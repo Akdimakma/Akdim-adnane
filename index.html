@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AKMA | Links</title>
-    <!-- Font Awesome for Icons -->
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -15,9 +15,9 @@
         }
 
         body {
-            /* خلفية التنين مع طبق ظلامية باش الكلام يبقى باين واضح */
+            /* صورة الخلفية: dragon.jpg */
             background: linear-gradient(rgba(15, 15, 17, 0.85), rgba(15, 15, 17, 0.85)), 
-                        url('https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=1000&auto=format&fit=crop') no-repeat center center fixed;
+                        url('dragon.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
             min-height: 100vh;
@@ -134,7 +134,7 @@
 <body>
 
     <div class="container">
-        <!-- Language Switcher -->
+        <!-- أزرار اللغات -->
         <div class="lang-switch">
             <button class="lang-btn active" onclick="setLanguage('ar', event)">العربية</button>
             <button class="lang-btn" onclick="setLanguage('en', event)">English</button>
@@ -142,15 +142,15 @@
             <button class="lang-btn" onclick="setLanguage('ber', event)">ⵜⴰⵎⴰⵣⵉⵖⵜ</button>
         </div>
 
-        <!-- Profile Header -->
+        <!-- البروفايل -->
         <div class="profile">
-            <!-- صورة الشطرنج الملك -->
-            <img src="https://i.postimg.cc/mD83SptW/chess-king.jpg" alt="AKMA Profile" class="profile-img">
+            <!-- صورة البروفايل: profile.jpg -->
+            <img src="profile.jpg" alt="AKMA Profile" class="profile-img">
             <h1>AKMA</h1>
             <p id="bio">مرحباً بكم في صفحتي الشخصية</p>
         </div>
 
-        <!-- Social Links -->
+        <!-- الروابط -->
         <div class="links">
             <!-- Instagram -->
             <a href="https://www.instagram.com/kacm_adnan?obrf=M25xdW1tNGFkdXJo" target="_blank" class="link-card">
@@ -214,20 +214,20 @@
         function setLanguage(lang, evt) {
             const data = translations[lang];
 
-            // Text & Direction updates
+            // تحديث النصوص والاتجاه
             document.documentElement.dir = data.dir;
             document.getElementById('bio').innerText = data.bio;
             document.getElementById('label-instagram').innerText = data.instagram;
             document.getElementById('label-whatsapp').innerText = data.whatsapp;
             document.getElementById('label-gmail').innerText = data.gmail;
 
-            // Update arrow icons direction
+            // تحديث اتجاه الأسهم
             const arrows = document.querySelectorAll('.arrow-icon');
             arrows.forEach(arrow => {
                 arrow.className = `fas ${data.arrow} arrow-icon`;
             });
 
-            // Update active button state
+            // تحديث الزر النشط
             const buttons = document.querySelectorAll('.lang-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             if (evt && evt.target) {
