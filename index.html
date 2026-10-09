@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKMA | Links</title>
+    <!-- خط القاهرة + أيقونات Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 35px 20px;
+            border-radius: 24px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #38bdf8;
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .username {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #f8fafc;
+            letter-spacing: 1px;
+        }
+
+        .bio {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 25px;
+        }
+
+        .links-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .link-card i {
+            font-size: 20px;
+            width: 25px;
+        }
+
+        .link-card:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: #38bdf8;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.25);
+        }
+
+        /* ألوان الأيقونات عند التمرير */
+        .fa-instagram { color: #e1306c; }
+        .fa-tiktok { color: #00f2fe; }
+        .fa-youtube { color: #ff0000; }
+        .fa-whatsapp { color: #25d366; }
+        .fa-envelope { color: #38bdf8; }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 13px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- بدل رابط الصورة بالصورة ديالك الشخصية -->
+        <img src="https://via.placeholder.com/150" alt="AKMA" class="profile-img">
+
+        <!-- اسم الحساب والوصف -->
+        <div class="username">AKMA</div>
+        <p class="bio">مرحباً بكم في صفحتي الرسمية | Welcome to my page</p>
+
+        <!-- روابط منصات التواصل -->
+        <div class="links-wrapper">
+            <a href="https://instagram.com/AKMA_USERNAME" target="_blank" class="link-card">
+                <span>إنستغرام</span>
+                <i class="fab fa-instagram"></i>
+            </a>
+
+            <a href="https://tiktok.com/@AKMA_USERNAME" target="_blank" class="link-card">
+                <span>تيك توك</span>
+                <i class="fab fa-tiktok"></i>
+            </a>
+
+            <a href="https://youtube.com/@AKMA_USERNAME" target="_blank" class="link-card">
+                <span>يوتيوب</span>
+                <i class="fab fa-youtube"></i>
+            </a>
+
+            <a href="https://wa.me/212600000000" target="_blank" class="link-card">
+                <span>واتساب</span>
+                <i class="fab fa-whatsapp"></i>
+            </a>
+
+            <a href="mailto:akma@example.com" class="link-card">
+                <span>البريد الإلكتروني</span>
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+
+        <div class="footer">
+            © 2026 AKMA. جميع الحقوق محفوظة.
+        </div>
+    </div>
+
+</body>
+</html>
