@@ -39,9 +39,9 @@
             overflow-x: hidden;
         }
 
-        /* شاشة الصيانة */
+        /* شاشة الصيانة الافتراضية للجميع */
         .maint-screen {
-            display: none;
+            display: flex; /* تظهر للجميع في كل الهواتف بمجرد رفع الكود */
             position: fixed;
             top: 0;
             left: 0;
@@ -817,6 +817,24 @@
         function recordFailedAttempt() { let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); const now = new Date(); logs.unshift(`[FAILED_ATTEMPT]: ${now.toLocaleTimeString()}`); if (logs.length > 5) logs.pop(); localStorage.setItem('adnan_intrusion_logs', JSON.stringify(logs)); }
         function displaySecurityLogs() { let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); document.getElementById('securityLogs').innerHTML = logs.length === 0 ? 'لا توجد محاولات مشبوهة حتى الآن.' : logs.join('<br>'); }
 
+        let maintMatrixInterval;
+        function startMaintMatrixEffect() {
+            const canvas = document.getElementById('maintMatrixCanvas'); const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*'; const fontSize = 14;
+            const columns = Math.floor(canvas.width / fontSize); const drops = Array(columns).fill(1);
+            clearInterval(maintMatrixInterval);
+            maintMatrixInterval = setInterval(() => {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.08)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#22c55e'; ctx.font = fontSize + 'px monospace';
+                for (let i = 0; i < drops.length; i++) {
+                    ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                    drops[i]++;
+                }
+            }, 35);
+        }
+
         let matrixInterval;
         function startMatrixEffect() {
             const canvas = document.getElementById('matrixCanvas'); const ctx = canvas.getContext('2d');
@@ -839,6 +857,7 @@
             if (e.key === 'Enter') {
                 if (this.value === "7002") {
                     closeTerminal();
+                    document.getElementById('maintScreen').style.display = 'none';
                     document.getElementById('bookCard').classList.add('flipped');
                     document.getElementById('clicks-count').innerText = interactionClicks;
                     loadEncryptedNotes(); displaySecurityLogs(); startMatrixEffect();
@@ -858,6 +877,7 @@
         function trackVisits() { let visits = parseInt(localStorage.getItem('adnan_visits_count') || '139'); visits++; localStorage.setItem('adnan_visits_count', visits); document.getElementById('visits-count').innerText = visits; }
 
         window.onload = () => {
+            startMaintMatrixEffect();
             trackVisits();
             typeWriter(localStorage.getItem('custom_bio') || translations['ar'].bio);
             document.getElementById('clicks-count').innerText = interactionClicks;
