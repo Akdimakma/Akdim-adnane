@@ -25,7 +25,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* استعادة إعدادات الخلفية الأصلية الواضحة والشديدة الدقة */
         body {
             background: linear-gradient(rgba(15, 15, 17, 0.37), rgba(15, 15, 17, 0.37)), 
                         url('dragon.jpg') no-repeat center center fixed;
@@ -50,6 +49,19 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(220, 38, 38, 0.3);
             text-align: center;
             position: relative;
+        }
+
+        /* شريط الإعلانات الترحيبي العلوي */
+        .notice-banner {
+            display: none;
+            background: rgba(220, 38, 38, 0.25);
+            border: 1px solid rgba(220, 38, 38, 0.6);
+            color: #fff;
+            font-size: 0.8rem;
+            padding: 8px 12px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            animation: fadeIn 0.5s ease;
         }
 
         .lang-switch {
@@ -252,45 +264,104 @@
             color: #a1a1aa;
         }
 
+        /* التصميم الجديد والأنيق للوحة السرية */
         .admin-panel {
-            margin-top: 15px;
+            margin-top: 20px;
             display: none;
             flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            background: rgba(20, 20, 25, 0.85);
-            border: 1px solid rgba(220, 38, 38, 0.6);
-            padding: 12px;
-            border-radius: 14px;
-            animation: fadeIn 0.5s ease;
+            gap: 12px;
+            background: rgba(15, 15, 20, 0.92);
+            border: 1px solid rgba(220, 38, 38, 0.7);
+            padding: 16px;
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8), 0 0 20px rgba(220, 38, 38, 0.3);
+            animation: fadeIn 0.4s ease;
+            text-align: right;
         }
 
-        .visitor-counter {
+        .admin-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 6px;
-            font-size: 0.8rem;
-            color: #ffffff;
+            border-bottom: 1px solid rgba(220, 38, 38, 0.3);
+            padding-bottom: 8px;
+            font-size: 0.85rem;
+            color: #dc2626;
+            font-weight: bold;
         }
 
-        .install-pwa-btn {
-            background: #dc2626;
-            border: none;
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            padding: 8px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-card label {
+            font-size: 0.7rem;
+            color: #a1a1aa;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .stat-card span {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #22c55e;
+        }
+
+        .admin-btn {
+            background: rgba(220, 38, 38, 0.2);
+            border: 1px solid rgba(220, 38, 38, 0.4);
             color: #fff;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 0.78rem;
+            padding: 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
-            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
-            transition: all 0.3s ease;
         }
 
-        .install-pwa-btn:hover {
+        .admin-btn:hover {
+            background: #dc2626;
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+        }
+
+        .admin-btn.danger {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.4);
+            color: #f87171;
+            grid-column: span 2;
+        }
+
+        .admin-btn.danger:hover {
             background: #ef4444;
+            color: #fff;
+        }
+
+        .admin-notes {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            padding: 8px;
+            font-size: 0.75rem;
+            resize: none;
+            height: 50px;
+            outline: none;
         }
 
         @keyframes fadeIn {
@@ -376,6 +447,11 @@
 <body>
 
     <div class="container">
+        <!-- شريط التنبيه العلوي المخصص -->
+        <div class="notice-banner" id="notice-banner">
+            <i class="fas fa-bullhorn"></i> <span id="notice-text">مرحباً بكم في الموقع الرسمي لعدنان أقديم</span>
+        </div>
+
         <!-- أزرار اللغات -->
         <div class="lang-switch">
             <button class="lang-btn active" onclick="setLanguage('ar', event)">العربية</button>
@@ -449,20 +525,46 @@
             </button>
         </div>
 
-        <!-- حقوق الصفحة ولوحة التحكم السرية -->
+        <!-- حقوق الصفحة واللوحة السرية الأنيقة -->
         <footer>
             <div>© 2026 ADNANE AKDIM | All rights reserved</div>
             
             <div class="admin-panel" id="admin-panel">
-                <div class="visitor-counter">
-                    <i class="fas fa-eye" style="color: #dc2626;"></i>
-                    <span id="label-views">إجمالي الزيارات:</span>
-                    <span id="visits-count" style="font-weight: bold; color: #22c55e;">...</span>
+                <div class="admin-header">
+                    <span><i class="fas fa-user-shield"></i> لوحة التحكم السرية</span>
+                    <span style="font-size: 0.65rem; color: #a1a1aa;" id="last-visit-time">--:--</span>
                 </div>
-                <button class="install-pwa-btn" onclick="installPwaApp()">
-                    <i class="fas fa-download"></i>
-                    <span>تثبيت الموقع كتطبيق</span>
-                </button>
+
+                <div class="admin-grid">
+                    <div class="stat-card">
+                        <label>إجمالي الزيارات</label>
+                        <span id="visits-count">...</span>
+                    </div>
+                    <div class="stat-card">
+                        <label>التفاعلات</label>
+                        <span id="clicks-count">0</span>
+                    </div>
+                </div>
+
+                <textarea class="admin-notes" id="admin-notes" placeholder="ملاحظاتك السرية هنا..." oninput="saveNotes()"></textarea>
+
+                <div class="admin-grid">
+                    <button class="admin-btn" onclick="toggleNoticeBanner()">
+                        <i class="fas fa-bullhorn"></i> الشريط العلوي
+                    </button>
+                    <button class="admin-btn" onclick="changeBioText()">
+                        <i class="fas fa-edit"></i> تعديل الوصف
+                    </button>
+                    <button class="admin-btn" onclick="installPwaApp()">
+                        <i class="fas fa-download"></i> تثبيت التطبيق
+                    </button>
+                    <button class="admin-btn" onclick="resetStats()">
+                        <i class="fas fa-redo"></i> تصفير العداد
+                    </button>
+                    <button class="admin-btn danger" onclick="closeAdminPanel()">
+                        <i class="fas fa-lock"></i> إغلاق وتأمين اللوحة
+                    </button>
+                </div>
             </div>
         </footer>
     </div>
@@ -492,7 +594,6 @@
                 save: 'حفظ الاتصال',
                 qr: 'رمز QR',
                 qrTitle: 'امسح الرمز لزيارة الصفحة',
-                views: 'إجمالي الزيارات:',
                 arrow: 'fa-arrow-left'
             },
             en: {
@@ -505,7 +606,6 @@
                 save: 'Save Contact',
                 qr: 'QR Code',
                 qrTitle: 'Scan Code to Visit Profile',
-                views: 'Total Views:',
                 arrow: 'fa-arrow-right'
             },
             fr: {
@@ -518,7 +618,6 @@
                 save: 'Enregistrer',
                 qr: 'Code QR',
                 qrTitle: 'Scannez le code pour visiter',
-                views: 'Vues Totales:',
                 arrow: 'fa-arrow-right'
             },
             ber: {
@@ -531,12 +630,18 @@
                 save: 'Save Contact',
                 qr: 'QR Code',
                 qrTitle: 'Scan QR Code',
-                views: 'Views:',
                 arrow: 'fa-arrow-right'
             }
         };
 
         let typingTimeout;
+        let interactionClicks = parseInt(localStorage.getItem('adnan_clicks') || '0');
+
+        function trackInteraction() {
+            interactionClicks++;
+            localStorage.setItem('adnan_clicks', interactionClicks);
+            document.getElementById('clicks-count').innerText = interactionClicks;
+        }
 
         function typeWriter(text, i = 0) {
             if (i < text.length) {
@@ -546,12 +651,15 @@
         }
 
         function setLanguage(lang, evt) {
+            trackInteraction();
             const data = translations[lang];
             document.documentElement.dir = data.dir;
             
             clearTimeout(typingTimeout);
             document.getElementById('bio').innerHTML = '';
-            typeWriter(data.bio);
+            
+            let customBio = localStorage.getItem('custom_bio') || data.bio;
+            typeWriter(customBio);
 
             document.getElementById('label-instagram').innerText = data.instagram;
             document.getElementById('label-whatsapp').innerText = data.whatsapp;
@@ -560,7 +668,6 @@
             document.getElementById('label-save').innerText = data.save;
             document.getElementById('label-qr').innerText = data.qr;
             document.getElementById('label-qr-title').innerText = data.qrTitle;
-            document.getElementById('label-views').innerText = data.views;
 
             const arrows = document.querySelectorAll('.arrow-icon');
             arrows.forEach(arrow => {
@@ -575,6 +682,7 @@
         }
 
         function shareProfile() {
+            trackInteraction();
             if (navigator.share) {
                 navigator.share({
                     title: 'ADNANE AKDIM | Links',
@@ -586,6 +694,7 @@
         }
 
         function copyToClipboard(text) {
+            trackInteraction();
             navigator.clipboard.writeText(text);
             const toast = document.getElementById('toast');
             toast.style.display = 'block';
@@ -595,6 +704,7 @@
         }
 
         function downloadVCard() {
+            trackInteraction();
             const vcard = "BEGIN:VCARD\nVERSION:3.0\nFN:ADNANE AKDIM\nTEL;TYPE=CELL:+212614060332\nEMAIL:akdimadnane@gmail.com\nURL:https://akdimakma.github.io\nEND:VCARD";
             const blob = new Blob([vcard], { type: 'text/vcard' });
             const url = URL.createObjectURL(blob);
@@ -606,6 +716,7 @@
 
         let qrGenerated = false;
         function openQrModal() {
+            trackInteraction();
             document.getElementById('qrModal').style.display = 'flex';
             if (!qrGenerated) {
                 new QRCode(document.getElementById("qrcode"), {
@@ -661,18 +772,54 @@
                 let password = prompt("أدخل رمز المشرف السري:");
                 if (password === "7002") {
                     const panel = document.getElementById('admin-panel');
-                    if (panel.style.display === 'flex') {
-                        panel.style.display = 'none';
-                        alert('تم إخفاء لوحة التحكم السرية.');
-                    } else {
-                        panel.style.display = 'flex';
-                        alert('مرحباً عدنان! تم فتح لوحة التحكم بنجاح.');
-                    }
+                    panel.style.display = 'flex';
+                    document.getElementById('clicks-count').innerText = interactionClicks;
+                    document.getElementById('admin-notes').value = localStorage.getItem('adnan_notes') || '';
                 } else if (password !== null) {
                     alert('كلمة المرور غير صحيحة!');
                 }
             } else {
                 clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
+            }
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('admin-panel').style.display = 'none';
+        }
+
+        function toggleNoticeBanner() {
+            const banner = document.getElementById('notice-banner');
+            if (banner.style.display === 'block') {
+                banner.style.display = 'none';
+            } else {
+                let customText = prompt("أدخل نص الإعلان العلوي:", "مرحباً بكم في الموقع الرسمي لعدنان أقديم");
+                if (customText) {
+                    document.getElementById('notice-text').innerText = customText;
+                    banner.style.display = 'block';
+                }
+            }
+        }
+
+        function changeBioText() {
+            let newBio = prompt("أدخل النص الترحيبي الجديد:");
+            if (newBio) {
+                localStorage.setItem('custom_bio', newBio);
+                clearTimeout(typingTimeout);
+                document.getElementById('bio').innerHTML = '';
+                typeWriter(newBio);
+            }
+        }
+
+        function saveNotes() {
+            const val = document.getElementById('admin-notes').value;
+            localStorage.setItem('adnan_notes', val);
+        }
+
+        function resetStats() {
+            if (confirm("هل تريد تصفير عداد التفاعلات؟")) {
+                interactionClicks = 0;
+                localStorage.setItem('adnan_clicks', '0');
+                document.getElementById('clicks-count').innerText = '0';
             }
         }
 
@@ -687,8 +834,15 @@
         }
 
         window.onload = () => {
-            typeWriter(translations['ar'].bio);
+            const initialBio = localStorage.getItem('custom_bio') || translations['ar'].bio;
+            typeWriter(initialBio);
             fetchVisits();
+            document.getElementById('clicks-count').innerText = interactionClicks;
+
+            // تسجيل وقت الزيارة
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('last-visit-time').innerText = "آخر زيارة: " + timeStr;
         };
     </script>
 </body>
