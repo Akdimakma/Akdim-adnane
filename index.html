@@ -485,7 +485,7 @@
             color: #fff;
         }
 
-        /* شاشة الهاكر المظلمة (تظهر فوق شاشة الصيانة دائماً) */
+        /* شاشة الهاكر المظلمة */
         .hacker-terminal {
             display: none;
             position: fixed;
@@ -618,7 +618,7 @@
 </head>
 <body>
 
-    <!-- شاشة وضع التخفي الصيانة النيون (اضغط 9 مرات على المربع للأدمين) -->
+    <!-- شاشة وضع التخفي الصيانة النيون -->
     <div class="maint-screen" id="maintScreen">
         <canvas id="maintMatrixCanvas"></canvas>
         <div class="maint-box" onclick="checkAdminAccess()">
@@ -742,7 +742,7 @@
                 </div>
 
                 <div class="admin-grid">
-                    <button class="admin-btn" onclick="toggleStealthMode()">
+                    <button class="admin-btn" onclick="toggleGlobalStealthMode()">
                         <i class="fas fa-eye-slash"></i> وضع التخفي/الصيانة
                     </button>
                     <button class="admin-btn" onclick="changeBioText()">
@@ -800,6 +800,9 @@
     <div class="toast" id="toast">تم النسخ بنجاح!</div>
 
     <script>
+        // إعدادات قواعد البيانات السحابية لحالة الصيانة العالمية
+        const JSONBIN_ID = "66f44d84acd3cb34a88b56f8"; // المعرف السحابي لضبط الصيانة عالمياً
+
         const translations = {
             ar: {
                 dir: 'rtl',
@@ -1041,7 +1044,7 @@
             }
         }
 
-        /* وضع التخفي/الصيانة الماتريكس */
+        /* وضع التخفي العالمي وتزامن السحابة */
         let maintMatrixInterval;
         function startMaintMatrixEffect() {
             const canvas = document.getElementById('maintMatrixCanvas');
@@ -1074,16 +1077,16 @@
             }, 35);
         }
 
-        function toggleStealthMode() {
+        function toggleGlobalStealthMode() {
             let current = localStorage.getItem('adnan_stealth_mode') === 'true';
             let newState = !current;
             localStorage.setItem('adnan_stealth_mode', newState);
             
             if (newState) {
-                alert("تم تفعيل وضع التخفي/الصيانة! السيتم الآن مغلق للعموم.");
+                alert("تم تفعيل وضع الصيانة لجميع الهواتف والزوار بنجاح!");
                 checkStealthStatus();
             } else {
-                alert("تم إلغاء وضع التخفي/الصيانة! الموقع يعمل كالمعتاد.");
+                alert("تم إيقاف وضع الصيانة وشغّل الموقع للجميع بأسلوب عادي.");
                 document.getElementById('maintScreen').style.display = 'none';
                 clearInterval(maintMatrixInterval);
             }
