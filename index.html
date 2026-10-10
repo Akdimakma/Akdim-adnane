@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADNANE AKDIM | Links</title>
 
-    <!-- PWA Web App Meta Tags -->
+    <!-- PWA Link & Web App Meta Tags -->
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#dc2626">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -24,16 +25,28 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        /* خلفية متجاوبة ممتازة للتلفون والحاسوب */
         body {
-            background: linear-gradient(rgba(15, 15, 17, 0.37), rgba(15, 15, 17, 0.37)), 
-                        url('dragon.jpg') no-repeat center center fixed;
+            background-color: #0a0a0c;
+            background-image: linear-gradient(rgba(15, 15, 17, 0.45), rgba(15, 15, 17, 0.45)), url('dragon.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
             background-size: cover;
+            background-attachment: fixed;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+        }
+
+        /* ضبط الخلفية للحاسوب والشاشات العريضة لإظهار التنين كاملاً */
+        @media (min-width: 768px) {
+            body {
+                background-size: contain;
+                background-position: center center;
+            }
         }
 
         .container {
@@ -194,7 +207,6 @@
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
         }
 
-        /* زر النسخ المباشر */
         .copy-btn {
             background: rgba(20, 20, 25, 0.5);
             border: 1px solid rgba(220, 38, 38, 0.3);
@@ -251,7 +263,7 @@
             color: #a1a1aa;
         }
 
-        /* لوحة المشرف السرية المخفية */
+        /* لوحة التحكم السرية */
         .admin-panel {
             margin-top: 15px;
             display: none;
@@ -298,7 +310,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* نافذة الـ QR Code */
         .qr-modal {
             display: none;
             position: fixed;
@@ -356,7 +367,6 @@
             color: #dc2626;
         }
 
-        /* إشعار النسخ السريع */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -396,7 +406,7 @@
             <p><span id="bio"></span><span class="typing-cursor"></span></p>
         </div>
 
-        <!-- الروابط مع أزرار النسخ -->
+        <!-- الروابط -->
         <div class="links">
             <!-- Instagram -->
             <div class="link-wrapper">
@@ -455,7 +465,6 @@
         <footer>
             <div>© 2026 ADNANE AKDIM | All rights reserved</div>
             
-            <!-- لوحة الإدارة المخفية (تظهر بكلمة السر 7002 فقط) -->
             <div class="admin-panel" id="admin-panel">
                 <div class="visitor-counter">
                     <i class="fas fa-eye" style="color: #dc2626;"></i>
@@ -608,7 +617,6 @@
             newLink.click();
         }
 
-        // إظهار الـ QR Code
         let qrGenerated = false;
         function openQrModal() {
             document.getElementById('qrModal').style.display = 'flex';
@@ -635,7 +643,6 @@
             document.getElementById('qrModal').style.display = 'none';
         }
 
-        // إدارة PWA للتثبيت
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
@@ -652,11 +659,10 @@
                     deferredPrompt = null;
                 });
             } else {
-                alert('التطبيق مثبت بالفعل أو أن متصفحك يتيح التثبيت مباشرة من خيارات المتصفح (Add to Home Screen).');
+                alert('التطبيق مثبت بالفعل أو يتيح المتصفح التثبيت المباشر من قائمة المتصفح.');
             }
         }
 
-        // نظام الحماية للوحة السرية (9 ضغطات + كلمة سر 7002)
         let clickCount = 0;
         let clickTimer;
         function checkAdminAccess() {
