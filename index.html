@@ -754,8 +754,9 @@
     <div class="toast" id="toast">تم النسخ بنجاح!</div>
 
     <script>
+        // تم تحديث اسم المستودع بدقة ليطابق مشروعك (Akdim-adnane)
         const GITHUB_USER = 'akdimakma';
-        const GITHUB_REPO = 'akdimakma.github.io';
+        const GITHUB_REPO = 'Akdim-adnane';
 
         const translations = {
             ar: { dir: 'rtl', bio: 'مرحباً بكم في صفحتي الشخصية', instagram: 'إنستغرام', whatsapp: 'واتساب', gmail: 'البريد الإلكتروني', share: 'مشاركة', save: 'حفظ الاتصال', qr: 'رمز QR', qrTitle: 'امسح الرمز لزيارة الصفحة', arrow: 'fa-arrow-left' },
@@ -830,7 +831,7 @@
         function recordFailedAttempt() { let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); const now = new Date(); logs.unshift(`[FAILED_ATTEMPT]: ${now.toLocaleTimeString()}`); if (logs.length > 5) logs.pop(); localStorage.setItem('adnan_intrusion_logs', JSON.stringify(logs)); }
         function displaySecurityLogs() { let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); document.getElementById('securityLogs').innerHTML = logs.length === 0 ? 'لا توجد محاولات مشبوهة حتى الآن.' : logs.join('<br>'); }
 
-        /* دالة التحديث العالمي المحدثة لطلب الرمز الجديد وتحديث status.txt */
+        /* دالة التحديث العالمي */
         async function setGlobalStatus(statusValue) {
             localStorage.removeItem('github_token');
             let token = prompt("أدخل رمز GitHub Personal Access Token الجديد:");
