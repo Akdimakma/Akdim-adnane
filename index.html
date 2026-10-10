@@ -110,12 +110,30 @@
             letter-spacing: 1px;
             margin-bottom: 5px;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            cursor: pointer;
+            user-select: none;
         }
 
         .profile p {
             color: #d1d1d6;
             font-size: 0.9rem;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            min-height: 24px;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            background-color: #dc2626;
+            width: 2px;
+            height: 15px;
+            animation: blink 0.7s infinite;
+            margin-right: 3px;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         .links {
@@ -191,18 +209,25 @@
             color: #a1a1aa;
         }
 
-        /* ستيل عداد الزيارات (الخاصية 4) */
+        /* العداد السري */
         .visitor-counter {
-            margin-top: 8px;
-            display: inline-flex;
+            margin-top: 10px;
+            display: none;
             align-items: center;
+            justify-content: center;
             gap: 6px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(220, 38, 38, 0.3);
-            padding: 4px 10px;
+            background: rgba(220, 38, 38, 0.2);
+            border: 1px solid rgba(220, 38, 38, 0.5);
+            padding: 5px 12px;
             border-radius: 12px;
-            font-size: 0.75rem;
-            color: #d1d1d6;
+            font-size: 0.8rem;
+            color: #ffffff;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .visitor-counter i {
@@ -227,27 +252,25 @@
                 <img src="profile.jpg" alt="ADNANE AKDIM Profile" class="profile-img">
                 <div class="status-badge" title="Active"></div>
             </div>
-            <h1>ADNANE AKDIM</h1>
-            <p id="bio">مرحباً بكم في صفحتي الشخصية</p>
+            <!-- النقر 9 مرات على الاسم لتشغيل العداد -->
+            <h1 onclick="checkAdminAccess()">ADNANE AKDIM</h1>
+            <p><span id="bio"></span><span class="typing-cursor"></span></p>
         </div>
 
         <!-- الروابط -->
         <div class="links">
-            <!-- Instagram -->
             <a href="https://www.instagram.com/kacm_adnan?obrf=M25xdW1tNGFkdXJo" target="_blank" class="link-card">
                 <i class="fab fa-instagram" style="color: #e1306c;"></i>
                 <span id="label-instagram">إنستغرام</span>
                 <i class="fas fa-arrow-left arrow-icon"></i>
             </a>
 
-            <!-- WhatsApp -->
             <a href="https://wa.me/212614060332" target="_blank" class="link-card">
                 <i class="fab fa-whatsapp" style="color: #25d366;"></i>
                 <span id="label-whatsapp">واتساب</span>
                 <i class="fas fa-arrow-left arrow-icon"></i>
             </a>
 
-            <!-- Gmail -->
             <a href="mailto:akdimadnane@gmail.com" class="link-card">
                 <i class="fas fa-envelope" style="color: #ea4335;"></i>
                 <span id="label-gmail">البريد الإلكتروني</span>
@@ -263,15 +286,14 @@
             </button>
         </div>
 
-        <!-- حقوق الصفحة والعداد -->
+        <!-- حقوق الصفحة والعداد السري -->
         <footer>
             <div>© 2026 ADNANE AKDIM | All rights reserved</div>
             
-            <!-- الخاصية 4: عداد الزيارات -->
-            <div class="visitor-counter">
+            <div class="visitor-counter" id="secret-counter">
                 <i class="fas fa-eye"></i>
-                <span id="label-views">الزيارات:</span>
-                <span id="visits-count">...</span>
+                <span id="label-views">إجمالي الزيارات (خاص بك):</span>
+                <span id="visits-count" style="font-weight: bold; color: #22c55e;">...</span>
             </div>
         </footer>
     </div>
@@ -285,7 +307,7 @@
                 whatsapp: 'واتساب',
                 gmail: 'البريد الإلكتروني',
                 share: 'مشاركة الصفحة',
-                views: 'الزيارات:',
+                views: 'إجمالي الزيارات (خاص بك):',
                 arrow: 'fa-arrow-left'
             },
             en: {
@@ -295,7 +317,7 @@
                 whatsapp: 'WhatsApp',
                 gmail: 'Gmail',
                 share: 'Share Profile',
-                views: 'Views:',
+                views: 'Total Views (Admin Only):',
                 arrow: 'fa-arrow-right'
             },
             fr: {
@@ -305,7 +327,7 @@
                 whatsapp: 'WhatsApp',
                 gmail: 'E-mail',
                 share: 'Partager la page',
-                views: 'Vues:',
+                views: 'Vues Totales (Privé):',
                 arrow: 'fa-arrow-right'
             },
             ber: {
@@ -320,11 +342,23 @@
             }
         };
 
+        let typingTimeout;
+
+        function typeWriter(text, i = 0) {
+            if (i < text.length) {
+                document.getElementById('bio').innerHTML += text.charAt(i);
+                typingTimeout = setTimeout(() => typeWriter(text, i + 1), 70);
+            }
+        }
+
         function setLanguage(lang, evt) {
             const data = translations[lang];
-
             document.documentElement.dir = data.dir;
-            document.getElementById('bio').innerText = data.bio;
+            
+            clearTimeout(typingTimeout);
+            document.getElementById('bio').innerHTML = '';
+            typeWriter(data.bio);
+
             document.getElementById('label-instagram').innerText = data.instagram;
             document.getElementById('label-whatsapp').innerText = data.whatsapp;
             document.getElementById('label-gmail').innerText = data.gmail;
@@ -355,18 +389,47 @@
             }
         }
 
-        // كود تشغيل عداد الزيارات المباشر
+        // نظام الحماية بـ 9 ضغطات وكلمة سر 7002
+        let clickCount = 0;
+        let clickTimer;
+        function checkAdminAccess() {
+            clickCount++;
+            clearTimeout(clickTimer);
+
+            if (clickCount === 9) {
+                clickCount = 0;
+                let password = prompt("أدخل رمز المشرف السري:");
+                if (password === "7002") {
+                    const counter = document.getElementById('secret-counter');
+                    if (counter.style.display === 'flex') {
+                        counter.style.display = 'none';
+                        alert('تم إخفاء العداد.');
+                    } else {
+                        counter.style.display = 'flex';
+                        alert('مرحباً بك عدنان! تم تفعيل عرض العداد بنجاح.');
+                    }
+                } else if (password !== null) {
+                    alert('كلمة المرور غير صحيحة!');
+                }
+            } else {
+                clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
+            }
+        }
+
         async function fetchVisits() {
             try {
                 const response = await fetch('https://api.countapi.xyz/hit/akdimakma.github.io/visits');
                 const data = await response.json();
                 document.getElementById('visits-count').innerText = data.value;
             } catch (err) {
-                // عدد تجريبي محلي فـ حالة عدم الاتصال
                 document.getElementById('visits-count').innerText = '100+';
             }
         }
-        fetchVisits();
+
+        window.onload = () => {
+            typeWriter(translations['ar'].bio);
+            fetchVisits();
+        };
     </script>
 </body>
 </html>
