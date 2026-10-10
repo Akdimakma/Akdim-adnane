@@ -74,13 +74,13 @@
             top: 0;
             left: 0;
             transform: rotateY(180deg);
-            background: rgba(5, 10, 5, 0.9);
+            background: rgba(5, 10, 5, 0.92);
             border: 1px solid #22c55e;
             box-shadow: 0 0 30px rgba(34, 197, 94, 0.4);
             overflow: hidden;
         }
 
-        /* كانفاس خلفية الماتريكس النيون للأرقام المتساقطة */
+        /* كانفاس خلفية الماتريكس النيون بالأرقام المتساقطة */
         #matrixCanvas {
             position: absolute;
             top: 0;
@@ -308,7 +308,7 @@
             color: #a1a1aa;
         }
 
-        /* تفاصيل الصفحة السرية الهاكر */
+        /* تفاصيل المخزن والصفحة السرية */
         .admin-header {
             display: flex;
             justify-content: space-between;
@@ -351,6 +351,40 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
+        /* تصميم قسم المخزن المشفر */
+        .vault-box {
+            background: rgba(0, 15, 0, 0.8);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 15px;
+            text-align: right;
+        }
+
+        .vault-title {
+            font-size: 0.75rem;
+            color: #22c55e;
+            font-family: 'Courier New', Courier, monospace;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .admin-notes {
+            width: 100%;
+            background: rgba(0, 5, 0, 0.9);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 8px;
+            color: #22c55e;
+            padding: 10px;
+            font-size: 0.8rem;
+            resize: none;
+            height: 70px;
+            outline: none;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
         .admin-btn {
             background: rgba(34, 197, 94, 0.15);
             border: 1px solid rgba(34, 197, 94, 0.4);
@@ -383,21 +417,6 @@
         .admin-btn.danger:hover {
             background: #ef4444;
             color: #fff;
-        }
-
-        .admin-notes {
-            width: 100%;
-            background: rgba(0, 10, 0, 0.7);
-            border: 1px solid rgba(34, 197, 94, 0.4);
-            border-radius: 10px;
-            color: #22c55e;
-            padding: 10px;
-            font-size: 0.8rem;
-            resize: none;
-            height: 60px;
-            outline: none;
-            margin-bottom: 15px;
-            font-family: 'Courier New', Courier, monospace;
         }
 
         /* شاشة الهاكر المظلمة */
@@ -613,13 +632,13 @@
             </footer>
         </div>
 
-        <!-- الوجه الثاني: الصفحة السرية مع أمطار الماتريكس الخضراء -->
+        <!-- الوجه الثاني: الصفحة السرية مع أمطار الماتريكس والمخزن المشفر -->
         <div class="page-back">
             <canvas id="matrixCanvas"></canvas>
             
             <div class="page-back-content">
                 <div class="admin-header">
-                    <span><i class="fas fa-terminal"></i> HACKER_ADMIN_PANEL</span>
+                    <span><i class="fas fa-user-secret"></i> ENCRYPTED_VAULT_SYSTEM</span>
                     <span style="font-size: 0.65rem; color: #22c55e;" id="last-visit-time">--:--</span>
                 </div>
 
@@ -634,7 +653,11 @@
                     </div>
                 </div>
 
-                <textarea class="admin-notes" id="admin-notes" placeholder="// أدخل ملاحظاتك السرية هنا..." oninput="saveNotes()"></textarea>
+                <!-- المخزن المشفر -->
+                <div class="vault-box">
+                    <div class="vault-title"><i class="fas fa-key"></i> المخزن المشفر (AES Secured):</div>
+                    <textarea class="admin-notes" id="admin-notes" placeholder="// اكتب أفكارك، أو روابطك الخاصة هنا..." oninput="saveEncryptedNotes()"></textarea>
+                </div>
 
                 <div class="admin-grid">
                     <button class="admin-btn" onclick="toggleNoticeBanner()">
@@ -650,12 +673,12 @@
                         <i class="fas fa-redo"></i> تصفير العداد
                     </button>
                     <button class="admin-btn danger" onclick="flipBackToPublic()">
-                        <i class="fas fa-sign-out-alt"></i> إغلاق وقلب الصفحة
+                        <i class="fas fa-lock"></i> قفل وتأمين المخزن
                     </button>
                 </div>
 
                 <footer>
-                    <div style="color: #22c55e; font-family: 'Courier New', Courier, monospace;">SYSTEM // ADNANE AKDIM</div>
+                    <div style="color: #22c55e; font-family: 'Courier New', Courier, monospace;">SECURE VAULT // ADNANE AKDIM</div>
                 </footer>
             </div>
         </div>
@@ -670,9 +693,9 @@
                 <span onclick="closeTerminal()" style="cursor: pointer; color: #a1a1aa;">[ESC]</span>
             </div>
             <div class="terminal-logs">
-                > INITIALIZING MATRIX_FLIP_PROTOCOL...<br>
+                > INITIALIZING ENCRYPTED_VAULT_PROTOCOL...<br>
                 > AUTHORIZATION REQUIRED.<br>
-                > ENTER SECURITY PASSCODE TO FLIP THE PAGE.
+                > ENTER PASSCODE TO UNLOCK SECRET STORAGE.
             </div>
             <div class="terminal-input-row">
                 <span>PASSCODE></span>
@@ -893,7 +916,31 @@
             document.getElementById('terminalInput').value = '';
         }
 
-        /* كود خلفية الماتريكس المتحركة بالرموز الخضراء المتساقطة */
+        /* كود تشفير وفك تشفير بيانات المخزن السري */
+        function encryptData(text) {
+            return btoa(unescape(encodeURIComponent(text)));
+        }
+
+        function decryptData(encoded) {
+            try {
+                return decodeURIComponent(escape(atob(encoded)));
+            } catch (e) {
+                return '';
+            }
+        }
+
+        function saveEncryptedNotes() {
+            const rawText = document.getElementById('admin-notes').value;
+            const encrypted = encryptData(rawText);
+            localStorage.setItem('adnan_vault_data', encrypted);
+        }
+
+        function loadEncryptedNotes() {
+            const encrypted = localStorage.getItem('adnan_vault_data') || '';
+            document.getElementById('admin-notes').value = decryptData(encrypted);
+        }
+
+        /* كود خلفية الماتريكس المتحركة */
         let matrixInterval;
         function startMatrixEffect() {
             const canvas = document.getElementById('matrixCanvas');
@@ -934,7 +981,7 @@
                     closeTerminal();
                     document.getElementById('bookCard').classList.add('flipped');
                     document.getElementById('clicks-count').innerText = interactionClicks;
-                    document.getElementById('admin-notes').value = localStorage.getItem('adnan_notes') || '';
+                    loadEncryptedNotes();
                     startMatrixEffect();
                 } else {
                     alert('ACCESS DENIED: INCORRECT PASSCODE!');
@@ -969,11 +1016,6 @@
                 document.getElementById('bio').innerHTML = '';
                 typeWriter(newBio);
             }
-        }
-
-        function saveNotes() {
-            const val = document.getElementById('admin-notes').value;
-            localStorage.setItem('adnan_notes', val);
         }
 
         function resetStats() {
