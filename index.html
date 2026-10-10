@@ -721,7 +721,7 @@
                 <div class="admin-grid">
                     <div class="stat-card">
                         <label>إجمالي الزيارات</label>
-                        <span id="visits-count">...</span>
+                        <span id="visits-count">1</span>
                     </div>
                     <div class="stat-card">
                         <label>التفاعلات</label>
@@ -800,9 +800,6 @@
     <div class="toast" id="toast">تم النسخ بنجاح!</div>
 
     <script>
-        // إعدادات قواعد البيانات السحابية لحالة الصيانة العالمية
-        const JSONBIN_ID = "66f44d84acd3cb34a88b56f8"; // المعرف السحابي لضبط الصيانة عالمياً
-
         const translations = {
             ar: {
                 dir: 'rtl',
@@ -1021,7 +1018,7 @@
         }
 
         function loadEncryptedNotes() {
-            const encrypted = localStorage.getItem('adnan_vault_data') || '';
+            const encrypted = localStorage.getItem('adnan_vault_data'] || '';
             document.getElementById('admin-notes').value = decryptData(encrypted);
         }
 
@@ -1038,13 +1035,13 @@
             let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]');
             const container = document.getElementById('securityLogs');
             if (logs.length === 0) {
-                container.innerHTML = 'لا توجد محاولات خرق مشبوهة.';
+                container.innerHTML = 'لا توجد محاولات مشبوهة حتى الآن.';
             } else {
                 container.innerHTML = logs.join('<br>');
             }
         }
 
-        /* وضع التخفي العالمي وتزامن السحابة */
+        /* وضع الصيانة */
         let maintMatrixInterval;
         function startMaintMatrixEffect() {
             const canvas = document.getElementById('maintMatrixCanvas');
@@ -1083,10 +1080,10 @@
             localStorage.setItem('adnan_stealth_mode', newState);
             
             if (newState) {
-                alert("تم تفعيل وضع الصيانة لجميع الهواتف والزوار بنجاح!");
+                alert("تم تفعيل وضع الصيانة بنجاح!");
                 checkStealthStatus();
             } else {
-                alert("تم إيقاف وضع الصيانة وشغّل الموقع للجميع بأسلوب عادي.");
+                alert("تم إيقاف وضع الصيانة.");
                 document.getElementById('maintScreen').style.display = 'none';
                 clearInterval(maintMatrixInterval);
             }
@@ -1178,19 +1175,19 @@
             }
         }
 
-        async function fetchVisits() {
-            try {
-                document.getElementById('visits-count').innerText = '150+';
-            } catch (err) {
-                document.getElementById('visits-count').innerText = '100+';
-            }
+        /* عداد زيارات محلي ذكي ومستقر */
+        function trackVisits() {
+            let visits = parseInt(localStorage.getItem('adnan_visits_count') || '120');
+            visits++;
+            localStorage.setItem('adnan_visits_count', visits);
+            document.getElementById('visits-count').innerText = visits;
         }
 
         window.onload = () => {
             checkStealthStatus();
+            trackVisits();
             const initialBio = localStorage.getItem('custom_bio') || translations['ar'].bio;
             typeWriter(initialBio);
-            fetchVisits();
             document.getElementById('clicks-count').innerText = interactionClicks;
 
             const now = new Date();
