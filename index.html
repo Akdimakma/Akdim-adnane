@@ -5,17 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADNANE AKDIM | Links</title>
 
+    <!-- PWA Link & Web App Meta Tags -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#dc2626">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ADNANE AKDIM">
 
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- QR Code Generator Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
         body {
             background: linear-gradient(rgba(15, 15, 17, 0.37), rgba(15, 15, 17, 0.37)), 
@@ -33,10 +41,12 @@
 
         /* شاشة الصيانة */
         .maint-screen {
-            display: none; /* مخفية افتراضياً حتى يفتح الموقع للجميع على كل الهواتف */
+            display: none;
             position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             background: #020502;
             z-index: 8888;
             flex-direction: column;
@@ -48,36 +58,57 @@
         }
 
         #maintMatrixCanvas {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0; opacity: 0.4; pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.4;
+            pointer-events: none;
         }
 
         .maint-box {
-            position: relative; z-index: 1;
+            position: relative;
+            z-index: 1;
             background: rgba(5, 15, 5, 0.9);
             border: 1px solid #22c55e;
             padding: 30px 20px;
             border-radius: 16px;
             box-shadow: 0 0 30px rgba(34, 197, 94, 0.4);
-            max-width: 420px; width: 90%;
-            cursor: pointer; user-select: none;
+            max-width: 420px;
+            width: 90%;
+            cursor: pointer;
+            user-select: none;
         }
 
-        .maint-box h2 { color: #22c55e; font-size: 1.2rem; margin-bottom: 10px; }
-        .maint-box p { color: #a1a1aa; font-size: 0.85rem; margin-bottom: 15px; }
+        .maint-box h2 {
+            color: #22c55e;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
 
-        /* الكارت */
+        .maint-box p {
+            color: #a1a1aa;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        /* حاوية تقليب الكتاب ثلاثية الأبعاد */
         .book-card {
-            width: 100%; max-width: 420px;
+            width: 100%;
+            max-width: 420px;
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 2;
         }
 
-        .book-card.flipped { transform: rotateY(180deg); }
+        .book-card.flipped {
+            transform: rotateY(180deg);
+        }
 
+        /* الوجهين: الأمامي والخلفي */
         .page-front, .page-back {
             width: 100%;
             background: rgba(15, 15, 20, 0.35);
@@ -92,8 +123,11 @@
             -webkit-backface-visibility: hidden;
         }
 
+        /* الصفحة السرية الخلفية */
         .page-back {
-            position: absolute; top: 0; left: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
             transform: rotateY(180deg);
             background: rgba(5, 10, 5, 0.92);
             border: 1px solid #22c55e;
@@ -102,84 +136,477 @@
         }
 
         #matrixCanvas {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0; opacity: 0.35; pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.35;
+            pointer-events: none;
         }
 
-        .page-back-content { position: relative; z-index: 1; }
+        .page-back-content {
+            position: relative;
+            z-index: 1;
+        }
 
-        .lang-switch { display: flex; justify-content: center; gap: 8px; margin-bottom: 25px; flex-wrap: wrap; }
+        .lang-switch {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
         .lang-btn {
-            background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ccc; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ccc;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
         }
-        .lang-btn:hover, .lang-btn.active { background: #dc2626; color: #fff; border-color: #dc2626; box-shadow: 0 0 12px rgba(220, 38, 38, 0.6); }
 
-        .profile { margin-bottom: 25px; }
-        .img-container { position: relative; width: 95px; height: 95px; margin: 0 auto 15px auto; }
-        .profile-img { width: 100%; height: 100%; border-radius: 50%; border: 2px solid #dc2626; padding: 3px; object-fit: cover; box-shadow: 0 0 15px rgba(220, 38, 38, 0.5); animation: pulseGlow 3s infinite alternate; }
-        .status-badge { position: absolute; bottom: 5px; right: 5px; width: 16px; height: 16px; background-color: #22c55e; border: 2px solid #0f0f13; border-radius: 50%; box-shadow: 0 0 8px #22c55e; }
+        .lang-btn:hover, .lang-btn.active {
+            background: #dc2626;
+            color: #fff;
+            border-color: #dc2626;
+            box-shadow: 0 0 12px rgba(220, 38, 38, 0.6);
+        }
 
-        @keyframes pulseGlow { 0% { box-shadow: 0 0 10px rgba(220, 38, 38, 0.4); } 100% { box-shadow: 0 0 25px rgba(220, 38, 38, 0.9); } }
+        .profile {
+            margin-bottom: 25px;
+        }
 
-        .profile h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8); cursor: pointer; user-select: none; }
-        .profile p { color: #d1d1d6; font-size: 0.9rem; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); min-height: 24px; }
-        .typing-cursor { display: inline-block; background-color: #dc2626; width: 2px; height: 15px; animation: blink 0.7s infinite; margin-right: 3px; vertical-align: middle; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .img-container {
+            position: relative;
+            width: 95px;
+            height: 95px;
+            margin: 0 auto 15px auto;
+        }
 
-        .links { display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; }
-        .link-wrapper { display: flex; align-items: center; gap: 8px; }
-        .link-card { flex: 1; display: flex; align-items: center; justify-content: space-between; background: rgba(20, 20, 25, 0.45); border: 1px solid rgba(220, 38, 38, 0.3); padding: 14px 18px; border-radius: 12px; color: #ffffff; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(4px); }
-        .link-card:hover { background: rgba(220, 38, 38, 0.25); border-color: #dc2626; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4); }
-        .link-card i { font-size: 1.3rem; width: 25px; }
-        .link-card span { flex-grow: 1; text-align: center; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); }
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid #dc2626;
+            padding: 3px;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.5);
+            animation: pulseGlow 3s infinite alternate;
+        }
 
-        .copy-btn { background: rgba(20, 20, 25, 0.5); border: 1px solid rgba(220, 38, 38, 0.3); color: #ccc; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(4px); }
-        .copy-btn:hover { background: #dc2626; color: #fff; border-color: #dc2626; box-shadow: 0 0 10px rgba(220, 38, 38, 0.5); }
+        .status-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 16px;
+            height: 16px;
+            background-color: #22c55e;
+            border: 2px solid #0f0f13;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #22c55e;
+        }
 
-        .action-sec { display: flex; justify-content: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-        .action-btn { background: rgba(220, 38, 38, 0.2); border: 1px solid rgba(220, 38, 38, 0.4); color: #fff; padding: 8px 12px; border-radius: 10px; cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center; gap: 5px; }
-        .action-btn:hover { background: #dc2626; box-shadow: 0 0 10px rgba(220, 38, 38, 0.5); }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px rgba(220, 38, 38, 0.4); }
+            100% { box-shadow: 0 0 25px rgba(220, 38, 38, 0.9); }
+        }
 
-        footer { margin-top: 20px; font-size: 0.75rem; color: #a1a1aa; }
+        .profile h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            cursor: pointer;
+            user-select: none;
+        }
 
-        /* اللوحة السرية */
-        .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(34, 197, 94, 0.4); padding-bottom: 10px; font-size: 0.85rem; color: #22c55e; font-weight: bold; margin-bottom: 15px; font-family: 'Courier New', Courier, monospace; }
-        .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .stat-card { background: rgba(0, 20, 0, 0.6); border: 1px solid rgba(34, 197, 94, 0.3); padding: 10px; border-radius: 10px; text-align: center; }
-        .stat-card label { font-size: 0.7rem; color: #a1a1aa; display: block; margin-bottom: 3px; }
-        .stat-card span { font-size: 1rem; font-weight: bold; color: #22c55e; font-family: 'Courier New', Courier, monospace; }
+        .profile p {
+            color: #d1d1d6;
+            font-size: 0.9rem;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            min-height: 24px;
+        }
 
-        .vault-box { background: rgba(0, 15, 0, 0.8); border: 1px solid rgba(34, 197, 94, 0.5); border-radius: 12px; padding: 12px; margin-bottom: 15px; text-align: right; }
-        .vault-title { font-size: 0.75rem; color: #22c55e; font-family: 'Courier New', Courier, monospace; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-        .admin-notes { width: 100%; background: rgba(0, 5, 0, 0.9); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 8px; color: #22c55e; padding: 10px; font-size: 0.8rem; resize: none; height: 60px; outline: none; font-family: 'Courier New', Courier, monospace; }
-        .logs-box { background: rgba(15, 0, 0, 0.6); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 10px; padding: 8px 10px; font-size: 0.7rem; color: #f87171; font-family: 'Courier New', Courier, monospace; max-height: 55px; overflow-y: auto; text-align: left; margin-bottom: 15px; }
+        .typing-cursor {
+            display: inline-block;
+            background-color: #dc2626;
+            width: 2px;
+            height: 15px;
+            animation: blink 0.7s infinite;
+            margin-right: 3px;
+            vertical-align: middle;
+        }
 
-        .admin-btn { background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.4); color: #22c55e; padding: 10px; border-radius: 10px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 6px; }
-        .admin-btn:hover { background: #22c55e; color: #000; box-shadow: 0 0 15px rgba(34, 197, 94, 0.6); }
-        .admin-btn.danger { background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.5); color: #f87171; grid-column: span 2; }
-        .admin-btn.danger:hover { background: #ef4444; color: #fff; }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
 
-        /* الهاكر المظلمة */
-        .hacker-terminal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #050508; z-index: 99999; flex-direction: column; justify-content: center; align-items: center; padding: 20px; font-family: 'Courier New', Courier, monospace; }
-        .terminal-box { width: 100%; max-width: 480px; background: rgba(10, 15, 10, 0.95); border: 1px solid #22c55e; border-radius: 12px; padding: 20px; box-shadow: 0 0 30px rgba(34, 197, 94, 0.3); text-align: left; direction: ltr; }
-        .terminal-header { color: #22c55e; font-size: 0.85rem; margin-bottom: 15px; border-bottom: 1px dashed rgba(34, 197, 94, 0.4); padding-bottom: 8px; display: flex; justify-content: space-between; }
-        .terminal-logs { color: #22c55e; font-size: 0.85rem; line-height: 1.6; margin-bottom: 15px; }
-        .terminal-input-row { display: flex; align-items: center; gap: 8px; color: #22c55e; }
-        .terminal-input { background: transparent; border: none; color: #fff; font-family: 'Courier New', Courier, monospace; font-size: 1rem; outline: none; flex: 1; letter-spacing: 2px; }
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
 
-        .qr-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 999; justify-content: center; align-items: center; }
-        .qr-card { background: rgba(20, 20, 25, 0.9); border: 1px solid rgba(220, 38, 38, 0.6); border-radius: 20px; padding: 25px; text-align: center; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 25px rgba(220, 38, 38, 0.4); max-width: 320px; width: 90%; }
-        .qr-card h3 { font-size: 1.1rem; margin-bottom: 15px; color: #fff; }
-        .qr-box { background: #ffffff; padding: 12px; border-radius: 14px; display: inline-block; margin-bottom: 15px; }
-        .close-qr { position: absolute; top: 10px; left: 15px; color: #a1a1aa; font-size: 1.4rem; cursor: pointer; }
-        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: rgba(220, 38, 38, 0.9); color: white; padding: 8px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; box-shadow: 0 0 15px rgba(220, 38, 38, 0.6); display: none; z-index: 1000; }
+        .link-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .link-card {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(20, 20, 25, 0.45);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            padding: 14px 18px;
+            border-radius: 12px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .link-card:hover {
+            background: rgba(220, 38, 38, 0.25);
+            border-color: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+        }
+
+        .link-card i {
+            font-size: 1.3rem;
+            width: 25px;
+        }
+
+        .link-card span {
+            flex-grow: 1;
+            text-align: center;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        .copy-btn {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            color: #ccc;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .copy-btn:hover {
+            background: #dc2626;
+            color: #fff;
+            border-color: #dc2626;
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+        }
+
+        .action-sec {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: rgba(220, 38, 38, 0.2);
+            border: 1px solid rgba(220, 38, 38, 0.4);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .action-btn:hover {
+            background: #dc2626;
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: #a1a1aa;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(34, 197, 94, 0.4);
+            padding-bottom: 10px;
+            font-size: 0.85rem;
+            color: #22c55e;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .stat-card {
+            background: rgba(0, 20, 0, 0.6);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-card label {
+            font-size: 0.7rem;
+            color: #a1a1aa;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .stat-card span {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #22c55e;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .vault-box {
+            background: rgba(0, 15, 0, 0.8);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 15px;
+            text-align: right;
+        }
+
+        .vault-title {
+            font-size: 0.75rem;
+            color: #22c55e;
+            font-family: 'Courier New', Courier, monospace;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .admin-notes {
+            width: 100%;
+            background: rgba(0, 5, 0, 0.9);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 8px;
+            color: #22c55e;
+            padding: 10px;
+            font-size: 0.8rem;
+            resize: none;
+            height: 60px;
+            outline: none;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .logs-box {
+            background: rgba(15, 0, 0, 0.6);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            border-radius: 10px;
+            padding: 8px 10px;
+            font-size: 0.7rem;
+            color: #f87171;
+            font-family: 'Courier New', Courier, monospace;
+            max-height: 55px;
+            overflow-y: auto;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .admin-btn {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            color: #22c55e;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .admin-btn:hover {
+            background: #22c55e;
+            color: #000;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
+        }
+
+        .admin-btn.danger {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.5);
+            color: #f87171;
+            grid-column: span 2;
+        }
+
+        .admin-btn.danger:hover {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .hacker-terminal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #050508;
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .terminal-box {
+            width: 100%;
+            max-width: 480px;
+            background: rgba(10, 15, 10, 0.95);
+            border: 1px solid #22c55e;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+            text-align: left;
+            direction: ltr;
+        }
+
+        .terminal-header {
+            color: #22c55e;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed rgba(34, 197, 94, 0.4);
+            padding-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .terminal-logs {
+            color: #22c55e;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .terminal-input-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #22c55e;
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            outline: none;
+            flex: 1;
+            letter-spacing: 2px;
+        }
+
+        .qr-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .qr-card {
+            background: rgba(20, 20, 25, 0.9);
+            border: 1px solid rgba(220, 38, 38, 0.6);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 25px rgba(220, 38, 38, 0.4);
+            max-width: 320px;
+            width: 90%;
+        }
+
+        .qr-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .qr-box {
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 14px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .close-qr {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            color: #a1a1aa;
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(220, 38, 38, 0.9);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.6);
+            display: none;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
 
-    <!-- شاشة الصيانة التحكمية -->
+    <!-- شاشة الصيانة الافتراضية -->
     <div class="maint-screen" id="maintScreen">
         <canvas id="maintMatrixCanvas"></canvas>
         <div class="maint-box" onclick="checkAdminAccess()">
@@ -189,10 +616,10 @@
         </div>
     </div>
 
-    <!-- كارت الكتاب -->
+    <!-- كارت الكتاب التفاعلي -->
     <div class="book-card" id="bookCard">
 
-        <!-- الوجه الرئيسي للعموم -->
+        <!-- الوجه الرئيسي للزوار -->
         <div class="page-front">
             <div class="lang-switch">
                 <button class="lang-btn active" onclick="setLanguage('ar', event)">العربية</button>
@@ -245,12 +672,15 @@
                 <button class="action-btn" onclick="openQrModal()"><i class="fas fa-qrcode"></i> <span id="label-qr">رمز QR</span></button>
             </div>
 
-            <footer><div>© 2026 ADNANE AKDIM | All rights reserved</div></footer>
+            <footer>
+                <div>© 2026 ADNANE AKDIM | All rights reserved</div>
+            </footer>
         </div>
 
-        <!-- الوجه الخلفي (اللوحة السرية) -->
+        <!-- اللوحة السرية -->
         <div class="page-back">
             <canvas id="matrixCanvas"></canvas>
+            
             <div class="page-back-content">
                 <div class="admin-header">
                     <span><i class="fas fa-user-secret"></i> COMMAND_CENTER_V2</span>
@@ -273,16 +703,15 @@
                 </div>
 
                 <div class="admin-grid">
-                    <button class="admin-btn" onclick="toggleGlobalStealthMode()" id="stealthBtn">
-                        <i class="fas fa-eye-slash"></i> وضع التخفي/الصيانة
-                    </button>
                     <button class="admin-btn" onclick="changeBioText()"><i class="fas fa-edit"></i> تعديل الوصف</button>
                     <button class="admin-btn" onclick="installPwaApp()"><i class="fas fa-download"></i> تثبيت التطبيق</button>
                     <button class="admin-btn" onclick="resetStats()"><i class="fas fa-redo"></i> تصفير العداد</button>
                     <button class="admin-btn danger" onclick="flipBackToPublic()"><i class="fas fa-lock"></i> قفل وتأمين المخزن</button>
                 </div>
 
-                <footer><div style="color: #22c55e; font-family: 'Courier New', Courier, monospace;">COMMAND CENTER // ADNANE AKDIM</div></footer>
+                <footer>
+                    <div style="color: #22c55e; font-family: 'Courier New', Courier, monospace;">COMMAND CENTER // ADNANE AKDIM</div>
+                </footer>
             </div>
         </div>
 
@@ -315,16 +744,9 @@
     <div class="toast" id="toast">تم النسخ بنجاح!</div>
 
     <script>
-        // ==========================================
-        // متغيّر الصيانة الرئيسي (تحكم مباشر للجميع)
-        // false = الموقع مفتوح للجميع فوراً
-        // true = الموقع مغلق للصيانة للجميع
-        // ==========================================
-        let GLOBAL_MAINTENANCE_MODE = false; 
-
         const translations = {
             ar: { dir: 'rtl', bio: 'مرحباً بكم في صفحتي الشخصية', instagram: 'إنستغرام', whatsapp: 'واتساب', gmail: 'البريد الإلكتروني', share: 'مشاركة', save: 'حفظ الاتصال', qr: 'رمز QR', qrTitle: 'امسح الرمز لزيارة الصفحة', arrow: 'fa-arrow-left' },
-            en: { dir: 'ltr', bio: 'Welcome to my personal links', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'Gmail', share: 'Share', save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan Code to Visit', arrow: 'fa-arrow-right' },
+            en: { dir: 'ltr', bio: 'Welcome to my personal links', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'Gmail', share: 'Share Profile', save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan Code to Visit', arrow: 'fa-arrow-right' },
             fr: { dir: 'ltr', bio: 'Bienvenue sur ma page personnelle', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'E-mail', share: 'Partager', save: 'Enregistrer', qr: 'Code QR', qrTitle: 'Scannez le code', arrow: 'fa-arrow-right' },
             ber: { dir: 'ltr', bio: 'أنسgrouped ⵖ ⵜⴰⵙⵏⴰ ⵉⵏⵓ', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'Gmail', share: 'Partager', save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan QR Code', arrow: 'fa-arrow-right' }
         };
@@ -372,4 +794,75 @@
         function downloadVCard() { trackInteraction(); const vcard = "BEGIN:VCARD\nVERSION:3.0\nFN:ADNANE AKDIM\nTEL;TYPE=CELL:+212614060332\nEMAIL:akdimadnane@gmail.com\nURL:https://akdimakma.github.io\nEND:VCARD"; const blob = new Blob([vcard], { type: 'text/vcard' }); const url = URL.createObjectURL(blob); const newLink = document.createElement('a'); newLink.download = 'ADNANE_AKDIM.vcf'; newLink.href = url; newLink.click(); }
 
         let qrGenerated = false;
-        function openQrModal() { trackInteraction(); document.getElementById('qr
+        function openQrModal() { trackInteraction(); document.getElementById('qrModal').style.display = 'flex'; if (!qrGenerated) { new QRCode(document.getElementById("qrcode"), { text: window.location.href, width: 170, height: 170, colorDark : "#000000", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.H }); qrGenerated = true; } }
+        function closeQrModal(e) { if (e.target.id === 'qrModal') document.getElementById('qrModal').style.display = 'none'; }
+        function closeQrModalDirect() { document.getElementById('qrModal').style.display = 'none'; }
+
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
+        function installPwaApp() { if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; } else { alert('التطبيق مثبت بالفعل أو متاح للثبيت من المتصفح مباشرة.'); } }
+
+        let clickCount = 0; let clickTimer;
+        function checkAdminAccess() {
+            clickCount++; clearTimeout(clickTimer);
+            if (clickCount === 9) { clickCount = 0; document.getElementById('hackerTerminal').style.display = 'flex'; document.getElementById('terminalInput').focus(); }
+            else { clickTimer = setTimeout(() => { clickCount = 0; }, 1500); }
+        }
+
+        function closeTerminal() { document.getElementById('hackerTerminal').style.display = 'none'; document.getElementById('terminalInput').value = ''; }
+        function encryptData(text) { return btoa(unescape(encodeURIComponent(text))); }
+        function decryptData(encoded) { try { return decodeURIComponent(escape(atob(encoded))); } catch (e) { return ''; } }
+        function saveEncryptedNotes() { localStorage.setItem('adnan_vault_data', encryptData(document.getElementById('admin-notes').value)); }
+        function loadEncryptedNotes() { document.getElementById('admin-notes').value = decryptData(localStorage.getItem('adnan_vault_data') || ''); }
+        function recordFailedAttempt() { let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); const now = new Date(); logs.unshift(`[FAILED_ATTEMPT]: ${now.toLocaleTimeString()}`); if (logs.length > 5) logs.pop(); localStorage.setItem('adnan_intrusion_logs', JSON.stringify(logs)); }
+        function displaySecurityLogs() { let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); document.getElementById('securityLogs').innerHTML = logs.length === 0 ? 'لا توجد محاولات مشبوهة حتى الآن.' : logs.join('<br>'); }
+
+        let matrixInterval;
+        function startMatrixEffect() {
+            const canvas = document.getElementById('matrixCanvas'); const ctx = canvas.getContext('2d');
+            canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight;
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*'; const fontSize = 12;
+            const columns = Math.floor(canvas.width / fontSize); const drops = Array(columns).fill(1);
+            clearInterval(matrixInterval);
+            matrixInterval = setInterval(() => {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.08)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#22c55e'; ctx.font = fontSize + 'px monospace';
+                for (let i = 0; i < drops.length; i++) {
+                    ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                    drops[i]++;
+                }
+            }, 35);
+        }
+
+        document.getElementById('terminalInput').addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                if (this.value === "7002") {
+                    closeTerminal();
+                    document.getElementById('bookCard').classList.add('flipped');
+                    document.getElementById('clicks-count').innerText = interactionClicks;
+                    loadEncryptedNotes(); displaySecurityLogs(); startMatrixEffect();
+                } else {
+                    recordFailedAttempt(); alert('ACCESS DENIED!'); this.value = '';
+                }
+            }
+        });
+
+        function flipBackToPublic() {
+            document.getElementById('bookCard').classList.remove('flipped');
+            clearInterval(matrixInterval);
+        }
+
+        function changeBioText() { let newBio = prompt("أدخل النص الترحيبي الجديد:"); if (newBio) { localStorage.setItem('custom_bio', newBio); clearTimeout(typingTimeout); document.getElementById('bio').innerHTML = ''; typeWriter(newBio); } }
+        function resetStats() { if (confirm("تصفير العداد؟")) { interactionClicks = 0; localStorage.setItem('adnan_clicks', '0'); document.getElementById('clicks-count').innerText = '0'; } }
+        function trackVisits() { let visits = parseInt(localStorage.getItem('adnan_visits_count') || '139'); visits++; localStorage.setItem('adnan_visits_count', visits); document.getElementById('visits-count').innerText = visits; }
+
+        window.onload = () => {
+            trackVisits();
+            typeWriter(localStorage.getItem('custom_bio') || translations['ar'].bio);
+            document.getElementById('clicks-count').innerText = interactionClicks;
+            document.getElementById('last-visit-time').innerText = "SYSTEM TIME: " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        };
+    </script>
+</body>
+</html>
