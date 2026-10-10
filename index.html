@@ -39,9 +39,9 @@
             overflow-x: hidden;
         }
 
-        /* شاشة الصيانة الافتراضية للجميع */
+        /* شاشة الصيانة */
         .maint-screen {
-            display: flex; /* تظهر للجميع في كل الهواتف بمجرد رفع الكود */
+            display: none; /* حوّلها إلى flex لإغلاق الموقع أمام الجميع عالمياً */
             position: fixed;
             top: 0;
             left: 0;
@@ -94,7 +94,7 @@
             margin-bottom: 15px;
         }
 
-        /* حاوية تقليب الكتاب ثلاثية الأبعاد */
+        /* حاوية تقليب الكتاب */
         .book-card {
             width: 100%;
             max-width: 420px;
@@ -108,7 +108,6 @@
             transform: rotateY(180deg);
         }
 
-        /* الوجهين: الأمامي والخلفي */
         .page-front, .page-back {
             width: 100%;
             background: rgba(15, 15, 20, 0.35);
@@ -123,7 +122,6 @@
             -webkit-backface-visibility: hidden;
         }
 
-        /* الصفحة السرية الخلفية */
         .page-back {
             position: absolute;
             top: 0;
@@ -462,6 +460,20 @@
             box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
         }
 
+        /* زر الإلغاء */
+        .admin-btn.success {
+            background: rgba(34, 197, 94, 0.25);
+            border-color: rgba(34, 197, 94, 0.6);
+            color: #22c55e;
+        }
+
+        /* زر التفعيل */
+        .admin-btn.warning {
+            background: rgba(234, 179, 8, 0.2);
+            border-color: rgba(234, 179, 8, 0.5);
+            color: #facc15;
+        }
+
         .admin-btn.danger {
             background: rgba(239, 68, 68, 0.2);
             border-color: rgba(239, 68, 68, 0.5);
@@ -606,7 +618,7 @@
 </head>
 <body>
 
-    <!-- شاشة الصيانة الافتراضية -->
+    <!-- شاشة الصيانة -->
     <div class="maint-screen" id="maintScreen">
         <canvas id="maintMatrixCanvas"></canvas>
         <div class="maint-box" onclick="checkAdminAccess()">
@@ -702,7 +714,10 @@
                     <div class="logs-box" id="securityLogs">لا توجد محاولات مشبوهة حتى الآن.</div>
                 </div>
 
+                <!-- الأزرار المخصصة المستقلة للتحكم بالصيانة -->
                 <div class="admin-grid">
+                    <button class="admin-btn success" onclick="disableMaintenance()"><i class="fas fa-eye"></i> إلغاء الصيانة (فتح)</button>
+                    <button class="admin-btn warning" onclick="enableMaintenance()"><i class="fas fa-eye-slash"></i> تفعيل الصيانة (إغلاق)</button>
                     <button class="admin-btn" onclick="changeBioText()"><i class="fas fa-edit"></i> تعديل الوصف</button>
                     <button class="admin-btn" onclick="installPwaApp()"><i class="fas fa-download"></i> تثبيت التطبيق</button>
                     <button class="admin-btn" onclick="resetStats()"><i class="fas fa-redo"></i> تصفير العداد</button>
@@ -817,6 +832,28 @@
         function recordFailedAttempt() { let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); const now = new Date(); logs.unshift(`[FAILED_ATTEMPT]: ${now.toLocaleTimeString()}`); if (logs.length > 5) logs.pop(); localStorage.setItem('adnan_intrusion_logs', JSON.stringify(logs)); }
         function displaySecurityLogs() { let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); document.getElementById('securityLogs').innerHTML = logs.length === 0 ? 'لا توجد محاولات مشبوهة حتى الآن.' : logs.join('<br>'); }
 
+        /* تفعيل وإلغاء وضع الصيانة عبر دالتين مستقلتين تماماً */
+        function disableMaintenance() {
+            localStorage.setItem('adnan_maint_active', 'false');
+            document.getElementById('maintScreen').style.display = 'none';
+            alert("تم فتح الموقع على متصفحك الحالي!");
+        }
+
+        function enableMaintenance() {
+            localStorage.setItem('adnan_maint_active', 'true');
+            document.getElementById('maintScreen').style.display = 'flex';
+            startMaintMatrixEffect();
+            alert("تم إغلاق الموقع وإظهار شاشة الصيانة على متصفحك الحالي!");
+        }
+
+        function checkMaintStatus() {
+            let isMaint = localStorage.getItem('adnan_maint_active') === 'true';
+            if (isMaint) {
+                document.getElementById('maintScreen').style.display = 'flex';
+                startMaintMatrixEffect();
+            }
+        }
+
         let maintMatrixInterval;
         function startMaintMatrixEffect() {
             const canvas = document.getElementById('maintMatrixCanvas'); const ctx = canvas.getContext('2d');
@@ -853,36 +890,4 @@
             }, 35);
         }
 
-        document.getElementById('terminalInput').addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') {
-                if (this.value === "7002") {
-                    closeTerminal();
-                    document.getElementById('maintScreen').style.display = 'none';
-                    document.getElementById('bookCard').classList.add('flipped');
-                    document.getElementById('clicks-count').innerText = interactionClicks;
-                    loadEncryptedNotes(); displaySecurityLogs(); startMatrixEffect();
-                } else {
-                    recordFailedAttempt(); alert('ACCESS DENIED!'); this.value = '';
-                }
-            }
-        });
-
-        function flipBackToPublic() {
-            document.getElementById('bookCard').classList.remove('flipped');
-            clearInterval(matrixInterval);
-        }
-
-        function changeBioText() { let newBio = prompt("أدخل النص الترحيبي الجديد:"); if (newBio) { localStorage.setItem('custom_bio', newBio); clearTimeout(typingTimeout); document.getElementById('bio').innerHTML = ''; typeWriter(newBio); } }
-        function resetStats() { if (confirm("تصفير العداد؟")) { interactionClicks = 0; localStorage.setItem('adnan_clicks', '0'); document.getElementById('clicks-count').innerText = '0'; } }
-        function trackVisits() { let visits = parseInt(localStorage.getItem('adnan_visits_count') || '139'); visits++; localStorage.setItem('adnan_visits_count', visits); document.getElementById('visits-count').innerText = visits; }
-
-        window.onload = () => {
-            startMaintMatrixEffect();
-            trackVisits();
-            typeWriter(localStorage.getItem('custom_bio') || translations['ar'].bio);
-            document.getElementById('clicks-count').innerText = interactionClicks;
-            document.getElementById('last-visit-time').innerText = "SYSTEM TIME: " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        };
-    </script>
-</body>
-</html>
+        document.getElementById('terminalInput').addEventListener('keyup', function(e)
