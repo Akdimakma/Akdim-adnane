@@ -35,12 +35,27 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            perspective: 1000px; /* لإعطاء تأثير ثلاثي الأبعاد حقيقي عند تقليب الصفحة */
             overflow-x: hidden;
         }
 
-        .container {
+        /* حاوية تقليب الكتاب (Book Card Container) */
+        .book-card {
             width: 100%;
             max-width: 420px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* عند تفعيل الحركة كتقلب الصفحة */
+        .book-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        /* الوجهين: الأمامي والخلفي */
+        .page-front, .page-back {
+            width: 100%;
             background: rgba(15, 15, 20, 0.35);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
@@ -49,7 +64,19 @@
             padding: 30px 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(220, 38, 38, 0.3);
             text-align: center;
-            position: relative;
+            backface-visibility: hidden; /* إخفاء الوجه الخلفي أثناء الدوران */
+            -webkit-backface-visibility: hidden;
+        }
+
+        /* الصفحة الخلفية (السرية) */
+        .page-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: rotateY(180deg);
+            background: rgba(10, 10, 15, 0.95);
+            border-color: rgba(220, 38, 38, 0.8);
+            box-shadow: 0 0 25px rgba(220, 38, 38, 0.5);
         }
 
         .notice-banner {
@@ -61,7 +88,6 @@
             padding: 8px 12px;
             border-radius: 12px;
             margin-bottom: 15px;
-            animation: fadeIn 0.5s ease;
         }
 
         .lang-switch {
@@ -264,42 +290,30 @@
             color: #a1a1aa;
         }
 
-        .admin-panel {
-            margin-top: 20px;
-            display: none;
-            flex-direction: column;
-            gap: 12px;
-            background: rgba(15, 15, 20, 0.95);
-            border: 1px solid rgba(220, 38, 38, 0.7);
-            padding: 16px;
-            border-radius: 16px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.8), 0 0 20px rgba(220, 38, 38, 0.3);
-            animation: fadeIn 0.4s ease;
-            text-align: right;
-        }
-
+        /* تفاصيل الصفحة السرية (الوجه الخلفي) */
         .admin-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(220, 38, 38, 0.3);
-            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(220, 38, 38, 0.4);
+            padding-bottom: 10px;
             font-size: 0.85rem;
             color: #dc2626;
             font-weight: bold;
+            margin-bottom: 15px;
         }
 
         .admin-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 10px;
+            margin-bottom: 15px;
         }
 
         .stat-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(220, 38, 38, 0.2);
-            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            padding: 10px;
             border-radius: 10px;
             text-align: center;
         }
@@ -308,11 +322,11 @@
             font-size: 0.7rem;
             color: #a1a1aa;
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
         }
 
         .stat-card span {
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: bold;
             color: #22c55e;
         }
@@ -321,9 +335,9 @@
             background: rgba(220, 38, 38, 0.2);
             border: 1px solid rgba(220, 38, 38, 0.4);
             color: #fff;
-            padding: 8px;
+            padding: 10px;
             border-radius: 10px;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
@@ -339,8 +353,8 @@
         }
 
         .admin-btn.danger {
-            background: rgba(239, 68, 68, 0.15);
-            border-color: rgba(239, 68, 68, 0.4);
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.5);
             color: #f87171;
             grid-column: span 2;
         }
@@ -352,18 +366,19 @@
 
         .admin-notes {
             width: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(220, 38, 38, 0.3);
-            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(220, 38, 38, 0.4);
+            border-radius: 10px;
             color: #fff;
-            padding: 8px;
-            font-size: 0.75rem;
+            padding: 10px;
+            font-size: 0.8rem;
             resize: none;
-            height: 50px;
+            height: 60px;
             outline: none;
+            margin-bottom: 15px;
         }
 
-        /* شاشة الهاكر المظلمة (Hacker Terminal Screen) */
+        /* شاشة الهاكر المظلمة */
         .hacker-terminal {
             display: none;
             position: fixed;
@@ -378,7 +393,6 @@
             align-items: center;
             padding: 20px;
             font-family: 'Courier New', Courier, monospace;
-            box-shadow: inset 0 0 100px rgba(220, 38, 38, 0.2);
         }
 
         .terminal-box {
@@ -428,11 +442,6 @@
             letter-spacing: 2px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .qr-modal {
             display: none;
             position: fixed;
@@ -446,7 +455,6 @@
             z-index: 999;
             justify-content: center;
             align-items: center;
-            animation: fadeIn 0.3s ease;
         }
 
         .qr-card {
@@ -473,7 +481,6 @@
             border-radius: 14px;
             display: inline-block;
             margin-bottom: 15px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
 
         .close-qr {
@@ -483,11 +490,6 @@
             color: #a1a1aa;
             font-size: 1.4rem;
             cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .close-qr:hover {
-            color: #dc2626;
         }
 
         .toast {
@@ -504,136 +506,137 @@
             box-shadow: 0 0 15px rgba(220, 38, 38, 0.6);
             display: none;
             z-index: 1000;
-            animation: fadeIn 0.3s ease;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- شريط التنبيه العلوي المخصص -->
-        <div class="notice-banner" id="notice-banner">
-            <i class="fas fa-bullhorn"></i> <span id="notice-text">مرحباً بكم في الموقع الرسمي لعدنان أقديم</span>
-        </div>
+    <!-- كارت الكتاب التفاعلي ثلاثي الأبعاد -->
+    <div class="book-card" id="bookCard">
 
-        <!-- أزرار اللغات -->
-        <div class="lang-switch">
-            <button class="lang-btn active" onclick="setLanguage('ar', event)">العربية</button>
-            <button class="lang-btn" onclick="setLanguage('en', event)">English</button>
-            <button class="lang-btn" onclick="setLanguage('fr', event)">Français</button>
-            <button class="lang-btn" onclick="setLanguage('ber', event)">ⵜⴰⵎⴰⵣⵉⵖⵜ</button>
-        </div>
-
-        <!-- البروفايل -->
-        <div class="profile">
-            <div class="img-container">
-                <img src="profile.jpg" alt="ADNANE AKDIM Profile" class="profile-img">
-                <div class="status-badge" title="Active"></div>
-            </div>
-            <h1 onclick="checkAdminAccess()">ADNANE AKDIM</h1>
-            <p><span id="bio"></span><span class="typing-cursor"></span></p>
-        </div>
-
-        <!-- الروابط -->
-        <div class="links">
-            <!-- Instagram -->
-            <div class="link-wrapper">
-                <a href="https://www.instagram.com/kacm_adnan?obrf=M25xdW1tNGFkdXJo" target="_blank" class="link-card">
-                    <i class="fab fa-instagram" style="color: #e1306c;"></i>
-                    <span id="label-instagram">إنستغرام</span>
-                    <i class="fas fa-arrow-left arrow-icon"></i>
-                </a>
-                <button class="copy-btn" onclick="copyToClipboard('kacm_adnan')" title="نسخ اسم الحساب">
-                    <i class="fas fa-copy"></i>
-                </button>
+        <!-- الوجه الأول: الصفحة الرئيسية العمومية للزوار -->
+        <div class="page-front">
+            <div class="notice-banner" id="notice-banner">
+                <i class="fas fa-bullhorn"></i> <span id="notice-text">مرحباً بكم في الموقع الرسمي لعدنان أقديم</span>
             </div>
 
-            <!-- WhatsApp -->
-            <div class="link-wrapper">
-                <a href="https://wa.me/212614060332" target="_blank" class="link-card">
-                    <i class="fab fa-whatsapp" style="color: #25d366;"></i>
-                    <span id="label-whatsapp">واتساب</span>
-                    <i class="fas fa-arrow-left arrow-icon"></i>
-                </a>
-                <button class="copy-btn" onclick="copyToClipboard('+212614060332')" title="نسخ الرقم">
-                    <i class="fas fa-copy"></i>
-                </button>
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="setLanguage('ar', event)">العربية</button>
+                <button class="lang-btn" onclick="setLanguage('en', event)">English</button>
+                <button class="lang-btn" onclick="setLanguage('fr', event)">Français</button>
+                <button class="lang-btn" onclick="setLanguage('ber', event)">ⵜⴰⵎⴰⵣⵉⵖⵜ</button>
             </div>
 
-            <!-- Gmail -->
-            <div class="link-wrapper">
-                <a href="mailto:akdimadnane@gmail.com" class="link-card">
-                    <i class="fas fa-envelope" style="color: #ea4335;"></i>
-                    <span id="label-gmail">البريد الإلكتروني</span>
-                    <i class="fas fa-arrow-left arrow-icon"></i>
-                </a>
-                <button class="copy-btn" onclick="copyToClipboard('akdimadnane@gmail.com')" title="نسخ البريد">
-                    <i class="fas fa-copy"></i>
-                </button>
+            <div class="profile">
+                <div class="img-container">
+                    <img src="profile.jpg" alt="ADNANE AKDIM Profile" class="profile-img">
+                    <div class="status-badge" title="Active"></div>
+                </div>
+                <h1 onclick="checkAdminAccess()">ADNANE AKDIM</h1>
+                <p><span id="bio"></span><span class="typing-cursor"></span></p>
             </div>
-        </div>
 
-        <!-- أزرار التفاعل العامة -->
-        <div class="action-sec">
-            <button class="action-btn" onclick="shareProfile()">
-                <i class="fas fa-share-alt"></i>
-                <span id="label-share">مشاركة الصفحة</span>
-            </button>
-            <button class="action-btn" onclick="downloadVCard()">
-                <i class="fas fa-user-plus"></i>
-                <span id="label-save">حفظ الاتصال</span>
-            </button>
-            <button class="action-btn" onclick="openQrModal()">
-                <i class="fas fa-qrcode"></i>
-                <span id="label-qr">رمز QR</span>
-            </button>
-        </div>
-
-        <!-- حقوق الصفحة واللوحة السرية -->
-        <footer>
-            <div>© 2026 ADNANE AKDIM | All rights reserved</div>
-            
-            <div class="admin-panel" id="admin-panel">
-                <div class="admin-header">
-                    <span><i class="fas fa-user-shield"></i> لوحة التحكم السرية</span>
-                    <span style="font-size: 0.65rem; color: #a1a1aa;" id="last-visit-time">--:--</span>
+            <div class="links">
+                <div class="link-wrapper">
+                    <a href="https://www.instagram.com/kacm_adnan?obrf=M25xdW1tNGFkdXJo" target="_blank" class="link-card">
+                        <i class="fab fa-instagram" style="color: #e1306c;"></i>
+                        <span id="label-instagram">إنستغرام</span>
+                        <i class="fas fa-arrow-left arrow-icon"></i>
+                    </a>
+                    <button class="copy-btn" onclick="copyToClipboard('kacm_adnan')" title="نسخ اسم الحساب">
+                        <i class="fas fa-copy"></i>
+                    </button>
                 </div>
 
-                <div class="admin-grid">
-                    <div class="stat-card">
-                        <label>إجمالي الزيارات</label>
-                        <span id="visits-count">...</span>
-                    </div>
-                    <div class="stat-card">
-                        <label>التفاعلات</label>
-                        <span id="clicks-count">0</span>
-                    </div>
+                <div class="link-wrapper">
+                    <a href="https://wa.me/212614060332" target="_blank" class="link-card">
+                        <i class="fab fa-whatsapp" style="color: #25d366;"></i>
+                        <span id="label-whatsapp">واتساب</span>
+                        <i class="fas fa-arrow-left arrow-icon"></i>
+                    </a>
+                    <button class="copy-btn" onclick="copyToClipboard('+212614060332')" title="نسخ الرقم">
+                        <i class="fas fa-copy"></i>
+                    </button>
                 </div>
 
-                <textarea class="admin-notes" id="admin-notes" placeholder="ملاحظاتك السرية هنا..." oninput="saveNotes()"></textarea>
-
-                <div class="admin-grid">
-                    <button class="admin-btn" onclick="toggleNoticeBanner()">
-                        <i class="fas fa-bullhorn"></i> الشريط العلوي
-                    </button>
-                    <button class="admin-btn" onclick="changeBioText()">
-                        <i class="fas fa-edit"></i> تعديل الوصف
-                    </button>
-                    <button class="admin-btn" onclick="installPwaApp()">
-                        <i class="fas fa-download"></i> تثبيت التطبيق
-                    </button>
-                    <button class="admin-btn" onclick="resetStats()">
-                        <i class="fas fa-redo"></i> تصفير العداد
-                    </button>
-                    <button class="admin-btn danger" onclick="closeAdminPanel()">
-                        <i class="fas fa-lock"></i> إغلاق وتأمين اللوحة
+                <div class="link-wrapper">
+                    <a href="mailto:akdimadnane@gmail.com" class="link-card">
+                        <i class="fas fa-envelope" style="color: #ea4335;"></i>
+                        <span id="label-gmail">البريد الإلكتروني</span>
+                        <i class="fas fa-arrow-left arrow-icon"></i>
+                    </a>
+                    <button class="copy-btn" onclick="copyToClipboard('akdimadnane@gmail.com')" title="نسخ البريد">
+                        <i class="fas fa-copy"></i>
                     </button>
                 </div>
             </div>
-        </footer>
+
+            <div class="action-sec">
+                <button class="action-btn" onclick="shareProfile()">
+                    <i class="fas fa-share-alt"></i>
+                    <span id="label-share">مشاركة الصفحة</span>
+                </button>
+                <button class="action-btn" onclick="downloadVCard()">
+                    <i class="fas fa-user-plus"></i>
+                    <span id="label-save">حفظ الاتصال</span>
+                </button>
+                <button class="action-btn" onclick="openQrModal()">
+                    <i class="fas fa-qrcode"></i>
+                    <span id="label-qr">رمز QR</span>
+                </button>
+            </div>
+
+            <footer>
+                <div>© 2026 ADNANE AKDIM | All rights reserved</div>
+            </footer>
+        </div>
+
+        <!-- الوجه الثاني: الصفحة السرية (ظهر الصفحة بعد التقلاب) -->
+        <div class="page-back">
+            <div class="admin-header">
+                <span><i class="fas fa-user-shield"></i> لوحة التحكم السرية</span>
+                <span style="font-size: 0.65rem; color: #a1a1aa;" id="last-visit-time">--:--</span>
+            </div>
+
+            <div class="admin-grid">
+                <div class="stat-card">
+                    <label>إجمالي الزيارات</label>
+                    <span id="visits-count">...</span>
+                </div>
+                <div class="stat-card">
+                    <label>التفاعلات</label>
+                    <span id="clicks-count">0</span>
+                </div>
+            </div>
+
+            <textarea class="admin-notes" id="admin-notes" placeholder="ملاحظاتك السرية هنا..." oninput="saveNotes()"></textarea>
+
+            <div class="admin-grid">
+                <button class="admin-btn" onclick="toggleNoticeBanner()">
+                    <i class="fas fa-bullhorn"></i> الشريط العلوي
+                </button>
+                <button class="admin-btn" onclick="changeBioText()">
+                    <i class="fas fa-edit"></i> تعديل الوصف
+                </button>
+                <button class="admin-btn" onclick="installPwaApp()">
+                    <i class="fas fa-download"></i> تثبيت التطبيق
+                </button>
+                <button class="admin-btn" onclick="resetStats()">
+                    <i class="fas fa-redo"></i> تصفير العداد
+                </button>
+                <button class="admin-btn danger" onclick="flipBackToPublic()">
+                    <i class="fas fa-book-open"></i> إغلاق وقلب الصفحة
+                </button>
+            </div>
+
+            <footer>
+                <div>CONFIDENTIAL ACCESS // ADNANE AKDIM</div>
+            </footer>
+        </div>
+
     </div>
 
-    <!-- شاشة إدخال الأوامر بنمط الهاكرز المظلم -->
+    <!-- شاشة الهاكر لإدخال الرمز السري -->
     <div class="hacker-terminal" id="hackerTerminal">
         <div class="terminal-box">
             <div class="terminal-header">
@@ -641,9 +644,9 @@
                 <span onclick="closeTerminal()" style="cursor: pointer; color: #a1a1aa;">[ESC]</span>
             </div>
             <div class="terminal-logs">
-                > INITIALIZING ENCRYPTED CONNECTION...<br>
+                > INITIALIZING BOOK_FLIP_PROTOCOL...<br>
                 > AUTHORIZATION REQUIRED.<br>
-                > ENTER SECURITY PASSCODE TO UNLOCK ADMIN SYSTEM.
+                > ENTER SECURITY PASSCODE TO FLIP THE PAGE.
             </div>
             <div class="terminal-input-row">
                 <span>PASSCODE></span>
@@ -864,14 +867,14 @@
             document.getElementById('terminalInput').value = '';
         }
 
-        // إدخال كلمة السر عبر الـ Terminal
+        // عند إدخال كلمة السر كتقلب الصفحة (Flip Effect)
         document.getElementById('terminalInput').addEventListener('keyup', function(e) {
             if (e.key === 'Enter') {
                 const val = this.value;
                 if (val === "7002") {
                     closeTerminal();
-                    const panel = document.getElementById('admin-panel');
-                    panel.style.display = 'flex';
+                    // تفعيل تقليب الكتاب ثلاثي الأبعاد
+                    document.getElementById('bookCard').classList.add('flipped');
                     document.getElementById('clicks-count').innerText = interactionClicks;
                     document.getElementById('admin-notes').value = localStorage.getItem('adnan_notes') || '';
                 } else {
@@ -881,8 +884,9 @@
             }
         });
 
-        function closeAdminPanel() {
-            document.getElementById('admin-panel').style.display = 'none';
+        // القلب من الصفحة السرية وإرجاع الصفحة العمومية
+        function flipBackToPublic() {
+            document.getElementById('bookCard').classList.remove('flipped');
         }
 
         function toggleNoticeBanner() {
