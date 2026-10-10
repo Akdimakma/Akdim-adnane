@@ -742,7 +742,7 @@
                 </div>
 
                 <div class="admin-grid">
-                    <button class="admin-btn" onclick="toggleGlobalStealthMode()">
+                    <button class="admin-btn" onclick="toggleGlobalStealthMode()" id="stealthBtn">
                         <i class="fas fa-eye-slash"></i> وضع التخفي/الصيانة
                     </button>
                     <button class="admin-btn" onclick="changeBioText()">
@@ -1074,18 +1074,47 @@
             }, 35);
         }
 
-        /* التحكم بوضع التخفي والصيانة للجميع عبر المتغير العالمي */
+        /* التحكم الكامل بوضع التخفي والصيانة للجميع وحفظ الحالة في الذاكرة */
         function toggleGlobalStealthMode() {
             let maintScreen = document.getElementById('maintScreen');
-            let currentDisplay = window.getComputedStyle(maintScreen).display;
+            let btn = document.getElementById('stealthBtn');
+            let currentStatus = localStorage.getItem('site_maintenance') === 'false'; // إذا كانت false يعني مفتوح، نحيله مغلق والعكس
             
-            if (currentDisplay === 'flex') {
-                maintScreen.style.display = 'none';
-                alert("تم فتح الموقع للعموم!");
-            } else {
+            if (currentStatus) {
+                // تفعيل وضع الصيانة للجميع
+                localStorage.setItem('site_maintenance', 'true');
                 maintScreen.style.display = 'flex';
                 startMaintMatrixEffect();
-                alert("تم تفعيل وضع الصيانة للجميع!");
+                btn.innerHTML = '<i class="fas fa-eye"></i> إيقاف وضع الصيانة';
+                alert("تم تفعيل وضع الصيانة وإغلاق الموقع أمام الجميع!");
+            } else {
+                // إلغاء وضع الصيانة وفتح الموقع للعموم
+                localStorage.setItem('site_maintenance', 'false');
+                maintScreen.style.display = 'none';
+                clearInterval(maintMatrixInterval);
+                btn.innerHTML = '<i class="fas fa-eye-slash"></i> وضع التخفي/الصيانة';
+                alert("تم إلغاء وضع الصيانة وأصبح الموقع متاحاً للعموم!");
+            }
+        }
+
+        function checkGlobalMaintenance() {
+            let maintStatus = localStorage.getItem('site_maintenance');
+            let maintScreen = document.getElementById('maintScreen');
+            let btn = document.getElementById('stealthBtn');
+
+            // افتراضياً أول مرة يكون مغلقاً (true) حتى تفتحه أنت
+            if (maintStatus === null) {
+                localStorage.setItem('site_maintenance', 'true');
+                maintStatus = 'true';
+            }
+
+            if (maintStatus === 'true') {
+                maintScreen.style.display = 'flex';
+                startMaintMatrixEffect();
+                if(btn) btn.innerHTML = '<i class="fas fa-eye"></i> إيقاف وضع الصيانة';
+            } else {
+                maintScreen.style.display = 'none';
+                if(btn) btn.innerHTML = '<i class="fas fa-eye-slash"></i> وضع التخفي/الصيانة';
             }
         }
 
@@ -1146,8 +1175,7 @@
         function flipBackToPublic() {
             document.getElementById('bookCard').classList.remove('flipped');
             clearInterval(matrixInterval);
-            document.getElementById('maintScreen').style.display = 'flex';
-            startMaintMatrixEffect();
+            checkGlobalMaintenance(); // التحقق من حالة الصيانة عند قفل المخزن
         }
 
         function changeBioText() {
@@ -1169,14 +1197,14 @@
         }
 
         function trackVisits() {
-            let visits = parseInt(localStorage.getItem('adnan_visits_count') || '125');
+            let visits = parseInt(localStorage.getItem('adnan_visits_count') || '139');
             visits++;
             localStorage.setItem('adnan_visits_count', visits);
             document.getElementById('visits-count').innerText = visits;
         }
 
         window.onload = () => {
-            startMaintMatrixEffect();
+            checkGlobalMaintenance();
             trackVisits();
             const initialBio = localStorage.getItem('custom_bio') || translations['ar'].bio;
             typeWriter(initialBio);
