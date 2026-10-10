@@ -754,9 +754,8 @@
     <div class="toast" id="toast">تم النسخ بنجاح!</div>
 
     <script>
-        // إعدادات الربط مع GitHub الخاص بك (قم بتعديل اسم المستخدم واسم المستودع هنا)
-        const GITHUB_USER = 'akdimakma'; // اسمك على جيت هاب
-        const GITHUB_REPO = 'akdimakma.github.io'; // اسم المستودع
+        const GITHUB_USER = 'akdimakma';
+        const GITHUB_REPO = 'akdimakma.github.io';
 
         const translations = {
             ar: { dir: 'rtl', bio: 'مرحباً بكم في صفحتي الشخصية', instagram: 'إنستغرام', whatsapp: 'واتساب', gmail: 'البريد الإلكتروني', share: 'مشاركة', save: 'حفظ الاتصال', qr: 'رمز QR', qrTitle: 'امسح الرمز لزيارة الصفحة', arrow: 'fa-arrow-left' },
@@ -831,26 +830,23 @@
         function recordFailedAttempt() { let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); const now = new Date(); logs.unshift(`[FAILED_ATTEMPT]: ${now.toLocaleTimeString()}`); if (logs.length > 5) logs.pop(); localStorage.setItem('adnan_intrusion_logs', JSON.stringify(logs)); }
         function displaySecurityLogs() { let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); document.getElementById('securityLogs').innerHTML = logs.length === 0 ? 'لا توجد محاولات مشبوهة حتى الآن.' : logs.join('<br>'); }
 
-        /* دالة التحديث العالمي لملف status.txt على GitHub عبر الضغط على الأزرار */
+        /* دالة التحديث العالمي المحدثة لطلب الرمز الجديد وتحديث status.txt */
         async function setGlobalStatus(statusValue) {
-            let token = localStorage.getItem('github_token');
-            if (!token) {
-                token = prompt("أدخل رمز GitHub Personal Access Token الخاص بك (يطلب مرة واحدة فقط للأمان):");
-                if (!token) return;
-                localStorage.setItem('github_token', token.trim());
-            }
+            localStorage.removeItem('github_token');
+            let token = prompt("أدخل رمز GitHub Personal Access Token الجديد:");
+            if (!token) return;
+            token = token.trim();
+            localStorage.setItem('github_token', token);
 
             alert("جاري تحديث الحالة عالمياً على خوادم GitHub...");
 
             try {
                 const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/status.txt`;
                 
-                // جلب الـ SHA الخاص بالملف الحالي
                 const getRes = await fetch(url);
                 const getData = await getRes.json();
                 const sha = getData.sha;
 
-                // تحديث الملف بالكلمة الجديدة (true أو false)
                 const res = await fetch(url, {
                     method: 'PUT',
                     headers: {
@@ -868,7 +864,7 @@
                     alert(statusValue === 'true' ? "تم إغلاق الموقع عالمياً بنجاح أمام الجميع!" : "تم فتح الموقع عالمياً بنجاح للجميع!");
                     location.reload();
                 } else {
-                    alert("فشل التحديث! تأكد من صحة رمز GitHub Token.");
+                    alert("فشل التحديث! تأكد من صحة الرمز ومن أن لديه صلاحية repo.");
                     localStorage.removeItem('github_token');
                 }
             } catch (err) {
@@ -876,7 +872,6 @@
             }
         }
 
-        /* فحص حالة الصيانة عند فتح أي هاتف للموقع */
         async function checkGlobalMaintenance() {
             try {
                 const res = await fetch('status.txt?t=' + new Date().getTime());
@@ -887,9 +882,7 @@
                 } else {
                     document.getElementById('maintScreen').style.display = 'none';
                 }
-            } catch (e) {
-                // افتراضياً يفتح الموقع إذا لم يتم العثور على الملف
-            }
+            } catch (e) {}
         }
 
         let maintMatrixInterval;
