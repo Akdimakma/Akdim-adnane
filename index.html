@@ -39,9 +39,9 @@
             overflow-x: hidden;
         }
 
-        /* شاشة وضع التخفي الصيانة النيون */
+        /* شاشة وضع الصيانة الافتراضية للجميع */
         .maint-screen {
-            display: none;
+            display: flex;
             position: fixed;
             top: 0;
             left: 0;
@@ -618,7 +618,7 @@
 </head>
 <body>
 
-    <!-- شاشة وضع التخفي الصيانة النيون -->
+    <!-- شاشة الصيانة الافتراضية للجميع -->
     <div class="maint-screen" id="maintScreen">
         <canvas id="maintMatrixCanvas"></canvas>
         <div class="maint-box" onclick="checkAdminAccess()">
@@ -742,9 +742,6 @@
                 </div>
 
                 <div class="admin-grid">
-                    <button class="admin-btn" onclick="toggleGlobalStealthMode()">
-                        <i class="fas fa-eye-slash"></i> وضع التخفي/الصيانة
-                    </button>
                     <button class="admin-btn" onclick="changeBioText()">
                         <i class="fas fa-edit"></i> تعديل الوصف
                     </button>
@@ -1041,7 +1038,7 @@
             }
         }
 
-        /* وضع الصيانة */
+        /* تفعيل خلفية الماتريكس لشاشة الصيانة */
         let maintMatrixInterval;
         function startMaintMatrixEffect() {
             const canvas = document.getElementById('maintMatrixCanvas');
@@ -1072,29 +1069,6 @@
                     drops[i]++;
                 }
             }, 35);
-        }
-
-        function toggleGlobalStealthMode() {
-            let current = localStorage.getItem('adnan_stealth_mode') === 'true';
-            let newState = !current;
-            localStorage.setItem('adnan_stealth_mode', newState);
-            
-            if (newState) {
-                alert("تم تفعيل وضع الصيانة بنجاح!");
-                checkStealthStatus();
-            } else {
-                alert("تم إيقاف وضع الصيانة.");
-                document.getElementById('maintScreen').style.display = 'none';
-                clearInterval(maintMatrixInterval);
-            }
-        }
-
-        function checkStealthStatus() {
-            let isStealth = localStorage.getItem('adnan_stealth_mode') === 'true';
-            if (isStealth) {
-                document.getElementById('maintScreen').style.display = 'flex';
-                startMaintMatrixEffect();
-            }
         }
 
         /* تأثير الماتريكس فـ اللوحة السرية */
@@ -1154,7 +1128,8 @@
         function flipBackToPublic() {
             document.getElementById('bookCard').classList.remove('flipped');
             clearInterval(matrixInterval);
-            checkStealthStatus();
+            document.getElementById('maintScreen').style.display = 'flex'; // إعادة إظهار الصيانة عند الخروج
+            startMaintMatrixEffect();
         }
 
         function changeBioText() {
@@ -1183,7 +1158,7 @@
         }
 
         window.onload = () => {
-            checkStealthStatus();
+            startMaintMatrixEffect(); // تشغيل خلفية الماتريكس لشاشة الصيانة للجميع
             trackVisits();
             const initialBio = localStorage.getItem('custom_bio') || translations['ar'].bio;
             typeWriter(initialBio);
