@@ -51,7 +51,6 @@
             position: relative;
         }
 
-        /* شريط الإعلانات الترحيبي العلوي */
         .notice-banner {
             display: none;
             background: rgba(220, 38, 38, 0.25);
@@ -264,7 +263,6 @@
             color: #a1a1aa;
         }
 
-        /* التصميم الجديد والأنيق للوحة السرية */
         .admin-panel {
             margin-top: 20px;
             display: none;
@@ -367,6 +365,98 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* النافذة السرية الجديدة الفخمة والمخصصة */
+        .pwd-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .pwd-card {
+            background: rgba(20, 20, 25, 0.95);
+            border: 1px solid rgba(220, 38, 38, 0.7);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 25px rgba(220, 38, 38, 0.4);
+            max-width: 320px;
+            width: 90%;
+        }
+
+        .pwd-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .pwd-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(220, 38, 38, 0.5);
+            border-radius: 12px;
+            color: #fff;
+            text-align: center;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            outline: none;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .pwd-input:focus {
+            border-color: #dc2626;
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+        }
+
+        .pwd-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .pwd-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .pwd-confirm {
+            background: #dc2626;
+            color: white;
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.4);
+        }
+
+        .pwd-confirm:hover {
+            background: #ef4444;
+        }
+
+        .pwd-cancel {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ccc;
+        }
+
+        .pwd-cancel:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .qr-modal {
@@ -525,7 +615,7 @@
             </button>
         </div>
 
-        <!-- حقوق الصفحة واللوحة السرية الأنيقة -->
+        <!-- حقوق الصفحة واللوحة السرية -->
         <footer>
             <div>© 2026 ADNANE AKDIM | All rights reserved</div>
             
@@ -567,6 +657,18 @@
                 </div>
             </div>
         </footer>
+    </div>
+
+    <!-- نافذة إدخال كلمة السر المخصصة الأنيقة -->
+    <div class="pwd-modal" id="pwdModal">
+        <div class="pwd-card">
+            <h3><i class="fas fa-lock" style="color: #dc2626;"></i> أدخل الرمز السري</h3>
+            <input type="password" class="pwd-input" id="pwdInput" placeholder="••••" maxlength="8">
+            <div class="pwd-actions">
+                <button class="pwd-btn pwd-confirm" onclick="verifyPassword()">دخول</button>
+                <button class="pwd-btn pwd-cancel" onclick="closePwdModal()">إلغاء</button>
+            </div>
+        </div>
     </div>
 
     <!-- نافذة الـ QR Code -->
@@ -769,19 +871,38 @@
 
             if (clickCount === 9) {
                 clickCount = 0;
-                let password = prompt("أدخل رمز المشرف السري:");
-                if (password === "7002") {
-                    const panel = document.getElementById('admin-panel');
-                    panel.style.display = 'flex';
-                    document.getElementById('clicks-count').innerText = interactionClicks;
-                    document.getElementById('admin-notes').value = localStorage.getItem('adnan_notes') || '';
-                } else if (password !== null) {
-                    alert('كلمة المرور غير صحيحة!');
-                }
+                document.getElementById('pwdModal').style.display = 'flex';
+                document.getElementById('pwdInput').focus();
             } else {
                 clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
             }
         }
+
+        function verifyPassword() {
+            const pwd = document.getElementById('pwdInput').value;
+            if (pwd === "7002") {
+                closePwdModal();
+                const panel = document.getElementById('admin-panel');
+                panel.style.display = 'flex';
+                document.getElementById('clicks-count').innerText = interactionClicks;
+                document.getElementById('admin-notes').value = localStorage.getItem('adnan_notes') || '';
+            } else {
+                alert('كلمة المرور غير صحيحة!');
+                document.getElementById('pwdInput').value = '';
+            }
+        }
+
+        function closePwdModal() {
+            document.getElementById('pwdModal').style.display = 'none';
+            document.getElementById('pwdInput').value = '';
+        }
+
+        // إمكانية الضغط على Enter لإدخال كلمة السر
+        document.getElementById('pwdInput').addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                verifyPassword();
+            }
+        });
 
         function closeAdminPanel() {
             document.getElementById('admin-panel').style.display = 'none';
@@ -839,7 +960,6 @@
             fetchVisits();
             document.getElementById('clicks-count').innerText = interactionClicks;
 
-            // تسجيل وقت الزيارة
             const now = new Date();
             const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             document.getElementById('last-visit-time').innerText = "آخر زيارة: " + timeStr;
