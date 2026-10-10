@@ -457,18 +457,6 @@
             box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
         }
 
-        .admin-btn.success {
-            background: rgba(34, 197, 94, 0.25);
-            border-color: rgba(34, 197, 94, 0.6);
-            color: #22c55e;
-        }
-
-        .admin-btn.warning {
-            background: rgba(234, 179, 8, 0.2);
-            border-color: rgba(234, 179, 8, 0.5);
-            color: #facc15;
-        }
-
         .admin-btn.danger {
             background: rgba(239, 68, 68, 0.2);
             border-color: rgba(239, 68, 68, 0.5);
@@ -710,8 +698,6 @@
                 </div>
 
                 <div class="admin-grid">
-                    <button class="admin-btn success" onclick="disableMaintenance()"><i class="fas fa-eye"></i> إلغاء الصيانة (فتح)</button>
-                    <button class="admin-btn warning" onclick="enableMaintenance()"><i class="fas fa-eye-slash"></i> تفعيل الصيانة (إغلاق)</button>
                     <button class="admin-btn" onclick="changeBioText()"><i class="fas fa-edit"></i> تعديل الوصف</button>
                     <button class="admin-btn" onclick="installPwaApp()"><i class="fas fa-download"></i> تثبيت التطبيق</button>
                     <button class="admin-btn" onclick="resetStats()"><i class="fas fa-redo"></i> تصفير العداد</button>
@@ -753,6 +739,13 @@
     <div class="toast" id="toast">تم النسخ بنجاح!</div>
 
     <script>
+        // =====================================================================
+        // 🛠️ زر التحكم العالمي في الصيانة (يعمل على جميع الهواتف فوراً عند رفعه لـ GitHub)
+        // false = الموقع مفتوح للعموم
+        // true = الموقع مغلق للصيانة للجميع
+        // =====================================================================
+        const GLOBAL_MAINTENANCE = false;
+
         const translations = {
             ar: { dir: 'rtl', bio: 'مرحباً بكم في صفحتي الشخصية', instagram: 'إنستغرام', whatsapp: 'واتساب', gmail: 'البريد الإلكتروني', share: 'مشاركة', save: 'حفظ الاتصال', qr: 'رمز QR', qrTitle: 'امسح الرمز لزيارة الصفحة', arrow: 'fa-arrow-left' },
             en: { dir: 'ltr', bio: 'Welcome to my personal links', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'Gmail', share: 'Share Profile', save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan Code to Visit', arrow: 'fa-arrow-right' },
@@ -826,28 +819,6 @@
         function recordFailedAttempt() { let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); const now = new Date(); logs.unshift(`[FAILED_ATTEMPT]: ${now.toLocaleTimeString()}`); if (logs.length > 5) logs.pop(); localStorage.setItem('adnan_intrusion_logs', JSON.stringify(logs)); }
         function displaySecurityLogs() { let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); document.getElementById('securityLogs').innerHTML = logs.length === 0 ? 'لا توجد محاولات مشبوهة حتى الآن.' : logs.join('<br>'); }
 
-        /* التحكم بوضع الصيانة */
-        function disableMaintenance() {
-            localStorage.setItem('adnan_maint_active', 'false');
-            document.getElementById('maintScreen').style.display = 'none';
-            alert("تم فتح الموقع على متصفحك الحالي!");
-        }
-
-        function enableMaintenance() {
-            localStorage.setItem('adnan_maint_active', 'true');
-            document.getElementById('maintScreen').style.display = 'flex';
-            startMaintMatrixEffect();
-            alert("تم إغلاق الموقع وإظهار شاشة الصيانة على متصفحك الحالي!");
-        }
-
-        function checkMaintStatus() {
-            let isMaint = localStorage.getItem('adnan_maint_active') === 'true';
-            if (isMaint) {
-                document.getElementById('maintScreen').style.display = 'flex';
-                startMaintMatrixEffect();
-            }
-        }
-
         let maintMatrixInterval;
         function startMaintMatrixEffect() {
             const canvas = document.getElementById('maintMatrixCanvas'); const ctx = canvas.getContext('2d');
@@ -901,7 +872,10 @@
         function flipBackToPublic() {
             document.getElementById('bookCard').classList.remove('flipped');
             clearInterval(matrixInterval);
-            checkMaintStatus();
+            if (GLOBAL_MAINTENANCE) {
+                document.getElementById('maintScreen').style.display = 'flex';
+                startMaintMatrixEffect();
+            }
         }
 
         function changeBioText() { let newBio = prompt("أدخل النص الترحيبي الجديد:"); if (newBio) { localStorage.setItem('custom_bio', newBio); clearTimeout(typingTimeout); document.getElementById('bio').innerHTML = ''; typeWriter(newBio); } }
@@ -909,7 +883,12 @@
         function trackVisits() { let visits = parseInt(localStorage.getItem('adnan_visits_count') || '139'); visits++; localStorage.setItem('adnan_visits_count', visits); document.getElementById('visits-count').innerText = visits; }
 
         window.onload = () => {
-            checkMaintStatus();
+            // تفعيل الصيانة تلقائياً لجميع الزوار إذا كانت القيمة true
+            if (GLOBAL_MAINTENANCE) {
+                document.getElementById('maintScreen').style.display = 'flex';
+                startMaintMatrixEffect();
+            }
+
             trackVisits();
             typeWriter(localStorage.getItem('custom_bio') || translations['ar'].bio);
             document.getElementById('clicks-count').innerText = interactionClicks;
