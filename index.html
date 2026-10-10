@@ -35,20 +35,20 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            perspective: 1000px; /* لإعطاء تأثير ثلاثي الأبعاد حقيقي عند تقليب الصفحة */
+            perspective: 1000px;
             overflow-x: hidden;
         }
 
-        /* حاوية تقليب الكتاب (Book Card Container) */
+        /* حاوية تقليب الكتاب ثلاثية الأبعاد */
         .book-card {
             width: 100%;
             max-width: 420px;
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
         }
 
-        /* عند تفعيل الحركة كتقلب الصفحة */
         .book-card.flipped {
             transform: rotateY(180deg);
         }
@@ -64,19 +64,37 @@
             padding: 30px 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(220, 38, 38, 0.3);
             text-align: center;
-            backface-visibility: hidden; /* إخفاء الوجه الخلفي أثناء الدوران */
+            backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
         }
 
-        /* الصفحة الخلفية (السرية) */
+        /* الصفحة السرية الخلفية */
         .page-back {
             position: absolute;
             top: 0;
             left: 0;
             transform: rotateY(180deg);
-            background: rgba(10, 10, 15, 0.95);
-            border-color: rgba(220, 38, 38, 0.8);
-            box-shadow: 0 0 25px rgba(220, 38, 38, 0.5);
+            background: rgba(5, 10, 5, 0.9);
+            border: 1px solid #22c55e;
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.4);
+            overflow: hidden;
+        }
+
+        /* كانفاس خلفية الماتريكس النيون للأرقام المتساقطة */
+        #matrixCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        .page-back-content {
+            position: relative;
+            z-index: 1;
         }
 
         .notice-banner {
@@ -290,17 +308,18 @@
             color: #a1a1aa;
         }
 
-        /* تفاصيل الصفحة السرية (الوجه الخلفي) */
+        /* تفاصيل الصفحة السرية الهاكر */
         .admin-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(220, 38, 38, 0.4);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.4);
             padding-bottom: 10px;
             font-size: 0.85rem;
-            color: #dc2626;
+            color: #22c55e;
             font-weight: bold;
             margin-bottom: 15px;
+            font-family: 'Courier New', Courier, monospace;
         }
 
         .admin-grid {
@@ -311,8 +330,8 @@
         }
 
         .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(220, 38, 38, 0.3);
+            background: rgba(0, 20, 0, 0.6);
+            border: 1px solid rgba(34, 197, 94, 0.3);
             padding: 10px;
             border-radius: 10px;
             text-align: center;
@@ -329,12 +348,13 @@
             font-size: 1rem;
             font-weight: bold;
             color: #22c55e;
+            font-family: 'Courier New', Courier, monospace;
         }
 
         .admin-btn {
-            background: rgba(220, 38, 38, 0.2);
-            border: 1px solid rgba(220, 38, 38, 0.4);
-            color: #fff;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            color: #22c55e;
             padding: 10px;
             border-radius: 10px;
             font-size: 0.78rem;
@@ -348,8 +368,9 @@
         }
 
         .admin-btn:hover {
-            background: #dc2626;
-            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+            background: #22c55e;
+            color: #000;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
         }
 
         .admin-btn.danger {
@@ -366,16 +387,17 @@
 
         .admin-notes {
             width: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(220, 38, 38, 0.4);
+            background: rgba(0, 10, 0, 0.7);
+            border: 1px solid rgba(34, 197, 94, 0.4);
             border-radius: 10px;
-            color: #fff;
+            color: #22c55e;
             padding: 10px;
             font-size: 0.8rem;
             resize: none;
             height: 60px;
             outline: none;
             margin-bottom: 15px;
+            font-family: 'Courier New', Courier, monospace;
         }
 
         /* شاشة الهاكر المظلمة */
@@ -398,20 +420,20 @@
         .terminal-box {
             width: 100%;
             max-width: 480px;
-            background: rgba(10, 10, 15, 0.95);
-            border: 1px solid #dc2626;
+            background: rgba(10, 15, 10, 0.95);
+            border: 1px solid #22c55e;
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 0 30px rgba(220, 38, 38, 0.4);
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
             text-align: left;
             direction: ltr;
         }
 
         .terminal-header {
-            color: #dc2626;
+            color: #22c55e;
             font-size: 0.85rem;
             margin-bottom: 15px;
-            border-bottom: 1px dashed rgba(220, 38, 38, 0.4);
+            border-bottom: 1px dashed rgba(34, 197, 94, 0.4);
             padding-bottom: 8px;
             display: flex;
             justify-content: space-between;
@@ -428,7 +450,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #dc2626;
+            color: #22c55e;
         }
 
         .terminal-input {
@@ -591,52 +613,56 @@
             </footer>
         </div>
 
-        <!-- الوجه الثاني: الصفحة السرية (ظهر الصفحة بعد التقلاب) -->
+        <!-- الوجه الثاني: الصفحة السرية مع أمطار الماتريكس الخضراء -->
         <div class="page-back">
-            <div class="admin-header">
-                <span><i class="fas fa-user-shield"></i> لوحة التحكم السرية</span>
-                <span style="font-size: 0.65rem; color: #a1a1aa;" id="last-visit-time">--:--</span>
-            </div>
-
-            <div class="admin-grid">
-                <div class="stat-card">
-                    <label>إجمالي الزيارات</label>
-                    <span id="visits-count">...</span>
+            <canvas id="matrixCanvas"></canvas>
+            
+            <div class="page-back-content">
+                <div class="admin-header">
+                    <span><i class="fas fa-terminal"></i> HACKER_ADMIN_PANEL</span>
+                    <span style="font-size: 0.65rem; color: #22c55e;" id="last-visit-time">--:--</span>
                 </div>
-                <div class="stat-card">
-                    <label>التفاعلات</label>
-                    <span id="clicks-count">0</span>
+
+                <div class="admin-grid">
+                    <div class="stat-card">
+                        <label>إجمالي الزيارات</label>
+                        <span id="visits-count">...</span>
+                    </div>
+                    <div class="stat-card">
+                        <label>التفاعلات</label>
+                        <span id="clicks-count">0</span>
+                    </div>
                 </div>
+
+                <textarea class="admin-notes" id="admin-notes" placeholder="// أدخل ملاحظاتك السرية هنا..." oninput="saveNotes()"></textarea>
+
+                <div class="admin-grid">
+                    <button class="admin-btn" onclick="toggleNoticeBanner()">
+                        <i class="fas fa-bullhorn"></i> الشريط العلوي
+                    </button>
+                    <button class="admin-btn" onclick="changeBioText()">
+                        <i class="fas fa-edit"></i> تعديل الوصف
+                    </button>
+                    <button class="admin-btn" onclick="installPwaApp()">
+                        <i class="fas fa-download"></i> تثبيت التطبيق
+                    </button>
+                    <button class="admin-btn" onclick="resetStats()">
+                        <i class="fas fa-redo"></i> تصفير العداد
+                    </button>
+                    <button class="admin-btn danger" onclick="flipBackToPublic()">
+                        <i class="fas fa-sign-out-alt"></i> إغلاق وقلب الصفحة
+                    </button>
+                </div>
+
+                <footer>
+                    <div style="color: #22c55e; font-family: 'Courier New', Courier, monospace;">SYSTEM // ADNANE AKDIM</div>
+                </footer>
             </div>
-
-            <textarea class="admin-notes" id="admin-notes" placeholder="ملاحظاتك السرية هنا..." oninput="saveNotes()"></textarea>
-
-            <div class="admin-grid">
-                <button class="admin-btn" onclick="toggleNoticeBanner()">
-                    <i class="fas fa-bullhorn"></i> الشريط العلوي
-                </button>
-                <button class="admin-btn" onclick="changeBioText()">
-                    <i class="fas fa-edit"></i> تعديل الوصف
-                </button>
-                <button class="admin-btn" onclick="installPwaApp()">
-                    <i class="fas fa-download"></i> تثبيت التطبيق
-                </button>
-                <button class="admin-btn" onclick="resetStats()">
-                    <i class="fas fa-redo"></i> تصفير العداد
-                </button>
-                <button class="admin-btn danger" onclick="flipBackToPublic()">
-                    <i class="fas fa-book-open"></i> إغلاق وقلب الصفحة
-                </button>
-            </div>
-
-            <footer>
-                <div>CONFIDENTIAL ACCESS // ADNANE AKDIM</div>
-            </footer>
         </div>
 
     </div>
 
-    <!-- شاشة الهاكر لإدخال الرمز السري -->
+    <!-- شاشة الهاكر المظلمة -->
     <div class="hacker-terminal" id="hackerTerminal">
         <div class="terminal-box">
             <div class="terminal-header">
@@ -644,7 +670,7 @@
                 <span onclick="closeTerminal()" style="cursor: pointer; color: #a1a1aa;">[ESC]</span>
             </div>
             <div class="terminal-logs">
-                > INITIALIZING BOOK_FLIP_PROTOCOL...<br>
+                > INITIALIZING MATRIX_FLIP_PROTOCOL...<br>
                 > AUTHORIZATION REQUIRED.<br>
                 > ENTER SECURITY PASSCODE TO FLIP THE PAGE.
             </div>
@@ -867,16 +893,49 @@
             document.getElementById('terminalInput').value = '';
         }
 
-        // عند إدخال كلمة السر كتقلب الصفحة (Flip Effect)
+        /* كود خلفية الماتريكس المتحركة بالرموز الخضراء المتساقطة */
+        let matrixInterval;
+        function startMatrixEffect() {
+            const canvas = document.getElementById('matrixCanvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
+            const fontSize = 12;
+            const columns = Math.floor(canvas.width / fontSize);
+            const drops = Array(columns).fill(1);
+
+            clearInterval(matrixInterval);
+            matrixInterval = setInterval(() => {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#22c55e';
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }, 35);
+        }
+
         document.getElementById('terminalInput').addEventListener('keyup', function(e) {
             if (e.key === 'Enter') {
                 const val = this.value;
                 if (val === "7002") {
                     closeTerminal();
-                    // تفعيل تقليب الكتاب ثلاثي الأبعاد
                     document.getElementById('bookCard').classList.add('flipped');
                     document.getElementById('clicks-count').innerText = interactionClicks;
                     document.getElementById('admin-notes').value = localStorage.getItem('adnan_notes') || '';
+                    startMatrixEffect();
                 } else {
                     alert('ACCESS DENIED: INCORRECT PASSCODE!');
                     this.value = '';
@@ -884,9 +943,9 @@
             }
         });
 
-        // القلب من الصفحة السرية وإرجاع الصفحة العمومية
         function flipBackToPublic() {
             document.getElementById('bookCard').classList.remove('flipped');
+            clearInterval(matrixInterval);
         }
 
         function toggleNoticeBanner() {
@@ -943,7 +1002,7 @@
 
             const now = new Date();
             const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            document.getElementById('last-visit-time').innerText = "آخر زيارة: " + timeStr;
+            document.getElementById('last-visit-time').innerText = "SYSTEM TIME: " + timeStr;
         };
     </script>
 </body>
