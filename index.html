@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADNANE AKDIM | Links</title>
+
+    <!-- PWA Web App Meta Tags -->
+    <meta name="theme-color" content="#dc2626">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ADNANE AKDIM">
+
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- QR Code Generator Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -39,6 +47,7 @@
             padding: 30px 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(220, 38, 38, 0.3);
             text-align: center;
+            position: relative;
         }
 
         .lang-switch {
@@ -145,13 +154,20 @@
             margin-bottom: 20px;
         }
 
+        .link-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .link-card {
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: rgba(20, 20, 25, 0.45);
             border: 1px solid rgba(220, 38, 38, 0.3);
-            padding: 14px 20px;
+            padding: 14px 18px;
             border-radius: 12px;
             color: #ffffff;
             text-decoration: none;
@@ -163,8 +179,8 @@
         .link-card:hover {
             background: rgba(220, 38, 38, 0.25);
             border-color: #dc2626;
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
         }
 
         .link-card i {
@@ -178,26 +194,50 @@
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
         }
 
+        /* زر النسخ المباشر */
+        .copy-btn {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            color: #ccc;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .copy-btn:hover {
+            background: #dc2626;
+            color: #fff;
+            border-color: #dc2626;
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+        }
+
         .action-sec {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             margin-top: 10px;
+            flex-wrap: wrap;
         }
 
         .action-btn {
             background: rgba(220, 38, 38, 0.2);
             border: 1px solid rgba(220, 38, 38, 0.4);
             color: #fff;
-            padding: 8px 14px;
+            padding: 8px 12px;
             border-radius: 10px;
             cursor: pointer;
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             font-weight: 600;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         .action-btn:hover {
@@ -211,20 +251,46 @@
             color: #a1a1aa;
         }
 
-        /* العداد السري */
-        .visitor-counter {
-            margin-top: 10px;
+        /* لوحة المشرف السرية المخفية */
+        .admin-panel {
+            margin-top: 15px;
             display: none;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            gap: 10px;
+            background: rgba(20, 20, 25, 0.85);
+            border: 1px solid rgba(220, 38, 38, 0.6);
+            padding: 12px;
+            border-radius: 14px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .visitor-counter {
+            display: flex;
+            align-items: center;
             gap: 6px;
-            background: rgba(220, 38, 38, 0.2);
-            border: 1px solid rgba(220, 38, 38, 0.5);
-            padding: 5px 12px;
-            border-radius: 12px;
             font-size: 0.8rem;
             color: #ffffff;
-            animation: fadeIn 0.5s ease;
+        }
+
+        .install-pwa-btn {
+            background: #dc2626;
+            border: none;
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .install-pwa-btn:hover {
+            background: #ef4444;
         }
 
         @keyframes fadeIn {
@@ -232,7 +298,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* نافذة الـ QR Code الاحترافية */
+        /* نافذة الـ QR Code */
         .qr-modal {
             display: none;
             position: fixed;
@@ -289,6 +355,24 @@
         .close-qr:hover {
             color: #dc2626;
         }
+
+        /* إشعار النسخ السريع */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(220, 38, 38, 0.9);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.6);
+            display: none;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -312,32 +396,54 @@
             <p><span id="bio"></span><span class="typing-cursor"></span></p>
         </div>
 
-        <!-- الروابط -->
+        <!-- الروابط مع أزرار النسخ -->
         <div class="links">
-            <a href="https://www.instagram.com/kacm_adnan?obrf=M25xdW1tNGFkdXJo" target="_blank" class="link-card">
-                <i class="fab fa-instagram" style="color: #e1306c;"></i>
-                <span id="label-instagram">إنستغرام</span>
-                <i class="fas fa-arrow-left arrow-icon"></i>
-            </a>
+            <!-- Instagram -->
+            <div class="link-wrapper">
+                <a href="https://www.instagram.com/kacm_adnan?obrf=M25xdW1tNGFkdXJo" target="_blank" class="link-card">
+                    <i class="fab fa-instagram" style="color: #e1306c;"></i>
+                    <span id="label-instagram">إنستغرام</span>
+                    <i class="fas fa-arrow-left arrow-icon"></i>
+                </a>
+                <button class="copy-btn" onclick="copyToClipboard('kacm_adnan')" title="نسخ اسم الحساب">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
 
-            <a href="https://wa.me/212614060332" target="_blank" class="link-card">
-                <i class="fab fa-whatsapp" style="color: #25d366;"></i>
-                <span id="label-whatsapp">واتساب</span>
-                <i class="fas fa-arrow-left arrow-icon"></i>
-            </a>
+            <!-- WhatsApp -->
+            <div class="link-wrapper">
+                <a href="https://wa.me/212614060332" target="_blank" class="link-card">
+                    <i class="fab fa-whatsapp" style="color: #25d366;"></i>
+                    <span id="label-whatsapp">واتساب</span>
+                    <i class="fas fa-arrow-left arrow-icon"></i>
+                </a>
+                <button class="copy-btn" onclick="copyToClipboard('+212614060332')" title="نسخ الرقم">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
 
-            <a href="mailto:akdimadnane@gmail.com" class="link-card">
-                <i class="fas fa-envelope" style="color: #ea4335;"></i>
-                <span id="label-gmail">البريد الإلكتروني</span>
-                <i class="fas fa-arrow-left arrow-icon"></i>
-            </a>
+            <!-- Gmail -->
+            <div class="link-wrapper">
+                <a href="mailto:akdimadnane@gmail.com" class="link-card">
+                    <i class="fas fa-envelope" style="color: #ea4335;"></i>
+                    <span id="label-gmail">البريد الإلكتروني</span>
+                    <i class="fas fa-arrow-left arrow-icon"></i>
+                </a>
+                <button class="copy-btn" onclick="copyToClipboard('akdimadnane@gmail.com')" title="نسخ البريد">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
         </div>
 
-        <!-- أزرار التفاعل (مشاركة وزر QR Code) -->
+        <!-- أزرار التفاعل العامة -->
         <div class="action-sec">
             <button class="action-btn" onclick="shareProfile()">
                 <i class="fas fa-share-alt"></i>
                 <span id="label-share">مشاركة الصفحة</span>
+            </button>
+            <button class="action-btn" onclick="downloadVCard()">
+                <i class="fas fa-user-plus"></i>
+                <span id="label-save">حفظ الاتصال</span>
             </button>
             <button class="action-btn" onclick="openQrModal()">
                 <i class="fas fa-qrcode"></i>
@@ -345,19 +451,26 @@
             </button>
         </div>
 
-        <!-- حقوق الصفحة والعداد السري -->
+        <!-- حقوق الصفحة ولوحة التحكم السرية -->
         <footer>
             <div>© 2026 ADNANE AKDIM | All rights reserved</div>
             
-            <div class="visitor-counter" id="secret-counter">
-                <i class="fas fa-eye" style="color: #dc2626;"></i>
-                <span id="label-views">إجمالي الزيارات (خاص بك):</span>
-                <span id="visits-count" style="font-weight: bold; color: #22c55e;">...</span>
+            <!-- لوحة الإدارة المخفية (تظهر بكلمة السر 7002 فقط) -->
+            <div class="admin-panel" id="admin-panel">
+                <div class="visitor-counter">
+                    <i class="fas fa-eye" style="color: #dc2626;"></i>
+                    <span id="label-views">إجمالي الزيارات:</span>
+                    <span id="visits-count" style="font-weight: bold; color: #22c55e;">...</span>
+                </div>
+                <button class="install-pwa-btn" onclick="installPwaApp()">
+                    <i class="fas fa-download"></i>
+                    <span>تثبيت الموقع كتطبيق</span>
+                </button>
             </div>
         </footer>
     </div>
 
-    <!-- نافذة الـ QR Code المنبثقة -->
+    <!-- نافذة الـ QR Code -->
     <div class="qr-modal" id="qrModal" onclick="closeQrModal(event)">
         <div class="qr-card">
             <span class="close-qr" onclick="closeQrModalDirect()">&times;</span>
@@ -368,6 +481,9 @@
         </div>
     </div>
 
+    <!-- إشعار النسخ -->
+    <div class="toast" id="toast">تم النسخ بنجاح!</div>
+
     <script>
         const translations = {
             ar: {
@@ -377,9 +493,10 @@
                 whatsapp: 'واتساب',
                 gmail: 'البريد الإلكتروني',
                 share: 'مشاركة الصفحة',
+                save: 'حفظ الاتصال',
                 qr: 'رمز QR',
                 qrTitle: 'امسح الرمز لزيارة الصفحة',
-                views: 'إجمالي الزيارات (خاص بك):',
+                views: 'إجمالي الزيارات:',
                 arrow: 'fa-arrow-left'
             },
             en: {
@@ -389,9 +506,10 @@
                 whatsapp: 'WhatsApp',
                 gmail: 'Gmail',
                 share: 'Share Profile',
+                save: 'Save Contact',
                 qr: 'QR Code',
                 qrTitle: 'Scan Code to Visit Profile',
-                views: 'Total Views (Admin Only):',
+                views: 'Total Views:',
                 arrow: 'fa-arrow-right'
             },
             fr: {
@@ -401,9 +519,10 @@
                 whatsapp: 'WhatsApp',
                 gmail: 'E-mail',
                 share: 'Partager la page',
+                save: 'Enregistrer',
                 qr: 'Code QR',
                 qrTitle: 'Scannez le code pour visiter',
-                views: 'Vues Totales (Privé):',
+                views: 'Vues Totales:',
                 arrow: 'fa-arrow-right'
             },
             ber: {
@@ -413,6 +532,7 @@
                 whatsapp: 'WhatsApp',
                 gmail: 'Gmail',
                 share: 'Partager',
+                save: 'Save Contact',
                 qr: 'QR Code',
                 qrTitle: 'Scan QR Code',
                 views: 'Views:',
@@ -441,6 +561,7 @@
             document.getElementById('label-whatsapp').innerText = data.whatsapp;
             document.getElementById('label-gmail').innerText = data.gmail;
             document.getElementById('label-share').innerText = data.share;
+            document.getElementById('label-save').innerText = data.save;
             document.getElementById('label-qr').innerText = data.qr;
             document.getElementById('label-qr-title').innerText = data.qrTitle;
             document.getElementById('label-views').innerText = data.views;
@@ -464,12 +585,30 @@
                     url: window.location.href
                 });
             } else {
-                navigator.clipboard.writeText(window.location.href);
-                alert('تم نسخ رابط الصفحة بنجاح!');
+                copyToClipboard(window.location.href);
             }
         }
 
-        // إظهار وتوليد QR Code
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+            const toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+
+        function downloadVCard() {
+            const vcard = "BEGIN:VCARD\nVERSION:3.0\nFN:ADNANE AKDIM\nTEL;TYPE=CELL:+212614060332\nEMAIL:akdimadnane@gmail.com\nURL:https://akdimakma.github.io\nEND:VCARD";
+            const blob = new Blob([vcard], { type: 'text/vcard' });
+            const url = URL.createObjectURL(blob);
+            const newLink = document.createElement('a');
+            newLink.download = 'ADNANE_AKDIM.vcf';
+            newLink.href = url;
+            newLink.click();
+        }
+
+        // إظهار الـ QR Code
         let qrGenerated = false;
         function openQrModal() {
             document.getElementById('qrModal').style.display = 'flex';
@@ -496,7 +635,28 @@
             document.getElementById('qrModal').style.display = 'none';
         }
 
-        // نظام الحماية للعداد (9 ضغطات + كلمة سر 7002)
+        // إدارة PWA للتثبيت
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        function installPwaApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        alert('جاري تثبيت التطبيق بنجاح!');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                alert('التطبيق مثبت بالفعل أو أن متصفحك يتيح التثبيت مباشرة من خيارات المتصفح (Add to Home Screen).');
+            }
+        }
+
+        // نظام الحماية للوحة السرية (9 ضغطات + كلمة سر 7002)
         let clickCount = 0;
         let clickTimer;
         function checkAdminAccess() {
@@ -507,13 +667,13 @@
                 clickCount = 0;
                 let password = prompt("أدخل رمز المشرف السري:");
                 if (password === "7002") {
-                    const counter = document.getElementById('secret-counter');
-                    if (counter.style.display === 'flex') {
-                        counter.style.display = 'none';
-                        alert('تم إخفاء العداد.');
+                    const panel = document.getElementById('admin-panel');
+                    if (panel.style.display === 'flex') {
+                        panel.style.display = 'none';
+                        alert('تم إخفاء لوحة التحكم السرية.');
                     } else {
-                        counter.style.display = 'flex';
-                        alert('مرحباً بك عدنان! تم تفعيل عرض العداد بنجاح.');
+                        panel.style.display = 'flex';
+                        alert('مرحباً عدنان! تم فتح لوحة التحكم بنجاح.');
                     }
                 } else if (password !== null) {
                     alert('كلمة المرور غير صحيحة!');
