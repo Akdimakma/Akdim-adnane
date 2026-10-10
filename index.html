@@ -39,6 +39,59 @@
             overflow-x: hidden;
         }
 
+        /* شاشة الصيانة النيون (وضع التخفي) */
+        .maint-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #020502;
+            z-index: 8888;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        #maintMatrixCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .maint-box {
+            position: relative;
+            z-index: 1;
+            background: rgba(5, 15, 5, 0.9);
+            border: 1px solid #22c55e;
+            padding: 30px 20px;
+            border-radius: 16px;
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.4);
+            max-width: 420px;
+            width: 90%;
+        }
+
+        .maint-box h2 {
+            color: #22c55e;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .maint-box p {
+            color: #a1a1aa;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
         /* حاوية تقليب الكتاب ثلاثية الأبعاد */
         .book-card {
             width: 100%;
@@ -80,7 +133,6 @@
             overflow: hidden;
         }
 
-        /* كانفاس خلفية الماتريكس النيون للأرقام المتساقطة */
         #matrixCanvas {
             position: absolute;
             top: 0;
@@ -308,7 +360,7 @@
             color: #a1a1aa;
         }
 
-        /* تفاصيل المخزن والصفحة السرية */
+        /* تفاصيل اللوحة السرية والمخزن */
         .admin-header {
             display: flex;
             justify-content: space-between;
@@ -351,7 +403,6 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-        /* تصميم قسم المخزن المشفر */
         .vault-box {
             background: rgba(0, 15, 0, 0.8);
             border: 1px solid rgba(34, 197, 94, 0.5);
@@ -380,9 +431,24 @@
             padding: 10px;
             font-size: 0.8rem;
             resize: none;
-            height: 70px;
+            height: 60px;
             outline: none;
             font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* سجل الأمان والدخلاء */
+        .logs-box {
+            background: rgba(15, 0, 0, 0.6);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            border-radius: 10px;
+            padding: 8px 10px;
+            font-size: 0.7rem;
+            color: #f87171;
+            font-family: 'Courier New', Courier, monospace;
+            max-height: 55px;
+            overflow-y: auto;
+            text-align: left;
+            margin-bottom: 15px;
         }
 
         .admin-btn {
@@ -552,6 +618,16 @@
 </head>
 <body>
 
+    <!-- شاشة وضع التخفي الصيانة النيون (Stealth Lockout Screen) -->
+    <div class="maint-screen" id="maintScreen">
+        <canvas id="maintMatrixCanvas"></canvas>
+        <div class="maint-box">
+            <h2><i class="fas fa-biohazard"></i> SYSTEM LOCKOUT ACTIVE</h2>
+            <p>> الموقع مغلق حالياً للصيانة المتقدمة.<br>> الرجاء المحاولة في وقت لاحق.</p>
+            <div style="font-size: 0.7rem; color: #22c55e;">[ADNANE AKDIM // ENCRYPTED SERVER]</div>
+        </div>
+    </div>
+
     <!-- كارت الكتاب التفاعلي ثلاثي الأبعاد -->
     <div class="book-card" id="bookCard">
 
@@ -632,13 +708,13 @@
             </footer>
         </div>
 
-        <!-- الوجه الثاني: الصفحة السرية مع أمطار الماتريكس والمخزن المشفر -->
+        <!-- الوجه الثاني: الصفحة السرية مع الماتريكس والمخزن وسجل الأمان -->
         <div class="page-back">
             <canvas id="matrixCanvas"></canvas>
             
             <div class="page-back-content">
                 <div class="admin-header">
-                    <span><i class="fas fa-user-secret"></i> ENCRYPTED_VAULT_SYSTEM</span>
+                    <span><i class="fas fa-user-secret"></i> COMMAND_CENTER_V2</span>
                     <span style="font-size: 0.65rem; color: #22c55e;" id="last-visit-time">--:--</span>
                 </div>
 
@@ -655,13 +731,19 @@
 
                 <!-- المخزن المشفر -->
                 <div class="vault-box">
-                    <div class="vault-title"><i class="fas fa-key"></i> المخزن المشفر (AES Secured):</div>
+                    <div class="vault-title"><i class="fas fa-key"></i> المخزن المشفر (AES Vault):</div>
                     <textarea class="admin-notes" id="admin-notes" placeholder="// اكتب أفكارك، أو روابطك الخاصة هنا..." oninput="saveEncryptedNotes()"></textarea>
                 </div>
 
+                <!-- سجل المحاولات الخاطئة للدخلاء -->
+                <div class="vault-box" style="border-color: rgba(239, 68, 68, 0.4);">
+                    <div class="vault-title" style="color: #f87171;"><i class="fas fa-shield-alt"></i> سجل محاولات الخرق (Intrusion Logs):</div>
+                    <div class="logs-box" id="securityLogs">لا توجد محاولات مشبوهة حتى الآن.</div>
+                </div>
+
                 <div class="admin-grid">
-                    <button class="admin-btn" onclick="toggleNoticeBanner()">
-                        <i class="fas fa-bullhorn"></i> الشريط العلوي
+                    <button class="admin-btn" onclick="toggleStealthMode()">
+                        <i class="fas fa-eye-slash"></i> وضع التخفي/الصيانة
                     </button>
                     <button class="admin-btn" onclick="changeBioText()">
                         <i class="fas fa-edit"></i> تعديل الوصف
@@ -678,14 +760,14 @@
                 </div>
 
                 <footer>
-                    <div style="color: #22c55e; font-family: 'Courier New', Courier, monospace;">SECURE VAULT // ADNANE AKDIM</div>
+                    <div style="color: #22c55e; font-family: 'Courier New', Courier, monospace;">COMMAND CENTER // ADNANE AKDIM</div>
                 </footer>
             </div>
         </div>
 
     </div>
 
-    <!-- شاشة الهاكر المظلمة (بدون حد أقصى للحروف) -->
+    <!-- شاشة الهاكر المظلمة -->
     <div class="hacker-terminal" id="hackerTerminal">
         <div class="terminal-box">
             <div class="terminal-header">
@@ -693,7 +775,7 @@
                 <span onclick="closeTerminal()" style="cursor: pointer; color: #a1a1aa;">[ESC]</span>
             </div>
             <div class="terminal-logs">
-                > INITIALIZING ENCRYPTED_VAULT_PROTOCOL...<br>
+                > INITIALIZING COMMAND_CENTER_PROTOCOL...<br>
                 > AUTHORIZATION REQUIRED.<br>
                 > ENTER PASSCODE TO UNLOCK SECRET STORAGE.
             </div>
@@ -916,7 +998,7 @@
             document.getElementById('terminalInput').value = '';
         }
 
-        /* تشفير وفك تشفير البيانات */
+        /* التشفير وتتبع الأمان */
         function encryptData(text) {
             return btoa(unescape(encodeURIComponent(text)));
         }
@@ -940,7 +1022,82 @@
             document.getElementById('admin-notes').value = decryptData(encrypted);
         }
 
-        /* تأثير الماتريكس */
+        function recordFailedAttempt() {
+            let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]');
+            const now = new Date();
+            const timeStr = now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            logs.unshift(`[FAILED_ATTEMPT]: ${timeStr}`);
+            if (logs.length > 5) logs.pop();
+            localStorage.setItem('adnan_intrusion_logs', JSON.stringify(logs));
+        }
+
+        function displaySecurityLogs() {
+            let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]');
+            const container = document.getElementById('securityLogs');
+            if (logs.length === 0) {
+                container.innerHTML = 'لا توجد محاولات خرق مشبوهة.';
+            } else {
+                container.innerHTML = logs.join('<br>');
+            }
+        }
+
+        /* وضع التخفي/الصيانة الماتريكس */
+        let maintMatrixInterval;
+        function startMaintMatrixEffect() {
+            const canvas = document.getElementById('maintMatrixCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
+            const fontSize = 14;
+            const columns = Math.floor(canvas.width / fontSize);
+            const drops = Array(columns).fill(1);
+
+            clearInterval(maintMatrixInterval);
+            maintMatrixInterval = setInterval(() => {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#22c55e';
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }, 35);
+        }
+
+        function toggleStealthMode() {
+            let current = localStorage.getItem('adnan_stealth_mode') === 'true';
+            let newState = !current;
+            localStorage.setItem('adnan_stealth_mode', newState);
+            
+            if (newState) {
+                alert("تم تفعيل وضع التخفي/الصيانة! السيتم الآن مغلق للعموم.");
+                checkStealthStatus();
+            } else {
+                alert("تم إلغاء وضع التخفي/الصيانة! الموقع يعمل كالمعتاد.");
+                document.getElementById('maintScreen').style.display = 'none';
+                clearInterval(maintMatrixInterval);
+            }
+        }
+
+        function checkStealthStatus() {
+            let isStealth = localStorage.getItem('adnan_stealth_mode') === 'true';
+            if (isStealth) {
+                document.getElementById('maintScreen').style.display = 'flex';
+                startMaintMatrixEffect();
+            }
+        }
+
+        /* تأثير الماتريكس فـ اللوحة السرية */
         let matrixInterval;
         function startMatrixEffect() {
             const canvas = document.getElementById('matrixCanvas');
@@ -978,14 +1135,17 @@
             if (e.key === 'Enter') {
                 const val = this.value;
                 
-                // يمكنك هنا تغيير كلمة المرور بأي كلمة مرور قوية اخترتها
-                if (val === "3RedDragons!FlyOver#Marrakech2026$SafeVault") {
+                // يمكنك تغيير كلمة السر هنا وقتما تشاء
+                if (val === "7002") {
                     closeTerminal();
+                    document.getElementById('maintScreen').style.display = 'none'; // فتح اللوحة حتى أثناء التخفي
                     document.getElementById('bookCard').classList.add('flipped');
                     document.getElementById('clicks-count').innerText = interactionClicks;
                     loadEncryptedNotes();
+                    displaySecurityLogs();
                     startMatrixEffect();
                 } else {
+                    recordFailedAttempt();
                     alert('ACCESS DENIED: INCORRECT PASSCODE!');
                     this.value = '';
                 }
@@ -995,19 +1155,7 @@
         function flipBackToPublic() {
             document.getElementById('bookCard').classList.remove('flipped');
             clearInterval(matrixInterval);
-        }
-
-        function toggleNoticeBanner() {
-            const banner = document.getElementById('notice-banner');
-            if (banner.style.display === 'block') {
-                banner.style.display = 'none';
-            } else {
-                let customText = prompt("أدخل نص الإعلان العلوي:", "مرحباً بكم في الموقع الرسمي لعدنان أقديم");
-                if (customText) {
-                    document.getElementById('notice-text').innerText = customText;
-                    banner.style.display = 'block';
-                }
-            }
+            checkStealthStatus();
         }
 
         function changeBioText() {
@@ -1030,8 +1178,6 @@
 
         async function fetchVisits() {
             try {
-                const response = 'https://api.countapi.xyz/hit/akdimakma.github.io/visits';
-                // يمكنك ترك عداد الزيارات أو استبداله بقيمة افتراضية
                 document.getElementById('visits-count').innerText = '150+';
             } catch (err) {
                 document.getElementById('visits-count').innerText = '100+';
@@ -1039,6 +1185,7 @@
         }
 
         window.onload = () => {
+            checkStealthStatus();
             const initialBio = localStorage.getItem('custom_bio') || translations['ar'].bio;
             typeWriter(initialBio);
             fetchVisits();
