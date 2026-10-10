@@ -1,241 +1,313 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AKMA | Links</title>
-<!-- Font Awesome Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKMA | Links</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-body {
-/* خففنا الظلامية ديال الخلفية باش التنين يبان واضح */
-background: linear-gradient(rgba(15, 15, 17, 0.37), rgba(15, 15, 17, 0.37)),
-url('dragon.jpg') no-repeat center center fixed;
-background-size: cover;
-color: #ffffff;
-min-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-padding: 20px;
-}
+        body {
+            /* نفس درجة الظلامية اللي اخترتي (0.37) */
+            background: linear-gradient(rgba(15, 15, 17, 0.37), rgba(15, 15, 17, 0.37)), 
+                        url('dragon.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-.container {
-width: 100%;
-max-width: 420px;
-/* زيادة الشفافية (رجعات 0.35) باش يبان التنين موراها */
-background: rgba(15, 15, 20, 0.35);
-backdrop-filter: blur(8px);
--webkit-backdrop-filter: blur(8px);
-border: 1px solid rgba(220, 38, 38, 0.5);
-border-radius: 20px;
-padding: 30px 20px;
-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(220, 38, 38, 0.3);
-text-align: center;
-}
+        .container {
+            width: 100%;
+            max-width: 420px;
+            /* نفس الشفافية ديالك (0.35) */
+            background: rgba(15, 15, 20, 0.35);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(220, 38, 38, 0.5);
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(220, 38, 38, 0.3);
+            text-align: center;
+        }
 
-.lang-switch {
-display: flex;
-justify-content: center;
-gap: 8px;
-margin-bottom: 25px;
-flex-wrap: wrap;
-}
+        .lang-switch {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
 
-.lang-btn {
-background: rgba(0, 0, 0, 0.4);
-border: 1px solid rgba(255, 255, 255, 0.2);
-color: #ccc;
-padding: 6px 12px;
-border-radius: 20px;
-cursor: pointer;
-font-size: 0.85rem;
-transition: all 0.3s ease;
-}
+        .lang-btn {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ccc;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
 
-.lang-btn:hover, .lang-btn.active {
-background: #dc2626;
-color: #fff;
-border-color: #dc2626;
-box-shadow: 0 0 12px rgba(220, 38, 38, 0.6);
-}
+        .lang-btn:hover, .lang-btn.active {
+            background: #dc2626;
+            color: #fff;
+            border-color: #dc2626;
+            box-shadow: 0 0 12px rgba(220, 38, 38, 0.6);
+        }
 
-.profile {
-margin-bottom: 25px;
-}
+        .profile {
+            margin-bottom: 25px;
+        }
 
-.profile-img {
-width: 95px;
-height: 95px;
-border-radius: 50%;
-border: 2px solid #dc2626;
-padding: 3px;
-margin-bottom: 15px;
-object-fit: cover;
-box-shadow: 0 0 15px rgba(220, 38, 38, 0.5);
-}
+        /* إضافة انيميشن إضاءة متدرجة هادئة حول الصورة */
+        .profile-img {
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            border: 2px solid #dc2626;
+            padding: 3px;
+            margin-bottom: 15px;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.5);
+            animation: pulseGlow 3s infinite alternate;
+        }
 
-.profile h1 {
-font-size: 1.6rem;
-font-weight: 700;
-letter-spacing: 1px;
-margin-bottom: 5px;
-text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-}
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px rgba(220, 38, 38, 0.4); }
+            100% { box-shadow: 0 0 25px rgba(220, 38, 38, 0.9); }
+        }
 
-.profile p {
-color: #d1d1d6;
-font-size: 0.9rem;
-text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-}
+        .profile h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
 
-.links {
-display: flex;
-flex-direction: column;
-gap: 15px;
-}
+        .profile p {
+            color: #d1d1d6;
+            font-size: 0.9rem;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
 
-.link-card {
-display: flex;
-align-items: center;
-justify-content: space-between;
-background: rgba(20, 20, 25, 0.45);
-border: 1px solid rgba(220, 38, 38, 0.3);
-padding: 14px 20px;
-border-radius: 12px;
-color: #ffffff;
-text-decoration: none;
-font-weight: 600;
-transition: all 0.3s ease;
-backdrop-filter: blur(4px);
-}
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
 
-.link-card:hover {
-background: rgba(220, 38, 38, 0.25);
-border-color: #dc2626;
-transform: translateY(-2px);
-box-shadow: 0 5px 15px rgba(220, 38, 38, 0.4);
-}
+        .link-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(20, 20, 25, 0.45);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            padding: 14px 20px;
+            border-radius: 12px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
 
-.link-card i {
-font-size: 1.3rem;
-width: 25px;
-}
+        .link-card:hover {
+            background: rgba(220, 38, 38, 0.25);
+            border-color: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.4);
+        }
 
-.link-card span {
-flex-grow: 1;
-text-align: center;
-text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-}
-</style>
+        .link-card i {
+            font-size: 1.3rem;
+            width: 25px;
+        }
+
+        .link-card span {
+            flex-grow: 1;
+            text-align: center;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        /* إضافة زر مشاركة الصفحة فـ الأسفل */
+        .action-sec {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .share-btn {
+            background: rgba(220, 38, 38, 0.2);
+            border: 1px solid rgba(220, 38, 38, 0.4);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .share-btn:hover {
+            background: #dc2626;
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: #a1a1aa;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-<!-- أزرار اللغات -->
-<div class="lang-switch">
-<button class="lang-btn active" onclick="setLanguage('ar', event)">العربية</button>
-<button class="lang-btn" onclick="setLanguage('en', event)">English</button>
-<button class="lang-btn" onclick="setLanguage('fr', event)">Français</button>
-<button class="lang-btn" onclick="setLanguage('ber', event)">ⵜⴰⵎⴰⵣⵉⵖⵜ</button>
-</div>
+    <div class="container">
+        <!-- أزرار اللغات -->
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="setLanguage('ar', event)">العربية</button>
+            <button class="lang-btn" onclick="setLanguage('en', event)">English</button>
+            <button class="lang-btn" onclick="setLanguage('fr', event)">Français</button>
+            <button class="lang-btn" onclick="setLanguage('ber', event)">ⵜⴰⵎⴰⵣⵉⵖⵜ</button>
+        </div>
 
-<!-- البروفايل -->
-<div class="profile">
-<img src="profile.jpg" alt="AKMA Profile" class="profile-img">
-<h1>AKMA</h1>
-<p id="bio">مرحباً بكم في صفحتي الشخصية</p>
-</div>
+        <!-- البروفايل -->
+        <div class="profile">
+            <img src="profile.jpg" alt="AKMA Profile" class="profile-img">
+            <h1>AKMA</h1>
+            <p id="bio">مرحباً بكم في صفحتي الشخصية</p>
+        </div>
 
-<!-- الروابط -->
-<div class="links">
-<!-- Instagram -->
-<a href="https://www.instagram.com/kacm_adnan?obrf=M25xdW1tNGFkdXJo" target="_blank" class="link-card">
-<i class="fab fa-instagram" style="color: #e1306c;"></i>
-<span id="label-instagram">إنستغرام</span>
-<i class="fas fa-arrow-left arrow-icon"></i>
-</a>
+        <!-- الروابط -->
+        <div class="links">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/kacm_adnan?obrf=M25xdW1tNGFkdXJo" target="_blank" class="link-card">
+                <i class="fab fa-instagram" style="color: #e1306c;"></i>
+                <span id="label-instagram">إنستغرام</span>
+                <i class="fas fa-arrow-left arrow-icon"></i>
+            </a>
 
-<!-- WhatsApp -->
-<a href="https://wa.me/212614060332" target="_blank" class="link-card">
-<i class="fab fa-whatsapp" style="color: #25d366;"></i>
-<span id="label-whatsapp">واتساب</span>
-<i class="fas fa-arrow-left arrow-icon"></i>
-</a>
+            <!-- WhatsApp -->
+            <a href="https://wa.me/212614060332" target="_blank" class="link-card">
+                <i class="fab fa-whatsapp" style="color: #25d366;"></i>
+                <span id="label-whatsapp">واتساب</span>
+                <i class="fas fa-arrow-left arrow-icon"></i>
+            </a>
 
-<!-- Gmail -->
-<a href="mailto:akdimadnane@gmail.com" class="link-card">
-<i class="fas fa-envelope" style="color: #ea4335;"></i>
-<span id="label-gmail">البريد الإلكتروني</span>
-<i class="fas fa-arrow-left arrow-icon"></i>
-</a>
-</div>
-</div>
+            <!-- Gmail -->
+            <a href="mailto:akdimadnane@gmail.com" class="link-card">
+                <i class="fas fa-envelope" style="color: #ea4335;"></i>
+                <span id="label-gmail">البريد الإلكتروني</span>
+                <i class="fas fa-arrow-left arrow-icon"></i>
+            </a>
+        </div>
 
-<script>
-const translations = {
-ar: {
-dir: 'rtl',
-bio: 'مرحباً بكم في صفحتي الشخصية',
-instagram: 'إنستغرام',
-whatsapp: 'واتساب',
-gmail: 'البريد الإلكتروني',
-arrow: 'fa-arrow-left'
-},
-en: {
-dir: 'ltr',
-bio: 'Welcome to my personal links',
-instagram: 'Instagram',
-whatsapp: 'WhatsApp',
-gmail: 'Gmail',
-arrow: 'fa-arrow-right'
-},
-fr: {
-dir: 'ltr',
-bio: 'Bienvenue sur ma page personnelle',
-instagram: 'Instagram',
-whatsapp: 'WhatsApp',
-gmail: 'E-mail',
-arrow: 'fa-arrow-right'
-},
-ber: {
-dir: 'ltr',
-bio: 'أنسgrouped ⵖ ⵜⴰⵙⵏⴰ ⵉⵏⵓ',
-instagram: 'Instagram',
-whatsapp: 'WhatsApp',
-gmail: 'Gmail',
-arrow: 'fa-arrow-right'
-}
-};
+        <!-- زر المشاركة -->
+        <div class="action-sec">
+            <button class="share-btn" onclick="shareProfile()">
+                <i class="fas fa-share-alt"></i>
+                <span id="label-share">مشاركة الصفحة</span>
+            </button>
+        </div>
 
-function setLanguage(lang, evt) {
-const data = translations[lang];
+        <!-- حقوق الصفحة -->
+        <footer>
+            © 2026 AKMA | All rights reserved
+        </footer>
+    </div>
 
-document.documentElement.dir = data.dir;
-document.getElementById('bio').innerText = data.bio;
-document.getElementById('label-instagram').innerText = data.instagram;
-document.getElementById('label-whatsapp').innerText = data.whatsapp;
-document.getElementById('label-gmail').innerText = data.gmail;
+    <script>
+        const translations = {
+            ar: {
+                dir: 'rtl',
+                bio: 'مرحباً بكم في صفحتي الشخصية',
+                instagram: 'إنستغرام',
+                whatsapp: 'واتساب',
+                gmail: 'البريد الإلكتروني',
+                share: 'مشاركة الصفحة',
+                arrow: 'fa-arrow-left'
+            },
+            en: {
+                dir: 'ltr',
+                bio: 'Welcome to my personal links',
+                instagram: 'Instagram',
+                whatsapp: 'WhatsApp',
+                gmail: 'Gmail',
+                share: 'Share Profile',
+                arrow: 'fa-arrow-right'
+            },
+            fr: {
+                dir: 'ltr',
+                bio: 'Bienvenue sur ma page personnelle',
+                instagram: 'Instagram',
+                whatsapp: 'WhatsApp',
+                gmail: 'E-mail',
+                share: 'Partager la page',
+                arrow: 'fa-arrow-right'
+            },
+            ber: {
+                dir: 'ltr',
+                bio: 'أنسgrouped ⵖ ⵜⴰⵙⵏⴰ ⵉⵏⵓ',
+                instagram: 'Instagram',
+                whatsapp: 'WhatsApp',
+                gmail: 'Gmail',
+                share: 'Partager',
+                arrow: 'fa-arrow-right'
+            }
+        };
 
-const arrows = document.querySelectorAll('.arrow-icon');
-arrows.forEach(arrow => {
-arrow.className = fas ${data.arrow} arrow-icon;
-});
+        function setLanguage(lang, evt) {
+            const data = translations[lang];
 
-const buttons = document.querySelectorAll('.lang-btn');
-buttons.forEach(btn => btn.classList.remove('active'));
-if (evt && evt.target) {
-evt.target.classList.add('active');
-}
-}
-</script>
+            document.documentElement.dir = data.dir;
+            document.getElementById('bio').innerText = data.bio;
+            document.getElementById('label-instagram').innerText = data.instagram;
+            document.getElementById('label-whatsapp').innerText = data.whatsapp;
+            document.getElementById('label-gmail').innerText = data.gmail;
+            document.getElementById('label-share').innerText = data.share;
+
+            // تصحيح سطر الأسهم
+            const arrows = document.querySelectorAll('.arrow-icon');
+            arrows.forEach(arrow => {
+                arrow.className = `fas ${data.arrow} arrow-icon`;
+            });
+
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (evt && evt.target) {
+                evt.target.classList.add('active');
+            }
+        }
+
+        function shareProfile() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'AKMA | Links',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('تم نسخ رابط الصفحة بنجاح!');
+            }
+        }
+    </script>
 </body>
 </html>
-
