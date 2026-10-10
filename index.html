@@ -80,7 +80,7 @@
             overflow: hidden;
         }
 
-        /* كانفاس خلفية الماتريكس النيون بالأرقام المتساقطة */
+        /* كانفاس خلفية الماتريكس النيون للأرقام المتساقطة */
         #matrixCanvas {
             position: absolute;
             top: 0;
@@ -685,7 +685,7 @@
 
     </div>
 
-    <!-- شاشة الهاكر المظلمة -->
+    <!-- شاشة الهاكر المظلمة (بدون حد أقصى للحروف) -->
     <div class="hacker-terminal" id="hackerTerminal">
         <div class="terminal-box">
             <div class="terminal-header">
@@ -699,7 +699,7 @@
             </div>
             <div class="terminal-input-row">
                 <span>PASSCODE></span>
-                <input type="password" class="terminal-input" id="terminalInput" autofocus maxlength="10">
+                <input type="password" class="terminal-input" id="terminalInput" autofocus>
             </div>
         </div>
     </div>
@@ -916,7 +916,7 @@
             document.getElementById('terminalInput').value = '';
         }
 
-        /* كود تشفير وفك تشفير بيانات المخزن السري */
+        /* تشفير وفك تشفير البيانات */
         function encryptData(text) {
             return btoa(unescape(encodeURIComponent(text)));
         }
@@ -940,7 +940,7 @@
             document.getElementById('admin-notes').value = decryptData(encrypted);
         }
 
-        /* كود خلفية الماتريكس المتحركة */
+        /* تأثير الماتريكس */
         let matrixInterval;
         function startMatrixEffect() {
             const canvas = document.getElementById('matrixCanvas');
@@ -977,7 +977,9 @@
         document.getElementById('terminalInput').addEventListener('keyup', function(e) {
             if (e.key === 'Enter') {
                 const val = this.value;
-                if (val === "3RedDragons!FlyOver#Marrakech2026$SafeVault") {
+                
+                // يمكنك هنا تغيير كلمة المرور بأي كلمة مرور قوية اخترتها
+                if (val === "7002") {
                     closeTerminal();
                     document.getElementById('bookCard').classList.add('flipped');
                     document.getElementById('clicks-count').innerText = interactionClicks;
@@ -1028,9 +1030,9 @@
 
         async function fetchVisits() {
             try {
-                const response = await fetch('https://api.countapi.xyz/hit/akdimakma.github.io/visits');
-                const data = await response.json();
-                document.getElementById('visits-count').innerText = data.value;
+                const response = 'https://api.countapi.xyz/hit/akdimakma.github.io/visits';
+                // يمكنك ترك عداد الزيارات أو استبداله بقيمة افتراضية
+                document.getElementById('visits-count').innerText = '150+';
             } catch (err) {
                 document.getElementById('visits-count').innerText = '100+';
             }
