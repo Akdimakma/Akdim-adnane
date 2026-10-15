@@ -2,7 +2,7 @@ name: AKMA Self-Improving Engine
 
 on:
   schedule:
-    - cron: '0 0 * * 0'
+    - cron: '0 0,8,16 * * *' # يعمل تلقائياً 3 مرات كل يوم
   workflow_dispatch:
 
 jobs:
