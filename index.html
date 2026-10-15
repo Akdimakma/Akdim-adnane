@@ -371,7 +371,6 @@
             color: #a1a1aa;
         }
 
-        /* Cyberpunk OS Back Panel Styles */
         .cyber-header {
             display: flex;
             justify-content: space-between;
@@ -474,7 +473,6 @@
             display: block;
         }
 
-        /* Tools Tab */
         .tool-subcard {
             background: rgba(0, 15, 5, 0.75);
             border: 1px solid rgba(34, 197, 94, 0.3);
@@ -530,7 +528,6 @@
             color: #000;
         }
 
-        /* Multi Secret Vault Tab */
         .vault-input-box {
             display: flex;
             flex-direction: column;
@@ -585,7 +582,6 @@
             gap: 4px;
         }
 
-        /* Interactive Terminal Tab */
         .cyber-term-box {
             background: rgba(0, 0, 0, 0.95);
             border: 1px solid rgba(34, 197, 94, 0.45);
@@ -630,7 +626,6 @@
             font-size: 0.75rem;
         }
 
-        /* Controls Tab */
         .admin-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -950,7 +945,6 @@
                     <button class="cyber-tab-btn" onclick="switchCyberTab('control', this)"><i class="fas fa-sliders-h"></i> التحكم</button>
                 </div>
 
-                <!-- TAB 1: TOOLS -->
                 <div class="cyber-panel-tab active" id="tab-tools">
                     <div class="tool-subcard">
                         <div class="tool-title"><i class="fas fa-key"></i> مولد مفاتيح وتشفير فائق:</div>
@@ -978,7 +972,6 @@
                     </div>
                 </div>
 
-                <!-- TAB 2: MULTI SECRET VAULT -->
                 <div class="cyber-panel-tab" id="tab-vault">
                     <div class="vault-input-box">
                         <div class="pass-output-row">
@@ -989,7 +982,6 @@
                     <div class="vault-list" id="vaultListContainer"></div>
                 </div>
 
-                <!-- TAB 3: CYBER TERMINAL -->
                 <div class="cyber-panel-tab" id="tab-terminal">
                     <div class="cyber-term-box">
                         <div class="cyber-term-output" id="cyberTermOutput">
@@ -1003,7 +995,6 @@
                     </div>
                 </div>
 
-                <!-- TAB 4: SYSTEM CONTROL & LOGS -->
                 <div class="cyber-panel-tab" id="tab-control">
                     <div class="admin-grid">
                         <button class="admin-btn success" onclick="setGlobalStatus('false')"><i class="fas fa-unlock"></i> فتح الموقع</button>
@@ -1289,7 +1280,6 @@
                 : logs.map(escapeHTML).join('<br>');
         }
 
-        /* --- CYBER OS TABS & APPS --- */
         function switchCyberTab(tabName, btn) {
             document.querySelectorAll('.cyber-tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.cyber-panel-tab').forEach(p => p.classList.remove('active'));
@@ -1325,7 +1315,6 @@
             showToast('تم التشفير بنجاح!');
         }
 
-        /* MULTI-VAULT STORAGE */
         function loadSecretItems() {
             const container = document.getElementById('vaultListContainer');
             container.innerHTML = '';
@@ -1384,7 +1373,6 @@
             loadSecretItems();
         }
 
-        /* CYBER CONSOLE COMMAND SIMULATOR */
         document.getElementById('cyberConsoleInput').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 const cmd = this.value.trim().toLowerCase();
