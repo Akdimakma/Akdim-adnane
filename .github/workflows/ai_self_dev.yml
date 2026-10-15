@@ -28,6 +28,7 @@ jobs:
         run: |
           python -c "
           import os
+          import time
           from google import genai
 
           client = genai.Client(api_key=os.environ['GEMINI_API_KEY'])
@@ -43,18 +44,33 @@ jobs:
           {current_code}
           '''
 
-          response = client.models.generate_content(
-              model='gemini-3.8-flash',
-              contents=prompt,
-          )
-          new_code = response.text.strip()
+          # قائمة بالنماذج المتاحة للتجربة بالتوالي في حال الضغط
+          models_to_try = ['gemini-2.5-flash', 'gemini-1.5-flash', 'gemini-3.8-flash']
+          response = None
 
-          if '<!DOCTYPE html>' in new_code:
-              with open('index.html', 'w', encoding='utf-8') as f:
-                  f.write(new_code)
-              print('تم تطوير الكود بنجاح بواسطة AKMA!')
+          for model_name in models_to_try:
+              try:
+                  print(f'جاري المحاولة باستخدام النموذج: {model_name}...')
+                  response = client.models.generate_content(
+                      model=model_name,
+                      contents=prompt,
+                  )
+                  print(f'تمت الاستجابة بنجاح باستخدام: {model_name}')
+                  break
+              except Exception as e:
+                  print(f'تعذر استخدام {model_name} بسبب الضغط أو الخطأ، جاري تجربة النموذج التالي...')
+                  time.sleep(2)
+
+          if response and response.text:
+              new_code = response.text.strip()
+              if '<!DOCTYPE html>' in new_code:
+                  with open('index.html', 'w', encoding='utf-8') as f:
+                      f.write(new_code)
+                  print('تم تطوير الكود بنجاح بواسطة AKMA!')
+              else:
+                  print('لم يتم اعتماد التعديل لعدم اكتمال الهيكل.')
           else:
-              print('لم يتم اعتماد التعديل لعدم اكتمال الهيكل.')
+              raise Exception('فشلت جميع المحاولات بسبب الضغط المؤقت على السيرفرات.')
           "
 
       - name: Commit and Push Changes by AKMA
