@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -15,35 +16,35 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <style>
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background: linear-gradient(rgba(15, 15, 17, 0.37), rgba(15, 15, 17, 0.37)), 
+            background: linear-gradient(rgba(15, 15, 17, 0.4), rgba(15, 15, 17, 0.4)), 
                         url('dragon.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            perspective: 1000px;
+            perspective: 1200px;
             overflow-x: hidden;
         }
 
-        /* شاشة الصيانة */
         .maint-screen {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            inset: 0;
+            width: 100%;
+            height: 100%;
             background: #020502;
             z-index: 8888;
             flex-direction: column;
@@ -56,42 +57,44 @@
 
         #maintMatrixCanvas {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.4;
+            opacity: 0.35;
             pointer-events: none;
         }
 
         .maint-box {
             position: relative;
             z-index: 1;
-            background: rgba(5, 15, 5, 0.9);
+            background: rgba(5, 15, 5, 0.92);
             border: 1px solid #22c55e;
             padding: 30px 20px;
             border-radius: 16px;
-            box-shadow: 0 0 30px rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.35);
             max-width: 420px;
             width: 90%;
             cursor: pointer;
             user-select: none;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .maint-box h2 {
             color: #22c55e;
             font-size: 1.2rem;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
         }
 
         .maint-box p {
             color: #a1a1aa;
             font-size: 0.85rem;
+            line-height: 1.6;
             margin-bottom: 15px;
         }
 
-        /* كارت الكتاب التفاعلي */
         .book-card {
             width: 100%;
             max-width: 420px;
@@ -107,13 +110,13 @@
 
         .page-front, .page-back {
             width: 100%;
-            background: rgba(15, 15, 20, 0.35);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(220, 38, 38, 0.5);
+            background: rgba(15, 15, 20, 0.5);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(220, 38, 38, 0.45);
             border-radius: 20px;
             padding: 30px 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(220, 38, 38, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(220, 38, 38, 0.25);
             text-align: center;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
@@ -124,20 +127,19 @@
             top: 0;
             left: 0;
             transform: rotateY(180deg);
-            background: rgba(5, 10, 5, 0.92);
+            background: rgba(5, 10, 5, 0.95);
             border: 1px solid #22c55e;
-            box-shadow: 0 0 30px rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.35);
             overflow: hidden;
         }
 
         #matrixCanvas {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.35;
+            opacity: 0.3;
             pointer-events: none;
         }
 
@@ -155,14 +157,14 @@
         }
 
         .lang-btn {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.45);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: #ccc;
-            padding: 6px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 0.85rem;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
 
         .lang-btn:hover, .lang-btn.active {
@@ -196,8 +198,8 @@
 
         .status-badge {
             position: absolute;
-            bottom: 5px;
-            right: 5px;
+            bottom: 4px;
+            right: 4px;
             width: 16px;
             height: 16px;
             background-color: #22c55e;
@@ -208,7 +210,7 @@
 
         @keyframes pulseGlow {
             0% { box-shadow: 0 0 10px rgba(220, 38, 38, 0.4); }
-            100% { box-shadow: 0 0 25px rgba(220, 38, 38, 0.9); }
+            100% { box-shadow: 0 0 25px rgba(220, 38, 38, 0.85); }
         }
 
         .profile h1 {
@@ -226,6 +228,9 @@
             font-size: 0.9rem;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
             min-height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .typing-cursor {
@@ -234,8 +239,7 @@
             width: 2px;
             height: 15px;
             animation: blink 0.7s infinite;
-            margin-right: 3px;
-            vertical-align: middle;
+            margin: 0 4px;
         }
 
         @keyframes blink {
@@ -246,7 +250,7 @@
         .links {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 14px;
             margin-bottom: 20px;
         }
 
@@ -261,15 +265,15 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(20, 20, 25, 0.45);
-            border: 1px solid rgba(220, 38, 38, 0.3);
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(220, 38, 38, 0.35);
             padding: 14px 18px;
             border-radius: 12px;
             color: #ffffff;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(4px);
+            transition: all 0.25s ease;
+            backdrop-filter: blur(6px);
         }
 
         .link-card:hover {
@@ -292,7 +296,7 @@
 
         .copy-btn {
             background: rgba(20, 20, 25, 0.5);
-            border: 1px solid rgba(220, 38, 38, 0.3);
+            border: 1px solid rgba(220, 38, 38, 0.35);
             color: #ccc;
             width: 48px;
             height: 48px;
@@ -301,8 +305,9 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(4px);
+            transition: all 0.25s ease;
+            backdrop-filter: blur(6px);
+            flex-shrink: 0;
         }
 
         .copy-btn:hover {
@@ -324,15 +329,15 @@
             background: rgba(220, 38, 38, 0.2);
             border: 1px solid rgba(220, 38, 38, 0.4);
             color: #fff;
-            padding: 8px 12px;
+            padding: 8px 14px;
             border-radius: 10px;
             cursor: pointer;
             font-size: 0.8rem;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
 
         .action-btn:hover {
@@ -444,7 +449,7 @@
             font-size: 0.78rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.25s;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -484,11 +489,10 @@
         .hacker-terminal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100vw;
             height: 100vh;
-            background: #050508;
+            background: rgba(5, 5, 8, 0.95);
             z-index: 99999;
             flex-direction: column;
             justify-content: center;
@@ -500,7 +504,7 @@
         .terminal-box {
             width: 100%;
             max-width: 480px;
-            background: rgba(10, 15, 10, 0.95);
+            background: rgba(10, 15, 10, 0.98);
             border: 1px solid #22c55e;
             border-radius: 12px;
             padding: 20px;
@@ -547,8 +551,7 @@
         .qr-modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.75);
@@ -560,7 +563,7 @@
         }
 
         .qr-card {
-            background: rgba(20, 20, 25, 0.9);
+            background: rgba(20, 20, 25, 0.92);
             border: 1px solid rgba(220, 38, 38, 0.6);
             border-radius: 20px;
             padding: 25px;
@@ -592,6 +595,11 @@
             color: #a1a1aa;
             font-size: 1.4rem;
             cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-qr:hover {
+            color: #fff;
         }
 
         .toast {
@@ -599,7 +607,7 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(220, 38, 38, 0.9);
+            background: rgba(220, 38, 38, 0.95);
             color: white;
             padding: 8px 18px;
             border-radius: 20px;
@@ -608,25 +616,23 @@
             box-shadow: 0 0 15px rgba(220, 38, 38, 0.6);
             display: none;
             z-index: 1000;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- شاشة الصيانة -->
     <div class="maint-screen" id="maintScreen">
         <canvas id="maintMatrixCanvas"></canvas>
         <div class="maint-box" onclick="checkAdminAccess()">
             <h2><i class="fas fa-biohazard"></i> SYSTEM LOCKOUT ACTIVE</h2>
-            <p>> الموقع مغلق حالياً للصيانة المتقدمة.<br>> الرجاء المحاولة في وقت لاحق.</p>
+            <p>&gt; الموقع مغلق حالياً للصيانة المتقدمة.<br>&gt; الرجاء المحاولة في وقت لاحق.</p>
             <div style="font-size: 0.7rem; color: #22c55e;">[ADNANE AKDIM // ENCRYPTED SERVER]</div>
         </div>
     </div>
 
-    <!-- كارت الكتاب التفاعلي -->
     <div class="book-card" id="bookCard">
 
-        <!-- الوجه الرئيسي للزوار -->
         <div class="page-front">
             <div class="lang-switch">
                 <button class="lang-btn active" onclick="setLanguage('ar', event)">العربية</button>
@@ -646,30 +652,30 @@
 
             <div class="links">
                 <div class="link-wrapper">
-                    <a href="https://www.instagram.com/kacm_adnan?obrf=M25xdW1tNGFkdXJo" target="_blank" class="link-card">
+                    <a href="https://www.instagram.com/kacm_adnan?obrf=M25xdW1tNGFkdXJo" target="_blank" rel="noopener noreferrer" class="link-card" onclick="trackInteraction()">
                         <i class="fab fa-instagram" style="color: #e1306c;"></i>
                         <span id="label-instagram">إنستغرام</span>
                         <i class="fas fa-arrow-left arrow-icon"></i>
                     </a>
-                    <button class="copy-btn" onclick="copyToClipboard('kacm_adnan')"><i class="fas fa-copy"></i></button>
+                    <button class="copy-btn" onclick="copyToClipboard('kacm_adnan')" aria-label="Copy Instagram"><i class="fas fa-copy"></i></button>
                 </div>
 
                 <div class="link-wrapper">
-                    <a href="https://wa.me/212614060332" target="_blank" class="link-card">
+                    <a href="https://wa.me/212614060332" target="_blank" rel="noopener noreferrer" class="link-card" onclick="trackInteraction()">
                         <i class="fab fa-whatsapp" style="color: #25d366;"></i>
                         <span id="label-whatsapp">واتساب</span>
                         <i class="fas fa-arrow-left arrow-icon"></i>
                     </a>
-                    <button class="copy-btn" onclick="copyToClipboard('+212614060332')"><i class="fas fa-copy"></i></button>
+                    <button class="copy-btn" onclick="copyToClipboard('+212614060332')" aria-label="Copy WhatsApp"><i class="fas fa-copy"></i></button>
                 </div>
 
                 <div class="link-wrapper">
-                    <a href="mailto:akdimadnane@gmail.com" class="link-card">
+                    <a href="mailto:akdimadnane@gmail.com" class="link-card" onclick="trackInteraction()">
                         <i class="fas fa-envelope" style="color: #ea4335;"></i>
                         <span id="label-gmail">البريد الإلكتروني</span>
                         <i class="fas fa-arrow-left arrow-icon"></i>
                     </a>
-                    <button class="copy-btn" onclick="copyToClipboard('akdimadnane@gmail.com')"><i class="fas fa-copy"></i></button>
+                    <button class="copy-btn" onclick="copyToClipboard('akdimadnane@gmail.com')" aria-label="Copy Email"><i class="fas fa-copy"></i></button>
                 </div>
             </div>
 
@@ -684,7 +690,6 @@
             </footer>
         </div>
 
-        <!-- اللوحة السرية -->
         <div class="page-back">
             <canvas id="matrixCanvas"></canvas>
             
@@ -709,7 +714,6 @@
                     <div class="logs-box" id="securityLogs">لا توجد محاولات مشبوهة حتى الآن.</div>
                 </div>
 
-                <!-- زرّا التفعيل والإلغاء العالميـان عبر status.txt -->
                 <div class="admin-grid">
                     <button class="admin-btn success" onclick="setGlobalStatus('false')"><i class="fas fa-eye"></i> إلغاء الصيانة (فتح)</button>
                     <button class="admin-btn warning" onclick="setGlobalStatus('true')"><i class="fas fa-eye-slash"></i> تفعيل الصيانة (إغلاق)</button>
@@ -727,22 +731,20 @@
 
     </div>
 
-    <!-- شاشة الهاكر للرمز السري -->
     <div class="hacker-terminal" id="hackerTerminal">
         <div class="terminal-box">
             <div class="terminal-header">
                 <span>SYSTEM_ROOT_ACCESS // AKDIM_V2</span>
                 <span onclick="closeTerminal()" style="cursor: pointer; color: #a1a1aa;">[ESC]</span>
             </div>
-            <div class="terminal-logs">> ENTER PASSCODE TO UNLOCK SECRET STORAGE.</div>
+            <div class="terminal-logs">&gt; ENTER PASSCODE TO UNLOCK SECRET STORAGE.</div>
             <div class="terminal-input-row">
-                <span>PASSCODE></span>
-                <input type="password" class="terminal-input" id="terminalInput" autofocus>
+                <span>PASSCODE&gt;</span>
+                <input type="password" class="terminal-input" id="terminalInput">
             </div>
         </div>
     </div>
 
-    <!-- QR Modal -->
     <div class="qr-modal" id="qrModal" onclick="closeQrModal(event)">
         <div class="qr-card">
             <span class="close-qr" onclick="closeQrModalDirect()">&times;</span>
@@ -761,11 +763,12 @@
             ar: { dir: 'rtl', bio: 'مرحباً بكم في صفحتي الشخصية', instagram: 'إنستغرام', whatsapp: 'واتساب', gmail: 'البريد الإلكتروني', share: 'مشاركة', save: 'حفظ الاتصال', qr: 'رمز QR', qrTitle: 'امسح الرمز لزيارة الصفحة', arrow: 'fa-arrow-left' },
             en: { dir: 'ltr', bio: 'Welcome to my personal links', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'Gmail', share: 'Share Profile', save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan Code to Visit', arrow: 'fa-arrow-right' },
             fr: { dir: 'ltr', bio: 'Bienvenue sur ma page personnelle', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'E-mail', share: 'Partager', save: 'Enregistrer', qr: 'Code QR', qrTitle: 'Scannez le code', arrow: 'fa-arrow-right' },
-            ber: { dir: 'ltr', bio: 'أنسgrouped ⵖ ⵜⴰⵙⵏⴰ ⵉⵏⵓ', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'Gmail', share: 'Partager', save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan QR Code', arrow: 'fa-arrow-right' }
+            ber: { dir: 'ltr', bio: 'Ansuf yiswen ɣer tasna inu', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'Gmail', share: 'Partager', save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan QR Code', arrow: 'fa-arrow-right' }
         };
 
         let typingTimeout;
-        let interactionClicks = parseInt(localStorage.getItem('adnan_clicks') || '0');
+        let interactionClicks = parseInt(localStorage.getItem('adnan_clicks') || '0', 10);
+        let toastTimeout;
 
         function trackInteraction() {
             interactionClicks++;
@@ -774,20 +777,23 @@
         }
 
         function typeWriter(text, i = 0) {
+            const bioElement = document.getElementById('bio');
             if (i < text.length) {
-                document.getElementById('bio').innerHTML += text.charAt(i);
-                typingTimeout = setTimeout(() => typeWriter(text, i + 1), 70);
+                bioElement.textContent += text.charAt(i);
+                typingTimeout = setTimeout(() => typeWriter(text, i + 1), 60);
             }
         }
 
         function setLanguage(lang, evt) {
             trackInteraction();
-            const data = translations[lang];
+            const data = translations[lang] || translations['ar'];
             document.documentElement.dir = data.dir;
             clearTimeout(typingTimeout);
-            document.getElementById('bio').innerHTML = '';
-            let customBio = localStorage.getItem('custom_bio') || data.bio;
+            document.getElementById('bio').textContent = '';
+            
+            const customBio = localStorage.getItem('custom_bio') || data.bio;
             typeWriter(customBio);
+
             document.getElementById('label-instagram').innerText = data.instagram;
             document.getElementById('label-whatsapp').innerText = data.whatsapp;
             document.getElementById('label-gmail').innerText = data.gmail;
@@ -795,54 +801,160 @@
             document.getElementById('label-save').innerText = data.save;
             document.getElementById('label-qr').innerText = data.qr;
             document.getElementById('label-qr-title').innerText = data.qrTitle;
+            
             const arrows = document.querySelectorAll('.arrow-icon');
             arrows.forEach(arrow => arrow.className = `fas ${data.arrow} arrow-icon`);
+            
             const buttons = document.querySelectorAll('.lang-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             if (evt && evt.target) evt.target.classList.add('active');
         }
 
-        function shareProfile() { trackInteraction(); if (navigator.share) { navigator.share({ title: 'ADNANE AKDIM | Links', url: window.location.href }); } else { copyToClipboard(window.location.href); } }
-        function copyToClipboard(text) { trackInteraction(); navigator.clipboard.writeText(text); const toast = document.getElementById('toast'); toast.style.display = 'block'; setTimeout(() => toast.style.display = 'none', 2000); }
-        function downloadVCard() { trackInteraction(); const vcard = "BEGIN:VCARD\nVERSION:3.0\nFN:ADNANE AKDIM\nTEL;TYPE=CELL:+212614060332\nEMAIL:akdimadnane@gmail.com\nURL:https://akdimakma.github.io\nEND:VCARD"; const blob = new Blob([vcard], { type: 'text/vcard' }); const url = URL.createObjectURL(blob); const newLink = document.createElement('a'); newLink.download = 'ADNANE_AKDIM.vcf'; newLink.href = url; newLink.click(); }
-
-        let qrGenerated = false;
-        function openQrModal() { trackInteraction(); document.getElementById('qrModal').style.display = 'flex'; if (!qrGenerated) { new QRCode(document.getElementById("qrcode"), { text: window.location.href, width: 170, height: 170, colorDark : "#000000", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.H }); qrGenerated = true; } }
-        function closeQrModal(e) { if (e.target.id === 'qrModal') document.getElementById('qrModal').style.display = 'none'; }
-        function closeQrModalDirect() { document.getElementById('qrModal').style.display = 'none'; }
-
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
-        function installPwaApp() { if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; } else { alert('التطبيق مثبت بالفعل أو متاح للثبيت من المتصفح مباشرة.'); } }
-
-        let clickCount = 0; let clickTimer;
-        function checkAdminAccess() {
-            clickCount++; clearTimeout(clickTimer);
-            if (clickCount === 9) { clickCount = 0; document.getElementById('hackerTerminal').style.display = 'flex'; document.getElementById('terminalInput').focus(); }
-            else { clickTimer = setTimeout(() => { clickCount = 0; }, 1500); }
+        async function shareProfile() {
+            trackInteraction();
+            if (navigator.share) {
+                try {
+                    await navigator.share({ title: 'ADNANE AKDIM | Links', url: window.location.href });
+                } catch (err) {}
+            } else {
+                copyToClipboard(window.location.href);
+            }
         }
 
-        function closeTerminal() { document.getElementById('hackerTerminal').style.display = 'none'; document.getElementById('terminalInput').value = ''; }
-        function encryptData(text) { return btoa(unescape(encodeURIComponent(text))); }
-        function decryptData(encoded) { try { return decodeURIComponent(escape(atob(encoded))); } catch (e) { return ''; } }
-        function saveEncryptedNotes() { localStorage.setItem('adnan_vault_data', encryptData(document.getElementById('admin-notes').value)); }
-        function loadEncryptedNotes() { document.getElementById('admin-notes').value = decryptData(localStorage.getItem('adnan_vault_data') || ''); }
-        function recordFailedAttempt() { let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); const now = new Date(); logs.unshift(`[FAILED_ATTEMPT]: ${now.toLocaleTimeString()}`); if (logs.length > 5) logs.pop(); localStorage.setItem('adnan_intrusion_logs', JSON.stringify(logs)); }
-        function displaySecurityLogs() { let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); document.getElementById('securityLogs').innerHTML = logs.length === 0 ? 'لا توجد محاولات مشبوهة حتى الآن.' : logs.join('<br>'); }
+        function copyToClipboard(text) {
+            trackInteraction();
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.style.display = 'block';
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => { toast.style.display = 'none'; }, 2000);
+            }).catch(() => {});
+        }
 
-        /* دالة التحديث المحدثة للرموز الحديثة Fine-grained tokens */
+        function downloadVCard() {
+            trackInteraction();
+            const vcard = "BEGIN:VCARD\r\nVERSION:3.0\r\nFN:ADNANE AKDIM\r\nTEL;TYPE=CELL:+212614060332\r\nEMAIL:akdimadnane@gmail.com\r\nURL:https://akdimakma.github.io\r\nEND:VCARD";
+            const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const newLink = document.createElement('a');
+            newLink.download = 'ADNANE_AKDIM.vcf';
+            newLink.href = url;
+            document.body.appendChild(newLink);
+            newLink.click();
+            document.body.removeChild(newLink);
+            URL.revokeObjectURL(url);
+        }
+
+        let qrCodeInstance = null;
+        function openQrModal() {
+            trackInteraction();
+            document.getElementById('qrModal').style.display = 'flex';
+            if (!qrCodeInstance) {
+                qrCodeInstance = new QRCode(document.getElementById("qrcode"), {
+                    text: window.location.href,
+                    width: 170,
+                    height: 170,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            }
+        }
+
+        function closeQrModal(e) {
+            if (e.target.id === 'qrModal') document.getElementById('qrModal').style.display = 'none';
+        }
+
+        function closeQrModalDirect() {
+            document.getElementById('qrModal').style.display = 'none';
+        }
+
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        function installPwaApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt = null;
+            } else {
+                alert('التطبيق مثبت بالفعل أو أن متصفحك لا يدعم التثبيت المباشر.');
+            }
+        }
+
+        let clickCount = 0;
+        let clickTimer;
+        function checkAdminAccess() {
+            clickCount++;
+            clearTimeout(clickTimer);
+            if (clickCount === 9) {
+                clickCount = 0;
+                document.getElementById('hackerTerminal').style.display = 'flex';
+                setTimeout(() => document.getElementById('terminalInput').focus(), 50);
+            } else {
+                clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
+            }
+        }
+
+        function closeTerminal() {
+            document.getElementById('hackerTerminal').style.display = 'none';
+            document.getElementById('terminalInput').value = '';
+        }
+
+        function encryptData(text) {
+            return btoa(unescape(encodeURIComponent(text)));
+        }
+
+        function decryptData(encoded) {
+            try {
+                return decodeURIComponent(escape(atob(encoded)));
+            } catch (e) {
+                return '';
+            }
+        }
+
+        function saveEncryptedNotes() {
+            localStorage.setItem('adnan_vault_data', encryptData(document.getElementById('admin-notes').value));
+        }
+
+        function loadEncryptedNotes() {
+            document.getElementById('admin-notes').value = decryptData(localStorage.getItem('adnan_vault_data') || '');
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag] || tag));
+        }
+
+        function recordFailedAttempt() {
+            let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]');
+            const now = new Date();
+            logs.unshift(`[FAILED_ATTEMPT]: ${now.toLocaleTimeString()}`);
+            if (logs.length > 5) logs.pop();
+            localStorage.setItem('adnan_intrusion_logs', JSON.stringify(logs));
+        }
+
+        function displaySecurityLogs() {
+            let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]');
+            document.getElementById('securityLogs').innerHTML = logs.length === 0 
+                ? 'لا توجد محاولات مشبوهة حتى الآن.' 
+                : logs.map(escapeHTML).join('<br>');
+        }
+
         async function setGlobalStatus(statusValue) {
-            localStorage.removeItem('github_token');
-            let token = prompt("أدخل رمز GitHub Token الجديد (يبدأ بـ github_pat_):");
+            let token = prompt("أدخل رمز GitHub Token الجديد (يبدأ بـ github_pat_ أو ghp_):");
             if (!token) return;
             token = token.trim();
-            localStorage.setItem('github_token', token);
-
-            alert("جاري تحديث الحالة عالمياً على خوادم GitHub...");
 
             try {
                 const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/status.txt`;
-                
                 const getRes = await fetch(url, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -851,14 +963,11 @@
                 });
                 
                 if (!getRes.ok) {
-                    alert("فشل الوصول للملف! تأكد من صحة الرمز ومن أن لديه صلاحية Contents: Read and write.");
-                    localStorage.removeItem('github_token');
+                    alert("فشل الوصول للملف! تأكد من صحة الرمز ومن صلاحيات Contents: Read and write.");
                     return;
                 }
 
                 const getData = await getRes.json();
-                const sha = getData.sha;
-
                 const res = await fetch(url, {
                     method: 'PUT',
                     headers: {
@@ -869,16 +978,15 @@
                     body: JSON.stringify({
                         message: "Update maintenance status via mobile admin panel",
                         content: btoa(statusValue),
-                        sha: sha
+                        sha: getData.sha
                     })
                 });
 
                 if (res.ok) {
-                    alert(statusValue === 'true' ? "تم إغلاق الموقع عالمياً بنجاح أمام الجميع!" : "تم فتح الموقع عالمياً بنجاح للجميع!");
+                    alert(statusValue === 'true' ? "تم تفعيل وضع الصيانة بنجاح!" : "تم إلغاء وضع الصيانة بنجاح!");
                     location.reload();
                 } else {
                     alert("فشل التحديث! تحقق من صلاحيات الرمز.");
-                    localStorage.removeItem('github_token');
                 }
             } catch (err) {
                 alert("حدث خطأ في الاتصال بالشبكة.");
@@ -887,84 +995,166 @@
 
         async function checkGlobalMaintenance() {
             try {
-                const res = await fetch('status.txt?t=' + new Date().getTime());
+                const res = await fetch('status.txt?t=' + Date.now());
+                if (!res.ok) return;
                 const text = await res.text();
                 if (text.trim() === 'true') {
                     document.getElementById('maintScreen').style.display = 'flex';
                     startMaintMatrixEffect();
                 } else {
                     document.getElementById('maintScreen').style.display = 'none';
+                    stopMaintMatrixEffect();
                 }
             } catch (e) {}
         }
 
-        let maintMatrixInterval;
+        let maintMatrixFrame;
         function startMaintMatrixEffect() {
-            const canvas = document.getElementById('maintMatrixCanvas'); const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*'; const fontSize = 14;
-            const columns = Math.floor(canvas.width / fontSize); const drops = Array(columns).fill(1);
-            clearInterval(maintMatrixInterval);
-            maintMatrixInterval = setInterval(() => {
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.08)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = '#22c55e'; ctx.font = fontSize + 'px monospace';
-                for (let i = 0; i < drops.length; i++) {
-                    ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * fontSize, drops[i] * fontSize);
-                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                    drops[i]++;
+            const canvas = document.getElementById('maintMatrixCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
+            const fontSize = 14;
+            const columns = Math.floor(canvas.width / fontSize);
+            const drops = Array(columns).fill(1);
+
+            cancelAnimationFrame(maintMatrixFrame);
+            let lastDraw = 0;
+
+            function draw(time) {
+                if (time - lastDraw > 40) {
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = '#22c55e';
+                    ctx.font = fontSize + 'px monospace';
+
+                    for (let i = 0; i < drops.length; i++) {
+                        ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * fontSize, drops[i] * fontSize);
+                        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                        drops[i]++;
+                    }
+                    lastDraw = time;
                 }
-            }, 35);
+                maintMatrixFrame = requestAnimationFrame(draw);
+            }
+            maintMatrixFrame = requestAnimationFrame(draw);
         }
 
-        let matrixInterval;
+        function stopMaintMatrixEffect() {
+            cancelAnimationFrame(maintMatrixFrame);
+        }
+
+        let matrixFrame;
         function startMatrixEffect() {
-            const canvas = document.getElementById('matrixCanvas'); const ctx = canvas.getContext('2d');
-            canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight;
-            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*'; const fontSize = 12;
-            const columns = Math.floor(canvas.width / fontSize); const drops = Array(columns).fill(1);
-            clearInterval(matrixInterval);
-            matrixInterval = setInterval(() => {
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.08)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = '#22c55e'; ctx.font = fontSize + 'px monospace';
-                for (let i = 0; i < drops.length; i++) {
-                    ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * fontSize, drops[i] * fontSize);
-                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                    drops[i]++;
+            const canvas = document.getElementById('matrixCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
+            const fontSize = 12;
+            const columns = Math.floor(canvas.width / fontSize);
+            const drops = Array(columns).fill(1);
+
+            cancelAnimationFrame(matrixFrame);
+            let lastDraw = 0;
+
+            function draw(time) {
+                if (time - lastDraw > 40) {
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = '#22c55e';
+                    ctx.font = fontSize + 'px monospace';
+
+                    for (let i = 0; i < drops.length; i++) {
+                        ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * fontSize, drops[i] * fontSize);
+                        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                        drops[i]++;
+                    }
+                    lastDraw = time;
                 }
-            }, 35);
+                matrixFrame = requestAnimationFrame(draw);
+            }
+            matrixFrame = requestAnimationFrame(draw);
         }
 
-        document.getElementById('terminalInput').addEventListener('keyup', function(e) {
+        function stopMatrixEffect() {
+            cancelAnimationFrame(matrixFrame);
+        }
+
+        document.getElementById('terminalInput').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 if (this.value === "7002") {
+                    this.value = '';
                     closeTerminal();
                     document.getElementById('maintScreen').style.display = 'none';
+                    stopMaintMatrixEffect();
                     document.getElementById('bookCard').classList.add('flipped');
                     document.getElementById('clicks-count').innerText = interactionClicks;
-                    loadEncryptedNotes(); displaySecurityLogs(); startMatrixEffect();
+                    loadEncryptedNotes();
+                    displaySecurityLogs();
+                    startMatrixEffect();
                 } else {
-                    recordFailedAttempt(); alert('ACCESS DENIED!'); this.value = '';
+                    recordFailedAttempt();
+                    alert('ACCESS DENIED!');
+                    this.value = '';
                 }
+            } else if (e.key === 'Escape') {
+                closeTerminal();
             }
         });
 
         function flipBackToPublic() {
             document.getElementById('bookCard').classList.remove('flipped');
-            clearInterval(matrixInterval);
+            stopMatrixEffect();
             checkGlobalMaintenance();
         }
 
-        function changeBioText() { let newBio = prompt("أدخل النص الترحيبي الجديد:"); if (newBio) { localStorage.setItem('custom_bio', newBio); clearTimeout(typingTimeout); document.getElementById('bio').innerHTML = ''; typeWriter(newBio); } }
-        function resetStats() { if (confirm("تصفير العداد؟")) { interactionClicks = 0; localStorage.setItem('adnan_clicks', '0'); document.getElementById('clicks-count').innerText = '0'; } }
-        function trackVisits() { let visits = parseInt(localStorage.getItem('adnan_visits_count') || '139'); visits++; localStorage.setItem('adnan_visits_count', visits); document.getElementById('visits-count').innerText = visits; }
+        function changeBioText() {
+            let newBio = prompt("أدخل النص الترحيبي الجديد:");
+            if (newBio !== null) {
+                newBio = newBio.trim();
+                localStorage.setItem('custom_bio', newBio);
+                clearTimeout(typingTimeout);
+                document.getElementById('bio').textContent = '';
+                typeWriter(newBio || translations['ar'].bio);
+            }
+        }
 
-        window.onload = () => {
+        function resetStats() {
+            if (confirm("هل تريد بالتأكيد تصفير العداد؟")) {
+                interactionClicks = 0;
+                localStorage.setItem('adnan_clicks', '0');
+                document.getElementById('clicks-count').innerText = '0';
+            }
+        }
+
+        function trackVisits() {
+            let visits = parseInt(localStorage.getItem('adnan_visits_count') || '139', 10);
+            visits++;
+            localStorage.setItem('adnan_visits_count', visits);
+            document.getElementById('visits-count').innerText = visits;
+        }
+
+        window.addEventListener('resize', () => {
+            const maintScreen = document.getElementById('maintScreen');
+            if (maintScreen && maintScreen.style.display === 'flex') {
+                startMaintMatrixEffect();
+            }
+            const bookCard = document.getElementById('bookCard');
+            if (bookCard && bookCard.classList.contains('flipped')) {
+                startMatrixEffect();
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
             checkGlobalMaintenance();
             trackVisits();
             typeWriter(localStorage.getItem('custom_bio') || translations['ar'].bio);
             document.getElementById('clicks-count').innerText = interactionClicks;
             document.getElementById('last-visit-time').innerText = "SYSTEM TIME: " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        };
+        });
     </script>
 </body>
 </html>
+```
