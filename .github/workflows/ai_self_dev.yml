@@ -20,7 +20,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install google-generativeai
+          pip install google-genai
 
       - name: Run AKMA AI Agent
         env:
@@ -28,10 +28,9 @@ jobs:
         run: |
           python -c "
           import os
-          import google.generativeai as genai
+          from google import genai
 
-          genai.configure(api_key=os.environ['GEMINI_API_KEY'])
-          model = genai.GenerativeModel('gemini-1.5-pro')
+          client = genai.Client(api_key=os.environ['GEMINI_API_KEY'])
 
           with open('index.html', 'r', encoding='utf-8') as f:
               current_code = f.read()
@@ -44,7 +43,10 @@ jobs:
           {current_code}
           '''
 
-          response = model.generate_content(prompt)
+          response = client.models.generate_content(
+              model='gemini-2.5-flash',
+              contents=prompt,
+          )
           new_code = response.text.strip()
 
           if '<!DOCTYPE html>' in new_code:
