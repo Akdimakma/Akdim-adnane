@@ -35,7 +35,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            perspective: 1200px;
+            perspective: 1400px;
             overflow-x: hidden;
         }
 
@@ -97,10 +97,10 @@
 
         .book-card {
             width: 100%;
-            max-width: 420px;
+            max-width: 430px;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.85s cubic-bezier(0.23, 1, 0.32, 1);
             z-index: 2;
         }
 
@@ -115,7 +115,7 @@
             -webkit-backdrop-filter: blur(14px);
             border: 1px solid rgba(220, 38, 38, 0.45);
             border-radius: 20px;
-            padding: 30px 20px;
+            padding: 28px 18px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(220, 38, 38, 0.25);
             text-align: center;
             backface-visibility: hidden;
@@ -127,10 +127,21 @@
             top: 0;
             left: 0;
             transform: rotateY(180deg);
-            background: rgba(5, 10, 5, 0.95);
-            border: 1px solid #22c55e;
-            box-shadow: 0 0 30px rgba(34, 197, 94, 0.35);
+            background: rgba(3, 8, 4, 0.94);
+            border: 1px solid rgba(34, 197, 94, 0.7);
+            box-shadow: 0 0 35px rgba(34, 197, 94, 0.3), inset 0 0 20px rgba(34, 197, 94, 0.08);
             overflow: hidden;
+            text-align: right;
+            direction: rtl;
+        }
+
+        .page-back::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, rgba(0, 255, 100, 0.015) 0px, rgba(0, 255, 100, 0.015) 1px, transparent 2px, transparent 4px);
+            pointer-events: none;
+            z-index: 1;
         }
 
         #matrixCanvas {
@@ -139,13 +150,13 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.3;
+            opacity: 0.28;
             pointer-events: none;
         }
 
         .page-back-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .lang-switch {
@@ -360,104 +371,279 @@
             color: #a1a1aa;
         }
 
-        .admin-header {
+        /* Cyberpunk OS Back Panel Styles */
+        .cyber-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid rgba(34, 197, 94, 0.4);
-            padding-bottom: 10px;
-            font-size: 0.85rem;
-            color: #22c55e;
-            font-weight: bold;
-            margin-bottom: 15px;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        .admin-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .stat-card {
-            background: rgba(0, 20, 0, 0.6);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            padding: 10px;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .stat-card label {
-            font-size: 0.7rem;
-            color: #a1a1aa;
-            display: block;
-            margin-bottom: 3px;
-        }
-
-        .stat-card span {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #22c55e;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        .vault-box {
-            background: rgba(0, 15, 0, 0.8);
-            border: 1px solid rgba(34, 197, 94, 0.5);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 15px;
-            text-align: right;
-        }
-
-        .vault-title {
+            padding-bottom: 8px;
             font-size: 0.75rem;
             color: #22c55e;
+            font-weight: 700;
+            margin-bottom: 12px;
             font-family: 'Courier New', Courier, monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .cyber-header .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #22c55e;
+            animation: pulse-dot 1.2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 0.3; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.15); }
+        }
+
+        .cyber-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .cyber-stat-box {
+            background: rgba(0, 20, 5, 0.7);
+            border: 1px solid rgba(34, 197, 94, 0.35);
+            padding: 6px 4px;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .cyber-stat-box label {
+            font-size: 0.6rem;
+            color: #86efac;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .cyber-stat-box span {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #22c55e;
+        }
+
+        .cyber-tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(34, 197, 94, 0.25);
+            padding-bottom: 6px;
+        }
+
+        .cyber-tab-btn {
+            background: rgba(0, 30, 10, 0.6);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #86efac;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s;
+        }
+
+        .cyber-tab-btn:hover, .cyber-tab-btn.active {
+            background: rgba(34, 197, 94, 0.25);
+            color: #fff;
+            border-color: #22c55e;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+        }
+
+        .cyber-panel-tab {
+            display: none;
+            min-height: 195px;
+        }
+
+        .cyber-panel-tab.active {
+            display: block;
+        }
+
+        /* Tools Tab */
+        .tool-subcard {
+            background: rgba(0, 15, 5, 0.75);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 8px;
+            padding: 8px;
             margin-bottom: 8px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .tool-title {
+            font-size: 0.72rem;
+            color: #22c55e;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .admin-notes {
-            width: 100%;
-            background: rgba(0, 5, 0, 0.9);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            border-radius: 8px;
+        .pass-output-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .pass-input {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            border-radius: 6px;
             color: #22c55e;
-            padding: 10px;
-            font-size: 0.8rem;
-            resize: none;
-            height: 60px;
+            padding: 6px 8px;
+            font-size: 0.75rem;
+            outline: none;
+            direction: ltr;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .mini-btn {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid #22c55e;
+            color: #fff;
+            padding: 0 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mini-btn:hover {
+            background: #22c55e;
+            color: #000;
+        }
+
+        /* Multi Secret Vault Tab */
+        .vault-input-box {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .secret-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(34, 197, 94, 0.35);
+            border-radius: 6px;
+            color: #22c55e;
+            padding: 6px 8px;
+            font-size: 0.75rem;
             outline: none;
             font-family: 'Courier New', Courier, monospace;
         }
 
-        .logs-box {
-            background: rgba(15, 0, 0, 0.6);
-            border: 1px solid rgba(239, 68, 68, 0.4);
-            border-radius: 10px;
-            padding: 8px 10px;
-            font-size: 0.7rem;
-            color: #f87171;
-            font-family: 'Courier New', Courier, monospace;
-            max-height: 55px;
+        .vault-list {
+            max-height: 110px;
             overflow-y: auto;
-            text-align: left;
-            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
             scrollbar-width: thin;
-            scrollbar-color: #ef4444 rgba(15, 0, 0, 0.6);
+            scrollbar-color: #22c55e rgba(0, 10, 0, 0.6);
+        }
+
+        .vault-item {
+            background: rgba(0, 25, 5, 0.7);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            padding: 6px 8px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .vault-item-content {
+            flex: 1;
+            color: #86efac;
+            word-break: break-all;
+            text-align: right;
+        }
+
+        .vault-item-actions {
+            display: flex;
+            gap: 4px;
+        }
+
+        /* Interactive Terminal Tab */
+        .cyber-term-box {
+            background: rgba(0, 0, 0, 0.95);
+            border: 1px solid rgba(34, 197, 94, 0.45);
+            border-radius: 8px;
+            padding: 8px;
+            height: 185px;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: left;
+            direction: ltr;
+        }
+
+        .cyber-term-output {
+            flex: 1;
+            overflow-y: auto;
+            color: #22c55e;
+            font-size: 0.72rem;
+            line-height: 1.4;
+            scrollbar-width: thin;
+            scrollbar-color: #22c55e rgba(0,0,0,0.5);
+            margin-bottom: 6px;
+        }
+
+        .cyber-term-prompt {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-top: 1px dashed rgba(34, 197, 94, 0.3);
+            padding-top: 4px;
+            color: #22c55e;
+            font-size: 0.75rem;
+        }
+
+        .cyber-term-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.75rem;
+        }
+
+        /* Controls Tab */
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
         }
 
         .admin-btn {
             background: rgba(34, 197, 94, 0.15);
             border: 1px solid rgba(34, 197, 94, 0.4);
             color: #22c55e;
-            padding: 10px;
+            padding: 9px 8px;
             border-radius: 10px;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.25s;
@@ -465,6 +651,7 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
+            font-family: 'Courier New', Courier, monospace;
         }
 
         .admin-btn:hover {
@@ -495,6 +682,23 @@
         .admin-btn.danger:hover {
             background: #ef4444;
             color: #fff;
+        }
+
+        .logs-box {
+            background: rgba(20, 0, 0, 0.6);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            border-radius: 8px;
+            padding: 6px 8px;
+            font-size: 0.68rem;
+            color: #f87171;
+            font-family: 'Courier New', Courier, monospace;
+            max-height: 50px;
+            overflow-y: auto;
+            text-align: left;
+            direction: ltr;
+            margin-top: 8px;
+            scrollbar-width: thin;
+            scrollbar-color: #ef4444 rgba(15, 0, 0, 0.6);
         }
 
         .hacker-terminal {
@@ -712,37 +916,111 @@
             <canvas id="matrixCanvas"></canvas>
             
             <div class="page-back-content">
-                <div class="admin-header">
-                    <span><i class="fas fa-user-secret"></i> COMMAND_CENTER_V2</span>
-                    <span style="font-size: 0.65rem; color: #22c55e;" id="last-visit-time">--:--</span>
+                <div class="cyber-header">
+                    <div class="status-indicator">
+                        <div class="pulse-dot"></div>
+                        <span>AKMA_CYBER_OS // v3.0</span>
+                    </div>
+                    <span id="cyberClock">00:00:00 UTC</span>
                 </div>
 
-                <div class="admin-grid">
-                    <div class="stat-card"><label>إجمالي الزيارات</label><span id="visits-count">1</span></div>
-                    <div class="stat-card"><label>التفاعلات</label><span id="clicks-count">0</span></div>
+                <div class="cyber-stats">
+                    <div class="cyber-stat-box">
+                        <label>الزيارات</label>
+                        <span id="visits-count">1</span>
+                    </div>
+                    <div class="cyber-stat-box">
+                        <label>النقرات</label>
+                        <span id="clicks-count">0</span>
+                    </div>
+                    <div class="cyber-stat-box">
+                        <label>الأمان</label>
+                        <span style="color: #38bdf8;">SECURE</span>
+                    </div>
+                    <div class="cyber-stat-box">
+                        <label>النواة</label>
+                        <span id="cyberPing">24ms</span>
+                    </div>
                 </div>
 
-                <div class="vault-box">
-                    <div class="vault-title"><i class="fas fa-key"></i> المخزن المشفر (AES Vault):</div>
-                    <textarea class="admin-notes" id="admin-notes" placeholder="// اكتب أفكارك هنا..." oninput="saveEncryptedNotes()"></textarea>
+                <div class="cyber-tabs">
+                    <button class="cyber-tab-btn active" onclick="switchCyberTab('tools', this)"><i class="fas fa-tools"></i> أدوات</button>
+                    <button class="cyber-tab-btn" onclick="switchCyberTab('vault', this)"><i class="fas fa-user-shield"></i> الأسرار</button>
+                    <button class="cyber-tab-btn" onclick="switchCyberTab('terminal', this)"><i class="fas fa-terminal"></i> الطرفية</button>
+                    <button class="cyber-tab-btn" onclick="switchCyberTab('control', this)"><i class="fas fa-sliders-h"></i> التحكم</button>
                 </div>
 
-                <div class="vault-box" style="border-color: rgba(239, 68, 68, 0.4);">
-                    <div class="vault-title" style="color: #f87171;"><i class="fas fa-shield-alt"></i> سجل محاولات الخرق:</div>
+                <!-- TAB 1: TOOLS -->
+                <div class="cyber-panel-tab active" id="tab-tools">
+                    <div class="tool-subcard">
+                        <div class="tool-title"><i class="fas fa-key"></i> مولد مفاتيح وتشفير فائق:</div>
+                        <div class="pass-output-row">
+                            <input type="text" class="pass-input" id="generatedPassword" readonly placeholder="PASSCODE_GENERATOR...">
+                            <button class="mini-btn" onclick="generateCyberPass()"><i class="fas fa-sync-alt"></i></button>
+                            <button class="mini-btn" onclick="copyCyberPass()"><i class="fas fa-copy"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="tool-subcard">
+                        <div class="tool-title"><i class="fas fa-fingerprint"></i> تشفير وتجزئة سريعة (Base64 Safe):</div>
+                        <div class="pass-output-row">
+                            <input type="text" class="pass-input" id="hashInput" placeholder="اكتب نصاً لتشفيره...">
+                            <button class="mini-btn" onclick="hashInputText()"><i class="fas fa-lock"></i> تشفير</button>
+                        </div>
+                    </div>
+
+                    <div class="tool-subcard" style="margin-bottom: 0;">
+                        <div class="tool-title"><i class="fas fa-network-wired"></i> حالة الاتصال السحابي:</div>
+                        <div style="font-size: 0.68rem; color: #86efac; display: flex; justify-content: space-between;">
+                            <span>REPO: Akdim-adnane</span>
+                            <span id="netStatus" style="color: #22c55e;">ONLINE [200 OK]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: MULTI SECRET VAULT -->
+                <div class="cyber-panel-tab" id="tab-vault">
+                    <div class="vault-input-box">
+                        <div class="pass-output-row">
+                            <input type="text" class="secret-input" id="vaultItemInput" placeholder="أضف ملاحظة أو حساباً مشفراً..." onkeydown="if(event.key==='Enter') addSecretItem()">
+                            <button class="mini-btn" onclick="addSecretItem()"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="vault-list" id="vaultListContainer"></div>
+                </div>
+
+                <!-- TAB 3: CYBER TERMINAL -->
+                <div class="cyber-panel-tab" id="tab-terminal">
+                    <div class="cyber-term-box">
+                        <div class="cyber-term-output" id="cyberTermOutput">
+                            &gt; AKMA CORE OS LOADED.<br>
+                            &gt; TYPE 'help' FOR COMMANDS LIST.<br>
+                        </div>
+                        <div class="cyber-term-prompt">
+                            <span>root@akma:~$</span>
+                            <input type="text" class="cyber-term-input" id="cyberConsoleInput" autocomplete="off" spellcheck="false">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: SYSTEM CONTROL & LOGS -->
+                <div class="cyber-panel-tab" id="tab-control">
+                    <div class="admin-grid">
+                        <button class="admin-btn success" onclick="setGlobalStatus('false')"><i class="fas fa-unlock"></i> فتح الموقع</button>
+                        <button class="admin-btn warning" onclick="setGlobalStatus('true')"><i class="fas fa-lock"></i> إغلاق الموقع</button>
+                        <button class="admin-btn" onclick="changeBioText()"><i class="fas fa-edit"></i> تعديل الوصف</button>
+                        <button class="admin-btn" onclick="installPwaApp()"><i class="fas fa-download"></i> تثبيت التطبيق</button>
+                        <button class="admin-btn" onclick="resetStats()"><i class="fas fa-redo"></i> تصفير العداد</button>
+                        <button class="admin-btn danger" onclick="flipBackToPublic()"><i class="fas fa-power-off"></i> تأمين وقفل النظام</button>
+                    </div>
+
                     <div class="logs-box" id="securityLogs">لا توجد محاولات مشبوهة حتى الآن.</div>
                 </div>
 
-                <div class="admin-grid">
-                    <button class="admin-btn success" onclick="setGlobalStatus('false')"><i class="fas fa-eye"></i> إلغاء الصيانة (فتح)</button>
-                    <button class="admin-btn warning" onclick="setGlobalStatus('true')"><i class="fas fa-eye-slash"></i> تفعيل الصيانة (إغلاق)</button>
-                    <button class="admin-btn" onclick="changeBioText()"><i class="fas fa-edit"></i> تعديل الوصف</button>
-                    <button class="admin-btn" onclick="installPwaApp()"><i class="fas fa-download"></i> تثبيت التطبيق</button>
-                    <button class="admin-btn" onclick="resetStats()"><i class="fas fa-redo"></i> تصفير العداد</button>
-                    <button class="admin-btn danger" onclick="flipBackToPublic()"><i class="fas fa-lock"></i> قفل وتأمين المخزن</button>
-                </div>
-
                 <footer>
-                    <div style="color: #22c55e; font-family: 'Courier New', Courier, monospace;">COMMAND CENTER // ADNANE AKDIM</div>
+                    <div style="color: #22c55e; font-family: 'Courier New', Courier, monospace; font-size: 0.7rem; margin-top: 10px;">
+                        [ROOT_SESSION: AUTH_ADNANE_AKDIM]
+                    </div>
                 </footer>
             </div>
         </div>
@@ -752,7 +1030,7 @@
     <div class="hacker-terminal" id="hackerTerminal">
         <div class="terminal-box">
             <div class="terminal-header">
-                <span>SYSTEM_ROOT_ACCESS // AKDIM_V2</span>
+                <span>SYSTEM_ROOT_ACCESS // AKDIM_V3</span>
                 <span onclick="closeTerminal()" style="cursor: pointer; color: #a1a1aa;">[ESC]</span>
             </div>
             <div class="terminal-logs">&gt; ENTER PASSCODE TO UNLOCK SECRET STORAGE.</div>
@@ -789,6 +1067,7 @@
         let toastTimeout;
         let qrCodeInstance = null;
         let currentLang = 'ar';
+        let cyberClockInterval;
 
         function trackInteraction() {
             interactionClicks++;
@@ -975,16 +1254,6 @@
             }
         }
 
-        function saveEncryptedNotes() {
-            const val = document.getElementById('admin-notes').value;
-            localStorage.setItem('adnan_vault_data', utf8ToBase64(val));
-        }
-
-        function loadEncryptedNotes() {
-            const data = localStorage.getItem('adnan_vault_data') || '';
-            document.getElementById('admin-notes').value = base64ToUtf8(data);
-        }
-
         function escapeHTML(str) {
             return str.replace(/[&<>'"]/g, tag => ({
                 '&': '&amp;',
@@ -1003,7 +1272,7 @@
                 logs = [];
             }
             const now = new Date();
-            logs.unshift(`[FAILED_ATTEMPT]: ${now.toLocaleTimeString()}`);
+            logs.unshift(`[INTRUSION_ALERT]: ${now.toLocaleTimeString()}`);
             if (logs.length > 5) logs.pop();
             localStorage.setItem('adnan_intrusion_logs', JSON.stringify(logs));
         }
@@ -1016,8 +1285,163 @@
                 logs = [];
             }
             document.getElementById('securityLogs').innerHTML = logs.length === 0 
-                ? 'لا توجد محاولات مشبوهة حتى الآن.' 
+                ? 'ALL SYSTEMS NOMINAL // NO INTRUSIONS' 
                 : logs.map(escapeHTML).join('<br>');
+        }
+
+        /* --- CYBER OS TABS & APPS --- */
+        function switchCyberTab(tabName, btn) {
+            document.querySelectorAll('.cyber-tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.cyber-panel-tab').forEach(p => p.classList.remove('active'));
+            
+            btn.classList.add('active');
+            const target = document.getElementById('tab-' + tabName);
+            if (target) target.classList.add('active');
+
+            if (tabName === 'terminal') {
+                setTimeout(() => document.getElementById('cyberConsoleInput').focus(), 50);
+            }
+        }
+
+        function generateCyberPass() {
+            const charset = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%^&*()_+~|}{[]:?";
+            let password = "";
+            for (let i = 0; i < 16; i++) {
+                password += charset.charAt(Math.floor(Math.random() * charset.length));
+            }
+            document.getElementById('generatedPassword').value = password;
+        }
+
+        function copyCyberPass() {
+            const val = document.getElementById('generatedPassword').value;
+            if (val) copyToClipboard(val);
+        }
+
+        function hashInputText() {
+            const input = document.getElementById('hashInput');
+            if (!input.value.trim()) return;
+            const encoded = utf8ToBase64(input.value);
+            input.value = `ENC[${encoded}]`;
+            showToast('تم التشفير بنجاح!');
+        }
+
+        /* MULTI-VAULT STORAGE */
+        function loadSecretItems() {
+            const container = document.getElementById('vaultListContainer');
+            container.innerHTML = '';
+            let items = [];
+            try {
+                const raw = localStorage.getItem('adnan_multi_vault');
+                if (raw) items = JSON.parse(base64ToUtf8(raw));
+            } catch (e) { items = []; }
+
+            if (items.length === 0) {
+                container.innerHTML = '<div style="color:#6ee7b7; font-size:0.7rem; text-align:center; padding:10px;">المخزن فارغ حالياً. أضف أول سر مشفر أعلاه.</div>';
+                return;
+            }
+
+            items.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'vault-item';
+                itemDiv.innerHTML = `
+                    <div class="vault-item-content">${escapeHTML(item)}</div>
+                    <div class="vault-item-actions">
+                        <button class="mini-btn" onclick="copyToClipboard('${escapeHTML(item)}')"><i class="fas fa-copy"></i></button>
+                        <button class="mini-btn" style="border-color:#ef4444; color:#ef4444;" onclick="deleteSecretItem(${index})"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+                container.appendChild(itemDiv);
+            });
+        }
+
+        function addSecretItem() {
+            const input = document.getElementById('vaultItemInput');
+            const val = input.value.trim();
+            if (!val) return;
+            
+            let items = [];
+            try {
+                const raw = localStorage.getItem('adnan_multi_vault');
+                if (raw) items = JSON.parse(base64ToUtf8(raw));
+            } catch (e) { items = []; }
+
+            items.unshift(val);
+            localStorage.setItem('adnan_multi_vault', utf8ToBase64(JSON.stringify(items)));
+            input.value = '';
+            loadSecretItems();
+            showToast('تم حفظ السر في المخزن!');
+        }
+
+        function deleteSecretItem(index) {
+            let items = [];
+            try {
+                const raw = localStorage.getItem('adnan_multi_vault');
+                if (raw) items = JSON.parse(base64ToUtf8(raw));
+            } catch (e) { items = []; }
+
+            items.splice(index, 1);
+            localStorage.setItem('adnan_multi_vault', utf8ToBase64(JSON.stringify(items)));
+            loadSecretItems();
+        }
+
+        /* CYBER CONSOLE COMMAND SIMULATOR */
+        document.getElementById('cyberConsoleInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const cmd = this.value.trim().toLowerCase();
+                this.value = '';
+                executeCyberCommand(cmd);
+            }
+        });
+
+        function executeCyberCommand(cmd) {
+            const out = document.getElementById('cyberTermOutput');
+            const print = (text) => {
+                out.innerHTML += `&gt; ${text}<br>`;
+                out.scrollTop = out.scrollHeight;
+            };
+
+            print(`<span style="color:#fff;">root@akma:~$ ${escapeHTML(cmd)}</span>`);
+
+            switch (cmd) {
+                case 'help':
+                    print("COMMANDS: status, ping, clear, bio, whoami, lock, date");
+                    break;
+                case 'status':
+                    print("SYSTEM: SECURE | CORE: ONLINE | PROTOCOL: TLS 1.3");
+                    break;
+                case 'ping':
+                    const p = Math.floor(Math.random() * 20) + 12;
+                    document.getElementById('cyberPing').innerText = p + 'ms';
+                    print(`REPLY FROM AKDIM_HOST: time=${p}ms TTL=64`);
+                    break;
+                case 'clear':
+                    out.innerHTML = '';
+                    break;
+                case 'whoami':
+                    print("OPERATOR: ADNANE AKDIM // AKMA SYSTEM ADMINISTRATOR");
+                    break;
+                case 'lock':
+                    flipBackToPublic();
+                    break;
+                case 'date':
+                    print(new Date().toUTCString());
+                    break;
+                case 'bio':
+                    print(`CURRENT BIO: "${localStorage.getItem('custom_bio') || translations[currentLang].bio}"`);
+                    break;
+                case '':
+                    break;
+                default:
+                    print(`COMMAND NOT FOUND: ${escapeHTML(cmd)}. Type 'help' for options.`);
+            }
+        }
+
+        function startCyberClock() {
+            clearInterval(cyberClockInterval);
+            cyberClockInterval = setInterval(() => {
+                const now = new Date();
+                document.getElementById('cyberClock').innerText = now.toTimeString().split(' ')[0] + ' LOC';
+            }, 1000);
         }
 
         async function setGlobalStatus(statusValue) {
@@ -1165,9 +1589,11 @@
                     stopMaintMatrixEffect();
                     document.getElementById('bookCard').classList.add('flipped');
                     document.getElementById('clicks-count').innerText = interactionClicks;
-                    loadEncryptedNotes();
+                    loadSecretItems();
+                    generateCyberPass();
                     displaySecurityLogs();
                     startMatrixEffect();
+                    startCyberClock();
                 } else {
                     recordFailedAttempt();
                     alert('ACCESS DENIED!');
@@ -1181,6 +1607,7 @@
         function flipBackToPublic() {
             document.getElementById('bookCard').classList.remove('flipped');
             stopMatrixEffect();
+            clearInterval(cyberClockInterval);
             checkGlobalMaintenance();
         }
 
@@ -1234,7 +1661,6 @@
             trackVisits();
             typeWriter(localStorage.getItem('custom_bio') || translations['ar'].bio);
             document.getElementById('clicks-count').innerText = interactionClicks;
-            document.getElementById('last-visit-time').innerText = "SYSTEM TIME: " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         });
     </script>
 </body>
