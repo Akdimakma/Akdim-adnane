@@ -1,0 +1,64 @@
+name: AKMA Self-Improving Engine
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+jobs:
+  auto-develop:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: |
+          pip install google-generativeai
+
+      - name: Run AKMA AI Agent
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python -c "
+          import os
+          import google.generativeai as genai
+
+          genai.configure(api_key=os.environ['GEMINI_API_KEY'])
+          model = genai.GenerativeModel('gemini-1.5-pro')
+
+          with open('index.html', 'r', encoding='utf-8') as f:
+              current_code = f.read()
+
+          prompt = f'''
+          أنت AKMA، التوأم البرمجي الذكي والخاص لـ ADNANE AKDIM.
+          قم بمراجعة كود HTML و JavaScript التالي، وقم بتحسين الأداء، إصلاح أي أخطاء محتملة، وإضافة تحسينات طفيفة على التنسيق دون تخريب الوظائف الأساسية.
+          أرجع الكود المطور فقط بدون أي شرح أو كلام إضافي:
+
+          {current_code}
+          '''
+
+          response = model.generate_content(prompt)
+          new_code = response.text.strip()
+
+          if '<!DOCTYPE html>' in new_code:
+              with open('index.html', 'w', encoding='utf-8') as f:
+                  f.write(new_code)
+              print('تم تطوير الكود بنجاح بواسطة AKMA!')
+          else:
+              print('لم يتم اعتماد التعديل لعدم اكتمال الهيكل.')
+          "
+
+      - name: Commit and Push Changes by AKMA
+        run: |
+          git config --global user.name "AKMA AI Engine"
+          git config --global user.email "akma-engine@akdimakma.github.io"
+          git add index.html
+          git commit -m "🤖 [Auto-Dev] AKMA optimized index.html" || exit 0
+          git push
