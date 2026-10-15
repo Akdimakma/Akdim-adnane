@@ -44,22 +44,23 @@ jobs:
           {current_code}
           '''
 
-          # قائمة بالنماذج المتاحة للتجربة بالتوالي في حال الضغط
-          models_to_try = ['gemini-2.5-flash', 'gemini-1.5-flash', 'gemini-3.8-flash']
           response = None
+          max_retries = 3
 
-          for model_name in models_to_try:
+          for attempt in range(1, max_retries + 1):
               try:
-                  print(f'جاري المحاولة باستخدام النموذج: {model_name}...')
+                  print(f'المحاولة رقم {attempt} باستخدام gemini-3.8-flash...')
                   response = client.models.generate_content(
-                      model=model_name,
+                      model='gemini-3.8-flash',
                       contents=prompt,
                   )
-                  print(f'تمت الاستجابة بنجاح باستخدام: {model_name}')
+                  print('تمت الاستجابة بنجاح من النموذج!')
                   break
               except Exception as e:
-                  print(f'تعذر استخدام {model_name} بسبب الضغط أو الخطأ، جاري تجربة النموذج التالي...')
-                  time.sleep(2)
+                  print(f'حدث خطأ أو ضغط مؤقت: {e}')
+                  if attempt < max_retries:
+                      print('جاري الانتظار 5 ثوانٍ قبل المحاولة التالية...')
+                      time.sleep(5)
 
           if response and response.text:
               new_code = response.text.strip()
@@ -70,7 +71,7 @@ jobs:
               else:
                   print('لم يتم اعتماد التعديل لعدم اكتمال الهيكل.')
           else:
-              raise Exception('فشلت جميع المحاولات بسبب الضغط المؤقت على السيرفرات.')
+              raise Exception('فشلت جميع المحاولات بسبب عدم استجابة السيرفر.')
           "
 
       - name: Commit and Push Changes by AKMA
