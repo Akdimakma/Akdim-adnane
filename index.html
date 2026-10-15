@@ -12,8 +12,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ADNANE AKDIM">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <style>
         *, *::before, *::after {
@@ -25,7 +25,7 @@
         }
 
         body {
-            background: linear-gradient(rgba(15, 15, 17, 0.4), rgba(15, 15, 17, 0.4)), 
+            background: linear-gradient(rgba(15, 15, 17, 0.45), rgba(15, 15, 17, 0.45)), 
                         url('dragon.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
@@ -193,7 +193,8 @@
             padding: 3px;
             object-fit: cover;
             box-shadow: 0 0 15px rgba(220, 38, 38, 0.5);
-            animation: pulseGlow 3s infinite alternate;
+            animation: pulseGlow 3s infinite alternate ease-in-out;
+            will-change: transform, box-shadow;
         }
 
         .status-badge {
@@ -209,8 +210,14 @@
         }
 
         @keyframes pulseGlow {
-            0% { box-shadow: 0 0 10px rgba(220, 38, 38, 0.4); }
-            100% { box-shadow: 0 0 25px rgba(220, 38, 38, 0.85); }
+            0% { 
+                box-shadow: 0 0 10px rgba(220, 38, 38, 0.4); 
+                transform: scale(1);
+            }
+            100% { 
+                box-shadow: 0 0 25px rgba(220, 38, 38, 0.85); 
+                transform: scale(1.02);
+            }
         }
 
         .profile h1 {
@@ -274,6 +281,7 @@
             font-weight: 600;
             transition: all 0.25s ease;
             backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
         }
 
         .link-card:hover {
@@ -307,6 +315,7 @@
             cursor: pointer;
             transition: all 0.25s ease;
             backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             flex-shrink: 0;
         }
 
@@ -438,6 +447,8 @@
             overflow-y: auto;
             text-align: left;
             margin-bottom: 15px;
+            scrollbar-width: thin;
+            scrollbar-color: #ef4444 rgba(15, 0, 0, 0.6);
         }
 
         .admin-btn {
@@ -606,7 +617,7 @@
             position: fixed;
             bottom: 30px;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateY(20px);
             background: rgba(220, 38, 38, 0.95);
             color: white;
             padding: 8px 18px;
@@ -614,9 +625,16 @@
             font-size: 0.85rem;
             font-weight: 600;
             box-shadow: 0 0 15px rgba(220, 38, 38, 0.6);
-            display: none;
-            z-index: 1000;
+            opacity: 0;
             pointer-events: none;
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
         }
     </style>
 </head>
@@ -740,7 +758,7 @@
             <div class="terminal-logs">&gt; ENTER PASSCODE TO UNLOCK SECRET STORAGE.</div>
             <div class="terminal-input-row">
                 <span>PASSCODE&gt;</span>
-                <input type="password" class="terminal-input" id="terminalInput">
+                <input type="password" class="terminal-input" id="terminalInput" autocomplete="off">
             </div>
         </div>
     </div>
@@ -769,28 +787,36 @@
         let typingTimeout;
         let interactionClicks = parseInt(localStorage.getItem('adnan_clicks') || '0', 10);
         let toastTimeout;
+        let qrCodeInstance = null;
+        let currentLang = 'ar';
 
         function trackInteraction() {
             interactionClicks++;
-            localStorage.setItem('adnan_clicks', interactionClicks);
-            document.getElementById('clicks-count').innerText = interactionClicks;
+            localStorage.setItem('adnan_clicks', interactionClicks.toString());
+            const clicksElem = document.getElementById('clicks-count');
+            if (clicksElem) clicksElem.innerText = interactionClicks;
         }
 
         function typeWriter(text, i = 0) {
             const bioElement = document.getElementById('bio');
-            if (i < text.length) {
-                bioElement.textContent += text.charAt(i);
-                typingTimeout = setTimeout(() => typeWriter(text, i + 1), 60);
+            if (!bioElement) return;
+            if (i === 0) bioElement.textContent = '';
+            
+            const chars = Array.from(text);
+            if (i < chars.length) {
+                bioElement.textContent += chars[i];
+                typingTimeout = setTimeout(() => typeWriter(text, i + 1), 50);
             }
         }
 
         function setLanguage(lang, evt) {
             trackInteraction();
+            currentLang = lang;
             const data = translations[lang] || translations['ar'];
             document.documentElement.dir = data.dir;
-            clearTimeout(typingTimeout);
-            document.getElementById('bio').textContent = '';
+            document.documentElement.lang = lang;
             
+            clearTimeout(typingTimeout);
             const customBio = localStorage.getItem('custom_bio') || data.bio;
             typeWriter(customBio);
 
@@ -802,12 +828,16 @@
             document.getElementById('label-qr').innerText = data.qr;
             document.getElementById('label-qr-title').innerText = data.qrTitle;
             
-            const arrows = document.querySelectorAll('.arrow-icon');
-            arrows.forEach(arrow => arrow.className = `fas ${data.arrow} arrow-icon`);
+            document.querySelectorAll('.arrow-icon').forEach(arrow => {
+                arrow.className = `fas ${data.arrow} arrow-icon`;
+            });
             
-            const buttons = document.querySelectorAll('.lang-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            if (evt && evt.target) evt.target.classList.add('active');
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            if (evt && evt.currentTarget) {
+                evt.currentTarget.classList.add('active');
+            } else if (evt && evt.target) {
+                evt.target.classList.add('active');
+            }
         }
 
         async function shareProfile() {
@@ -821,14 +851,38 @@
             }
         }
 
+        function showToast(message = 'تم النسخ بنجاح!') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => { 
+                toast.classList.remove('show'); 
+            }, 2000);
+        }
+
         function copyToClipboard(text) {
             trackInteraction();
-            navigator.clipboard.writeText(text).then(() => {
-                const toast = document.getElementById('toast');
-                toast.style.display = 'block';
-                clearTimeout(toastTimeout);
-                toastTimeout = setTimeout(() => { toast.style.display = 'none'; }, 2000);
-            }).catch(() => {});
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => showToast()).catch(() => fallbackCopy(text));
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast();
+            } catch (err) {}
+            document.body.removeChild(textArea);
         }
 
         function downloadVCard() {
@@ -845,10 +899,10 @@
             URL.revokeObjectURL(url);
         }
 
-        let qrCodeInstance = null;
         function openQrModal() {
             trackInteraction();
-            document.getElementById('qrModal').style.display = 'flex';
+            const qrModal = document.getElementById('qrModal');
+            qrModal.style.display = 'flex';
             if (!qrCodeInstance) {
                 qrCodeInstance = new QRCode(document.getElementById("qrcode"), {
                     text: window.location.href,
@@ -878,7 +932,9 @@
         function installPwaApp() {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
-                deferredPrompt = null;
+                deferredPrompt.userChoice.then(() => {
+                    deferredPrompt = null;
+                });
             } else {
                 alert('التطبيق مثبت بالفعل أو أن متصفحك لا يدعم التثبيت المباشر.');
             }
@@ -889,7 +945,7 @@
         function checkAdminAccess() {
             clickCount++;
             clearTimeout(clickTimer);
-            if (clickCount === 9) {
+            if (clickCount >= 9) {
                 clickCount = 0;
                 document.getElementById('hackerTerminal').style.display = 'flex';
                 setTimeout(() => document.getElementById('terminalInput').focus(), 50);
@@ -903,24 +959,30 @@
             document.getElementById('terminalInput').value = '';
         }
 
-        function encryptData(text) {
-            return btoa(unescape(encodeURIComponent(text)));
+        function utf8ToBase64(str) {
+            return window.btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (match, p1) => 
+                String.fromCharCode(parseInt(p1, 16))
+            ));
         }
 
-        function decryptData(encoded) {
+        function base64ToUtf8(str) {
             try {
-                return decodeURIComponent(escape(atob(encoded)));
+                return decodeURIComponent(Array.prototype.map.call(window.atob(str), (c) => 
+                    '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+                ).join(''));
             } catch (e) {
                 return '';
             }
         }
 
         function saveEncryptedNotes() {
-            localStorage.setItem('adnan_vault_data', encryptData(document.getElementById('admin-notes').value));
+            const val = document.getElementById('admin-notes').value;
+            localStorage.setItem('adnan_vault_data', utf8ToBase64(val));
         }
 
         function loadEncryptedNotes() {
-            document.getElementById('admin-notes').value = decryptData(localStorage.getItem('adnan_vault_data') || '');
+            const data = localStorage.getItem('adnan_vault_data') || '';
+            document.getElementById('admin-notes').value = base64ToUtf8(data);
         }
 
         function escapeHTML(str) {
@@ -934,7 +996,12 @@
         }
 
         function recordFailedAttempt() {
-            let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]');
+            let logs = [];
+            try {
+                logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]');
+            } catch (e) {
+                logs = [];
+            }
             const now = new Date();
             logs.unshift(`[FAILED_ATTEMPT]: ${now.toLocaleTimeString()}`);
             if (logs.length > 5) logs.pop();
@@ -942,7 +1009,12 @@
         }
 
         function displaySecurityLogs() {
-            let logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]');
+            let logs = [];
+            try {
+                logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]');
+            } catch (e) {
+                logs = [];
+            }
             document.getElementById('securityLogs').innerHTML = logs.length === 0 
                 ? 'لا توجد محاولات مشبوهة حتى الآن.' 
                 : logs.map(escapeHTML).join('<br>');
@@ -977,7 +1049,7 @@
                     },
                     body: JSON.stringify({
                         message: "Update maintenance status via mobile admin panel",
-                        content: btoa(statusValue),
+                        content: utf8ToBase64(statusValue),
                         sha: getData.sha
                     })
                 });
@@ -1008,13 +1080,15 @@
             } catch (e) {}
         }
 
+        const charsMatrix = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
         let maintMatrixFrame;
+
         function startMaintMatrixEffect() {
             const canvas = document.getElementById('maintMatrixCanvas');
+            if (!canvas) return;
             const ctx = canvas.getContext('2d');
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
             const fontSize = 14;
             const columns = Math.floor(canvas.width / fontSize);
             const drops = Array(columns).fill(1);
@@ -1030,7 +1104,7 @@
                     ctx.font = fontSize + 'px monospace';
 
                     for (let i = 0; i < drops.length; i++) {
-                        ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * fontSize, drops[i] * fontSize);
+                        ctx.fillText(charsMatrix.charAt(Math.floor(Math.random() * charsMatrix.length)), i * fontSize, drops[i] * fontSize);
                         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
                         drops[i]++;
                     }
@@ -1048,10 +1122,10 @@
         let matrixFrame;
         function startMatrixEffect() {
             const canvas = document.getElementById('matrixCanvas');
+            if (!canvas || !canvas.parentElement) return;
             const ctx = canvas.getContext('2d');
             canvas.width = canvas.parentElement.offsetWidth;
             canvas.height = canvas.parentElement.offsetHeight;
-            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
             const fontSize = 12;
             const columns = Math.floor(canvas.width / fontSize);
             const drops = Array(columns).fill(1);
@@ -1067,7 +1141,7 @@
                     ctx.font = fontSize + 'px monospace';
 
                     for (let i = 0; i < drops.length; i++) {
-                        ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * fontSize, drops[i] * fontSize);
+                        ctx.fillText(charsMatrix.charAt(Math.floor(Math.random() * charsMatrix.length)), i * fontSize, drops[i] * fontSize);
                         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
                         drops[i]++;
                     }
@@ -1114,10 +1188,14 @@
             let newBio = prompt("أدخل النص الترحيبي الجديد:");
             if (newBio !== null) {
                 newBio = newBio.trim();
-                localStorage.setItem('custom_bio', newBio);
+                if (newBio) {
+                    localStorage.setItem('custom_bio', newBio);
+                } else {
+                    localStorage.removeItem('custom_bio');
+                }
                 clearTimeout(typingTimeout);
                 document.getElementById('bio').textContent = '';
-                typeWriter(newBio || translations['ar'].bio);
+                typeWriter(newBio || translations[currentLang].bio);
             }
         }
 
@@ -1132,19 +1210,23 @@
         function trackVisits() {
             let visits = parseInt(localStorage.getItem('adnan_visits_count') || '139', 10);
             visits++;
-            localStorage.setItem('adnan_visits_count', visits);
+            localStorage.setItem('adnan_visits_count', visits.toString());
             document.getElementById('visits-count').innerText = visits;
         }
 
+        let resizeTimeout;
         window.addEventListener('resize', () => {
-            const maintScreen = document.getElementById('maintScreen');
-            if (maintScreen && maintScreen.style.display === 'flex') {
-                startMaintMatrixEffect();
-            }
-            const bookCard = document.getElementById('bookCard');
-            if (bookCard && bookCard.classList.contains('flipped')) {
-                startMatrixEffect();
-            }
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                const maintScreen = document.getElementById('maintScreen');
+                if (maintScreen && getComputedStyle(maintScreen).display === 'flex') {
+                    startMaintMatrixEffect();
+                }
+                const bookCard = document.getElementById('bookCard');
+                if (bookCard && bookCard.classList.contains('flipped')) {
+                    startMatrixEffect();
+                }
+            }, 100);
         });
 
         window.addEventListener('DOMContentLoaded', () => {
