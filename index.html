@@ -25,7 +25,7 @@
         }
 
         body {
-            background: linear-gradient(rgba(15, 15, 17, 0.45), rgba(15, 15, 17, 0.45)), 
+            background: linear-gradient(rgba(10, 10, 14, 0.65), rgba(10, 10, 14, 0.65)), 
                         url('dragon.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
@@ -35,7 +35,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            perspective: 1400px;
+            perspective: 1600px;
             overflow-x: hidden;
         }
 
@@ -68,9 +68,9 @@
         .maint-box {
             position: relative;
             z-index: 1;
-            background: rgba(5, 15, 5, 0.92);
+            background: rgba(5, 15, 5, 0.94);
             border: 1px solid #22c55e;
-            padding: 30px 20px;
+            padding: 30px 22px;
             border-radius: 16px;
             box-shadow: 0 0 30px rgba(34, 197, 94, 0.35);
             max-width: 420px;
@@ -83,7 +83,7 @@
 
         .maint-box h2 {
             color: #22c55e;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             margin-bottom: 12px;
             letter-spacing: 0.5px;
         }
@@ -97,7 +97,7 @@
 
         .book-card {
             width: 100%;
-            max-width: 430px;
+            max-width: 440px;
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.85s cubic-bezier(0.23, 1, 0.32, 1);
@@ -110,16 +110,22 @@
 
         .page-front, .page-back {
             width: 100%;
-            background: rgba(15, 15, 20, 0.5);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(220, 38, 38, 0.45);
-            border-radius: 20px;
-            padding: 28px 18px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(220, 38, 38, 0.25);
-            text-align: center;
+            border-radius: 24px;
+            padding: 28px 20px;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .page-front {
+            background: rgba(15, 15, 20, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(220, 38, 38, 0.35);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(220, 38, 38, 0.2);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
         }
 
         .page-back {
@@ -127,19 +133,20 @@
             top: 0;
             left: 0;
             transform: rotateY(180deg);
-            background: rgba(3, 8, 4, 0.94);
+            background: rgba(4, 10, 6, 0.95);
             border: 1px solid rgba(34, 197, 94, 0.7);
-            box-shadow: 0 0 35px rgba(34, 197, 94, 0.3), inset 0 0 20px rgba(34, 197, 94, 0.08);
+            box-shadow: 0 0 40px rgba(34, 197, 94, 0.25), inset 0 0 25px rgba(34, 197, 94, 0.08);
             overflow: hidden;
             text-align: right;
             direction: rtl;
+            min-height: 100%;
         }
 
         .page-back::before {
             content: "";
             position: absolute;
             inset: 0;
-            background: repeating-linear-gradient(0deg, rgba(0, 255, 100, 0.015) 0px, rgba(0, 255, 100, 0.015) 1px, transparent 2px, transparent 4px);
+            background: repeating-linear-gradient(0deg, rgba(0, 255, 100, 0.02) 0px, rgba(0, 255, 100, 0.02) 1px, transparent 2px, transparent 4px);
             pointer-events: none;
             z-index: 1;
         }
@@ -150,31 +157,34 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.28;
+            opacity: 0.24;
             pointer-events: none;
         }
 
         .page-back-content {
             position: relative;
             z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .lang-switch {
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 25px;
+            margin-bottom: 22px;
             flex-wrap: wrap;
         }
 
         .lang-btn {
-            background: rgba(0, 0, 0, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ccc;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #d4d4d8;
             padding: 6px 14px;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             transition: all 0.25s ease;
         }
 
@@ -186,14 +196,14 @@
         }
 
         .profile {
-            margin-bottom: 25px;
+            margin-bottom: 22px;
         }
 
         .img-container {
             position: relative;
-            width: 95px;
-            height: 95px;
-            margin: 0 auto 15px auto;
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 14px auto;
         }
 
         .profile-img {
@@ -203,7 +213,7 @@
             border: 2px solid #dc2626;
             padding: 3px;
             object-fit: cover;
-            box-shadow: 0 0 15px rgba(220, 38, 38, 0.5);
+            box-shadow: 0 0 16px rgba(220, 38, 38, 0.45);
             animation: pulseGlow 3s infinite alternate ease-in-out;
             will-change: transform, box-shadow;
         }
@@ -212,8 +222,8 @@
             position: absolute;
             bottom: 4px;
             right: 4px;
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
             background-color: #22c55e;
             border: 2px solid #0f0f13;
             border-radius: 50%;
@@ -222,28 +232,28 @@
 
         @keyframes pulseGlow {
             0% { 
-                box-shadow: 0 0 10px rgba(220, 38, 38, 0.4); 
+                box-shadow: 0 0 10px rgba(220, 38, 38, 0.35); 
                 transform: scale(1);
             }
             100% { 
-                box-shadow: 0 0 25px rgba(220, 38, 38, 0.85); 
+                box-shadow: 0 0 24px rgba(220, 38, 38, 0.75); 
                 transform: scale(1.02);
             }
         }
 
         .profile h1 {
-            font-size: 1.5rem;
+            font-size: 1.45rem;
             font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
+            letter-spacing: 0.8px;
+            margin-bottom: 6px;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
             cursor: pointer;
             user-select: none;
         }
 
         .profile p {
-            color: #d1d1d6;
-            font-size: 0.9rem;
+            color: #d4d4d8;
+            font-size: 0.88rem;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
             min-height: 24px;
             display: flex;
@@ -255,7 +265,7 @@
             display: inline-block;
             background-color: #dc2626;
             width: 2px;
-            height: 15px;
+            height: 14px;
             animation: blink 0.7s infinite;
             margin: 0 4px;
         }
@@ -268,7 +278,7 @@
         .links {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
             margin-bottom: 20px;
         }
 
@@ -283,28 +293,29 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(20, 20, 25, 0.5);
-            border: 1px solid rgba(220, 38, 38, 0.35);
-            padding: 14px 18px;
-            border-radius: 12px;
+            background: rgba(22, 22, 30, 0.55);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            padding: 13px 16px;
+            border-radius: 14px;
             color: #ffffff;
             text-decoration: none;
             font-weight: 600;
+            font-size: 0.92rem;
             transition: all 0.25s ease;
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
         }
 
         .link-card:hover {
-            background: rgba(220, 38, 38, 0.25);
+            background: rgba(220, 38, 38, 0.22);
             border-color: #dc2626;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+            box-shadow: 0 6px 18px rgba(220, 38, 38, 0.35);
         }
 
         .link-card i {
-            font-size: 1.3rem;
-            width: 25px;
+            font-size: 1.25rem;
+            width: 24px;
         }
 
         .link-card span {
@@ -314,12 +325,12 @@
         }
 
         .copy-btn {
-            background: rgba(20, 20, 25, 0.5);
-            border: 1px solid rgba(220, 38, 38, 0.35);
-            color: #ccc;
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            background: rgba(22, 22, 30, 0.55);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            color: #d4d4d8;
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -334,23 +345,23 @@
             background: #dc2626;
             color: #fff;
             border-color: #dc2626;
-            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+            box-shadow: 0 0 12px rgba(220, 38, 38, 0.45);
         }
 
         .action-sec {
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-top: 10px;
+            margin-top: 6px;
             flex-wrap: wrap;
         }
 
         .action-btn {
-            background: rgba(220, 38, 38, 0.2);
-            border: 1px solid rgba(220, 38, 38, 0.4);
+            background: rgba(220, 38, 38, 0.16);
+            border: 1px solid rgba(220, 38, 38, 0.35);
             color: #fff;
             padding: 8px 14px;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             font-size: 0.8rem;
             font-weight: 600;
@@ -362,25 +373,25 @@
 
         .action-btn:hover {
             background: #dc2626;
-            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+            box-shadow: 0 0 12px rgba(220, 38, 38, 0.5);
         }
 
         footer {
-            margin-top: 20px;
-            font-size: 0.75rem;
+            margin-top: 18px;
+            font-size: 0.72rem;
             color: #a1a1aa;
         }
 
+        /* CYBER OS STYLES */
         .cyber-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid rgba(34, 197, 94, 0.4);
             padding-bottom: 8px;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: #22c55e;
             font-weight: 700;
-            margin-bottom: 12px;
             font-family: 'Courier New', Courier, monospace;
             letter-spacing: 0.5px;
         }
@@ -388,7 +399,7 @@
         .cyber-header .status-indicator {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
 
         .pulse-dot {
@@ -409,12 +420,11 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 6px;
-            margin-bottom: 10px;
         }
 
         .cyber-stat-box {
-            background: rgba(0, 20, 5, 0.7);
-            border: 1px solid rgba(34, 197, 94, 0.35);
+            background: rgba(0, 20, 8, 0.75);
+            border: 1px solid rgba(34, 197, 94, 0.3);
             padding: 6px 4px;
             border-radius: 8px;
             text-align: center;
@@ -436,14 +446,19 @@
 
         .cyber-tabs {
             display: flex;
-            gap: 5px;
-            margin-bottom: 10px;
+            gap: 4px;
             border-bottom: 1px solid rgba(34, 197, 94, 0.25);
             padding-bottom: 6px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .cyber-tabs::-webkit-scrollbar {
+            display: none;
         }
 
         .cyber-tab-btn {
-            background: rgba(0, 30, 10, 0.6);
+            background: rgba(0, 25, 10, 0.7);
             border: 1px solid rgba(34, 197, 94, 0.3);
             color: #86efac;
             padding: 5px 10px;
@@ -454,31 +469,33 @@
             display: flex;
             align-items: center;
             gap: 4px;
+            white-space: nowrap;
             transition: all 0.2s;
         }
 
         .cyber-tab-btn:hover, .cyber-tab-btn.active {
             background: rgba(34, 197, 94, 0.25);
-            color: #fff;
+            color: #ffffff;
             border-color: #22c55e;
             box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
         }
 
         .cyber-panel-tab {
             display: none;
-            min-height: 195px;
+            min-height: 220px;
         }
 
         .cyber-panel-tab.active {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .tool-subcard {
-            background: rgba(0, 15, 5, 0.75);
+            background: rgba(0, 15, 6, 0.8);
             border: 1px solid rgba(34, 197, 94, 0.3);
-            border-radius: 8px;
-            padding: 8px;
-            margin-bottom: 8px;
+            border-radius: 10px;
+            padding: 8px 10px;
             font-family: 'Courier New', Courier, monospace;
         }
 
@@ -489,6 +506,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            font-weight: 600;
         }
 
         .pass-output-row {
@@ -503,7 +521,7 @@
             border-radius: 6px;
             color: #22c55e;
             padding: 6px 8px;
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             outline: none;
             direction: ltr;
             font-family: 'Courier New', Courier, monospace;
@@ -513,7 +531,7 @@
             background: rgba(34, 197, 94, 0.2);
             border: 1px solid #22c55e;
             color: #fff;
-            padding: 0 10px;
+            padding: 6px 10px;
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.7rem;
@@ -521,6 +539,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 4px;
+            font-family: 'Courier New', Courier, monospace;
         }
 
         .mini-btn:hover {
@@ -532,33 +552,33 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
-            margin-bottom: 8px;
         }
 
         .secret-input {
-            width: 100%;
+            flex: 1;
             background: rgba(0, 0, 0, 0.85);
             border: 1px solid rgba(34, 197, 94, 0.35);
             border-radius: 6px;
             color: #22c55e;
             padding: 6px 8px;
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             outline: none;
             font-family: 'Courier New', Courier, monospace;
         }
 
         .vault-list {
-            max-height: 110px;
+            max-height: 155px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
             gap: 6px;
             scrollbar-width: thin;
             scrollbar-color: #22c55e rgba(0, 10, 0, 0.6);
+            padding-right: 2px;
         }
 
         .vault-item {
-            background: rgba(0, 25, 5, 0.7);
+            background: rgba(0, 25, 7, 0.75);
             border: 1px solid rgba(34, 197, 94, 0.25);
             padding: 6px 8px;
             border-radius: 6px;
@@ -575,6 +595,7 @@
             color: #86efac;
             word-break: break-all;
             text-align: right;
+            user-select: text;
         }
 
         .vault-item-actions {
@@ -587,7 +608,7 @@
             border: 1px solid rgba(34, 197, 94, 0.45);
             border-radius: 8px;
             padding: 8px;
-            height: 185px;
+            height: 210px;
             display: flex;
             flex-direction: column;
             font-family: 'Courier New', Courier, monospace;
@@ -599,8 +620,8 @@
             flex: 1;
             overflow-y: auto;
             color: #22c55e;
-            font-size: 0.72rem;
-            line-height: 1.4;
+            font-size: 0.7rem;
+            line-height: 1.45;
             scrollbar-width: thin;
             scrollbar-color: #22c55e rgba(0,0,0,0.5);
             margin-bottom: 6px;
@@ -613,7 +634,7 @@
             border-top: 1px dashed rgba(34, 197, 94, 0.3);
             padding-top: 4px;
             color: #22c55e;
-            font-size: 0.75rem;
+            font-size: 0.74rem;
         }
 
         .cyber-term-input {
@@ -621,9 +642,9 @@
             background: transparent;
             border: none;
             outline: none;
-            color: #fff;
+            color: #ffffff;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 0.75rem;
+            font-size: 0.74rem;
         }
 
         .admin-grid {
@@ -638,7 +659,7 @@
             color: #22c55e;
             padding: 9px 8px;
             border-radius: 10px;
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.25s;
@@ -676,22 +697,21 @@
 
         .admin-btn.danger:hover {
             background: #ef4444;
-            color: #fff;
+            color: #ffffff;
         }
 
         .logs-box {
-            background: rgba(20, 0, 0, 0.6);
+            background: rgba(20, 0, 0, 0.65);
             border: 1px solid rgba(239, 68, 68, 0.4);
             border-radius: 8px;
             padding: 6px 8px;
             font-size: 0.68rem;
             color: #f87171;
             font-family: 'Courier New', Courier, monospace;
-            max-height: 50px;
+            max-height: 52px;
             overflow-y: auto;
             text-align: left;
             direction: ltr;
-            margin-top: 8px;
             scrollbar-width: thin;
             scrollbar-color: #ef4444 rgba(15, 0, 0, 0.6);
         }
@@ -713,20 +733,20 @@
 
         .terminal-box {
             width: 100%;
-            max-width: 480px;
-            background: rgba(10, 15, 10, 0.98);
+            max-width: 460px;
+            background: rgba(10, 16, 12, 0.98);
             border: 1px solid #22c55e;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 0 35px rgba(34, 197, 94, 0.35);
             text-align: left;
             direction: ltr;
         }
 
         .terminal-header {
             color: #22c55e;
-            font-size: 0.85rem;
-            margin-bottom: 15px;
+            font-size: 0.82rem;
+            margin-bottom: 14px;
             border-bottom: 1px dashed rgba(34, 197, 94, 0.4);
             padding-bottom: 8px;
             display: flex;
@@ -735,9 +755,9 @@
 
         .terminal-logs {
             color: #22c55e;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             line-height: 1.6;
-            margin-bottom: 15px;
+            margin-bottom: 14px;
         }
 
         .terminal-input-row {
@@ -755,7 +775,7 @@
             font-size: 1rem;
             outline: none;
             flex: 1;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
 
         .qr-modal {
@@ -764,7 +784,7 @@
             inset: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.78);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             z-index: 999;
@@ -773,10 +793,10 @@
         }
 
         .qr-card {
-            background: rgba(20, 20, 25, 0.92);
+            background: rgba(20, 20, 26, 0.94);
             border: 1px solid rgba(220, 38, 38, 0.6);
             border-radius: 20px;
-            padding: 25px;
+            padding: 24px;
             text-align: center;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 25px rgba(220, 38, 38, 0.4);
@@ -785,7 +805,7 @@
         }
 
         .qr-card h3 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             margin-bottom: 15px;
             color: #fff;
         }
@@ -809,7 +829,7 @@
         }
 
         .close-qr:hover {
-            color: #fff;
+            color: #ffffff;
         }
 
         .toast {
@@ -818,7 +838,7 @@
             left: 50%;
             transform: translateX(-50%) translateY(20px);
             background: rgba(220, 38, 38, 0.95);
-            color: white;
+            color: #ffffff;
             padding: 8px 18px;
             border-radius: 20px;
             font-size: 0.85rem;
@@ -914,7 +934,7 @@
                 <div class="cyber-header">
                     <div class="status-indicator">
                         <div class="pulse-dot"></div>
-                        <span>AKMA_CYBER_OS // v3.0</span>
+                        <span>AKMA_CYBER_OS // v3.2</span>
                     </div>
                     <span id="cyberClock">00:00:00 UTC</span>
                 </div>
@@ -956,14 +976,15 @@
                     </div>
 
                     <div class="tool-subcard">
-                        <div class="tool-title"><i class="fas fa-fingerprint"></i> تشفير وتجزئة سريعة (Base64 Safe):</div>
+                        <div class="tool-title"><i class="fas fa-fingerprint"></i> تشفير وفك نصوص (Base64 Safe):</div>
                         <div class="pass-output-row">
-                            <input type="text" class="pass-input" id="hashInput" placeholder="اكتب نصاً لتشفيره...">
+                            <input type="text" class="pass-input" id="hashInput" placeholder="اكتب نصاً لتشفيره/فكه...">
                             <button class="mini-btn" onclick="hashInputText()"><i class="fas fa-lock"></i> تشفير</button>
+                            <button class="mini-btn" onclick="decodeInputText()"><i class="fas fa-unlock"></i> فك</button>
                         </div>
                     </div>
 
-                    <div class="tool-subcard" style="margin-bottom: 0;">
+                    <div class="tool-subcard">
                         <div class="tool-title"><i class="fas fa-network-wired"></i> حالة الاتصال السحابي:</div>
                         <div style="font-size: 0.68rem; color: #86efac; display: flex; justify-content: space-between;">
                             <span>REPO: Akdim-adnane</span>
@@ -976,7 +997,7 @@
                     <div class="vault-input-box">
                         <div class="pass-output-row">
                             <input type="text" class="secret-input" id="vaultItemInput" placeholder="أضف ملاحظة أو حساباً مشفراً..." onkeydown="if(event.key==='Enter') addSecretItem()">
-                            <button class="mini-btn" onclick="addSecretItem()"><i class="fas fa-plus"></i></button>
+                            <button class="mini-btn" onclick="addSecretItem()"><i class="fas fa-plus"></i> إضافة</button>
                         </div>
                     </div>
                     <div class="vault-list" id="vaultListContainer"></div>
@@ -986,7 +1007,7 @@
                     <div class="cyber-term-box">
                         <div class="cyber-term-output" id="cyberTermOutput">
                             &gt; AKMA CORE OS LOADED.<br>
-                            &gt; TYPE 'help' FOR COMMANDS LIST.<br>
+                            &gt; TYPE 'help' FOR AVAILABLE COMMANDS.<br>
                         </div>
                         <div class="cyber-term-prompt">
                             <span>root@akma:~$</span>
@@ -1009,7 +1030,7 @@
                 </div>
 
                 <footer>
-                    <div style="color: #22c55e; font-family: 'Courier New', Courier, monospace; font-size: 0.7rem; margin-top: 10px;">
+                    <div style="color: #22c55e; font-family: 'Courier New', Courier, monospace; font-size: 0.7rem; margin-top: 6px; text-align: center;">
                         [ROOT_SESSION: AUTH_ADNANE_AKDIM]
                     </div>
                 </footer>
@@ -1075,7 +1096,7 @@
             const chars = Array.from(text);
             if (i < chars.length) {
                 bioElement.textContent += chars[i];
-                typingTimeout = setTimeout(() => typeWriter(text, i + 1), 50);
+                typingTimeout = setTimeout(() => typeWriter(text, i + 1), 45);
             }
         }
 
@@ -1310,9 +1331,25 @@
         function hashInputText() {
             const input = document.getElementById('hashInput');
             if (!input.value.trim()) return;
-            const encoded = utf8ToBase64(input.value);
+            const encoded = utf8ToBase64(input.value.trim());
             input.value = `ENC[${encoded}]`;
             showToast('تم التشفير بنجاح!');
+        }
+
+        function decodeInputText() {
+            const input = document.getElementById('hashInput');
+            let val = input.value.trim();
+            if (!val) return;
+            if (val.startsWith('ENC[') && val.endsWith(']')) {
+                val = val.substring(4, val.length - 1);
+            }
+            const decoded = base64ToUtf8(val);
+            if (decoded) {
+                input.value = decoded;
+                showToast('تم فك التشفير بنجاح!');
+            } else {
+                alert('فشل فك النص! تأكد من صحة الصيغة.');
+            }
         }
 
         function loadSecretItems() {
@@ -1325,20 +1362,38 @@
             } catch (e) { items = []; }
 
             if (items.length === 0) {
-                container.innerHTML = '<div style="color:#6ee7b7; font-size:0.7rem; text-align:center; padding:10px;">المخزن فارغ حالياً. أضف أول سر مشفر أعلاه.</div>';
+                container.innerHTML = '<div style="color:#86efac; font-size:0.7rem; text-align:center; padding:12px; font-family:\'Courier New\', Courier, monospace;">المخزن فارغ حالياً. أضف أسرارك المشفرة أعلاه.</div>';
                 return;
             }
 
             items.forEach((item, index) => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'vault-item';
-                itemDiv.innerHTML = `
-                    <div class="vault-item-content">${escapeHTML(item)}</div>
-                    <div class="vault-item-actions">
-                        <button class="mini-btn" onclick="copyToClipboard('${escapeHTML(item)}')"><i class="fas fa-copy"></i></button>
-                        <button class="mini-btn" style="border-color:#ef4444; color:#ef4444;" onclick="deleteSecretItem(${index})"><i class="fas fa-trash"></i></button>
-                    </div>
-                `;
+                
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'vault-item-content';
+                contentDiv.textContent = item;
+
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'vault-item-actions';
+
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'mini-btn';
+                copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+                copyBtn.onclick = () => copyToClipboard(item);
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'mini-btn';
+                deleteBtn.style.borderColor = '#ef4444';
+                deleteBtn.style.color = '#ef4444';
+                deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteBtn.onclick = () => deleteSecretItem(index);
+
+                actionsDiv.appendChild(copyBtn);
+                actionsDiv.appendChild(deleteBtn);
+                itemDiv.appendChild(contentDiv);
+                itemDiv.appendChild(actionsDiv);
+
                 container.appendChild(itemDiv);
             });
         }
@@ -1388,19 +1443,22 @@
                 out.scrollTop = out.scrollHeight;
             };
 
-            print(`<span style="color:#fff;">root@akma:~$ ${escapeHTML(cmd)}</span>`);
+            print(`<span style="color:#ffffff;">root@akma:~$ ${escapeHTML(cmd)}</span>`);
 
             switch (cmd) {
                 case 'help':
-                    print("COMMANDS: status, ping, clear, bio, whoami, lock, date");
+                    print("COMMANDS: status, ping, clear, bio, whoami, lock, date, stats");
                     break;
                 case 'status':
-                    print("SYSTEM: SECURE | CORE: ONLINE | PROTOCOL: TLS 1.3");
+                    print("SYSTEM: SECURE | CORE: ONLINE | PROTOCOL: TLS 1.3 | MODE: STEALTH");
                     break;
                 case 'ping':
                     const p = Math.floor(Math.random() * 20) + 12;
                     document.getElementById('cyberPing').innerText = p + 'ms';
                     print(`REPLY FROM AKDIM_HOST: time=${p}ms TTL=64`);
+                    break;
+                case 'stats':
+                    print(`VISITS: ${document.getElementById('visits-count').innerText} | CLICKS: ${interactionClicks}`);
                     break;
                 case 'clear':
                     out.innerHTML = '';
