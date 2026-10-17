@@ -11,7 +11,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ADNANE AKDIM">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <style>
@@ -38,7 +37,7 @@
             overflow-x: hidden;
         }
 
-        /* زر الأشرطة الثلاثة العائم العصري والمعاد هيكلته */
+        /* زر الأشرطة الثلاثة العائم */
         .menu-toggle-btn {
             position: fixed;
             top: 22px;
@@ -53,7 +52,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
             cursor: pointer;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -73,7 +71,13 @@
             transform: scale(1.08) rotate(90deg);
         }
 
-        /* القائمة الجانبية الحديثة والمنظمة */
+        .menu-toggle-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #ffffff;
+        }
+
+        /* القائمة الجانبية */
         .sidebar-drawer {
             position: fixed;
             top: 0;
@@ -141,7 +145,12 @@
             align-items: center;
             gap: 10px;
             font-weight: 700;
-            letter-spacing: 0.5px;
+        }
+
+        .sidebar-header h3 svg {
+            width: 18px;
+            height: 18px;
+            fill: #ef4444;
         }
 
         .close-sidebar-btn {
@@ -154,7 +163,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -192,7 +201,6 @@
             background: rgba(220, 38, 38, 0.22);
             border-color: rgba(239, 68, 68, 0.55);
             transform: translateX(-5px);
-            box-shadow: 0 6px 18px rgba(220, 38, 38, 0.25);
         }
 
         html[dir="ltr"] .sidebar-item:hover {
@@ -205,11 +213,10 @@
             gap: 12px;
         }
 
-        .sidebar-item i {
-            font-size: 1.15rem;
-            color: #ef4444;
-            width: 24px;
-            text-align: center;
+        .sidebar-item svg {
+            width: 18px;
+            height: 18px;
+            fill: #ef4444;
         }
 
         .badge-soon {
@@ -220,7 +227,6 @@
             padding: 3px 9px;
             border-radius: 12px;
             font-weight: 700;
-            letter-spacing: 0.5px;
         }
 
         .maint-screen {
@@ -261,15 +267,12 @@
             width: 90%;
             cursor: pointer;
             user-select: none;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
         }
 
         .maint-box h2 {
             color: #22c55e;
             font-size: 1.25rem;
             margin-bottom: 12px;
-            letter-spacing: 0.5px;
         }
 
         .maint-box p {
@@ -298,7 +301,6 @@
             padding: 32px 24px;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
-            transition: all 0.3s ease;
         }
 
         .page-front {
@@ -306,9 +308,7 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(239, 68, 68, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 
-                        0 0 30px rgba(220, 38, 38, 0.15),
-                        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(220, 38, 38, 0.15);
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -321,20 +321,11 @@
             transform: rotateY(180deg);
             background: rgba(4, 10, 6, 0.95);
             border: 1px solid rgba(34, 197, 94, 0.7);
-            box-shadow: 0 0 40px rgba(34, 197, 94, 0.25), inset 0 0 25px rgba(34, 197, 94, 0.08);
+            box-shadow: 0 0 40px rgba(34, 197, 94, 0.25);
             overflow: hidden;
             text-align: right;
             direction: rtl;
             min-height: 100%;
-        }
-
-        .page-back::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(0deg, rgba(0, 255, 100, 0.02) 0px, rgba(0, 255, 100, 0.02) 1px, transparent 2px, transparent 4px);
-            pointer-events: none;
-            z-index: 1;
         }
 
         #matrixCanvas {
@@ -375,7 +366,7 @@
             cursor: pointer;
             font-size: 0.78rem;
             font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
         }
 
         .lang-btn:hover {
@@ -408,7 +399,6 @@
             object-fit: cover;
             box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
             animation: pulseGlow 3s infinite alternate ease-in-out;
-            will-change: transform, box-shadow;
         }
 
         .status-badge {
@@ -424,14 +414,8 @@
         }
 
         @keyframes pulseGlow {
-            0% { 
-                box-shadow: 0 0 12px rgba(220, 38, 38, 0.3); 
-                transform: scale(1);
-            }
-            100% { 
-                box-shadow: 0 0 28px rgba(220, 38, 38, 0.7); 
-                transform: scale(1.03);
-            }
+            0% { box-shadow: 0 0 12px rgba(220, 38, 38, 0.3); transform: scale(1); }
+            100% { box-shadow: 0 0 28px rgba(220, 38, 38, 0.7); transform: scale(1.03); }
         }
 
         .profile h1 {
@@ -440,10 +424,8 @@
             letter-spacing: 1.2px;
             margin-bottom: 6px;
             color: #ffffff;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
             cursor: pointer;
             user-select: none;
-            transition: color 0.3s;
         }
 
         .profile h1:hover {
@@ -453,7 +435,6 @@
         .profile p {
             color: #cbd5e1;
             font-size: 0.9rem;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
             min-height: 24px;
             display: flex;
             align-items: center;
@@ -503,7 +484,6 @@
             font-size: 0.95rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
         }
 
         .link-card:hover {
@@ -513,15 +493,15 @@
             box-shadow: 0 8px 25px rgba(220, 38, 38, 0.35);
         }
 
-        .link-card i {
-            font-size: 1.35rem;
-            width: 28px;
+        .link-card svg {
+            width: 20px;
+            height: 20px;
+            fill: #ffffff;
         }
 
         .link-card span {
             flex-grow: 1;
             text-align: center;
-            letter-spacing: 0.3px;
         }
 
         .copy-btn {
@@ -535,9 +515,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.3s;
             flex-shrink: 0;
         }
 
@@ -546,7 +524,12 @@
             color: #ffffff;
             border-color: #dc2626;
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.4);
+        }
+
+        .copy-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
         }
 
         .action-sec {
@@ -569,7 +552,7 @@
             cursor: pointer;
             font-size: 0.82rem;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -580,6 +563,12 @@
             color: #ffffff;
             border-color: #dc2626;
             box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+        }
+
+        .action-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
         }
 
         footer {
@@ -600,13 +589,6 @@
             color: #22c55e;
             font-weight: 700;
             font-family: 'Courier New', Courier, monospace;
-            letter-spacing: 0.5px;
-        }
-
-        .cyber-header .status-indicator {
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         .pulse-dot {
@@ -660,9 +642,7 @@
             scrollbar-width: none;
         }
 
-        .cyber-tabs::-webkit-scrollbar {
-            display: none;
-        }
+        .cyber-tabs::-webkit-scrollbar { display: none; }
 
         .cyber-tab-btn {
             background: rgba(0, 25, 10, 0.7);
@@ -677,7 +657,6 @@
             align-items: center;
             gap: 4px;
             white-space: nowrap;
-            transition: all 0.2s;
         }
 
         .cyber-tab-btn:hover, .cyber-tab-btn.active {
@@ -716,10 +695,7 @@
             font-weight: 600;
         }
 
-        .pass-output-row {
-            display: flex;
-            gap: 6px;
-        }
+        .pass-output-row { display: flex; gap: 6px; }
 
         .pass-input {
             flex: 1;
@@ -742,7 +718,6 @@
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.7rem;
-            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -750,16 +725,9 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-        .mini-btn:hover {
-            background: #22c55e;
-            color: #000;
-        }
+        .mini-btn:hover { background: #22c55e; color: #000; }
 
-        .vault-input-box {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
+        .vault-input-box { display: flex; flex-direction: column; gap: 6px; }
 
         .secret-input {
             flex: 1;
@@ -781,7 +749,6 @@
             gap: 6px;
             scrollbar-width: thin;
             scrollbar-color: #22c55e rgba(0, 10, 0, 0.6);
-            padding-right: 2px;
         }
 
         .vault-item {
@@ -802,13 +769,9 @@
             color: #86efac;
             word-break: break-all;
             text-align: right;
-            user-select: text;
         }
 
-        .vault-item-actions {
-            display: flex;
-            gap: 4px;
-        }
+        .vault-item-actions { display: flex; gap: 4px; }
 
         .cyber-term-box {
             background: rgba(0, 0, 0, 0.95);
@@ -829,8 +792,6 @@
             color: #22c55e;
             font-size: 0.7rem;
             line-height: 1.45;
-            scrollbar-width: thin;
-            scrollbar-color: #22c55e rgba(0,0,0,0.5);
             margin-bottom: 6px;
         }
 
@@ -854,11 +815,7 @@
             font-size: 0.74rem;
         }
 
-        .admin-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
+        .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
         .admin-btn {
             background: rgba(34, 197, 94, 0.15);
@@ -869,7 +826,6 @@
             font-size: 0.74rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.25s;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -883,29 +839,10 @@
             box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
         }
 
-        .admin-btn.success {
-            background: rgba(34, 197, 94, 0.25);
-            border-color: rgba(34, 197, 94, 0.6);
-            color: #22c55e;
-        }
-
-        .admin-btn.warning {
-            background: rgba(234, 179, 8, 0.2);
-            border-color: rgba(234, 179, 8, 0.5);
-            color: #facc15;
-        }
-
-        .admin-btn.danger {
-            background: rgba(239, 68, 68, 0.2);
-            border-color: rgba(239, 68, 68, 0.5);
-            color: #f87171;
-            grid-column: span 2;
-        }
-
-        .admin-btn.danger:hover {
-            background: #ef4444;
-            color: #ffffff;
-        }
+        .admin-btn.success { background: rgba(34, 197, 94, 0.25); border-color: rgba(34, 197, 94, 0.6); color: #22c55e; }
+        .admin-btn.warning { background: rgba(234, 179, 8, 0.2); border-color: rgba(234, 179, 8, 0.5); color: #facc15; }
+        .admin-btn.danger { background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.5); color: #f87171; grid-column: span 2; }
+        .admin-btn.danger:hover { background: #ef4444; color: #ffffff; }
 
         .logs-box {
             background: rgba(20, 0, 0, 0.65);
@@ -919,8 +856,6 @@
             overflow-y: auto;
             text-align: left;
             direction: ltr;
-            scrollbar-width: thin;
-            scrollbar-color: #ef4444 rgba(15, 0, 0, 0.6);
         }
 
         .hacker-terminal {
@@ -960,30 +895,9 @@
             justify-content: space-between;
         }
 
-        .terminal-logs {
-            color: #22c55e;
-            font-size: 0.82rem;
-            line-height: 1.6;
-            margin-bottom: 14px;
-        }
-
-        .terminal-input-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #22c55e;
-        }
-
-        .terminal-input {
-            background: transparent;
-            border: none;
-            color: #fff;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1rem;
-            outline: none;
-            flex: 1;
-            letter-spacing: 3px;
-        }
+        .terminal-logs { color: #22c55e; font-size: 0.82rem; line-height: 1.6; margin-bottom: 14px; }
+        .terminal-input-row { display: flex; align-items: center; gap: 8px; color: #22c55e; }
+        .terminal-input { background: transparent; border: none; color: #fff; font-family: 'Courier New', Courier, monospace; font-size: 1rem; outline: none; flex: 1; letter-spacing: 3px; }
 
         .qr-modal {
             display: none;
@@ -993,7 +907,6 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.82);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             z-index: 999;
             justify-content: center;
             align-items: center;
@@ -1011,19 +924,8 @@
             width: 90%;
         }
 
-        .qr-card h3 {
-            font-size: 1.05rem;
-            margin-bottom: 16px;
-            color: #fff;
-        }
-
-        .qr-box {
-            background: #ffffff;
-            padding: 12px;
-            border-radius: 16px;
-            display: inline-block;
-            margin-bottom: 16px;
-        }
+        .qr-card h3 { font-size: 1.05rem; margin-bottom: 16px; color: #fff; }
+        .qr-box { background: #ffffff; padding: 12px; border-radius: 16px; display: inline-block; margin-bottom: 16px; }
 
         .close-qr {
             position: absolute;
@@ -1032,12 +934,8 @@
             color: #94a3b8;
             font-size: 1.4rem;
             cursor: pointer;
-            transition: color 0.2s;
         }
-
-        .close-qr:hover {
-            color: #ffffff;
-        }
+        .close-qr:hover { color: #ffffff; }
 
         .toast {
             position: fixed;
@@ -1056,35 +954,31 @@
             z-index: 1000;
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
-
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-            pointer-events: auto;
-        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
     </style>
 </head>
 <body>
 
-    <!-- زر الأشرطة الثلاثة العائم المعاد هيكلته -->
-    <button class="menu-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Navigation Menu">
-        <i class="fas fa-bars"></i>
+    <!-- زر القائمة العائم (SVG مدمج) -->
+    <button class="menu-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Menu">
+        <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
     </button>
 
-    <!-- الطبقة المظلمة خلف القائمة الجانبية -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-    <!-- القائمة الجانبية المتقدمة والمنظمة -->
     <aside class="sidebar-drawer" id="sidebarDrawer">
         <div class="sidebar-header">
-            <h3><i class="fas fa-compass"></i> التصفح السريع</h3>
+            <h3>
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                التصفح السريع
+            </h3>
             <button class="close-sidebar-btn" onclick="closeSidebar()">&times;</button>
         </div>
 
         <div class="sidebar-menu-list">
             <a href="#" class="sidebar-item" onclick="openStoreNotice(event)">
                 <div class="sidebar-item-info">
-                    <i class="fas fa-store"></i>
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z"/></svg>
                     <span>المتجر الإلكتروني</span>
                 </div>
                 <span class="badge-soon">قريباً</span>
@@ -1092,7 +986,7 @@
 
             <a href="#" class="sidebar-item" onclick="openPortfolioNotice(event)">
                 <div class="sidebar-item-info">
-                    <i class="fas fa-briefcase"></i>
+                    <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4zm10 15H4V8h16v11z"/></svg>
                     <span>المشاريع والخدمات</span>
                 </div>
                 <span class="badge-soon">قريباً</span>
@@ -1100,10 +994,10 @@
 
             <a href="mailto:akdimadnane@gmail.com" class="sidebar-item" onclick="trackInteraction()">
                 <div class="sidebar-item-info">
-                    <i class="fas fa-paper-plane"></i>
+                    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
                     <span>التواصل السريع</span>
                 </div>
-                <i class="fas fa-chevron-left" style="font-size: 0.8rem; color: #64748b;"></i>
+                <svg viewBox="0 0 24 24" style="width:14px; height:14px; fill:#64748b;"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
             </a>
         </div>
 
@@ -1115,7 +1009,7 @@
     <div class="maint-screen" id="maintScreen">
         <canvas id="maintMatrixCanvas"></canvas>
         <div class="maint-box" onclick="checkAdminAccess()">
-            <h2><i class="fas fa-biohazard"></i> SYSTEM LOCKOUT ACTIVE</h2>
+            <h2>SYSTEM LOCKOUT ACTIVE</h2>
             <p>&gt; الموقع مغلق حالياً للصيانة المتقدمة.<br>&gt; الرجاء المحاولة في وقت لاحق.</p>
             <div style="font-size: 0.7rem; color: #22c55e;">[ADNANE AKDIM // ENCRYPTED SERVER]</div>
         </div>
@@ -1143,36 +1037,45 @@
             <div class="links">
                 <div class="link-wrapper">
                     <a href="https://www.instagram.com/kacm_adnan?obrf=M25xdW1tNGFkdXJo" target="_blank" rel="noopener noreferrer" class="link-card" onclick="trackInteraction()">
-                        <i class="fab fa-instagram" style="color: #e1306c;"></i>
+                        <svg viewBox="0 0 24 24" style="fill: #e1306c;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                         <span id="label-instagram">إنستغرام</span>
-                        <i class="fas fa-arrow-left arrow-icon"></i>
+                        <svg viewBox="0 0 24 24" class="arrow-icon" style="width:16px; height:16px; fill:#a1a1aa;"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
                     </a>
-                    <button class="copy-btn" onclick="copyToClipboard('kacm_adnan')" aria-label="Copy Instagram"><i class="fas fa-copy"></i></button>
+                    <button class="copy-btn" onclick="copyToClipboard('kacm_adnan')" aria-label="Copy"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
                 </div>
 
                 <div class="link-wrapper">
                     <a href="https://wa.me/212614060332" target="_blank" rel="noopener noreferrer" class="link-card" onclick="trackInteraction()">
-                        <i class="fab fa-whatsapp" style="color: #25d366;"></i>
+                        <svg viewBox="0 0 24 24" style="fill: #25d366;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
                         <span id="label-whatsapp">واتساب</span>
-                        <i class="fas fa-arrow-left arrow-icon"></i>
+                        <svg viewBox="0 0 24 24" class="arrow-icon" style="width:16px; height:16px; fill:#a1a1aa;"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
                     </a>
-                    <button class="copy-btn" onclick="copyToClipboard('+212614060332')" aria-label="Copy WhatsApp"><i class="fas fa-copy"></i></button>
+                    <button class="copy-btn" onclick="copyToClipboard('+212614060332')" aria-label="Copy"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
                 </div>
 
                 <div class="link-wrapper">
                     <a href="mailto:akdimadnane@gmail.com" class="link-card" onclick="trackInteraction()">
-                        <i class="fas fa-envelope" style="color: #ea4335;"></i>
+                        <svg viewBox="0 0 24 24" style="fill: #ea4335;"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                         <span id="label-gmail">البريد الإلكتروني</span>
-                        <i class="fas fa-arrow-left arrow-icon"></i>
+                        <svg viewBox="0 0 24 24" class="arrow-icon" style="width:16px; height:16px; fill:#a1a1aa;"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
                     </a>
-                    <button class="copy-btn" onclick="copyToClipboard('akdimadnane@gmail.com')" aria-label="Copy Email"><i class="fas fa-copy"></i></button>
+                    <button class="copy-btn" onclick="copyToClipboard('akdimadnane@gmail.com')" aria-label="Copy"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
                 </div>
             </div>
 
             <div class="action-sec">
-                <button class="action-btn" onclick="shareProfile()"><i class="fas fa-share-alt"></i> <span id="label-share">مشاركة</span></button>
-                <button class="action-btn" onclick="downloadVCard()"><i class="fas fa-user-plus"></i> <span id="label-save">حفظ الاتصال</span></button>
-                <button class="action-btn" onclick="openQrModal()"><i class="fas fa-qrcode"></i> <span id="label-qr">رمز QR</span></button>
+                <button class="action-btn" onclick="shareProfile()">
+                    <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                    <span id="label-share">مشاركة</span>
+                </button>
+                <button class="action-btn" onclick="downloadVCard()">
+                    <svg viewBox="0 0 24 24"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    <span id="label-save">حفظ الاتصال</span>
+                </button>
+                <button class="action-btn" onclick="openQrModal()">
+                    <svg viewBox="0 0 24 24"><path d="M3 11h8V3H3v8zm2-6h4v4H5V5zm8-2v8h8V3h-8zm6 6h-4V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm13-2h-2v3h-3v2h5v-5zm0 6h-2v2h2v-2zm-6-6h2v2h-2v-2z"/></svg>
+                    <span id="label-qr">رمز QR</span>
+                </button>
             </div>
 
             <footer>
@@ -1185,7 +1088,7 @@
             
             <div class="page-back-content">
                 <div class="cyber-header">
-                    <div class="status-indicator">
+                    <div class="status-indicator" style="display:flex; align-items:center; gap:6px;">
                         <div class="pulse-dot"></div>
                         <span>AKMA_CYBER_OS // v3.2</span>
                     </div>
@@ -1193,55 +1096,43 @@
                 </div>
 
                 <div class="cyber-stats">
-                    <div class="cyber-stat-box">
-                        <label>الزيارات</label>
-                        <span id="visits-count">1</span>
-                    </div>
-                    <div class="cyber-stat-box">
-                        <label>النقرات</label>
-                        <span id="clicks-count">0</span>
-                    </div>
-                    <div class="cyber-stat-box">
-                        <label>الأمان</label>
-                        <span style="color: #38bdf8;">SECURE</span>
-                    </div>
-                    <div class="cyber-stat-box">
-                        <label>النواة</label>
-                        <span id="cyberPing">24ms</span>
-                    </div>
+                    <div class="cyber-stat-box"><label>الزيارات</label><span id="visits-count">1</span></div>
+                    <div class="cyber-stat-box"><label>النقرات</label><span id="clicks-count">0</span></div>
+                    <div class="cyber-stat-box"><label>الأمان</label><span style="color: #38bdf8;">SECURE</span></div>
+                    <div class="cyber-stat-box"><label>النواة</label><span id="cyberPing">24ms</span></div>
                 </div>
 
                 <div class="cyber-tabs">
-                    <button class="cyber-tab-btn active" onclick="switchCyberTab('tools', this)"><i class="fas fa-tools"></i> أدوات</button>
-                    <button class="cyber-tab-btn" onclick="switchCyberTab('vault', this)"><i class="fas fa-user-shield"></i> الأسرار</button>
-                    <button class="cyber-tab-btn" onclick="switchCyberTab('terminal', this)"><i class="fas fa-terminal"></i> الطرفية</button>
-                    <button class="cyber-tab-btn" onclick="switchCyberTab('control', this)"><i class="fas fa-sliders-h"></i> التحكم</button>
+                    <button class="cyber-tab-btn active" onclick="switchCyberTab('tools', this)">أدوات</button>
+                    <button class="cyber-tab-btn" onclick="switchCyberTab('vault', this)">الأسرار</button>
+                    <button class="cyber-tab-btn" onclick="switchCyberTab('terminal', this)">الطرفية</button>
+                    <button class="cyber-tab-btn" onclick="switchCyberTab('control', this)">التحكم</button>
                 </div>
 
                 <div class="cyber-panel-tab active" id="tab-tools">
                     <div class="tool-subcard">
-                        <div class="tool-title"><i class="fas fa-key"></i> مولد مفاتيح وتشفير فائق:</div>
+                        <div class="tool-title">مولد مفاتيح وتشفير فائق:</div>
                         <div class="pass-output-row">
-                            <input type="text" class="pass-input" id="generatedPassword" readonly placeholder="PASSCODE_GENERATOR...">
-                            <button class="mini-btn" onclick="generateCyberPass()"><i class="fas fa-sync-alt"></i></button>
-                            <button class="mini-btn" onclick="copyCyberPass()"><i class="fas fa-copy"></i></button>
+                            <input type="text" class="pass-input" id="generatedPassword" readonly placeholder="PASSCODE...">
+                            <button class="mini-btn" onclick="generateCyberPass()">توليد</button>
+                            <button class="mini-btn" onclick="copyCyberPass()">نسخ</button>
                         </div>
                     </div>
 
                     <div class="tool-subcard">
-                        <div class="tool-title"><i class="fas fa-fingerprint"></i> تشفير وفك نصوص (Base64 Safe):</div>
+                        <div class="tool-title">تشفير وفك نصوص (Base64):</div>
                         <div class="pass-output-row">
-                            <input type="text" class="pass-input" id="hashInput" placeholder="اكتب نصاً لتشفيره/فكه...">
-                            <button class="mini-btn" onclick="hashInputText()"><i class="fas fa-lock"></i> تشفير</button>
-                            <button class="mini-btn" onclick="decodeInputText()"><i class="fas fa-unlock"></i> فك</button>
+                            <input type="text" class="pass-input" id="hashInput" placeholder="اكتب نصاً...">
+                            <button class="mini-btn" onclick="hashInputText()">تشفير</button>
+                            <button class="mini-btn" onclick="decodeInputText()">فك</button>
                         </div>
                     </div>
 
                     <div class="tool-subcard">
-                        <div class="tool-title"><i class="fas fa-network-wired"></i> حالة الاتصال السحابي:</div>
+                        <div class="tool-title">حالة الاتصال السحابي:</div>
                         <div style="font-size: 0.68rem; color: #86efac; display: flex; justify-content: space-between;">
                             <span>REPO: Akdim-adnane</span>
-                            <span id="netStatus" style="color: #22c55e;">ONLINE [200 OK]</span>
+                            <span style="color: #22c55e;">ONLINE [200 OK]</span>
                         </div>
                     </div>
                 </div>
@@ -1249,8 +1140,8 @@
                 <div class="cyber-panel-tab" id="tab-vault">
                     <div class="vault-input-box">
                         <div class="pass-output-row">
-                            <input type="text" class="secret-input" id="vaultItemInput" placeholder="أضف ملاحظة أو حساباً مشفراً..." onkeydown="if(event.key==='Enter') addSecretItem()">
-                            <button class="mini-btn" onclick="addSecretItem()"><i class="fas fa-plus"></i> إضافة</button>
+                            <input type="text" class="secret-input" id="vaultItemInput" placeholder="أضف ملاحظة أو سراً مشفراً..." onkeydown="if(event.key==='Enter') addSecretItem()">
+                            <button class="mini-btn" onclick="addSecretItem()">إضافة</button>
                         </div>
                     </div>
                     <div class="vault-list" id="vaultListContainer"></div>
@@ -1260,7 +1151,7 @@
                     <div class="cyber-term-box">
                         <div class="cyber-term-output" id="cyberTermOutput">
                             &gt; AKMA CORE OS LOADED.<br>
-                            &gt; TYPE 'help' FOR AVAILABLE COMMANDS.<br>
+                            &gt; TYPE 'help' FOR COMMANDS.<br>
                         </div>
                         <div class="cyber-term-prompt">
                             <span>root@akma:~$</span>
@@ -1271,12 +1162,12 @@
 
                 <div class="cyber-panel-tab" id="tab-control">
                     <div class="admin-grid">
-                        <button class="admin-btn success" onclick="setGlobalStatus('false')"><i class="fas fa-unlock"></i> فتح الموقع</button>
-                        <button class="admin-btn warning" onclick="setGlobalStatus('true')"><i class="fas fa-lock"></i> إغلاق الموقع</button>
-                        <button class="admin-btn" onclick="changeBioText()"><i class="fas fa-edit"></i> تعديل الوصف</button>
-                        <button class="admin-btn" onclick="installPwaApp()"><i class="fas fa-download"></i> تثبيت التطبيق</button>
-                        <button class="admin-btn" onclick="resetStats()"><i class="fas fa-redo"></i> تصفير العداد</button>
-                        <button class="admin-btn danger" onclick="flipBackToPublic()"><i class="fas fa-power-off"></i> تأمين وقفل النظام</button>
+                        <button class="admin-btn success" onclick="setGlobalStatus('false')">فتح الموقع</button>
+                        <button class="admin-btn warning" onclick="setGlobalStatus('true')">إغلاق الموقع</button>
+                        <button class="admin-btn" onclick="changeBioText()">تعديل الوصف</button>
+                        <button class="admin-btn" onclick="installPwaApp()">تثبيت التطبيق</button>
+                        <button class="admin-btn" onclick="resetStats()">تصفير العداد</button>
+                        <button class="admin-btn danger" onclick="flipBackToPublic()">تأمين وقفل النظام</button>
                     </div>
 
                     <div class="logs-box" id="securityLogs">لا توجد محاولات مشبوهة حتى الآن.</div>
@@ -1321,10 +1212,10 @@
         const GITHUB_REPO = 'Akdim-adnane';
 
         const translations = {
-            ar: { dir: 'rtl', bio: 'مرحباً بكم في صفحتي الشخصية', instagram: 'إنستغرام', whatsapp: 'واتساب', gmail: 'البريد الإلكتروني', share: 'مشاركة', save: 'حفظ الاتصال', qr: 'رمز QR', qrTitle: 'امسح الرمز لزيارة الصفحة', arrow: 'fa-arrow-left' },
-            en: { dir: 'ltr', bio: 'Welcome to my personal links', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'Gmail', share: 'Share Profile', save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan Code to Visit', arrow: 'fa-arrow-right' },
-            fr: { dir: 'ltr', bio: 'Bienvenue sur ma page personnelle', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'E-mail', share: 'Partager', save: 'Enregistrer', qr: 'Code QR', qrTitle: 'Scannez le code', arrow: 'fa-arrow-right' },
-            ber: { dir: 'ltr', bio: 'Ansuf yiswen ɣer tasna inu', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'Gmail', share: 'Partager', save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan QR Code', arrow: 'fa-arrow-right' }
+            ar: { dir: 'rtl', bio: 'مرحباً بكم في صفحتي الشخصية', instagram: 'إنستغرام', whatsapp: 'واتساب', gmail: 'البريد الإلكتروني', share: 'مشاركة', save: 'حفظ الاتصال', qr: 'رمز QR', qrTitle: 'امسح الرمز لزيارة الصفحة' },
+            en: { dir: 'ltr', bio: 'Welcome to my personal links', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'Gmail', share: 'Share Profile', save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan Code to Visit' },
+            fr: { dir: 'ltr', bio: 'Bienvenue sur ma page personnelle', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'E-mail', share: 'Partager', save: 'Enregistrer', qr: 'Code QR', qrTitle: 'Scannez le code' },
+            ber: { dir: 'ltr', bio: 'Ansuf yiswen ɣer tasna inu', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'Gmail', share: 'Partager', save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan QR Code' }
         };
 
         let typingTimeout;
@@ -1393,10 +1284,6 @@
             document.getElementById('label-save').innerText = data.save;
             document.getElementById('label-qr').innerText = data.qr;
             document.getElementById('label-qr-title').innerText = data.qrTitle;
-            
-            document.querySelectorAll('.arrow-icon').forEach(arrow => {
-                arrow.className = `fas ${data.arrow} arrow-icon`;
-            });
             
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             if (evt && evt.currentTarget) {
@@ -1555,9 +1442,7 @@
             let logs = [];
             try {
                 logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]');
-            } catch (e) {
-                logs = [];
-            }
+            } catch (e) { logs = []; }
             const now = new Date();
             logs.unshift(`[INTRUSION_ALERT]: ${now.toLocaleTimeString()}`);
             if (logs.length > 5) logs.pop();
@@ -1568,9 +1453,7 @@
             let logs = [];
             try {
                 logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]');
-            } catch (e) {
-                logs = [];
-            }
+            } catch (e) { logs = []; }
             document.getElementById('securityLogs').innerHTML = logs.length === 0 
                 ? 'ALL SYSTEMS NOMINAL // NO INTRUSIONS' 
                 : logs.map(escapeHTML).join('<br>');
@@ -1623,7 +1506,7 @@
                 input.value = decoded;
                 showToast('تم فك التشفير بنجاح!');
             } else {
-                alert('فشل فك النص! تأكد من صحة الصيغة.');
+                alert('فشل فك النص!');
             }
         }
 
@@ -1637,7 +1520,7 @@
             } catch (e) { items = []; }
 
             if (items.length === 0) {
-                container.innerHTML = '<div style="color:#86efac; font-size:0.7rem; text-align:center; padding:12px; font-family:\'Courier New\', Courier, monospace;">المخزن فارغ حالياً. أضف أسرارك المشفرة أعلاه.</div>';
+                container.innerHTML = '<div style="color:#86efac; font-size:0.7rem; text-align:center; padding:12px; font-family:\'Courier New\', Courier, monospace;">المخزن فارغ حالياً.</div>';
                 return;
             }
 
@@ -1654,14 +1537,14 @@
 
                 const copyBtn = document.createElement('button');
                 copyBtn.className = 'mini-btn';
-                copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+                copyBtn.innerText = 'نسخ';
                 copyBtn.onclick = () => copyToClipboard(item);
 
                 const deleteBtn = document.createElement('button');
                 deleteBtn.className = 'mini-btn';
                 deleteBtn.style.borderColor = '#ef4444';
                 deleteBtn.style.color = '#ef4444';
-                deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteBtn.innerText = 'حذف';
                 deleteBtn.onclick = () => deleteSecretItem(index);
 
                 actionsDiv.appendChild(copyBtn);
@@ -1688,7 +1571,7 @@
             localStorage.setItem('adnan_multi_vault', utf8ToBase64(JSON.stringify(items)));
             input.value = '';
             loadSecretItems();
-            showToast('تم حفظ السر في المخزن!');
+            showToast('تم حفظ السر!');
         }
 
         function deleteSecretItem(index) {
@@ -1725,12 +1608,12 @@
                     print("COMMANDS: status, ping, clear, bio, whoami, lock, date, stats");
                     break;
                 case 'status':
-                    print("SYSTEM: SECURE | CORE: ONLINE | PROTOCOL: TLS 1.3 | MODE: STEALTH");
+                    print("SYSTEM: SECURE | CORE: ONLINE | PROTOCOL: TLS 1.3");
                     break;
                 case 'ping':
                     const p = Math.floor(Math.random() * 20) + 12;
                     document.getElementById('cyberPing').innerText = p + 'ms';
-                    print(`REPLY FROM AKDIM_HOST: time=${p}ms TTL=64`);
+                    print(`REPLY FROM HOST: time=${p}ms TTL=64`);
                     break;
                 case 'stats':
                     print(`VISITS: ${document.getElementById('visits-count').innerText} | CLICKS: ${interactionClicks}`);
@@ -1739,7 +1622,7 @@
                     out.innerHTML = '';
                     break;
                 case 'whoami':
-                    print("OPERATOR: ADNANE AKDIM // AKMA SYSTEM ADMINISTRATOR");
+                    print("OPERATOR: ADNANE AKDIM // AKMA ADMIN");
                     break;
                 case 'lock':
                     flipBackToPublic();
@@ -1753,7 +1636,7 @@
                 case '':
                     break;
                 default:
-                    print(`COMMAND NOT FOUND: ${escapeHTML(cmd)}. Type 'help' for options.`);
+                    print(`COMMAND NOT FOUND: ${escapeHTML(cmd)}.`);
             }
         }
 
@@ -1766,47 +1649,36 @@
         }
 
         async function setGlobalStatus(statusValue) {
-            let token = prompt("أدخل رمز GitHub Token الجديد (يبدأ بـ github_pat_ أو ghp_):");
+            let token = prompt("أدخل رمز GitHub Token (يبدأ بـ github_pat_ أو ghp_):");
             if (!token) return;
             token = token.trim();
 
             try {
                 const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/status.txt`;
                 const getRes = await fetch(url, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
+                    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
                 });
                 
                 if (!getRes.ok) {
-                    alert("فشل الوصول للملف! تأكد من صحة الرمز ومن صلاحيات Contents: Read and write.");
+                    alert("فشل الوصول للملف! تأكد من صحة الرمز وصلاحياته.");
                     return;
                 }
 
                 const getData = await getRes.json();
                 const res = await fetch(url, {
                     method: 'PUT',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/vnd.github.v3+json'
-                    },
-                    body: JSON.stringify({
-                        message: "Update maintenance status via mobile admin panel",
-                        content: utf8ToBase64(statusValue),
-                        sha: getData.sha
-                    })
+                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' },
+                    body: JSON.stringify({ message: "Update status", content: utf8ToBase64(statusValue), sha: getData.sha })
                 });
 
                 if (res.ok) {
-                    alert(statusValue === 'true' ? "تم تفعيل وضع الصيانة بنجاح!" : "تم إلغاء وضع الصيانة بنجاح!");
+                    alert("تم تحديث حالة الصيانة بنجاح!");
                     location.reload();
                 } else {
-                    alert("فشل التحديث! تحقق من صلاحيات الرمز.");
+                    alert("فشل التحديث!");
                 }
             } catch (err) {
-                alert("حدث خطأ في الاتصال بالشبكة.");
+                alert("خطأ في الاتصال بالشبكة.");
             }
         }
 
@@ -1860,9 +1732,7 @@
             maintMatrixFrame = requestAnimationFrame(draw);
         }
 
-        function stopMaintMatrixEffect() {
-            cancelAnimationFrame(maintMatrixFrame);
-        }
+        function stopMaintMatrixEffect() { cancelAnimationFrame(maintMatrixFrame); }
 
         let matrixFrame;
         function startMatrixEffect() {
@@ -1897,9 +1767,7 @@
             matrixFrame = requestAnimationFrame(draw);
         }
 
-        function stopMatrixEffect() {
-            cancelAnimationFrame(matrixFrame);
-        }
+        function stopMatrixEffect() { cancelAnimationFrame(matrixFrame); }
 
         document.getElementById('terminalInput').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
@@ -1961,21 +1829,6 @@
             localStorage.setItem('adnan_visits_count', visits.toString());
             document.getElementById('visits-count').innerText = visits;
         }
-
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                const maintScreen = document.getElementById('maintScreen');
-                if (maintScreen && getComputedStyle(maintScreen).display === 'flex') {
-                    startMaintMatrixEffect();
-                }
-                const bookCard = document.getElementById('bookCard');
-                if (bookCard && bookCard.classList.contains('flipped')) {
-                    startMatrixEffect();
-                }
-            }, 100);
-        });
 
         window.addEventListener('DOMContentLoaded', () => {
             checkGlobalMaintenance();
