@@ -959,7 +959,7 @@
 </head>
 <body>
 
-    <!-- زر القائمة العائم (SVG مدمج) -->
+    <!-- زر القائمة العائم -->
     <button class="menu-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Menu">
         <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
     </button>
@@ -968,7 +968,7 @@
 
     <aside class="sidebar-drawer" id="sidebarDrawer">
         <div class="sidebar-header">
-            <h3>
+            <h3 id="label-sidebar-title">
                 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
                 التصفح السريع
             </h3>
@@ -979,23 +979,23 @@
             <a href="#" class="sidebar-item" onclick="openStoreNotice(event)">
                 <div class="sidebar-item-info">
                     <svg viewBox="0 0 24 24"><path d="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z"/></svg>
-                    <span>المتجر الإلكتروني</span>
+                    <span id="label-sidebar-store">المتجر الإلكتروني</span>
                 </div>
-                <span class="badge-soon">قريباً</span>
+                <span class="badge-soon" id="label-badge-soon1">قريباً</span>
             </a>
 
             <a href="#" class="sidebar-item" onclick="openPortfolioNotice(event)">
                 <div class="sidebar-item-info">
                     <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4zm10 15H4V8h16v11z"/></svg>
-                    <span>المشاريع والخدمات</span>
+                    <span id="label-sidebar-portfolio">المشاريع والخدمات</span>
                 </div>
-                <span class="badge-soon">قريباً</span>
+                <span class="badge-soon" id="label-badge-soon2">قريباً</span>
             </a>
 
             <a href="mailto:akdimadnane@gmail.com" class="sidebar-item" onclick="trackInteraction()">
                 <div class="sidebar-item-info">
                     <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-                    <span>التواصل السريع</span>
+                    <span id="label-sidebar-contact">التواصل السريع</span>
                 </div>
                 <svg viewBox="0 0 24 24" style="width:14px; height:14px; fill:#64748b;"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
             </a>
@@ -1212,10 +1212,22 @@
         const GITHUB_REPO = 'Akdim-adnane';
 
         const translations = {
-            ar: { dir: 'rtl', bio: 'مرحباً بكم في صفحتي الشخصية', instagram: 'إنستغرام', whatsapp: 'واتساب', gmail: 'البريد الإلكتروني', share: 'مشاركة', save: 'حفظ الاتصال', qr: 'رمز QR', qrTitle: 'امسح الرمز لزيارة الصفحة' },
-            en: { dir: 'ltr', bio: 'Welcome to my personal links', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'Gmail', share: 'Share Profile', save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan Code to Visit' },
-            fr: { dir: 'ltr', bio: 'Bienvenue sur ma page personnelle', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'E-mail', share: 'Partager', save: 'Enregistrer', qr: 'Code QR', qrTitle: 'Scannez le code' },
-            ber: { dir: 'ltr', bio: 'Ansuf yiswen ɣer tasna inu', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'Gmail', share: 'Partager', save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan QR Code' }
+            ar: { 
+                dir: 'rtl', bio: 'مرحباً بكم في صفحتي الشخصية', instagram: 'إنستغرام', whatsapp: 'واتساب', gmail: 'البريد الإلكتروني', share: 'مشاركة', save: 'حفظ الاتصال', qr: 'رمز QR', qrTitle: 'امسح الرمز لزيارة الصفحة',
+                sidebarTitle: 'التصفح السريع', store: 'المتجر الإلكتروني', portfolio: 'المشاريع والخدمات', contact: 'التواصل السريع', soon: 'قريباً', storeNotice: 'المتجر الإلكتروني قيد التطوير حالياً!', portfolioNotice: 'قسم المشاريع سيتوفر قريباً!'
+            },
+            en: { 
+                dir: 'ltr', bio: 'Welcome to my personal links', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'Gmail', share: 'Share Profile', save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan Code to Visit',
+                sidebarTitle: 'Quick Navigation', store: 'E-Store', portfolio: 'Projects & Services', contact: 'Quick Contact', soon: 'Soon', storeNotice: 'E-Store is currently under development!', portfolioNotice: 'Projects section coming soon!'
+            },
+            fr: { 
+                dir: 'ltr', bio: 'Bienvenue sur ma page personnelle', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'E-mail', share: 'Partager', save: 'Enregistrer', qr: 'Code QR', qrTitle: 'Scannez le code',
+                sidebarTitle: 'Navigation Rapide', store: 'Boutique en ligne', portfolio: 'Projets & Services', contact: 'Contact Rapide', soon: 'Bientôt', storeNotice: 'La boutique est en cours de développement !', portfolioNotice: 'Section projets bientôt disponible !'
+            },
+            ber: { 
+                dir: 'ltr', bio: 'Ansuf yiswen ɣer tasna inu', instagram: 'Instagram', whatsapp: 'WhatsApp', gmail: 'Gmail', share: 'Partager', save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan QR Code',
+                sidebarTitle: 'Tugna n Usikel', store: 'Ahanu n Internet', portfolio: 'Isenfaren & Isseqdac', contact: 'Amsawadh Awarad', soon: 'Qrib', storeNotice: 'Ahanu n Internet aql-it deg usnegmu!', portfolioNotice: 'Ahric n isenfaren a d-yass qrib!'
+            }
         };
 
         let typingTimeout;
@@ -1237,13 +1249,15 @@
 
         function openStoreNotice(e) {
             e.preventDefault();
-            showToast('المتجر الإلكتروني قيد التطوير حالياً!');
+            const data = translations[currentLang] || translations['ar'];
+            showToast(data.storeNotice);
             closeSidebar();
         }
 
         function openPortfolioNotice(e) {
             e.preventDefault();
-            showToast('قسم المشاريع سيتوفر قريباً!');
+            const data = translations[currentLang] || translations['ar'];
+            showToast(data.portfolioNotice);
             closeSidebar();
         }
 
@@ -1277,6 +1291,7 @@
             const customBio = localStorage.getItem('custom_bio') || data.bio;
             typeWriter(customBio);
 
+            // ترجمة الواجهة الرئيسية
             document.getElementById('label-instagram').innerText = data.instagram;
             document.getElementById('label-whatsapp').innerText = data.whatsapp;
             document.getElementById('label-gmail').innerText = data.gmail;
@@ -1284,7 +1299,15 @@
             document.getElementById('label-save').innerText = data.save;
             document.getElementById('label-qr').innerText = data.qr;
             document.getElementById('label-qr-title').innerText = data.qrTitle;
-            
+
+            // ترجمة القائمة الجانبية (التصفح السريع)
+            document.getElementById('label-sidebar-title').childNodes[2].nodeValue = " " + data.sidebarTitle;
+            document.getElementById('label-sidebar-store').innerText = data.store;
+            document.getElementById('label-sidebar-portfolio').innerText = data.portfolio;
+            document.getElementById('label-sidebar-contact').innerText = data.contact;
+            document.getElementById('label-badge-soon1').innerText = data.soon;
+            document.getElementById('label-badge-soon2').innerText = data.soon;
+
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             if (evt && evt.currentTarget) {
                 evt.currentTarget.classList.add('active');
