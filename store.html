@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AKMA STORE | Storefront</title>
+    <title>AKMA STORE | Storefront Pro</title>
     <meta name="theme-color" content="#dc2626">
 
     <style>
@@ -16,35 +16,39 @@
         }
 
         body {
-            background: radial-gradient(circle at center, rgba(30, 10, 15, 0.5), rgba(5, 5, 8, 0.95)), 
+            background: radial-gradient(circle at center, rgba(30, 10, 15, 0.55), rgba(5, 5, 8, 0.96)), 
                         url('dragon.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
             min-height: 100vh;
-            padding: 20px 15px 40px 15px;
+            padding: 20px 15px 80px 15px;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
+        /* Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 20px;
-            background: rgba(12, 12, 18, 0.65);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 16px 22px;
+            background: rgba(12, 12, 18, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(239, 68, 68, 0.35);
             border-radius: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            position: sticky;
+            top: 15px;
+            z-index: 100;
         }
 
         .brand-logo {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 800;
             color: #ffffff;
             text-decoration: none;
@@ -59,126 +63,174 @@
             align-items: center;
         }
 
-        .action-btn {
-            background: rgba(220, 38, 38, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.4);
-            color: #f87171;
+        .btn-icon {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffffff;
             padding: 8px 14px;
             border-radius: 12px;
-            text-decoration: none;
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 6px;
+            text-decoration: none;
         }
 
-        .action-btn:hover {
+        .btn-icon:hover {
             background: #dc2626;
-            color: #ffffff;
+            border-color: #dc2626;
             box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
         }
 
-        .page-title {
+        /* Hero & Search controls */
+        .hero-section {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
 
-        .page-title h1 {
-            font-size: 1.8rem;
+        .hero-section h1 {
+            font-size: 2rem;
             font-weight: 800;
             margin-bottom: 8px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
 
-        .page-title p {
+        .hero-section p {
             color: #94a3b8;
+            font-size: 0.92rem;
+            margin-bottom: 20px;
+        }
+
+        .search-bar-wrapper {
+            display: flex;
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+        }
+
+        .search-input {
+            flex: 1;
+            background: rgba(12, 12, 18, 0.8);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 14px;
+            padding: 12px 18px;
+            color: #ffffff;
             font-size: 0.9rem;
+            outline: none;
+            backdrop-filter: blur(10px);
         }
 
-        /* حالة اغلاق المتجر */
-        .store-closed-screen {
-            display: none;
-            flex-direction: column;
-            align-items: center;
+        .search-input:focus {
+            border-color: #ef4444;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Categories Filter */
+        .categories-filter {
+            display: flex;
             justify-content: center;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+
+        .cat-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .cat-btn.active, .cat-btn:hover {
+            background: #dc2626;
+            color: #ffffff;
+            border-color: #dc2626;
+            box-shadow: 0 2px 10px rgba(220, 38, 38, 0.4);
+        }
+
+        /* Store Closed State */
+        .store-closed-box {
+            display: none;
             text-align: center;
-            padding: 60px 20px;
+            padding: 50px 20px;
             background: rgba(12, 12, 18, 0.85);
-            border: 1px solid rgba(239, 68, 68, 0.5);
+            border: 1px solid rgba(239, 68, 68, 0.4);
             border-radius: 24px;
-            margin-top: 40px;
+            margin-top: 20px;
         }
 
-        .store-closed-screen h2 {
-            color: #ef4444;
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-        }
-
-        .store-closed-screen p {
-            color: #94a3b8;
-            font-size: 0.95rem;
-        }
+        .store-closed-box h2 { color: #ef4444; font-size: 1.5rem; margin-bottom: 10px; }
+        .store-closed-box p { color: #94a3b8; font-size: 0.95rem; }
 
         /* Products Grid */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 22px;
+            margin-top: 25px;
         }
 
         .product-card {
-            background: rgba(12, 12, 18, 0.6);
+            background: rgba(12, 12, 18, 0.65);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 22px;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .product-card:hover {
-            border-color: rgba(239, 68, 68, 0.5);
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(220, 38, 38, 0.25);
+            border-color: rgba(239, 68, 68, 0.55);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.25);
         }
 
         .product-img-box {
             position: relative;
             width: 100%;
-            height: 200px;
+            height: 210px;
             background: rgba(0, 0, 0, 0.4);
             overflow: hidden;
+            cursor: pointer;
         }
 
         .product-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 0.5s ease;
         }
 
         .product-card:hover .product-img {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
-        .badge-status {
+        .badge-tag {
             position: absolute;
             top: 12px;
             right: 12px;
-            background: rgba(34, 197, 94, 0.2);
-            border: 1px solid rgba(34, 197, 94, 0.5);
-            color: #4ade80;
+            background: rgba(220, 38, 38, 0.85);
+            color: #ffffff;
             padding: 4px 10px;
             border-radius: 20px;
             font-size: 0.7rem;
             font-weight: 700;
             backdrop-filter: blur(8px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
 
         .product-info {
@@ -188,11 +240,18 @@
             flex: 1;
         }
 
+        .product-rating {
+            color: #facc15;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+        }
+
         .product-title {
             font-size: 1.05rem;
             font-weight: 700;
             margin-bottom: 6px;
             color: #ffffff;
+            cursor: pointer;
         }
 
         .product-desc {
@@ -213,48 +272,73 @@
         }
 
         .product-price {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 800;
             color: #ef4444;
         }
 
-        .order-btn {
+        .add-cart-btn {
+            background: rgba(220, 38, 38, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #f87171;
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-cart-btn:hover {
+            background: #dc2626;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+        }
+
+        /* Floating Cart Button */
+        .floating-cart-btn {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
             background: #dc2626;
             color: #ffffff;
             border: none;
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.85rem;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.5);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 10px;
+            z-index: 99;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .order-btn:hover {
-            background: #b91c1c;
-            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.5);
+        .floating-cart-btn:hover {
+            transform: scale(1.06);
         }
 
-        .delete-prod-btn {
-            background: rgba(239, 68, 68, 0.2);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.4);
-            padding: 4px 8px;
-            border-radius: 8px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            margin-top: 8px;
+        .cart-badge {
+            background: #ffffff;
+            color: #dc2626;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 800;
         }
 
-        /* Modal Forms */
+        /* Modals */
         .modal-overlay {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.82);
             backdrop-filter: blur(12px);
             z-index: 999;
             justify-content: center;
@@ -263,14 +347,13 @@
         }
 
         .modal-card {
-            background: rgba(18, 18, 26, 0.95);
+            background: rgba(18, 18, 26, 0.96);
             border: 1px solid rgba(239, 68, 68, 0.4);
             border-radius: 24px;
             padding: 26px;
             width: 100%;
-            max-width: 420px;
+            max-width: 450px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-            position: relative;
             max-height: 90vh;
             overflow-y: auto;
         }
@@ -279,17 +362,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 12px;
+            padding-bottom: 10px;
         }
 
-        .modal-header h3 {
-            font-size: 1.1rem;
-            color: #ef4444;
-        }
+        .modal-header h3 { font-size: 1.15rem; color: #ef4444; }
 
-        .close-modal {
+        .close-btn {
             background: transparent;
             border: none;
             color: #94a3b8;
@@ -297,18 +377,63 @@
             cursor: pointer;
         }
 
-        .form-group {
-            margin-bottom: 14px;
-            text-align: right;
+        /* Cart Drawer Items */
+        .cart-items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+            max-height: 250px;
+            overflow-y: auto;
         }
 
-        .form-group label {
-            display: block;
-            font-size: 0.8rem;
-            color: #cbd5e1;
-            margin-bottom: 6px;
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 14px;
+            border-radius: 14px;
         }
 
+        .cart-item-info { flex: 1; }
+        .cart-item-title { font-size: 0.88rem; font-weight: 700; color: #fff; }
+        .cart-item-price { font-size: 0.8rem; color: #ef4444; font-weight: 700; }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0,0,0,0.4);
+            padding: 4px 8px;
+            border-radius: 10px;
+        }
+
+        .qty-btn {
+            background: transparent;
+            border: none;
+            color: #22c55e;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 20px;
+            text-align: center;
+        }
+
+        .cart-total-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 800;
+            padding: 12px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .form-group { margin-bottom: 14px; text-align: right; }
+        .form-group label { display: block; font-size: 0.8rem; color: #cbd5e1; margin-bottom: 6px; }
         .form-control {
             width: 100%;
             background: rgba(0, 0, 0, 0.5);
@@ -318,11 +443,6 @@
             color: #ffffff;
             font-size: 0.9rem;
             outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .form-control:focus {
-            border-color: #ef4444;
         }
 
         .submit-btn {
@@ -335,52 +455,85 @@
             font-size: 0.95rem;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 10px;
             transition: all 0.3s;
         }
 
-        .submit-btn.admin-action {
+        .submit-btn:hover { background: #1eb854; }
+
+        .admin-action-btn {
             background: #dc2626;
-        }
-        .submit-btn.admin-action:hover {
-            background: #b91c1c;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <!-- Header -->
         <header>
             <a href="index.html" class="brand-logo">AKMA <span>STORE</span></a>
             <div class="header-actions">
-                <button class="action-btn" onclick="openAdminModal()">⚙️ لوحة التحكم</button>
-                <a href="index.html" class="action-btn">الرئيسية</a>
+                <button class="btn-icon" onclick="openAdminModal()">⚙️ الإدارة</button>
+                <a href="index.html" class="btn-icon">الرئيسية</a>
             </div>
         </header>
 
-        <div class="page-title">
-            <h1>المتجر الرسمي</h1>
-            <p>تسوق أفضل المنتجات المادية بضغطة زر واحدة</p>
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1>المتجر الإلكتروني الرسمي</h1>
+            <p>تسوق أحدث المنتجات والخدمات الحصرية مع شحن مباشر وسريع</p>
+
+            <div class="search-bar-wrapper">
+                <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن منتج..." oninput="filterProducts()">
+            </div>
+
+            <div class="categories-filter" id="categoriesContainer">
+                <button class="cat-btn active" onclick="filterCategory('all', this)">الكل</button>
+                <button class="cat-btn" onclick="filterCategory('ملابس', this)">ملابس</button>
+                <button class="cat-btn" onclick="filterCategory('إلكترونيات', this)">إلكترونيات</button>
+                <button class="cat-btn" onclick="filterCategory('إكسسوارات', this)">إكسسوارات</button>
+            </div>
         </div>
 
-        <!-- شاشة المتجر المغلق -->
-        <div class="store-closed-screen" id="storeClosedScreen">
-            <h2>⚠️ المتجر مغلق مؤقتاً</h2>
-            <p>نعتذر منك، المتجر متوقف عن استقبال الطلبات حالياً للصيانة أو تحديث المخزون. يرجى العودة لاحقاً.</p>
+        <!-- Store Closed Box -->
+        <div class="store-closed-box" id="storeClosedBox">
+            <h2>⚠️ المتجر مغلق حالياً</h2>
+            <p>نعتذر منك، المتجر متوقف عن استقبال الطلبات مؤقتاً للصيانة. يرجى العودة لاحقاً.</p>
         </div>
 
-        <!-- شبكة المنتجات -->
+        <!-- Products Grid -->
         <div class="products-grid" id="productsGrid"></div>
     </div>
 
-    <!-- نافذة طلب الشراء -->
-    <div class="modal-overlay" id="orderModal" onclick="closeModal(event, 'orderModal')">
+    <!-- Floating Cart Button -->
+    <button class="floating-cart-btn" onclick="openCartModal()">
+        <span>🛒 سلة التسوق</span>
+        <span class="cart-badge" id="cartBadgeCount">0</span>
+    </button>
+
+    <!-- Modal 1: Cart & Checkout -->
+    <div class="modal-overlay" id="cartModal" onclick="closeModalOnBg(event, 'cartModal')">
         <div class="modal-card">
             <div class="modal-header">
-                <h3 id="modalProductTitle">إتمام الطلب</h3>
-                <button class="close-modal" onclick="hideModal('orderModal')">&times;</button>
+                <h3>🛒 سلة التسوق والشراء</h3>
+                <button class="close-btn" onclick="hideModal('cartModal')">&times;</button>
             </div>
-            <form onsubmit="sendWhatsAppOrder(event)">
+
+            <div class="cart-items-list" id="cartItemsList"></div>
+
+            <div class="cart-total-box">
+                <span>المجموع الإجمالي:</span>
+                <span id="cartTotalPrice" style="color:#ef4444;">0 MAD</span>
+            </div>
+
+            <form onsubmit="checkoutWhatsApp(event)">
                 <div class="form-group">
                     <label>الاسم الكامل:</label>
                     <input type="text" class="form-control" id="custName" required placeholder="مثال: عدنان أقديم">
@@ -393,141 +546,290 @@
                     <label>المدينة والعنوان:</label>
                     <input type="text" class="form-control" id="custCity" required placeholder="مثال: مراكش، حي السلام">
                 </div>
-                <div class="form-group">
-                    <label>الكمية:</label>
-                    <input type="number" class="form-control" id="custQty" value="1" min="1" required>
-                </div>
-                <button type="submit" class="submit-btn">تأكيد الطلب عبر واتساب</button>
+                <button type="submit" class="submit-btn">إتمام الطلب عبر واتساب 📲</button>
             </form>
         </div>
     </div>
 
-    <!-- نافذة لوحة التحكم (إضافة منتج وتفتح/إغلاق المتجر) -->
-    <div class="modal-overlay" id="adminModal" onclick="closeModal(event, 'adminModal')">
+    <!-- Modal 2: Product Quick View -->
+    <div class="modal-overlay" id="productModal" onclick="closeModalOnBg(event, 'productModal')">
         <div class="modal-card">
             <div class="modal-header">
-                <h3>⚙️ إعدادات المتجر وإضافة السلع</h3>
-                <button class="close-modal" onclick="hideModal('adminModal')">&times;</button>
+                <h3 id="pvTitle">تفاصيل المنتج</h3>
+                <button class="close-btn" onclick="hideModal('productModal')">&times;</button>
             </div>
-            
-            <div style="margin-bottom: 20px;">
-                <button class="submit-btn admin-action" id="toggleStoreStatusBtn" onclick="toggleStoreStatus()">تبديل حالة المتجر (فتح/إغلاق)</button>
+            <img id="pvImg" src="" style="width:100%; height:200px; object-fit:cover; border-radius:16px; margin-bottom:15px;">
+            <p id="pvDesc" style="color:#94a3b8; font-size:0.88rem; line-height:1.6; margin-bottom:15px;"></p>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span id="pvPrice" style="font-size:1.3rem; font-weight:800; color:#ef4444;"></span>
+                <button class="submit-btn" style="width:auto; padding:10px 20px;" id="pvAddBtn">إضافة للسلة</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Admin Control -->
+    <div class="modal-overlay" id="adminModal" onclick="closeModalOnBg(event, 'adminModal')">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>⚙️ لوحة إدارة المتجر</h3>
+                <button class="close-btn" onclick="hideModal('adminModal')">&times;</button>
             </div>
 
-            <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 20px;">
+            <button class="admin-action-btn" id="toggleStoreBtn" onclick="toggleStoreStatus()">إغلاق/فتح المتجر</button>
 
-            <h4 style="font-size: 0.95rem; margin-bottom: 12px; color: #cbd5e1;">إضافة منتج جديد بسرعة:</h4>
+            <h4 style="font-size:0.92rem; margin-bottom:10px; color:#cbd5e1;">إضافة منتج جديد:</h4>
             <form onsubmit="addNewProduct(event)">
-                <div class="form-group">
-                    <label>عنوان المنتج:</label>
-                    <input type="text" class="form-control" id="newTitle" required placeholder="مثال: قميص فاخر">
+                <div class="form-group"><label>اسم المنتج:</label><input type="text" class="form-control" id="npTitle" required></div>
+                <div class="form-group"><label>السعر بالدرهم (مثال: 150):</label><input type="number" class="form-control" id="npPrice" required></div>
+                <div class="form-group"><label>القسم:</label>
+                    <select class="form-control" id="npCategory">
+                        <option value="ملابس">ملابس</option>
+                        <option value="إلكترونيات">إلكترونيات</option>
+                        <option value="إكسسوارات">إكسسوارات</option>
+                    </select>
                 </div>
-                <div class="form-group">
-                    <label>السعر (مثال: 150 MAD):</label>
-                    <input type="text" class="form-control" id="newPrice" required placeholder="150 MAD">
-                </div>
-                <div class="form-group">
-                    <label>رابط الصورة (رابط مباشر للصورة):</label>
-                    <input type="text" class="form-control" id="newImg" required placeholder="profile.jpg أو رابط صورة">
-                </div>
-                <div class="form-group">
-                    <label>وصف مختصر:</label>
-                    <input type="text" class="form-control" id="newDesc" required placeholder="مواصفات المنتج...">
-                </div>
-                <button type="submit" class="submit-btn admin-action">إضافة المنتج للمتجر</button>
+                <div class="form-group"><label>رابط الصورة:</label><input type="text" class="form-control" id="npImg" placeholder="profile.jpg" required></div>
+                <div class="form-group"><label>الشارة (مثال: الأكثر مبيعاً):</label><input type="text" class="form-control" id="npBadge" value="جديد"></div>
+                <div class="form-group"><label>الوصف:</label><input type="text" class="form-control" id="npDesc" required></div>
+                <button type="submit" class="submit-btn" style="background:#dc2626;">إضافة للمتجر</button>
             </form>
         </div>
     </div>
 
     <script>
-        // المنتجات الافتراضية الأولية في حال لم تقم بإضافة منتجات بعد
-        let defaultProducts = [
-            { id: 1, title: "قميص AKMA المخصص", price: "199 MAD", img: "profile.jpg", desc: "قميص عصري بتصميم خاص وجودة عالية." },
-            { id: 2, title: "بطاقة NFC الذكية", price: "149 MAD", img: "profile.jpg", desc: "بطاقة فاخرة لمشاركة روابطك بلمسة واحدة." },
-            { id: 3, title: "غطاء هاتف AKMA", price: "99 MAD", img: "profile.jpg", desc: "حماية ممتازة لهاتفك بتصميم تنين الحماية." }
+        const initialProducts = [
+            { id: 1, title: "قميص AKMA المخصص", price: 199, category: "ملابس", img: "profile.jpg", badge: "الأكثر مبيعاً", rating: "★★★★★", desc: "قميص قطني عصري بجودة عالية وتصميم المظلم المميز." },
+            { id: 2, title: "بطاقة NFC الذكية", price: 149, category: "إلكترونيات", img: "profile.jpg", badge: "جديد", rating: "★★★★★", desc: "بطاقة ذكية لمشاركة جميع روابطك ومعلومات الاتصال بلمسة واحدة." },
+            { id: 3, title: "غطاء هاتف AKMA", price: 99, category: "إكسسوارات", img: "profile.jpg", badge: "خصم", rating: "★★★★☆", desc: "غطاء حماية مقوى للهواتف مع شعار التنين المضيء." }
         ];
 
-        // جلب البيانات من localStorage أو استخدام الافتراضية
-        let products = JSON.parse(localStorage.getItem('akma_store_products')) || defaultProducts;
-        let isStoreOpen = JSON.parse(localStorage.getItem('akma_store_status')) !== false; // افتراضياً مفتوح
-
-        let selectedProduct = '';
-        let selectedPrice = '';
+        let products = JSON.parse(localStorage.getItem('akma_pro_products')) || initialProducts;
+        let cart = JSON.parse(localStorage.getItem('akma_pro_cart')) || [];
+        let isStoreOpen = JSON.parse(localStorage.getItem('akma_pro_status')) !== false;
+        let selectedCategory = 'all';
 
         window.addEventListener('DOMContentLoaded', () => {
-            renderStoreState();
-            renderProducts();
+            renderStore();
+            updateCartBadge();
         });
 
-        function renderStoreState() {
+        function renderStore() {
             const grid = document.getElementById('productsGrid');
-            const closedScreen = document.getElementById('storeClosedScreen');
-            const statusBtn = document.getElementById('toggleStoreStatusBtn');
+            const closedBox = document.getElementById('storeClosedBox');
+            const toggleBtn = document.getElementById('toggleStoreBtn');
 
-            if (isStoreOpen) {
-                grid.style.display = 'grid';
-                closedScreen.style.display = 'none';
-                statusBtn.innerText = '🔴 إغلاق المتجر الآن';
-                statusBtn.style.background = '#dc2626';
-            } else {
+            if (!isStoreOpen) {
                 grid.style.display = 'none';
-                closedScreen.style.display = 'flex';
-                statusBtn.innerText = '🟢 فتح المتجر الآن';
-                statusBtn.style.background = '#22c55e';
-            }
-        }
-
-        function toggleStoreStatus() {
-            isStoreOpen = !isStoreOpen;
-            localStorage.setItem('akma_store_status', JSON.stringify(isStoreOpen));
-            renderStoreState();
-            hideModal('adminModal');
-        }
-
-        function renderProducts() {
-            const grid = document.getElementById('productsGrid');
-            grid.innerHTML = '';
-
-            if (products.length === 0) {
-                grid.innerHTML = '<p style="color:#94a3b8; text-align:center; grid-column: 1/-1;">لا توجد منتجات متاحة حالياً.</p>';
+                closedBox.style.display = 'block';
+                toggleBtn.innerText = '🟢 فتح المتجر الآن';
+                toggleBtn.style.background = '#22c55e';
                 return;
             }
 
-            products.forEach(prod => {
+            grid.style.display = 'grid';
+            closedBox.style.display = 'none';
+            toggleBtn.innerText = '🔴 إغلاق المتجر الآن';
+            toggleBtn.style.background = '#dc2626';
+
+            grid.innerHTML = '';
+            const query = document.getElementById('searchInput').value.toLowerCase();
+
+            const filtered = products.filter(p => {
+                const matchCat = selectedCategory === 'all' || p.category === selectedCategory;
+                const matchSearch = p.title.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query);
+                return matchCat && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<p style="color:#94a3b8; text-align:center; grid-column:1/-1;">لا توجد منتجات تطابق البحث.</p>';
+                return;
+            }
+
+            filtered.forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 card.innerHTML = `
-                    <div class="product-img-box">
-                        <span class="badge-status">متوفر</span>
-                        <img src="${prod.img}" alt="${prod.title}" class="product-img">
+                    <div class="product-img-box" onclick="quickView(${p.id})">
+                        <span class="badge-tag">${p.badge}</span>
+                        <img src="${p.img}" class="product-img">
                     </div>
                     <div class="product-info">
-                        <h2 class="product-title">${prod.title}</h2>
-                        <p class="product-desc">${prod.desc}</p>
+                        <div class="product-rating">${p.rating}</div>
+                        <h3 class="product-title" onclick="quickView(${p.id})">${p.title}</h3>
+                        <p class="product-desc">${p.desc}</p>
                         <div class="product-bottom">
-                            <span class="product-price">${prod.price}</span>
-                            <button class="order-btn" onclick="openOrderModal('${prod.title}', '${prod.price}')">طلب الآن</button>
+                            <span class="product-price">${p.price} MAD</span>
+                            <button class="add-cart-btn" onclick="addToCart(${p.id})">+ السلة</button>
                         </div>
-                        <button class="delete-prod-btn" onclick="deleteProduct(${prod.id})">حذف المنتج</button>
+                        <button onclick="deleteProduct(${p.id})" style="background:transparent; border:none; color:#ef4444; font-size:0.7rem; cursor:pointer; margin-top:8px; text-align:right;">حذف المنتج 🗑️</button>
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
+        function filterCategory(cat, btn) {
+            selectedCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderStore();
+        }
+
+        function filterProducts() {
+            renderStore();
+        }
+
+        function addToCart(id) {
+            const prod = products.find(p => p.id === id);
+            if (!prod) return;
+
+            const exist = cart.find(item => item.id === id);
+            if (exist) {
+                exist.qty++;
+            } else {
+                cart.push({ ...prod, qty: 1 });
+            }
+            saveCart();
+            alert(`تمت إضافة (${prod.title}) إلى السلة!`);
+        }
+
+        function saveCart() {
+            localStorage.setItem('akma_pro_cart', JSON.stringify(cart));
+            updateCartBadge();
+        }
+
+        function updateCartBadge() {
+            const count = cart.reduce((acc, item) => acc + item.qty, 0);
+            document.getElementById('cartBadgeCount').innerText = count;
+        }
+
+        function openCartModal() {
+            renderCartItems();
+            document.getElementById('cartModal').style.display = 'flex';
+        }
+
+        function renderCartItems() {
+            const list = document.getElementById('cartItemsList');
+            list.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                list.innerHTML = '<p style="color:#94a3b8; text-align:center; padding:15px;">السلة فارغة حالياً.</p>';
+                document.getElementById('cartTotalPrice').innerText = '0 MAD';
+                return;
+            }
+
+            cart.forEach(item => {
+                total += item.price * item.qty;
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <div class="cart-item-info">
+                        <div class="cart-item-title">${item.title}</div>
+                        <div class="cart-item-price">${item.price * item.qty} MAD</div>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+                        <span style="font-size:0.85rem; font-weight:bold;">${item.qty}</span>
+                        <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+
+            document.getElementById('cartTotalPrice').innerText = total + ' MAD';
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            saveCart();
+            renderCartItems();
+        }
+
+        function checkoutWhatsApp(e) {
+            e.preventDefault();
+            if (cart.length === 0) {
+                alert('السلة فارغة!');
+                return;
+            }
+
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const city = document.getElementById('custCity').value.trim();
+            const myPhone = "212614060332";
+
+            let itemsTxt = '';
+            let total = 0;
+            cart.forEach(i => {
+                itemsTxt += `• ${i.title} (الكمية: ${i.qty}) - ${i.price * i.qty} MAD%0A`;
+                total += i.price * i.qty;
+            });
+
+            const msg = `السلام عليكم، أرغب في تأكيد طلب شراء من المتجر:%0A%0A` +
+                        `📋 *المنتجات المطلوبة:*%0A${itemsTxt}%0A` +
+                        `💰 *المجموع الإجمالي:* ${total} MAD%0A%0A` +
+                        `👤 *المشتري:* ${name}%0A` +
+                        `📞 *الهاتف:* ${phone}%0A` +
+                        `📍 *العنوان:* ${city}`;
+
+            window.open(`https://wa.me/${myPhone}?text=${msg}`, '_blank');
+            cart = [];
+            saveCart();
+            hideModal('cartModal');
+        }
+
+        function quickView(id) {
+            const p = products.find(item => item.id === id);
+            if (!p) return;
+
+            document.getElementById('pvTitle').innerText = p.title;
+            document.getElementById('pvImg').src = p.img;
+            document.getElementById('pvDesc').innerText = p.desc;
+            document.getElementById('pvPrice').innerText = p.price + ' MAD';
+            
+            const addBtn = document.getElementById('pvAddBtn');
+            addBtn.onclick = () => { addToCart(p.id); hideModal('productModal'); };
+
+            document.getElementById('productModal').style.display = 'flex';
+        }
+
+        function openAdminModal() {
+            const pwd = prompt("أدخل كلمة المرور لدخول الإدارة:");
+            if (pwd === "7002") {
+                document.getElementById('adminModal').style.display = 'flex';
+            } else if (pwd !== null) {
+                alert("كلمة المرور خاطئة!");
+            }
+        }
+
+        function toggleStoreStatus() {
+            isStoreOpen = !isStoreOpen;
+            localStorage.setItem('akma_pro_status', JSON.stringify(isStoreOpen));
+            renderStore();
+            hideModal('adminModal');
+        }
+
         function addNewProduct(e) {
             e.preventDefault();
-            const newProd = {
+            const newP = {
                 id: Date.now(),
-                title: document.getElementById('newTitle').value.trim(),
-                price: document.getElementById('newPrice').value.trim(),
-                img: document.getElementById('newImg').value.trim(),
-                desc: document.getElementById('newDesc').value.trim()
+                title: document.getElementById('npTitle').value.trim(),
+                price: parseFloat(document.getElementById('npPrice').value),
+                category: document.getElementById('npCategory').value,
+                img: document.getElementById('npImg').value.trim(),
+                badge: document.getElementById('npBadge').value.trim() || 'جديد',
+                rating: "★★★★★",
+                desc: document.getElementById('npDesc').value.trim()
             };
 
-            products.unshift(newProd);
-            localStorage.setItem('akma_store_products', JSON.stringify(products));
-            renderProducts();
+            products.unshift(newP);
+            localStorage.setItem('akma_pro_products', JSON.stringify(products));
+            renderStore();
             hideModal('adminModal');
             e.target.reset();
             alert('تمت إضافة المنتج بنجاح!');
@@ -536,55 +838,17 @@
         function deleteProduct(id) {
             if (confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
                 products = products.filter(p => p.id !== id);
-                localStorage.setItem('akma_store_products', JSON.stringify(products));
-                renderProducts();
+                localStorage.setItem('akma_pro_products', JSON.stringify(products));
+                renderStore();
             }
         }
 
-        function openAdminModal() {
-            // حماية بسيطة أو فتح مباشر للوحة التحكم
-            document.getElementById('adminModal').style.display = 'flex';
+        function closeModalOnBg(e, id) {
+            if (e.target.id === id) hideModal(id);
         }
 
-        function openOrderModal(title, price) {
-            if (!isStoreOpen) {
-                alert('عذراً، المتجر مغلق حالياً ولا يمكن استقبال طلبات.');
-                return;
-            }
-            selectedProduct = title;
-            selectedPrice = price;
-            document.getElementById('modalProductTitle').innerText = 'طلب: ' + title;
-            document.getElementById('orderModal').style.display = 'flex';
-        }
-
-        function closeModal(e, modalId) {
-            if (e.target.id === modalId) {
-                hideModal(modalId);
-            }
-        }
-
-        function hideModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        function sendWhatsAppOrder(e) {
-            e.preventDefault();
-            const name = document.getElementById('custName').value.trim();
-            const phone = document.getElementById('custPhone').value.trim();
-            const city = document.getElementById('custCity').value.trim();
-            const qty = document.getElementById('custQty').value;
-            const myPhoneNumber = "212614060332";
-
-            const message = `السلام عليكم، أرغب في تأكيد طلب منتج من المتجر:%0A%0A` +
-                            `🛍️ *المنتج:* ${selectedProduct}%0A` +
-                            `💰 *السعر:* ${selectedPrice}%0A` +
-                            `🔢 *الكمية:* ${qty}%0A%0A` +
-                            `👤 *اسم المشتري:* ${name}%0A` +
-                            `📞 *رقم الهاتف:* ${phone}%0A` +
-                            `📍 *المدينة والعنوان:* ${city}`;
-
-            window.open(`https://wa.me/${myPhoneNumber}?text=${message}`, '_blank');
-            hideModal('orderModal');
+        function hideModal(id) {
+            document.getElementById(id).style.display = 'none';
         }
     </script>
 </body>
