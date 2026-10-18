@@ -1164,6 +1164,7 @@
                     <div class="admin-grid">
                         <button class="admin-btn success" onclick="setGlobalStatus('false')">فتح الموقع</button>
                         <button class="admin-btn warning" onclick="setGlobalStatus('true')">إغلاق الموقع</button>
+                        <button class="admin-btn" onclick="goToStoreAdmin()">🛒 إدارة المتجر</button>
                         <button class="admin-btn" onclick="changeBioText()">تعديل الوصف</button>
                         <button class="admin-btn" onclick="installPwaApp()">تثبيت التطبيق</button>
                         <button class="admin-btn" onclick="resetStats()">تصفير العداد</button>
@@ -1237,6 +1238,10 @@
         let currentLang = 'ar';
         let cyberClockInterval;
 
+        function goToStoreAdmin() {
+            window.location.href = "store.html?admin=true";
+        }
+
         function toggleSidebar() {
             document.getElementById('sidebarDrawer').classList.toggle('open');
             document.getElementById('sidebarOverlay').classList.toggle('open');
@@ -1284,7 +1289,6 @@
             const customBio = localStorage.getItem('custom_bio') || data.bio;
             typeWriter(customBio);
 
-            // ترجمة الواجهة الرئيسية
             document.getElementById('label-instagram').innerText = data.instagram;
             document.getElementById('label-whatsapp').innerText = data.whatsapp;
             document.getElementById('label-gmail').innerText = data.gmail;
@@ -1293,7 +1297,6 @@
             document.getElementById('label-qr').innerText = data.qr;
             document.getElementById('label-qr-title').innerText = data.qrTitle;
 
-            // ترجمة القائمة الجانبية (التصفح السريع)
             document.getElementById('label-sidebar-title').childNodes[2].nodeValue = " " + data.sidebarTitle;
             document.getElementById('label-sidebar-store').innerText = data.store;
             document.getElementById('label-sidebar-portfolio').innerText = data.portfolio;
@@ -1620,7 +1623,10 @@
 
             switch (cmd) {
                 case 'help':
-                    print("COMMANDS: status, ping, clear, bio, whoami, lock, date, stats");
+                    print("COMMANDS: status, store, ping, clear, bio, whoami, lock, date, stats");
+                    break;
+                case 'store':
+                    goToStoreAdmin();
                     break;
                 case 'status':
                     print("SYSTEM: SECURE | CORE: ONLINE | PROTOCOL: TLS 1.3");
