@@ -37,7 +37,6 @@
             overflow-x: hidden;
         }
 
-        /* زر الأشرطة الثلاثة العائم */
         .menu-toggle-btn {
             position: fixed;
             top: 22px;
@@ -59,10 +58,7 @@
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        html[dir="ltr"] .menu-toggle-btn {
-            right: auto;
-            left: 22px;
-        }
+        html[dir="ltr"] .menu-toggle-btn { right: auto; left: 22px; }
 
         .menu-toggle-btn:hover {
             background: #dc2626;
@@ -71,13 +67,8 @@
             transform: scale(1.08) rotate(90deg);
         }
 
-        .menu-toggle-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: #ffffff;
-        }
+        .menu-toggle-btn svg { width: 20px; height: 20px; fill: #ffffff; }
 
-        /* القائمة الجانبية */
         .sidebar-drawer {
             position: fixed;
             top: 0;
@@ -96,14 +87,7 @@
             box-shadow: -15px 0 35px rgba(0,0,0,0.85);
         }
 
-        html[dir="ltr"] .sidebar-drawer {
-            right: auto;
-            left: -320px;
-            border-left: none;
-            border-right: 1px solid rgba(239, 68, 68, 0.3);
-            transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 15px 0 35px rgba(0,0,0,0.85);
-        }
+        html[dir="ltr"] .sidebar-drawer { right: auto; left: -320px; border-left: none; border-right: 1px solid rgba(239, 68, 68, 0.3); }
 
         .sidebar-drawer.open { right: 0; }
         html[dir="ltr"] .sidebar-drawer.open { left: 0; }
@@ -119,10 +103,7 @@
             transition: opacity 0.3s ease;
         }
 
-        .sidebar-overlay.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .sidebar-overlay.open { opacity: 1; pointer-events: auto; }
 
         .sidebar-header {
             display: flex;
@@ -133,15 +114,7 @@
             margin-bottom: 25px;
         }
 
-        .sidebar-header h3 {
-            font-size: 1.05rem;
-            color: #ef4444;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-        }
-
+        .sidebar-header h3 { font-size: 1.05rem; color: #ef4444; display: flex; align-items: center; gap: 10px; font-weight: 700; }
         .sidebar-header h3 svg { width: 18px; height: 18px; fill: #ef4444; }
 
         .close-sidebar-btn {
@@ -159,18 +132,9 @@
             transition: all 0.2s;
         }
 
-        .close-sidebar-btn:hover {
-            color: #ffffff;
-            background: #dc2626;
-            border-color: #dc2626;
-        }
+        .close-sidebar-btn:hover { color: #ffffff; background: #dc2626; border-color: #dc2626; }
 
-        .sidebar-menu-list {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            flex: 1;
-        }
+        .sidebar-menu-list { display: flex; flex-direction: column; gap: 14px; flex: 1; }
 
         .sidebar-item {
             display: flex;
@@ -188,20 +152,10 @@
             cursor: pointer;
         }
 
-        .sidebar-item:hover {
-            background: rgba(220, 38, 38, 0.22);
-            border-color: rgba(239, 68, 68, 0.55);
-            transform: translateX(-5px);
-        }
-
+        .sidebar-item:hover { background: rgba(220, 38, 38, 0.22); border-color: rgba(239, 68, 68, 0.55); transform: translateX(-5px); }
         html[dir="ltr"] .sidebar-item:hover { transform: translateX(5px); }
 
-        .sidebar-item-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
+        .sidebar-item-info { display: flex; align-items: center; gap: 12px; }
         .sidebar-item svg { width: 18px; height: 18px; fill: #ef4444; }
 
         .badge-soon {
@@ -230,15 +184,7 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-        #maintMatrixCanvas {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.35;
-            pointer-events: none;
-        }
+        #maintMatrixCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.35; pointer-events: none; }
 
         .maint-box {
             position: relative;
@@ -301,23 +247,9 @@
             min-height: 100%;
         }
 
-        #matrixCanvas {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.24;
-            pointer-events: none;
-        }
+        #matrixCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.24; pointer-events: none; }
 
-        .page-back-content {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        .page-back-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 10px; }
 
         .lang-switch {
             display: flex;
@@ -343,20 +275,11 @@
         }
 
         .lang-btn:hover { color: #ffffff; }
-        .lang-btn.active {
-            background: #dc2626;
-            color: #ffffff;
-            box-shadow: 0 2px 10px rgba(220, 38, 38, 0.5);
-        }
+        .lang-btn.active { background: #dc2626; color: #ffffff; box-shadow: 0 2px 10px rgba(220, 38, 38, 0.5); }
 
         .profile { margin-bottom: 24px; }
 
-        .img-container {
-            position: relative;
-            width: 105px;
-            height: 105px;
-            margin: 0 auto 16px auto;
-        }
+        .img-container { position: relative; width: 105px; height: 105px; margin: 0 auto 16px auto; }
 
         .profile-img {
             width: 100%;
@@ -386,54 +309,16 @@
             100% { box-shadow: 0 0 28px rgba(220, 38, 38, 0.7); transform: scale(1.03); }
         }
 
-        .profile h1 {
-            font-size: 1.55rem;
-            font-weight: 800;
-            letter-spacing: 1.2px;
-            margin-bottom: 6px;
-            color: #ffffff;
-            cursor: pointer;
-            user-select: none;
-        }
-
+        .profile h1 { font-size: 1.55rem; font-weight: 800; letter-spacing: 1.2px; margin-bottom: 6px; color: #ffffff; cursor: pointer; user-select: none; }
         .profile h1:hover { color: #ef4444; }
 
-        .profile p {
-            color: #cbd5e1;
-            font-size: 0.9rem;
-            min-height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 500;
-        }
+        .profile p { color: #cbd5e1; font-size: 0.9rem; min-height: 24px; display: flex; align-items: center; justify-content: center; font-weight: 500; }
 
-        .typing-cursor {
-            display: inline-block;
-            background-color: #ef4444;
-            width: 2px;
-            height: 15px;
-            animation: blink 0.7s infinite;
-            margin: 0 4px;
-        }
+        .typing-cursor { display: inline-block; background-color: #ef4444; width: 2px; height: 15px; animation: blink 0.7s infinite; margin: 0 4px; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-bottom: 24px;
-        }
-
-        .link-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .links { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+        .link-wrapper { display: flex; align-items: center; gap: 10px; }
 
         .link-card {
             flex: 1;
@@ -452,13 +337,7 @@
             backdrop-filter: blur(8px);
         }
 
-        .link-card:hover {
-            background: rgba(220, 38, 38, 0.2);
-            border-color: rgba(239, 68, 68, 0.6);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.35);
-        }
-
+        .link-card:hover { background: rgba(220, 38, 38, 0.2); border-color: rgba(239, 68, 68, 0.6); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(220, 38, 38, 0.35); }
         .link-card svg { width: 20px; height: 20px; fill: #ffffff; }
         .link-card span { flex-grow: 1; text-align: center; }
 
@@ -477,22 +356,10 @@
             flex-shrink: 0;
         }
 
-        .copy-btn:hover {
-            background: #dc2626;
-            color: #ffffff;
-            border-color: #dc2626;
-            transform: translateY(-3px);
-        }
-
+        .copy-btn:hover { background: #dc2626; color: #ffffff; border-color: #dc2626; transform: translateY(-3px); }
         .copy-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
-        .action-sec {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 4px;
-            flex-wrap: wrap;
-        }
+        .action-sec { display: flex; justify-content: center; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
 
         .action-btn {
             flex: 1;
@@ -512,23 +379,11 @@
             gap: 6px;
         }
 
-        .action-btn:hover {
-            background: #dc2626;
-            color: #ffffff;
-            border-color: #dc2626;
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
-        }
-
+        .action-btn:hover { background: #dc2626; color: #ffffff; border-color: #dc2626; box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4); }
         .action-btn svg { width: 16px; height: 16px; fill: currentColor; }
 
-        footer {
-            margin-top: 22px;
-            font-size: 0.74rem;
-            color: #64748b;
-            font-weight: 500;
-        }
+        footer { margin-top: 22px; font-size: 0.74rem; color: #64748b; font-weight: 500; }
 
-        /* CYBER OS STYLES */
         .cyber-header {
             display: flex;
             justify-content: space-between;
@@ -550,16 +405,9 @@
             animation: pulse-dot 1.2s infinite ease-in-out;
         }
 
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 0.3; transform: scale(0.9); }
-            50% { opacity: 1; transform: scale(1.15); }
-        }
+        @keyframes pulse-dot { 0%, 100% { opacity: 0.3; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.15); } }
 
-        .cyber-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
-        }
+        .cyber-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
 
         .cyber-stat-box {
             background: rgba(0, 20, 8, 0.75);
@@ -570,27 +418,10 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-        .cyber-stat-box label {
-            font-size: 0.6rem;
-            color: #86efac;
-            display: block;
-            margin-bottom: 2px;
-        }
+        .cyber-stat-box label { font-size: 0.6rem; color: #86efac; display: block; margin-bottom: 2px; }
+        .cyber-stat-box span { font-size: 0.85rem; font-weight: bold; color: #22c55e; }
 
-        .cyber-stat-box span {
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: #22c55e;
-        }
-
-        .cyber-tabs {
-            display: flex;
-            gap: 4px;
-            border-bottom: 1px solid rgba(34, 197, 94, 0.25);
-            padding-bottom: 6px;
-            overflow-x: auto;
-            scrollbar-width: none;
-        }
+        .cyber-tabs { display: flex; gap: 4px; border-bottom: 1px solid rgba(34, 197, 94, 0.25); padding-bottom: 6px; overflow-x: auto; scrollbar-width: none; }
 
         .cyber-tab-btn {
             background: rgba(0, 25, 10, 0.7);
@@ -607,12 +438,7 @@
             white-space: nowrap;
         }
 
-        .cyber-tab-btn:hover, .cyber-tab-btn.active {
-            background: rgba(34, 197, 94, 0.25);
-            color: #ffffff;
-            border-color: #22c55e;
-            box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
-        }
+        .cyber-tab-btn:hover, .cyber-tab-btn.active { background: rgba(34, 197, 94, 0.25); color: #ffffff; border-color: #22c55e; box-shadow: 0 0 10px rgba(34, 197, 94, 0.4); }
 
         .cyber-panel-tab { display: none; min-height: 220px; }
         .cyber-panel-tab.active { display: flex; flex-direction: column; gap: 8px; }
@@ -625,17 +451,8 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-        .tool-title {
-            font-size: 0.74rem;
-            color: #22c55e;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-weight: 600;
-        }
+        .tool-title { font-size: 0.74rem; color: #22c55e; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; }
 
-        /* Toggle Switch Style */
         .toggle-switch-wrapper {
             display: flex;
             align-items: center;
@@ -647,20 +464,9 @@
             margin-bottom: 8px;
         }
 
-        .toggle-label {
-            font-size: 0.82rem;
-            font-weight: bold;
-            color: #22c55e;
-            font-family: 'Courier New', Courier, monospace;
-        }
+        .toggle-label { font-size: 0.82rem; font-weight: bold; color: #22c55e; font-family: 'Courier New', Courier, monospace; }
 
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 48px;
-            height: 24px;
-        }
-
+        .switch { position: relative; display: inline-block; width: 48px; height: 24px; }
         .switch input { opacity: 0; width: 0; height: 0; }
 
         .slider {
@@ -686,16 +492,8 @@
             box-shadow: 0 0 8px #22c55e;
         }
 
-        input:checked + .slider {
-            background-color: rgba(239, 68, 68, 0.3);
-            border-color: #ef4444;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(24px);
-            background-color: #ef4444;
-            box-shadow: 0 0 8px #ef4444;
-        }
+        input:checked + .slider { background-color: rgba(239, 68, 68, 0.3); border-color: #ef4444; }
+        input:checked + .slider:before { transform: translateX(24px); background-color: #ef4444; box-shadow: 0 0 8px #ef4444; }
 
         .pass-output-row { display: flex; gap: 6px; }
 
@@ -743,14 +541,7 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-        .vault-list {
-            max-height: 155px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            scrollbar-width: thin;
-        }
+        .vault-list { max-height: 155px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; scrollbar-width: thin; }
 
         .vault-item {
             background: rgba(0, 25, 7, 0.75);
@@ -765,12 +556,7 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-        .vault-item-content {
-            flex: 1;
-            color: #86efac;
-            word-break: break-all;
-            text-align: right;
-        }
+        .vault-item-content { flex: 1; color: #86efac; word-break: break-all; text-align: right; }
 
         .cyber-term-box {
             background: rgba(0, 0, 0, 0.95);
@@ -785,34 +571,9 @@
             direction: ltr;
         }
 
-        .cyber-term-output {
-            flex: 1;
-            overflow-y: auto;
-            color: #22c55e;
-            font-size: 0.7rem;
-            line-height: 1.45;
-            margin-bottom: 6px;
-        }
-
-        .cyber-term-prompt {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            border-top: 1px dashed rgba(34, 197, 94, 0.3);
-            padding-top: 4px;
-            color: #22c55e;
-            font-size: 0.74rem;
-        }
-
-        .cyber-term-input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #ffffff;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.74rem;
-        }
+        .cyber-term-output { flex: 1; overflow-y: auto; color: #22c55e; font-size: 0.7rem; line-height: 1.45; margin-bottom: 6px; }
+        .cyber-term-prompt { display: flex; align-items: center; gap: 6px; border-top: 1px dashed rgba(34, 197, 94, 0.3); padding-top: 4px; color: #22c55e; font-size: 0.74rem; }
+        .cyber-term-input { flex: 1; background: transparent; border: none; outline: none; color: #ffffff; font-family: 'Courier New', Courier, monospace; font-size: 0.74rem; }
 
         .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
@@ -832,12 +593,7 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-        .admin-btn:hover {
-            background: #22c55e;
-            color: #000;
-            box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
-        }
-
+        .admin-btn:hover { background: #22c55e; color: #000; box-shadow: 0 0 15px rgba(34, 197, 94, 0.6); }
         .admin-btn.danger { background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.5); color: #f87171; grid-column: span 2; }
         .admin-btn.danger:hover { background: #ef4444; color: #ffffff; }
 
@@ -882,16 +638,7 @@
             direction: ltr;
         }
 
-        .terminal-header {
-            color: #22c55e;
-            font-size: 0.82rem;
-            margin-bottom: 14px;
-            border-bottom: 1px dashed rgba(34, 197, 94, 0.4);
-            padding-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-        }
-
+        .terminal-header { color: #22c55e; font-size: 0.82rem; margin-bottom: 14px; border-bottom: 1px dashed rgba(34, 197, 94, 0.4); padding-bottom: 8px; display: flex; justify-content: space-between; }
         .terminal-logs { color: #22c55e; font-size: 0.82rem; line-height: 1.6; margin-bottom: 14px; }
         .terminal-input-row { display: flex; align-items: center; gap: 8px; color: #22c55e; }
         .terminal-input { background: transparent; border: none; color: #fff; font-family: 'Courier New', Courier, monospace; font-size: 1rem; outline: none; flex: 1; letter-spacing: 3px; }
@@ -924,14 +671,7 @@
         .qr-card h3 { font-size: 1.05rem; margin-bottom: 16px; color: #fff; }
         .qr-box { background: #ffffff; padding: 12px; border-radius: 16px; display: inline-block; margin-bottom: 16px; }
 
-        .close-qr {
-            position: absolute;
-            top: 12px;
-            left: 16px;
-            color: #94a3b8;
-            font-size: 1.4rem;
-            cursor: pointer;
-        }
+        .close-qr { position: absolute; top: 12px; left: 16px; color: #94a3b8; font-size: 1.4rem; cursor: pointer; }
 
         .toast {
             position: fixed;
@@ -955,7 +695,6 @@
 </head>
 <body>
 
-    <!-- زر القائمة العائم -->
     <button class="menu-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Menu">
         <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
     </button>
@@ -972,7 +711,8 @@
         </div>
 
         <div class="sidebar-menu-list">
-            <a href="store.html" class="sidebar-item" onclick="trackInteraction()">
+            <!-- تم ربط زر المتجر بدالة التحقق السحابي -->
+            <a href="store.html" class="sidebar-item" onclick="handleStoreMenuClick(event)">
                 <div class="sidebar-item-info">
                     <svg viewBox="0 0 24 24"><path d="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z"/></svg>
                     <span id="label-sidebar-store">المتجر الإلكتروني</span>
@@ -1002,7 +742,6 @@
         </div>
     </aside>
 
-    <!-- شاشة إغلاق الموقع للصيانة -->
     <div class="maint-screen" id="maintScreen">
         <canvas id="maintMatrixCanvas"></canvas>
         <div class="maint-box" onclick="checkAdminAccess()">
@@ -1158,7 +897,6 @@
                 </div>
 
                 <div class="cyber-panel-tab" id="tab-control">
-                    <!-- مفتاح إغلاق وفتح الموقع المطور والجديد (سحابي) -->
                     <div class="toggle-switch-wrapper">
                         <span class="toggle-label" id="maintStatusText">وضع الصيانة مغلق (الموقع مفتوح)</span>
                         <label class="switch">
@@ -1213,7 +951,6 @@
     <div class="toast" id="toast">تم النسخ بنجاح!</div>
 
     <script>
-        // إعدادات الاتصال السحابي (JSONBin)
         const BIN_ID = '6ad4bd4effd5d1605375c100';
         const API_KEY = '$2a$10$Djxcb/OoBHXzsfltv.zIl.NeUl2/lBJTL8smk6/g0Q7pxEQeP.eZK';
 
@@ -1245,6 +982,50 @@
 
         function goToStoreAdmin() {
             window.location.href = "store.html?admin=true";
+        }
+
+        // فحص حالة المتجر سحابياً عند الضغط عليه من القائمة الجانبية
+        async function handleStoreMenuClick(e) {
+            e.preventDefault();
+            trackInteraction();
+
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                    headers: { 'X-Master-Key': API_KEY }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    const isStoreClosed = data.record.store_maint === true;
+
+                    if (isStoreClosed) {
+                        showToast('⚠️ المتجر مغلق حالياً للتحديثات الجذرية والصيانة!');
+                        closeSidebar();
+                        return;
+                    }
+                }
+            } catch (err) {
+                console.error("خطأ في التحقق من حالة المتجر:", err);
+            }
+
+            window.location.href = "store.html";
+        }
+
+        // الكشف التلقائي عن لغة الهاتف
+        function detectUserLanguage() {
+            const savedLang = localStorage.getItem('user_preferred_lang');
+            if (savedLang && translations[savedLang]) {
+                setLanguage(savedLang);
+                return;
+            }
+
+            const browserLang = navigator.language || navigator.userLanguage;
+            let selectedLang = 'ar';
+
+            if (browserLang.startsWith('fr')) selectedLang = 'fr';
+            else if (browserLang.startsWith('en')) selectedLang = 'en';
+            else if (browserLang.startsWith('ber') || browserLang.startsWith('zgh')) selectedLang = 'ber';
+
+            setLanguage(selectedLang);
         }
 
         function toggleSidebar() {
@@ -1284,8 +1065,9 @@
         }
 
         function setLanguage(lang, evt) {
-            trackInteraction();
+            if (evt) trackInteraction();
             currentLang = lang;
+            localStorage.setItem('user_preferred_lang', lang);
             const data = translations[lang] || translations['ar'];
             document.documentElement.dir = data.dir;
             document.documentElement.lang = lang;
@@ -1311,8 +1093,16 @@
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             if (evt && evt.currentTarget) {
                 evt.currentTarget.classList.add('active');
-            } else if (evt && evt.target) {
-                evt.target.classList.add('active');
+            } else {
+                // تفعيل الزر المناسب تلقائياً حسب اللغة
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    if ((lang === 'ar' && btn.textContent.includes('العربية')) ||
+                        (lang === 'en' && btn.textContent.includes('English')) ||
+                        (lang === 'fr' && btn.textContent.includes('Français')) ||
+                        (lang === 'ber' && btn.textContent.includes('ⵜⴰⵎⴰⵣⵉⵖⵜ'))) {
+                        btn.classList.add('active');
+                    }
+                });
             }
         }
 
@@ -1332,9 +1122,7 @@
             toast.textContent = message;
             toast.classList.add('show');
             clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => { 
-                toast.classList.remove('show'); 
-            }, 2200);
+            toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 2200);
         }
 
         function copyToClipboard(text) {
@@ -1354,10 +1142,7 @@
             document.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
-            try {
-                document.execCommand('copy');
-                showToast();
-            } catch (err) {}
+            try { document.execCommand('copy'); showToast(); } catch (err) {}
             document.body.removeChild(textArea);
         }
 
@@ -1381,36 +1166,21 @@
             qrModal.style.display = 'flex';
             if (!qrCodeInstance) {
                 qrCodeInstance = new QRCode(document.getElementById("qrcode"), {
-                    text: window.location.href,
-                    width: 170,
-                    height: 170,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H
+                    text: window.location.href, width: 170, height: 170, colorDark: "#000000", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H
                 });
             }
         }
 
-        function closeQrModal(e) {
-            if (e.target.id === 'qrModal') document.getElementById('qrModal').style.display = 'none';
-        }
-
-        function closeQrModalDirect() {
-            document.getElementById('qrModal').style.display = 'none';
-        }
+        function closeQrModal(e) { if (e.target.id === 'qrModal') document.getElementById('qrModal').style.display = 'none'; }
+        function closeQrModalDirect() { document.getElementById('qrModal').style.display = 'none'; }
 
         let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-        });
+        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
 
         function installPwaApp() {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
-                deferredPrompt.userChoice.then(() => {
-                    deferredPrompt = null;
-                });
+                deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
             } else {
                 alert('التطبيق مثبت بالفعل أو أن متصفحك لا يدعم التثبيت المباشر.');
             }
@@ -1430,42 +1200,23 @@
             }
         }
 
-        function closeTerminal() {
-            document.getElementById('hackerTerminal').style.display = 'none';
-            document.getElementById('terminalInput').value = '';
-        }
+        function closeTerminal() { document.getElementById('hackerTerminal').style.display = 'none'; document.getElementById('terminalInput').value = ''; }
 
         function utf8ToBase64(str) {
-            return window.btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (match, p1) => 
-                String.fromCharCode(parseInt(p1, 16))
-            ));
+            return window.btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode(parseInt(p1, 16))));
         }
 
         function base64ToUtf8(str) {
-            try {
-                return decodeURIComponent(Array.prototype.map.call(window.atob(str), (c) => 
-                    '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-                ).join(''));
-            } catch (e) {
-                return '';
-            }
+            try { return decodeURIComponent(Array.prototype.map.call(window.atob(str), (c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')); } catch (e) { return ''; }
         }
 
         function escapeHTML(str) {
-            return str.replace(/[&<>'"]/g, tag => ({
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                "'": '&#39;',
-                '"': '&quot;'
-            }[tag] || tag));
+            return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
         }
 
         function recordFailedAttempt() {
             let logs = [];
-            try {
-                logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]');
-            } catch (e) { logs = []; }
+            try { logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); } catch (e) { logs = []; }
             const now = new Date();
             logs.unshift(`[INTRUSION_ALERT]: ${now.toLocaleTimeString()}`);
             if (logs.length > 5) logs.pop();
@@ -1474,40 +1225,27 @@
 
         function displaySecurityLogs() {
             let logs = [];
-            try {
-                logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]');
-            } catch (e) { logs = []; }
-            document.getElementById('securityLogs').innerHTML = logs.length === 0 
-                ? 'ALL SYSTEMS NOMINAL // NO INTRUSIONS' 
-                : logs.map(escapeHTML).join('<br>');
+            try { logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); } catch (e) { logs = []; }
+            document.getElementById('securityLogs').innerHTML = logs.length === 0 ? 'ALL SYSTEMS NOMINAL // NO INTRUSIONS' : logs.map(escapeHTML).join('<br>');
         }
 
         function switchCyberTab(tabName, btn) {
             document.querySelectorAll('.cyber-tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.cyber-panel-tab').forEach(p => p.classList.remove('active'));
-            
             btn.classList.add('active');
             const target = document.getElementById('tab-' + tabName);
             if (target) target.classList.add('active');
-
-            if (tabName === 'terminal') {
-                setTimeout(() => document.getElementById('cyberConsoleInput').focus(), 50);
-            }
+            if (tabName === 'terminal') setTimeout(() => document.getElementById('cyberConsoleInput').focus(), 50);
         }
 
         function generateCyberPass() {
             const charset = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%^&*()_+~|}{[]:?";
             let password = "";
-            for (let i = 0; i < 16; i++) {
-                password += charset.charAt(Math.floor(Math.random() * charset.length));
-            }
+            for (let i = 0; i < 16; i++) password += charset.charAt(Math.floor(Math.random() * charset.length));
             document.getElementById('generatedPassword').value = password;
         }
 
-        function copyCyberPass() {
-            const val = document.getElementById('generatedPassword').value;
-            if (val) copyToClipboard(val);
-        }
+        function copyCyberPass() { const val = document.getElementById('generatedPassword').value; if (val) copyToClipboard(val); }
 
         function hashInputText() {
             const input = document.getElementById('hashInput');
@@ -1521,16 +1259,9 @@
             const input = document.getElementById('hashInput');
             let val = input.value.trim();
             if (!val) return;
-            if (val.startsWith('ENC[') && val.endsWith(']')) {
-                val = val.substring(4, val.length - 1);
-            }
+            if (val.startsWith('ENC[') && val.endsWith(']')) val = val.substring(4, val.length - 1);
             const decoded = base64ToUtf8(val);
-            if (decoded) {
-                input.value = decoded;
-                showToast('تم فك التشفير بنجاح!');
-            } else {
-                alert('فشل فك النص!');
-            }
+            if (decoded) { input.value = decoded; showToast('تم فك التشفير بنجاح!'); } else { alert('فشل فك النص!'); }
         }
 
         function loadSecretItems() {
@@ -1550,31 +1281,20 @@
             items.forEach((item, index) => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'vault-item';
-                
                 const contentDiv = document.createElement('div');
                 contentDiv.className = 'vault-item-content';
                 contentDiv.textContent = item;
 
                 const actionsDiv = document.createElement('div');
-                actionsDiv.className = 'vault-item-actions';
-
                 const copyBtn = document.createElement('button');
-                copyBtn.className = 'mini-btn';
-                copyBtn.innerText = 'نسخ';
-                copyBtn.onclick = () => copyToClipboard(item);
+                copyBtn.className = 'mini-btn'; copyBtn.innerText = 'نسخ'; copyBtn.onclick = () => copyToClipboard(item);
 
                 const deleteBtn = document.createElement('button');
-                deleteBtn.className = 'mini-btn';
-                deleteBtn.style.borderColor = '#ef4444';
-                deleteBtn.style.color = '#ef4444';
-                deleteBtn.innerText = 'حذف';
-                deleteBtn.onclick = () => deleteSecretItem(index);
+                deleteBtn.className = 'mini-btn'; deleteBtn.style.borderColor = '#ef4444'; deleteBtn.style.color = '#ef4444';
+                deleteBtn.innerText = 'حذف'; deleteBtn.onclick = () => deleteSecretItem(index);
 
-                actionsDiv.appendChild(copyBtn);
-                actionsDiv.appendChild(deleteBtn);
-                itemDiv.appendChild(contentDiv);
-                itemDiv.appendChild(actionsDiv);
-
+                actionsDiv.appendChild(copyBtn); actionsDiv.appendChild(deleteBtn);
+                itemDiv.appendChild(contentDiv); itemDiv.appendChild(actionsDiv);
                 container.appendChild(itemDiv);
             });
         }
@@ -1583,13 +1303,11 @@
             const input = document.getElementById('vaultItemInput');
             const val = input.value.trim();
             if (!val) return;
-            
             let items = [];
             try {
                 const raw = localStorage.getItem('adnan_multi_vault');
                 if (raw) items = JSON.parse(base64ToUtf8(raw));
             } catch (e) { items = []; }
-
             items.unshift(val);
             localStorage.setItem('adnan_multi_vault', utf8ToBase64(JSON.stringify(items)));
             input.value = '';
@@ -1603,66 +1321,36 @@
                 const raw = localStorage.getItem('adnan_multi_vault');
                 if (raw) items = JSON.parse(base64ToUtf8(raw));
             } catch (e) { items = []; }
-
             items.splice(index, 1);
             localStorage.setItem('adnan_multi_vault', utf8ToBase64(JSON.stringify(items)));
             loadSecretItems();
         }
 
         document.getElementById('cyberConsoleInput').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                const cmd = this.value.trim().toLowerCase();
-                this.value = '';
-                executeCyberCommand(cmd);
-            }
+            if (e.key === 'Enter') { const cmd = this.value.trim().toLowerCase(); this.value = ''; executeCyberCommand(cmd); }
         });
 
         function executeCyberCommand(cmd) {
             const out = document.getElementById('cyberTermOutput');
-            const print = (text) => {
-                out.innerHTML += `&gt; ${text}<br>`;
-                out.scrollTop = out.scrollHeight;
-            };
-
+            const print = (text) => { out.innerHTML += `&gt; ${text}<br>`; out.scrollTop = out.scrollHeight; };
             print(`<span style="color:#ffffff;">root@akma:~$ ${escapeHTML(cmd)}</span>`);
-
             switch (cmd) {
-                case 'help':
-                    print("COMMANDS: status, store, ping, clear, bio, whoami, lock, date, stats");
-                    break;
-                case 'store':
-                    goToStoreAdmin();
-                    break;
-                case 'status':
-                    print("SYSTEM: SECURE | CORE: ONLINE | PROTOCOL: TLS 1.3");
-                    break;
+                case 'help': print("COMMANDS: status, store, ping, clear, bio, whoami, lock, date, stats"); break;
+                case 'store': goToStoreAdmin(); break;
+                case 'status': print("SYSTEM: SECURE | CORE: ONLINE | PROTOCOL: TLS 1.3"); break;
                 case 'ping':
                     const p = Math.floor(Math.random() * 20) + 12;
                     document.getElementById('cyberPing').innerText = p + 'ms';
                     print(`REPLY FROM HOST: time=${p}ms TTL=64`);
                     break;
-                case 'stats':
-                    print(`VISITS: ${document.getElementById('visits-count').innerText} | CLICKS: ${interactionClicks}`);
-                    break;
-                case 'clear':
-                    out.innerHTML = '';
-                    break;
-                case 'whoami':
-                    print("OPERATOR: ADNANE AKDIM // AKMA ADMIN");
-                    break;
-                case 'lock':
-                    flipBackToPublic();
-                    break;
-                case 'date':
-                    print(new Date().toUTCString());
-                    break;
-                case 'bio':
-                    print(`CURRENT BIO: "${localStorage.getItem('custom_bio') || translations[currentLang].bio}"`);
-                    break;
-                case '':
-                    break;
-                default:
-                    print(`COMMAND NOT FOUND: ${escapeHTML(cmd)}.`);
+                case 'stats': print(`VISITS: ${document.getElementById('visits-count').innerText} | CLICKS: ${interactionClicks}`); break;
+                case 'clear': out.innerHTML = ''; break;
+                case 'whoami': print("OPERATOR: ADNANE AKDIM // AKMA ADMIN"); break;
+                case 'lock': flipBackToPublic(); break;
+                case 'date': print(new Date().toUTCString()); break;
+                case 'bio': print(`CURRENT BIO: "${localStorage.getItem('custom_bio') || translations[currentLang].bio}"`); break;
+                case '': break;
+                default: print(`COMMAND NOT FOUND: ${escapeHTML(cmd)}.`);
             }
         }
 
@@ -1674,7 +1362,6 @@
             }, 1000);
         }
 
-        // --- نظام التحكم السحابي الموحد لفتح وإغلاق الموقع ---
         async function checkGlobalMaintenance() {
             try {
                 const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
@@ -1683,37 +1370,27 @@
                 if (res.ok) {
                     const data = await res.json();
                     const isMaint = data.record.maint === true;
-                    
                     const toggleInput = document.getElementById('maintToggle');
                     if (toggleInput) toggleInput.checked = isMaint;
                     updateMaintUI(isMaint);
                 }
-            } catch (e) {
-                console.error("خطأ في جلب حالة الصيانة السحابية:", e);
-            }
+            } catch (e) { console.error("خطأ:", e); }
         }
 
         async function toggleMaintenanceMode(isMaint) {
             updateMaintUI(isMaint);
-
             try {
+                const getRes = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { headers: { 'X-Master-Key': API_KEY } });
+                let currentData = getRes.ok ? (await getRes.json()).record : {};
+                currentData.maint = isMaint;
+
                 const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
                     method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Master-Key': API_KEY
-                    },
-                    body: JSON.stringify({ maint: isMaint })
+                    headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+                    body: JSON.stringify(currentData)
                 });
-
-                if (res.ok) {
-                    showToast(isMaint ? 'تم إغلاق الموقع لجميع الزوار 🔴' : 'تم فتح الموقع للجميع 🟢');
-                } else {
-                    alert('خطأ في التحديث السحابي!');
-                }
-            } catch (e) {
-                alert('حدث خطأ أثناء الاتصال بالسحاب');
-            }
+                if (res.ok) showToast(isMaint ? 'تم إغلاق الموقع لجميع الزوار 🔴' : 'تم فتح الموقع للجميع 🟢');
+            } catch (e) { alert('خطأ في الاتصال بالسحاب'); }
         }
 
         function updateMaintUI(isMaint) {
@@ -1722,15 +1399,9 @@
                 txt.innerText = isMaint ? "وضع الصيانة مفعل (الموقع مغلق)" : "وضع الصيانة مغلق (الموقع مفتوح)";
                 txt.style.color = isMaint ? "#ef4444" : "#22c55e";
             }
-            
             const screen = document.getElementById('maintScreen');
-            if (isMaint) {
-                screen.style.display = 'flex';
-                startMaintMatrixEffect();
-            } else {
-                screen.style.display = 'none';
-                stopMaintMatrixEffect();
-            }
+            if (isMaint) { screen.style.display = 'flex'; startMaintMatrixEffect(); }
+            else { screen.style.display = 'none'; stopMaintMatrixEffect(); }
         }
 
         const charsMatrix = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
@@ -1740,22 +1411,15 @@
             const canvas = document.getElementById('maintMatrixCanvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            const fontSize = 14;
-            const columns = Math.floor(canvas.width / fontSize);
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            const fontSize = 14; const columns = Math.floor(canvas.width / fontSize);
             const drops = Array(columns).fill(1);
-
             cancelAnimationFrame(maintMatrixFrame);
             let lastDraw = 0;
-
             function draw(time) {
                 if (time - lastDraw > 40) {
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = '#22c55e';
-                    ctx.font = fontSize + 'px monospace';
-
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = '#22c55e'; ctx.font = fontSize + 'px monospace';
                     for (let i = 0; i < drops.length; i++) {
                         ctx.fillText(charsMatrix.charAt(Math.floor(Math.random() * charsMatrix.length)), i * fontSize, drops[i] * fontSize);
                         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
@@ -1775,22 +1439,15 @@
             const canvas = document.getElementById('matrixCanvas');
             if (!canvas || !canvas.parentElement) return;
             const ctx = canvas.getContext('2d');
-            canvas.width = canvas.parentElement.offsetWidth;
-            canvas.height = canvas.parentElement.offsetHeight;
-            const fontSize = 12;
-            const columns = Math.floor(canvas.width / fontSize);
+            canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight;
+            const fontSize = 12; const columns = Math.floor(canvas.width / fontSize);
             const drops = Array(columns).fill(1);
-
             cancelAnimationFrame(matrixFrame);
             let lastDraw = 0;
-
             function draw(time) {
                 if (time - lastDraw > 40) {
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = '#22c55e';
-                    ctx.font = fontSize + 'px monospace';
-
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = '#22c55e'; ctx.font = fontSize + 'px monospace';
                     for (let i = 0; i < drops.length; i++) {
                         ctx.fillText(charsMatrix.charAt(Math.floor(Math.random() * charsMatrix.length)), i * fontSize, drops[i] * fontSize);
                         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
@@ -1819,14 +1476,8 @@
                     displaySecurityLogs();
                     startMatrixEffect();
                     startCyberClock();
-                } else {
-                    recordFailedAttempt();
-                    alert('ACCESS DENIED!');
-                    this.value = '';
-                }
-            } else if (e.key === 'Escape') {
-                closeTerminal();
-            }
+                } else { recordFailedAttempt(); alert('ACCESS DENIED!'); this.value = ''; }
+            } else if (e.key === 'Escape') { closeTerminal(); }
         });
 
         function flipBackToPublic() {
@@ -1840,11 +1491,8 @@
             let newBio = prompt("أدخل النص الترحيبي الجديد:");
             if (newBio !== null) {
                 newBio = newBio.trim();
-                if (newBio) {
-                    localStorage.setItem('custom_bio', newBio);
-                } else {
-                    localStorage.removeItem('custom_bio');
-                }
+                if (newBio) localStorage.setItem('custom_bio', newBio);
+                else localStorage.removeItem('custom_bio');
                 clearTimeout(typingTimeout);
                 document.getElementById('bio').textContent = '';
                 typeWriter(newBio || translations[currentLang].bio);
@@ -1869,7 +1517,8 @@
         window.addEventListener('DOMContentLoaded', () => {
             checkGlobalMaintenance();
             trackVisits();
-            typeWriter(localStorage.getItem('custom_bio') || translations['ar'].bio);
+            detectUserLanguage(); // تفعيل الكشف التلقائي عن لغة الهاتف
+            typeWriter(localStorage.getItem('custom_bio') || translations[currentLang].bio);
             document.getElementById('clicks-count').innerText = interactionClicks;
         });
     </script>
