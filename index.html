@@ -1158,7 +1158,7 @@
                 </div>
 
                 <div class="cyber-panel-tab" id="tab-control">
-                    <!-- مفتاح إغلاق وفتح الموقع المطور والجديد -->
+                    <!-- مفتاح إغلاق وفتح الموقع المطور والجديد (سحابي) -->
                     <div class="toggle-switch-wrapper">
                         <span class="toggle-label" id="maintStatusText">وضع الصيانة مغلق (الموقع مفتوح)</span>
                         <label class="switch">
@@ -1213,6 +1213,10 @@
     <div class="toast" id="toast">تم النسخ بنجاح!</div>
 
     <script>
+        // إعدادات الاتصال السحابي (JSONBin)
+        const BIN_ID = '6ad4bd4effd5d1605375c100';
+        const API_KEY = '$2a$10$Djxcb/OoBHXzsfltv.zIl.NeUl2/lBJTL8smk6/g0Q7pxEQeP.eZK';
+
         const translations = {
             ar: { 
                 dir: 'rtl', bio: 'مرحباً بكم في صفحتي الشخصية', instagram: 'إنستغرام', whatsapp: 'واتساب', gmail: 'البريد الإلكتروني', share: 'مشاركة', save: 'حفظ الاتصال', qr: 'رمز QR', qrTitle: 'امسح الرمز لزيارة الصفحة',
@@ -1670,11 +1674,46 @@
             }, 1000);
         }
 
-        // --- الميزة المحدثة لتفعيل/إيقاف وضع الصيانة وإغلاق الموقع فورياً ---
-        function toggleMaintenanceMode(isMaint) {
-            localStorage.setItem('akma_site_maint', isMaint ? 'true' : 'false');
+        // --- نظام التحكم السحابي الموحد لفتح وإغلاق الموقع ---
+        async function checkGlobalMaintenance() {
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                    headers: { 'X-Master-Key': API_KEY }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    const isMaint = data.record.maint === true;
+                    
+                    const toggleInput = document.getElementById('maintToggle');
+                    if (toggleInput) toggleInput.checked = isMaint;
+                    updateMaintUI(isMaint);
+                }
+            } catch (e) {
+                console.error("خطأ في جلب حالة الصيانة السحابية:", e);
+            }
+        }
+
+        async function toggleMaintenanceMode(isMaint) {
             updateMaintUI(isMaint);
-            showToast(isMaint ? 'تم تفعيل وضع الصيانة (الموقع مغلق)' : 'تم إيقاف الصيانة (الموقع مفتوح)');
+
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': API_KEY
+                    },
+                    body: JSON.stringify({ maint: isMaint })
+                });
+
+                if (res.ok) {
+                    showToast(isMaint ? 'تم إغلاق الموقع لجميع الزوار 🔴' : 'تم فتح الموقع للجميع 🟢');
+                } else {
+                    alert('خطأ في التحديث السحابي!');
+                }
+            } catch (e) {
+                alert('حدث خطأ أثناء الاتصال بالسحاب');
+            }
         }
 
         function updateMaintUI(isMaint) {
@@ -1692,13 +1731,6 @@
                 screen.style.display = 'none';
                 stopMaintMatrixEffect();
             }
-        }
-
-        function checkGlobalMaintenance() {
-            const isMaint = localStorage.getItem('akma_site_maint') === 'true';
-            const toggleInput = document.getElementById('maintToggle');
-            if (toggleInput) toggleInput.checked = isMaint;
-            updateMaintUI(isMaint);
         }
 
         const charsMatrix = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
