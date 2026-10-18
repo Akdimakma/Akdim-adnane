@@ -1117,13 +1117,52 @@
             }
         }
 
-        function showToast(message = 'تم النسخ بنجاح!') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 2200);
+            <style>
+        /* تصميم التنبيه الجانبي العائم الجديد */
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: -100%;
+            background: linear-gradient(135deg, rgba(20, 10, 15, 0.95), rgba(40, 10, 15, 0.98));
+            border: 1px solid rgba(239, 68, 68, 0.7);
+            border-right: 5px solid #ef4444;
+            color: #ffffff;
+            padding: 16px 22px;
+            border-radius: 18px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(220, 38, 38, 0.4);
+            z-index: 10000;
+            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            opacity: 0;
+            max-width: 340px;
+            width: 90%;
+            text-align: right;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
+
+        html[dir="ltr"] .toast {
+            right: auto;
+            left: -100%;
+            border-right: 1px solid rgba(239, 68, 68, 0.7);
+            border-left: 5px solid #ef4444;
+            text-align: left;
+            transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+        }
+
+        .toast.show {
+            right: 20px;
+            opacity: 1;
+        }
+
+        html[dir="ltr"] .toast.show {
+            left: 20px;
+            right: auto;
+            opacity: 1;
+        }
+    </style>
+
 
         function copyToClipboard(text) {
             trackInteraction();
