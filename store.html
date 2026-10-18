@@ -517,7 +517,7 @@
 <body>
 
     <div class="container">
-        <!-- زر تغيير اللغات داخل المتجر -->
+        <!-- شريط اللغات -->
         <div class="lang-switch">
             <button class="lang-btn active" onclick="setLanguage('ar', event)">العربية</button>
             <button class="lang-btn" onclick="setLanguage('en', event)">English</button>
@@ -527,8 +527,8 @@
 
         <header>
             <a href="index.html" class="brand-logo">AKMA <span>STORE</span></a>
-            <div class="header-actions">
-                <button class="btn-icon" id="adminHeaderBtn" style="display:none;" onclick="openAdminModal()">⚙️ الإدارة</button>
+            <div class="header-actions" id="headerActions">
+                <!-- تم إزالة زر الإدارة هنا برمجياً ولن ينشأ إلا لصاحب المتجر فقط -->
                 <a href="index.html" class="btn-icon" id="label-home">الرئيسية</a>
             </div>
         </header>
@@ -721,9 +721,20 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
+            
+            // التحقق الجذري من الدخول كأدمن
             if (urlParams.get('admin') === 'true') {
                 isAdmin = true;
-                document.getElementById('adminHeaderBtn').style.display = 'inline-flex';
+                
+                // إنشاء زر الإدارة في الهيدر ديناميكياً فقط عند ثبوت صلاحيات المسؤول
+                const actionsContainer = document.getElementById('headerActions');
+                const adminBtn = document.createElement('button');
+                adminBtn.className = 'btn-icon';
+                adminBtn.innerHTML = '⚙️ الإدارة';
+                adminBtn.onclick = openAdminModal;
+                actionsContainer.insertBefore(adminBtn, actionsContainer.firstChild);
+
+                openAdminModal();
             }
 
             renderStore();
