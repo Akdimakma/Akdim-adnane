@@ -205,7 +205,7 @@
 
         .book-card {
             width: 100%;
-            max-width: 430px;
+            max-width: 440px;
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.85s cubic-bezier(0.23, 1, 0.32, 1);
@@ -217,7 +217,7 @@
         .page-front, .page-back {
             width: 100%;
             border-radius: 28px;
-            padding: 32px 24px;
+            padding: 28px 22px;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
         }
@@ -238,18 +238,19 @@
             top: 0;
             left: 0;
             transform: rotateY(180deg);
-            background: rgba(4, 10, 6, 0.95);
-            border: 1px solid rgba(34, 197, 94, 0.7);
-            box-shadow: 0 0 40px rgba(34, 197, 94, 0.25);
+            background: rgba(4, 8, 12, 0.94);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(34, 197, 94, 0.6);
+            box-shadow: 0 0 50px rgba(34, 197, 94, 0.25), inset 0 0 15px rgba(34, 197, 94, 0.1);
             overflow: hidden;
             text-align: right;
             direction: rtl;
             min-height: 100%;
         }
 
-        #matrixCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.24; pointer-events: none; }
+        #matrixCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.22; pointer-events: none; }
 
-        .page-back-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 10px; }
+        .page-back-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 9px; }
 
         .lang-switch {
             display: flex;
@@ -459,9 +460,8 @@
             justify-content: space-between;
             background: rgba(0, 25, 10, 0.85);
             border: 1px solid rgba(34, 197, 94, 0.4);
-            padding: 12px 14px;
+            padding: 10px 14px;
             border-radius: 12px;
-            margin-bottom: 8px;
         }
 
         .toggle-label { font-size: 0.82rem; font-weight: bold; color: #22c55e; font-family: 'Courier New', Courier, monospace; }
@@ -541,7 +541,7 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-        .vault-list { max-height: 155px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; scrollbar-width: thin; }
+        .vault-list { max-height: 165px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; scrollbar-width: thin; }
 
         .vault-item {
             background: rgba(0, 25, 7, 0.75);
@@ -675,22 +675,46 @@
 
         .toast {
             position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: rgba(220, 38, 38, 0.95);
+            bottom: 25px;
+            right: -100%;
+            background: linear-gradient(135deg, rgba(20, 10, 15, 0.95), rgba(40, 10, 15, 0.98));
+            border: 1px solid rgba(239, 68, 68, 0.7);
+            border-right: 5px solid #ef4444;
             color: #ffffff;
-            padding: 9px 20px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            box-shadow: 0 0 20px rgba(220, 38, 38, 0.6);
+            padding: 16px 22px;
+            border-radius: 18px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(220, 38, 38, 0.4);
+            z-index: 10000;
+            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
             opacity: 0;
-            pointer-events: none;
-            z-index: 1000;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            max-width: 340px;
+            width: 90%;
+            text-align: right;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
-        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+
+        html[dir="ltr"] .toast {
+            right: auto;
+            left: -100%;
+            border-right: 1px solid rgba(239, 68, 68, 0.7);
+            border-left: 5px solid #ef4444;
+            text-align: left;
+            transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+        }
+
+        .toast.show {
+            right: 20px;
+            opacity: 1;
+        }
+
+        html[dir="ltr"] .toast.show {
+            left: 20px;
+            right: auto;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -711,7 +735,6 @@
         </div>
 
         <div class="sidebar-menu-list">
-            <!-- تم ربط زر المتجر بدالة التحقق السحابي -->
             <a href="store.html" class="sidebar-item" onclick="handleStoreMenuClick(event)">
                 <div class="sidebar-item-info">
                     <svg viewBox="0 0 24 24"><path d="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z"/></svg>
@@ -948,7 +971,7 @@
         </div>
     </div>
 
-    <div class="toast" id="toast">تم النسخ بنجاح!</div>
+    <div class="toast" id="toast">تم الإجراء بنجاح!</div>
 
     <script>
         const BIN_ID = '6ad4bd4effd5d1605375c100';
@@ -980,11 +1003,22 @@
         let currentLang = 'ar';
         let cyberClockInterval;
 
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            if (msg) toast.innerText = msg;
+            else toast.innerText = (currentLang === 'ar') ? 'تم النسخ بنجاح!' : 'Copied successfully!';
+            
+            toast.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2600);
+        }
+
         function goToStoreAdmin() {
             window.location.href = "store.html?admin=true";
         }
 
-        // فحص حالة المتجر سحابياً عند الضغط عليه من القائمة الجانبية
         async function handleStoreMenuClick(e) {
             e.preventDefault();
             trackInteraction();
@@ -1010,7 +1044,6 @@
             window.location.href = "store.html";
         }
 
-        // الكشف التلقائي عن لغة الهاتف
         function detectUserLanguage() {
             const savedLang = localStorage.getItem('user_preferred_lang');
             if (savedLang && translations[savedLang]) {
@@ -1094,7 +1127,6 @@
             if (evt && evt.currentTarget) {
                 evt.currentTarget.classList.add('active');
             } else {
-                // تفعيل الزر المناسب تلقائياً حسب اللغة
                 document.querySelectorAll('.lang-btn').forEach(btn => {
                     if ((lang === 'ar' && btn.textContent.includes('العربية')) ||
                         (lang === 'en' && btn.textContent.includes('English')) ||
@@ -1116,53 +1148,6 @@
                 copyToClipboard(window.location.href);
             }
         }
-
-            <style>
-        /* تصميم التنبيه الجانبي العائم الجديد */
-        .toast {
-            position: fixed;
-            bottom: 25px;
-            right: -100%;
-            background: linear-gradient(135deg, rgba(20, 10, 15, 0.95), rgba(40, 10, 15, 0.98));
-            border: 1px solid rgba(239, 68, 68, 0.7);
-            border-right: 5px solid #ef4444;
-            color: #ffffff;
-            padding: 16px 22px;
-            border-radius: 18px;
-            font-size: 0.92rem;
-            font-weight: 700;
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(220, 38, 38, 0.4);
-            z-index: 10000;
-            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
-            opacity: 0;
-            max-width: 340px;
-            width: 90%;
-            text-align: right;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
-
-        html[dir="ltr"] .toast {
-            right: auto;
-            left: -100%;
-            border-right: 1px solid rgba(239, 68, 68, 0.7);
-            border-left: 5px solid #ef4444;
-            text-align: left;
-            transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
-        }
-
-        .toast.show {
-            right: 20px;
-            opacity: 1;
-        }
-
-        html[dir="ltr"] .toast.show {
-            left: 20px;
-            right: auto;
-            opacity: 1;
-        }
-    </style>
-
 
         function copyToClipboard(text) {
             trackInteraction();
@@ -1556,7 +1541,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             checkGlobalMaintenance();
             trackVisits();
-            detectUserLanguage(); // تفعيل الكشف التلقائي عن لغة الهاتف
+            detectUserLanguage();
             typeWriter(localStorage.getItem('custom_bio') || translations[currentLang].bio);
             document.getElementById('clicks-count').innerText = interactionClicks;
         });
