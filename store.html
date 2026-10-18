@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AKMA STORE | المتجر الإلكتروني</title>
+    <title>AKMA STORE | Storefront</title>
     <meta name="theme-color" content="#dc2626">
 
     <style>
@@ -29,7 +29,6 @@
             margin: 0 auto;
         }
 
-        /* Header */
         header {
             display: flex;
             justify-content: space-between;
@@ -54,22 +53,29 @@
 
         .brand-logo span { color: #ef4444; }
 
-        .back-btn {
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .action-btn {
             background: rgba(220, 38, 38, 0.15);
             border: 1px solid rgba(239, 68, 68, 0.4);
             color: #f87171;
-            padding: 8px 16px;
+            padding: 8px 14px;
             border-radius: 12px;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .back-btn:hover {
+        .action-btn:hover {
             background: #dc2626;
             color: #ffffff;
             box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
@@ -90,6 +96,31 @@
         .page-title p {
             color: #94a3b8;
             font-size: 0.9rem;
+        }
+
+        /* حالة اغلاق المتجر */
+        .store-closed-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(12, 12, 18, 0.85);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            border-radius: 24px;
+            margin-top: 40px;
+        }
+
+        .store-closed-screen h2 {
+            color: #ef4444;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .store-closed-screen p {
+            color: #94a3b8;
+            font-size: 0.95rem;
         }
 
         /* Products Grid */
@@ -207,7 +238,18 @@
             box-shadow: 0 4px 15px rgba(220, 38, 38, 0.5);
         }
 
-        /* Modal Order Form */
+        .delete-prod-btn {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        /* Modal Forms */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -229,6 +271,8 @@
             max-width: 420px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.8);
             position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .modal-header {
@@ -281,7 +325,7 @@
             border-color: #ef4444;
         }
 
-        .submit-order-btn {
+        .submit-btn {
             width: 100%;
             background: #25d366;
             color: #ffffff;
@@ -293,15 +337,13 @@
             cursor: pointer;
             margin-top: 10px;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
         }
 
-        .submit-order-btn:hover {
-            background: #1eb854;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        .submit-btn.admin-action {
+            background: #dc2626;
+        }
+        .submit-btn.admin-action:hover {
+            background: #b91c1c;
         }
     </style>
 </head>
@@ -310,76 +352,34 @@
     <div class="container">
         <header>
             <a href="index.html" class="brand-logo">AKMA <span>STORE</span></a>
-            <a href="index.html" class="back-btn">
-                <svg viewBox="0 0 24 24" style="width:16px; height:16px; fill:currentColor;"><path d="M10 20l1.41-1.41L5.83 13H22v-2H5.83l5.58-5.59L10 4l-8 8 8 8z"/></svg>
-                العودة للرئيسية
-            </a>
+            <div class="header-actions">
+                <button class="action-btn" onclick="openAdminModal()">⚙️ لوحة التحكم</button>
+                <a href="index.html" class="action-btn">الرئيسية</a>
+            </div>
         </header>
 
         <div class="page-title">
             <h1>المتجر الرسمي</h1>
-            <p>اختر منتجك المفضل وسيتم معالجة الطلب والتوصيل فوراً عبر واتساب</p>
+            <p>تسوق أفضل المنتجات المادية بضغطة زر واحدة</p>
         </div>
 
-        <div class="products-grid">
-            <!-- منتج 1 -->
-            <div class="product-card">
-                <div class="product-img-box">
-                    <span class="badge-status">متوفر</span>
-                    <img src="profile.jpg" alt="Product" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-title">قميص AKMA المخصص</h2>
-                    <p class="product-desc">قميص عصري بتصميم خاص وجودة عالية متوفر بجميع المقاسات.</p>
-                    <div class="product-bottom">
-                        <span class="product-price">199 MAD</span>
-                        <button class="order-btn" onclick="openOrderModal('قميص AKMA المخصص', '199 MAD')">طلب الآن</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- منتج 2 -->
-            <div class="product-card">
-                <div class="product-img-box">
-                    <span class="badge-status">متوفر</span>
-                    <img src="profile.jpg" alt="Product" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-title">بطاقة NFC الذكية</h2>
-                    <p class="product-desc">بطاقة فاخرة لمشاركة روابطك ومعلومات الاتصال بلمسة واحدة على الهاتف.</p>
-                    <div class="product-bottom">
-                        <span class="product-price">149 MAD</span>
-                        <button class="order-btn" onclick="openOrderModal('بطاقة NFC الذكية', '149 MAD')">طلب الآن</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- منتج 3 -->
-            <div class="product-card">
-                <div class="product-img-box">
-                    <span class="badge-status">متوفر</span>
-                    <img src="profile.jpg" alt="Product" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-title">غطاء هاتف هودي AKMA</h2>
-                    <p class="product-desc">حماية ممتازة لهاتفك بتصميم تنين الحماية المظلم.</p>
-                    <div class="product-bottom">
-                        <span class="product-price">99 MAD</span>
-                        <button class="order-btn" onclick="openOrderModal('غطاء هاتف AKMA', '99 MAD')">طلب الآن</button>
-                    </div>
-                </div>
-            </div>
+        <!-- شاشة المتجر المغلق -->
+        <div class="store-closed-screen" id="storeClosedScreen">
+            <h2>⚠️ المتجر مغلق مؤقتاً</h2>
+            <p>نعتذر منك، المتجر متوقف عن استقبال الطلبات حالياً للصيانة أو تحديث المخزون. يرجى العودة لاحقاً.</p>
         </div>
+
+        <!-- شبكة المنتجات -->
+        <div class="products-grid" id="productsGrid"></div>
     </div>
 
-    <!-- نافذة طلب المنتج -->
-    <div class="modal-overlay" id="orderModal" onclick="closeOrderModal(event)">
+    <!-- نافذة طلب الشراء -->
+    <div class="modal-overlay" id="orderModal" onclick="closeModal(event, 'orderModal')">
         <div class="modal-card">
             <div class="modal-header">
                 <h3 id="modalProductTitle">إتمام الطلب</h3>
-                <button class="close-modal" onclick="closeModalDirect()">&times;</button>
+                <button class="close-modal" onclick="hideModal('orderModal')">&times;</button>
             </div>
-
             <form onsubmit="sendWhatsAppOrder(event)">
                 <div class="form-group">
                     <label>الاسم الكامل:</label>
@@ -397,33 +397,174 @@
                     <label>الكمية:</label>
                     <input type="number" class="form-control" id="custQty" value="1" min="1" required>
                 </div>
+                <button type="submit" class="submit-btn">تأكيد الطلب عبر واتساب</button>
+            </form>
+        </div>
+    </div>
 
-                <button type="submit" class="submit-order-btn">
-                    تأكيد الطلب عبر واتساب
-                </button>
+    <!-- نافذة لوحة التحكم (إضافة منتج وتفتح/إغلاق المتجر) -->
+    <div class="modal-overlay" id="adminModal" onclick="closeModal(event, 'adminModal')">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>⚙️ إعدادات المتجر وإضافة السلع</h3>
+                <button class="close-modal" onclick="hideModal('adminModal')">&times;</button>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <button class="submit-btn admin-action" id="toggleStoreStatusBtn" onclick="toggleStoreStatus()">تبديل حالة المتجر (فتح/إغلاق)</button>
+            </div>
+
+            <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 20px;">
+
+            <h4 style="font-size: 0.95rem; margin-bottom: 12px; color: #cbd5e1;">إضافة منتج جديد بسرعة:</h4>
+            <form onsubmit="addNewProduct(event)">
+                <div class="form-group">
+                    <label>عنوان المنتج:</label>
+                    <input type="text" class="form-control" id="newTitle" required placeholder="مثال: قميص فاخر">
+                </div>
+                <div class="form-group">
+                    <label>السعر (مثال: 150 MAD):</label>
+                    <input type="text" class="form-control" id="newPrice" required placeholder="150 MAD">
+                </div>
+                <div class="form-group">
+                    <label>رابط الصورة (رابط مباشر للصورة):</label>
+                    <input type="text" class="form-control" id="newImg" required placeholder="profile.jpg أو رابط صورة">
+                </div>
+                <div class="form-group">
+                    <label>وصف مختصر:</label>
+                    <input type="text" class="form-control" id="newDesc" required placeholder="مواصفات المنتج...">
+                </div>
+                <button type="submit" class="submit-btn admin-action">إضافة المنتج للمتجر</button>
             </form>
         </div>
     </div>
 
     <script>
+        // المنتجات الافتراضية الأولية في حال لم تقم بإضافة منتجات بعد
+        let defaultProducts = [
+            { id: 1, title: "قميص AKMA المخصص", price: "199 MAD", img: "profile.jpg", desc: "قميص عصري بتصميم خاص وجودة عالية." },
+            { id: 2, title: "بطاقة NFC الذكية", price: "149 MAD", img: "profile.jpg", desc: "بطاقة فاخرة لمشاركة روابطك بلمسة واحدة." },
+            { id: 3, title: "غطاء هاتف AKMA", price: "99 MAD", img: "profile.jpg", desc: "حماية ممتازة لهاتفك بتصميم تنين الحماية." }
+        ];
+
+        // جلب البيانات من localStorage أو استخدام الافتراضية
+        let products = JSON.parse(localStorage.getItem('akma_store_products')) || defaultProducts;
+        let isStoreOpen = JSON.parse(localStorage.getItem('akma_store_status')) !== false; // افتراضياً مفتوح
+
         let selectedProduct = '';
         let selectedPrice = '';
 
+        window.addEventListener('DOMContentLoaded', () => {
+            renderStoreState();
+            renderProducts();
+        });
+
+        function renderStoreState() {
+            const grid = document.getElementById('productsGrid');
+            const closedScreen = document.getElementById('storeClosedScreen');
+            const statusBtn = document.getElementById('toggleStoreStatusBtn');
+
+            if (isStoreOpen) {
+                grid.style.display = 'grid';
+                closedScreen.style.display = 'none';
+                statusBtn.innerText = '🔴 إغلاق المتجر الآن';
+                statusBtn.style.background = '#dc2626';
+            } else {
+                grid.style.display = 'none';
+                closedScreen.style.display = 'flex';
+                statusBtn.innerText = '🟢 فتح المتجر الآن';
+                statusBtn.style.background = '#22c55e';
+            }
+        }
+
+        function toggleStoreStatus() {
+            isStoreOpen = !isStoreOpen;
+            localStorage.setItem('akma_store_status', JSON.stringify(isStoreOpen));
+            renderStoreState();
+            hideModal('adminModal');
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            if (products.length === 0) {
+                grid.innerHTML = '<p style="color:#94a3b8; text-align:center; grid-column: 1/-1;">لا توجد منتجات متاحة حالياً.</p>';
+                return;
+            }
+
+            products.forEach(prod => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-img-box">
+                        <span class="badge-status">متوفر</span>
+                        <img src="${prod.img}" alt="${prod.title}" class="product-img">
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-title">${prod.title}</h2>
+                        <p class="product-desc">${prod.desc}</p>
+                        <div class="product-bottom">
+                            <span class="product-price">${prod.price}</span>
+                            <button class="order-btn" onclick="openOrderModal('${prod.title}', '${prod.price}')">طلب الآن</button>
+                        </div>
+                        <button class="delete-prod-btn" onclick="deleteProduct(${prod.id})">حذف المنتج</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function addNewProduct(e) {
+            e.preventDefault();
+            const newProd = {
+                id: Date.now(),
+                title: document.getElementById('newTitle').value.trim(),
+                price: document.getElementById('newPrice').value.trim(),
+                img: document.getElementById('newImg').value.trim(),
+                desc: document.getElementById('newDesc').value.trim()
+            };
+
+            products.unshift(newProd);
+            localStorage.setItem('akma_store_products', JSON.stringify(products));
+            renderProducts();
+            hideModal('adminModal');
+            e.target.reset();
+            alert('تمت إضافة المنتج بنجاح!');
+        }
+
+        function deleteProduct(id) {
+            if (confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
+                products = products.filter(p => p.id !== id);
+                localStorage.setItem('akma_store_products', JSON.stringify(products));
+                renderProducts();
+            }
+        }
+
+        function openAdminModal() {
+            // حماية بسيطة أو فتح مباشر للوحة التحكم
+            document.getElementById('adminModal').style.display = 'flex';
+        }
+
         function openOrderModal(title, price) {
+            if (!isStoreOpen) {
+                alert('عذراً، المتجر مغلق حالياً ولا يمكن استقبال طلبات.');
+                return;
+            }
             selectedProduct = title;
             selectedPrice = price;
             document.getElementById('modalProductTitle').innerText = 'طلب: ' + title;
             document.getElementById('orderModal').style.display = 'flex';
         }
 
-        function closeOrderModal(e) {
-            if (e.target.id === 'orderModal') {
-                document.getElementById('orderModal').style.display = 'none';
+        function closeModal(e, modalId) {
+            if (e.target.id === modalId) {
+                hideModal(modalId);
             }
         }
 
-        function closeModalDirect() {
-            document.getElementById('orderModal').style.display = 'none';
+        function hideModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
         }
 
         function sendWhatsAppOrder(e) {
@@ -432,7 +573,6 @@
             const phone = document.getElementById('custPhone').value.trim();
             const city = document.getElementById('custCity').value.trim();
             const qty = document.getElementById('custQty').value;
-
             const myPhoneNumber = "212614060332";
 
             const message = `السلام عليكم، أرغب في تأكيد طلب منتج من المتجر:%0A%0A` +
@@ -444,7 +584,7 @@
                             `📍 *المدينة والعنوان:* ${city}`;
 
             window.open(`https://wa.me/${myPhoneNumber}?text=${message}`, '_blank');
-            closeModalDirect();
+            hideModal('orderModal');
         }
     </script>
 </body>
