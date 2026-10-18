@@ -517,7 +517,7 @@
 <body>
 
     <div class="container">
-        <!-- شريط اللغات -->
+        <!-- زر تغيير اللغات داخل المتجر -->
         <div class="lang-switch">
             <button class="lang-btn active" onclick="setLanguage('ar', event)">العربية</button>
             <button class="lang-btn" onclick="setLanguage('en', event)">English</button>
@@ -528,7 +528,6 @@
         <header>
             <a href="index.html" class="brand-logo">AKMA <span>STORE</span></a>
             <div class="header-actions" id="headerActions">
-                <!-- تم إزالة زر الإدارة هنا برمجياً ولن ينشأ إلا لصاحب المتجر فقط -->
                 <a href="index.html" class="btn-icon" id="label-home">الرئيسية</a>
             </div>
         </header>
@@ -619,7 +618,7 @@
                 <button class="close-btn" onclick="hideModal('adminModal')">&times;</button>
             </div>
 
-            <button class="admin-action-btn" id="toggleStoreBtn" onclick="toggleStoreStatus()">إغلاق/فتح المتجر</button>
+            <button class="admin-action-btn" id="toggleStoreBtn" onclick="toggleStoreStatusCloud()">إغلاق/فتح المتجر</button>
 
             <h4 style="font-size:0.92rem; margin-bottom:10px; color:#cbd5e1;">إضافة منتج جديد:</h4>
             <form onsubmit="addNewProduct(event)">
@@ -641,6 +640,10 @@
     </div>
 
     <script>
+        // إعدادات الاتصال السحابي (JSONBin)
+        const BIN_ID = '6ad4bd4effd5d1605375c100';
+        const API_KEY = '$2a$10$Djxcb/OoBHXzsfltv.zIl.NeUl2/lBJTL8smk6/g0Q7pxEQeP.eZK';
+
         const storeTranslations = {
             ar: {
                 dir: 'rtl', home: 'الرئيسية', storeTitle: 'المتجر الإلكتروني الرسمي', storeDesc: 'تسوق أحدث المنتجات والخدمات الحصرية مع شحن مباشر وسريع',
@@ -715,18 +718,14 @@
 
         let products = JSON.parse(localStorage.getItem('akma_pro_products')) || initialProducts;
         let cart = JSON.parse(localStorage.getItem('akma_pro_cart')) || [];
-        let isStoreOpen = JSON.parse(localStorage.getItem('akma_pro_status')) !== false;
+        let isStoreOpen = true; // الحالة الافتراضية
         let selectedCategory = 'all';
         let isAdmin = false;
 
-        window.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('DOMContentLoaded', async () => {
             const urlParams = new URLSearchParams(window.location.search);
-            
-            // التحقق الجذري من الدخول كأدمن
             if (urlParams.get('admin') === 'true') {
                 isAdmin = true;
-                
-                // إنشاء زر الإدارة في الهيدر ديناميكياً فقط عند ثبوت صلاحيات المسؤول
                 const actionsContainer = document.getElementById('headerActions');
                 const adminBtn = document.createElement('button');
                 adminBtn.className = 'btn-icon';
@@ -737,9 +736,67 @@
                 openAdminModal();
             }
 
+            await checkCloudStoreStatus();
             renderStore();
             updateCartBadge();
         });
+
+        // قراءة حالة المتجر سحابياً
+        async function checkCloudStoreStatus() {
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                    headers: { 'X-Master-Key': API_KEY }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.record.store_maint !== undefined) {
+                        isStoreOpen = !data.record.store_maint;
+                    }
+                }
+            } catch (e) {
+                console.error("خطأ في قراءة حالة المتجر:", e);
+            }
+        }
+
+        // تبديل حالة المتجر سحابياً للجميع
+        async function toggleStoreStatusCloud() {
+            isStoreOpen = !isStoreOpen;
+            const isMaint = !isStoreOpen;
+
+            try {
+                // جلب البيانات الحالية أولاً لعدم مسح حالة الموقع الرئيسية
+                const getRes = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                    headers: { 'X-Master-Key': API_KEY }
+                });
+                let currentData = {};
+                if (getRes.ok) {
+                    const json = await getRes.json();
+                    currentData = json.record;
+                }
+
+                currentData.store_maint = isMaint;
+
+                // تحديث البيانات سحابياً
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': API_KEY
+                    },
+                    body: JSON.stringify(currentData)
+                });
+
+                if (res.ok) {
+                    alert(isMaint ? 'تم إغلاق المتجر لجميع الزوار 🔴' : 'تم فتح المتجر للجميع 🟢');
+                    renderStore();
+                    hideModal('adminModal');
+                } else {
+                    alert('خطأ في التحديث السحابي!');
+                }
+            } catch (e) {
+                alert('حدث خطأ في الاتصال بالشبكة السحابية.');
+            }
+        }
 
         function renderStore() {
             const t = storeTranslations[currentLang] || storeTranslations['ar'];
@@ -750,15 +807,19 @@
             if (!isStoreOpen) {
                 grid.style.display = 'none';
                 closedBox.style.display = 'block';
-                toggleBtn.innerText = '🟢 فتح المتجر الآن';
-                toggleBtn.style.background = '#22c55e';
+                if (toggleBtn) {
+                    toggleBtn.innerText = '🟢 فتح المتجر الآن';
+                    toggleBtn.style.background = '#22c55e';
+                }
                 return;
             }
 
             grid.style.display = 'grid';
             closedBox.style.display = 'none';
-            toggleBtn.innerText = '🔴 إغلاق المتجر الآن';
-            toggleBtn.style.background = '#dc2626';
+            if (toggleBtn) {
+                toggleBtn.innerText = '🔴 إغلاق المتجر الآن';
+                toggleBtn.style.background = '#dc2626';
+            }
 
             grid.innerHTML = '';
             const query = document.getElementById('searchInput').value.toLowerCase();
@@ -930,13 +991,6 @@
 
         function openAdminModal() {
             document.getElementById('adminModal').style.display = 'flex';
-        }
-
-        function toggleStoreStatus() {
-            isStoreOpen = !isStoreOpen;
-            localStorage.setItem('akma_pro_status', JSON.stringify(isStoreOpen));
-            renderStore();
-            hideModal('adminModal');
         }
 
         function addNewProduct(e) {
