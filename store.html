@@ -3,597 +3,370 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AKMA STORE | Storefront Pro</title>
-    <meta name="theme-color" content="#dc2626">
-
+    <title>Goblin Merchant | متجر الجوبلن للكنوز</title>
+    
     <style>
         *, *::before, *::after {
-            margin: 0; padding: 0; box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background: radial-gradient(circle at center, rgba(30, 10, 15, 0.55), rgba(5, 5, 8, 0.96)), 
+            background: radial-gradient(circle at center, rgba(30, 20, 5, 0.9), rgba(5, 8, 5, 0.98)), 
                         url('dragon.jpg') no-repeat center center fixed;
-            background-size: cover; color: #ffffff; min-height: 100vh; padding: 20px 15px 80px 15px;
+            background-size: cover;
+            color: #fef08a;
+            min-height: 100vh;
+            padding: 20px 15px;
         }
 
-        .container { max-width: 1100px; margin: 0 auto; }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
+        /* رأس المتجر والطابع */
         header {
-            display: flex; justify-content: space-between; align-items: center; padding: 16px 22px;
-            background: rgba(12, 12, 18, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 20px; margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6); position: sticky; top: 15px; z-index: 100;
+            text-align: center;
+            margin-bottom: 25px;
+            background: rgba(15, 12, 5, 0.85);
+            border: 2px solid #eab308;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(234, 179, 8, 0.25);
+            backdrop-filter: blur(12px);
         }
 
-        .brand-logo { font-size: 1.3rem; font-weight: 800; color: #ffffff; text-decoration: none; letter-spacing: 1px; }
-        .brand-logo span { color: #ef4444; }
-
-        .header-actions { display: flex; gap: 10px; align-items: center; }
-
-        .btn-icon {
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #ffffff; padding: 8px 14px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;
-            cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 6px; text-decoration: none;
+        .goblin-avatar {
+            font-size: 3.5rem;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 0 10px #eab308);
+            animation: bounce 2s infinite ease-in-out;
         }
 
-        .btn-icon:hover { background: #dc2626; border-color: #dc2626; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4); }
-
-        .lang-switch {
-            display: flex; justify-content: center; gap: 6px; margin-bottom: 20px; background: rgba(0, 0, 0, 0.3);
-            padding: 5px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.08); width: fit-content; margin-left: auto; margin-right: auto;
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
-        .lang-btn { background: transparent; border: none; color: #a1a1aa; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.78rem; font-weight: 600; transition: all 0.3s; }
-        .lang-btn:hover { color: #ffffff; }
-        .lang-btn.active { background: #dc2626; color: #ffffff; box-shadow: 0 2px 10px rgba(220, 38, 38, 0.5); }
-
-        .hero-section { text-align: center; margin-bottom: 30px; }
-        .hero-section h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        .hero-section p { color: #94a3b8; font-size: 0.92rem; margin-bottom: 20px; }
-
-        .search-bar-wrapper { display: flex; gap: 10px; max-width: 600px; margin: 0 auto 20px auto; }
-        .search-input {
-            flex: 1; background: rgba(12, 12, 18, 0.8); border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 14px; padding: 12px 18px; color: #ffffff; font-size: 0.9rem; outline: none; backdrop-filter: blur(10px);
+        header h1 {
+            color: #fbbf24;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
         }
-        .search-input:focus { border-color: #ef4444; box-shadow: 0 0 15px rgba(239, 68, 68, 0.3); }
 
-        .categories-filter { display: flex; justify-content: center; gap: 8px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
-        .cat-btn {
-            background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #cbd5e1; padding: 7px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.3s;
+        header p {
+            color: #a1a1aa;
+            font-size: 0.9rem;
+            margin-top: 6px;
         }
-        .cat-btn.active, .cat-btn:hover { background: #dc2626; color: #ffffff; border-color: #dc2626; box-shadow: 0 2px 10px rgba(220, 38, 38, 0.4); }
 
-        .store-closed-box {
-            display: none; text-align: center; padding: 50px 20px; background: rgba(12, 12, 18, 0.85);
-            border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 24px; margin-top: 20px;
+        /* شبكة المنتجات */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
         }
-        .store-closed-box h2 { color: #ef4444; font-size: 1.5rem; margin-bottom: 10px; }
-        .store-closed-box p { color: #94a3b8; font-size: 0.95rem; }
-
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 22px; margin-top: 25px; }
 
         .product-card {
-            background: rgba(12, 12, 18, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 22px; overflow: hidden; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex; flex-direction: column; position: relative;
+            background: rgba(12, 10, 8, 0.85);
+            border: 1px solid rgba(234, 179, 8, 0.4);
+            border-radius: 18px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
         }
-        .product-card:hover { border-color: rgba(239, 68, 68, 0.55); transform: translateY(-6px); box-shadow: 0 15px 35px rgba(220, 38, 38, 0.25); }
 
-        .product-img-box { position: relative; width: 100%; height: 210px; background: rgba(0, 0, 0, 0.4); overflow: hidden; cursor: pointer; }
-        .product-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-        .product-card:hover .product-img { transform: scale(1.08); }
-
-        .badge-tag {
-            position: absolute; top: 12px; right: 12px; background: rgba(220, 38, 38, 0.85);
-            color: #ffffff; padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; backdrop-filter: blur(8px);
+        .product-card:hover {
+            border-color: #f59e0b;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
         }
-        html[dir="ltr"] .badge-tag { right: auto; left: 12px; }
 
-        .product-info { padding: 18px; display: flex; flex-direction: column; flex: 1; }
-        .product-rating { color: #facc15; font-size: 0.8rem; margin-bottom: 6px; }
-        .product-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: #ffffff; cursor: pointer; }
-        .product-desc { font-size: 0.82rem; color: #94a3b8; line-height: 1.5; margin-bottom: 15px; flex: 1; }
-
-        .product-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
-        .product-price { font-size: 1.2rem; font-weight: 800; color: #ef4444; }
-
-        .add-cart-btn {
-            background: rgba(220, 38, 38, 0.15); border: 1px solid rgba(239, 68, 68, 0.4);
-            color: #f87171; padding: 8px 14px; border-radius: 12px; font-weight: 700; font-size: 0.82rem; cursor: pointer; transition: all 0.3s;
+        .product-img-box {
+            width: 100%;
+            height: 140px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .add-cart-btn:hover { background: #dc2626; color: #ffffff; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4); }
 
-        .floating-cart-btn {
-            position: fixed; bottom: 25px; left: 25px; background: #dc2626; color: #ffffff; border: none;
-            padding: 12px 20px; border-radius: 30px; font-weight: 700; font-size: 0.9rem; cursor: pointer;
-            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.5); display: flex; align-items: center; gap: 10px; z-index: 99; transition: transform 0.3s;
+        .product-title {
+            color: #ffffff;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
-        html[dir="ltr"] .floating-cart-btn { left: auto; right: 25px; }
 
-        .cart-badge { background: #ffffff; color: #dc2626; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; }
-
-        .modal-overlay {
-            display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.82); backdrop-filter: blur(12px);
-            z-index: 999; justify-content: center; align-items: center; padding: 20px;
+        .product-desc {
+            color: #a1a1aa;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            flex-grow: 1;
         }
-        .modal-card {
-            background: rgba(18, 18, 26, 0.96); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 24px;
-            padding: 26px; width: 100%; max-width: 450px; box-shadow: 0 20px 40px rgba(0,0,0,0.8); max-height: 90vh; overflow-y: auto; text-align: right;
+
+        .product-price {
+            color: #facc15;
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 12px;
         }
-        html[dir="ltr"] .modal-card { text-align: left; }
 
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 10px; }
-        .modal-header h3 { font-size: 1.15rem; color: #ef4444; }
-        .close-btn { background: transparent; border: none; color: #94a3b8; font-size: 1.5rem; cursor: pointer; }
+        .buy-btn {
+            background: linear-gradient(135deg, #d97706, #b45309);
+            border: 1px solid #f59e0b;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
 
-        .cart-items-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; max-height: 250px; overflow-y: auto; }
-        .cart-item { display: flex; align-items: center; justify-content: space-between; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); padding: 10px 14px; border-radius: 14px; }
-        .cart-item-title { font-size: 0.88rem; font-weight: 700; color: #fff; }
-        .cart-item-price { font-size: 0.8rem; color: #ef4444; font-weight: 700; }
+        .buy-btn:hover {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.6);
+        }
 
-        .qty-controls { display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.4); padding: 4px 8px; border-radius: 10px; }
-        .qty-btn { background: transparent; border: none; color: #22c55e; font-size: 1rem; font-weight: bold; cursor: pointer; width: 20px; text-align: center; }
+        /* سلة التسوق - كيس الذهب */
+        .cart-box {
+            background: rgba(15, 12, 5, 0.92);
+            border: 2px solid #eab308;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            backdrop-filter: blur(15px);
+        }
 
-        .cart-total-box { display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; font-weight: 800; padding: 12px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 15px; }
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(234, 179, 8, 0.3);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            color: #facc15;
+        }
 
-        .form-group { margin-bottom: 14px; text-align: right; }
-        html[dir="ltr"] .form-group { text-align: left; }
-        .form-group label { display: block; font-size: 0.8rem; color: #cbd5e1; margin-bottom: 6px; }
-        .form-control { width: 100%; background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.15); padding: 10px 14px; border-radius: 12px; color: #ffffff; font-size: 0.9rem; outline: none; }
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
 
-        .submit-btn { width: 100%; background: #25d366; color: #ffffff; border: none; padding: 12px; border-radius: 14px; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: all 0.3s; }
-        .submit-btn:hover { background: #1eb854; }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-size: 0.9rem;
+        }
 
-        .admin-action-btn { background: #dc2626; color: #ffffff; border: none; padding: 10px; border-radius: 12px; font-weight: 700; cursor: pointer; width: 100%; margin-bottom: 15px; }
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #facc15;
+            margin-bottom: 15px;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(234, 179, 8, 0.4);
+        }
+
+        .checkout-btn {
+            background: #22c55e;
+            border: 1px solid #4ade80;
+            color: #000000;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 800;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .checkout-btn:hover {
+            background: #16a34a;
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #a1a1aa;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: #facc15; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="lang-switch">
-            <button class="lang-btn active" onclick="setLanguage('ar', event)">العربية</button>
-            <button class="lang-btn" onclick="setLanguage('en', event)">English</button>
-            <button class="lang-btn" onclick="setLanguage('fr', event)">Français</button>
-            <button class="lang-btn" onclick="setLanguage('ber', event)">ⵜⴰⵎⴰⵣⵉⵖⵜ</button>
-        </div>
-
         <header>
-            <a href="index.html" class="brand-logo">AKMA <span>STORE</span></a>
-            <div class="header-actions" id="headerActions">
-                <a href="index.html" class="btn-icon" id="label-home">الرئيسية</a>
-            </div>
+            <div class="goblin-avatar">👺💎</div>
+            <h1>مخبأ التاجر الجوبلن</h1>
+            <p>"هات الذهب وخذ الكنوز! الجوبلن لا يقبل سوى الصفقة الرابحة! 🤑🪙"</p>
         </header>
 
-        <div class="hero-section">
-            <h1 id="label-store-title">المتجر الإلكتروني الرسمي</h1>
-            <p id="label-store-desc">تسوق أحدث المنتجات والخدمات الحصرية مع شحن مباشر وسريع</p>
-
-            <div class="search-bar-wrapper">
-                <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن منتج..." oninput="filterProducts()">
+        <!-- شبكة المنتجات -->
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-img-box">🗡️</div>
+                <div class="product-title">خنجر الأساطير المشع</div>
+                <div class="product-desc">خنجر مسحور نادر، حاد كالشفرة ومزين بالزمرد.</div>
+                <div class="product-price">150 🪙</div>
+                <button class="buy-btn" onclick="addToCart('خنجر الأساطير المشع', 150)">ضع في الكيس 💰</button>
             </div>
 
-            <div class="categories-filter" id="categoriesContainer">
-                <button class="cat-btn active" onclick="filterCategory('all', this)" id="label-cat-all">الكل</button>
-                <button class="cat-btn" onclick="filterCategory('ملابس', this)" id="label-cat-clothes">ملابس</button>
-                <button class="cat-btn" onclick="filterCategory('إلكترونيات', this)" id="label-cat-electronics">إلكترونيات</button>
-                <button class="cat-btn" onclick="filterCategory('إكسسوارات', this)" id="label-cat-accessories">إكسسوارات</button>
+            <div class="product-card">
+                <div class="product-img-box">🔮</div>
+                <div class="product-title">بلورة الرؤية المستقبلية</div>
+                <div class="product-desc">تكشف لك أسرار الصفقة القادمة قبل الجميع!</div>
+                <div class="product-price">300 🪙</div>
+                <button class="buy-btn" onclick="addToCart('بلورة الرؤية المستقبلية', 300)">ضع في الكيس 💰</button>
             </div>
-        </div>
 
-        <div class="store-closed-box" id="storeClosedBox">
-            <h2 id="label-closed-title">⚠️ المتجر مغلق حالياً</h2>
-            <p id="label-closed-desc">نعتذر منك، المتجر متوقف عن استقبال الطلبات مؤقتاً للصيانة والتحديثات الجذرية. يرجى العودة لاحقاً.</p>
-        </div>
-
-        <div class="products-grid" id="productsGrid"></div>
-    </div>
-
-    <button class="floating-cart-btn" onclick="openCartModal()">
-        <span id="label-cart-btn">🛒 سلة التسوق</span>
-        <span class="cart-badge" id="cartBadgeCount">0</span>
-    </button>
-
-    <div class="modal-overlay" id="cartModal" onclick="closeModalOnBg(event, 'cartModal')">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3 id="label-cart-title">🛒 سلة التسوق والشراء</h3>
-                <button class="close-btn" onclick="hideModal('cartModal')">&times;</button>
-            </div>
-            <div class="cart-items-list" id="cartItemsList"></div>
-            <div class="cart-total-box">
-                <span id="label-total">المجموع الإجمالي:</span>
-                <span id="cartTotalPrice" style="color:#ef4444;">0 MAD</span>
-            </div>
-            <form onsubmit="checkoutWhatsApp(event)">
-                <div class="form-group"><label id="label-name">الاسم الكامل:</label><input type="text" class="form-control" id="custName" required placeholder="مثال: عدنان أقديم"></div>
-                <div class="form-group"><label id="label-phone">رقم الهاتف:</label><input type="tel" class="form-control" id="custPhone" required placeholder="مثال: 0614060332"></div>
-                <div class="form-group"><label id="label-city">المدينة والعنوان:</label><input type="text" class="form-control" id="custCity" required placeholder="مثال: مراكش"></div>
-                <button type="submit" class="submit-btn" id="label-checkout">إتمام الطلب عبر واتساب 📲</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="productModal" onclick="closeModalOnBg(event, 'productModal')">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3 id="pvTitle">تفاصيل المنتج</h3>
-                <button class="close-btn" onclick="hideModal('productModal')">&times;</button>
-            </div>
-            <img id="pvImg" src="" style="width:100%; height:200px; object-fit:cover; border-radius:16px; margin-bottom:15px;">
-            <p id="pvDesc" style="color:#94a3b8; font-size:0.88rem; line-height:1.6; margin-bottom:15px;"></p>
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span id="pvPrice" style="font-size:1.3rem; font-weight:800; color:#ef4444;"></span>
-                <button class="submit-btn" style="width:auto; padding:10px 20px;" id="pvAddBtn">إضافة للسلة</button>
+            <div class="product-card">
+                <div class="product-img-box">📜</div>
+                <div class="product-title">مخطوطة الأسرار المشفّرة</div>
+                <div class="product-desc">تحتوي على شفرات المطور وحيل التقنية العالية.</div>
+                <div class="product-price">200 🪙</div>
+                <button class="buy-btn" onclick="addToCart('مخطوطة الأسرار المشفّرة', 200)">ضع في الكيس 💰</button>
             </div>
         </div>
-    </div>
 
-    <div class="modal-overlay" id="adminModal" onclick="closeModalOnBg(event, 'adminModal')">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3>⚙️ لوحة إدارة المتجر</h3>
-                <button class="close-btn" onclick="hideModal('adminModal')">&times;</button>
+        <!-- سلة التسوق -->
+        <div class="cart-box">
+            <div class="cart-header">
+                <h3>💰 كيس الكنوز الخاص بك</h3>
+                <span id="item-count">0 عناصر</span>
             </div>
-            <button class="admin-action-btn" id="toggleStoreBtn" onclick="toggleStoreStatusCloud()">إغلاق/فتح المتجر</button>
-            <h4 style="font-size:0.92rem; margin-bottom:10px; color:#cbd5e1;">إضافة منتج جديد:</h4>
-            <form onsubmit="addNewProduct(event)">
-                <div class="form-group"><label>اسم المنتج:</label><input type="text" class="form-control" id="npTitle" required></div>
-                <div class="form-group"><label>السعر بالدرهم:</label><input type="number" class="form-control" id="npPrice" required></div>
-                <div class="form-group"><label>القسم:</label>
-                    <select class="form-control" id="npCategory">
-                        <option value="ملابس">ملابس</option>
-                        <option value="إلكترونيات">إلكترونيات</option>
-                        <option value="إكسسوارات">إكسسوارات</option>
-                    </select>
-                </div>
-                <div class="form-group"><label>رابط الصورة:</label><input type="text" class="form-control" id="npImg" placeholder="profile.jpg" required></div>
-                <div class="form-group"><label>الشارة:</label><input type="text" class="form-control" id="npBadge" value="جديد"></div>
-                <div class="form-group"><label>الوصف:</label><input type="text" class="form-control" id="npDesc" required></div>
-                <button type="submit" class="submit-btn" style="background:#dc2626;">إضافة للمتجر</button>
-            </form>
+
+            <div class="cart-items" id="cart-items">
+                <p style="color: #71717a; text-align: center; font-size: 0.85rem;" id="empty-msg">
+                    كيسك فارغ كجيب فلاح فقير! أضف بعض الكنوز فوراً! 👺
+                </p>
+            </div>
+
+            <div class="cart-total">
+                <span>المجموع بالذهب:</span>
+                <span id="total-price">0 🪙</span>
+            </div>
+
+            <button class="checkout-btn" onclick="checkoutWhatsApp()">
+                مقايضة الكنز عبر واتساب 📲🤑
+            </button>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link">← العودة إلى الصفحة الشخصية</a>
         </div>
     </div>
 
     <script>
-        const BIN_ID = '6ad4bd4effd5d1605375c100';
-        const API_KEY = '$2a$10$Djxcb/OoBHXzsfltv.zIl.NeUl2/lBJTL8smk6/g0Q7pxEQeP.eZK';
+        let cart = [];
 
-        const storeTranslations = {
-            ar: {
-                dir: 'rtl', home: 'الرئيسية', storeTitle: 'المتجر الإلكتروني الرسمي', storeDesc: 'تسوق أحدث المنتجات والخدمات الحصرية مع شحن مباشر وسريع',
-                searchPlaceholder: 'ابحث عن منتج...', catAll: 'الكل', catClothes: 'ملابس', catElectronics: 'إلكترونيات', catAccessories: 'إكسسوارات',
-                closedTitle: '⚠️ المتجر مغلق حالياً', closedDesc: 'نعتذر منك، المتجر متوقف عن استقبال الطلبات مؤقتاً للتحديثات الجذرية والصيانة. يرجى العودة لاحقاً.',
-                cartBtn: '🛒 سلة التسوق', cartTitle: '🛒 سلة التسوق والشراء', total: 'المجموع الإجمالي:', name: 'الاسم الكامل:',
-                phone: 'رقم الهاتف:', city: 'المدينة والعنوان:', checkout: 'إتمام الطلب عبر واتساب 📲', addCart: '+ السلة',
-                emptyCart: 'السلة فارغة حالياً.', deleteProd: 'حذف المنتج 🗑️'
-            },
-            en: {
-                dir: 'ltr', home: 'Home', storeTitle: 'Official E-Store', storeDesc: 'Shop the latest exclusive products with fast and direct shipping',
-                searchPlaceholder: 'Search a product...', catAll: 'All', catClothes: 'Clothes', catElectronics: 'Electronics', catAccessories: 'Accessories',
-                closedTitle: '⚠️ Store is Currently Closed', closedDesc: 'We apologize, the store is temporarily closed for maintenance and updates. Please check back later.',
-                cartBtn: '🛒 Cart', cartTitle: '🛒 Shopping Cart & Checkout', total: 'Total Amount:', name: 'Full Name:',
-                phone: 'Phone Number:', city: 'City & Address:', checkout: 'Complete Order via WhatsApp 📲', addCart: '+ Cart',
-                emptyCart: 'Cart is currently empty.', deleteProd: 'Delete Product 🗑️'
-            },
-            fr: {
-                dir: 'ltr', home: 'Accueil', storeTitle: 'Boutique Officielle', storeDesc: 'Achetez les derniers produits exclusifs avec livraison rapide',
-                searchPlaceholder: 'Rechercher...', catAll: 'Tout', catClothes: 'Vêtements', catElectronics: 'Électronique', catAccessories: 'Accessoires',
-                closedTitle: '⚠️ Boutique Actuellement Fermée', closedDesc: 'Nous nous excusons, la boutique est temporairement fermée pour maintenance.',
-                cartBtn: '🛒 Panier', cartTitle: '🛒 Panier & Commande', total: 'Montant Total:', name: 'Nom complet:',
-                phone: 'Téléphone:', city: 'Ville & Adresse:', checkout: 'Commander via WhatsApp 📲', addCart: '+ Panier',
-                emptyCart: 'Le panier est vide.', deleteProd: 'Supprimer 🗑️'
-            },
-            ber: {
-                dir: 'ltr', home: 'Asnubɣer', storeTitle: 'Ahanu Unṣib', storeDesc: 'Ɣezzif isefra n idisan s urured',
-                searchPlaceholder: 'Nadi...', catAll: 'Aakk', catClothes: 'Ibaḍniwen', catElectronics: 'Ielektrikiyen', catAccessories: 'Issekcam',
-                closedTitle: '⚠️ Ahanu Ittyagal', closedDesc: 'Smarriɣ, ahanu ittyagal i usgungu.',
-                cartBtn: '🛒 Tasilt', cartTitle: '🛒 Tasilt & Asuture', total: 'Amsad:', name: 'Isem Amatu:',
-                phone: 'Uṭṭun n Wawal:', city: 'Tamdint & Tansa:', checkout: 'Suter s WhatsApp 📲', addCart: '+ Tasilt',
-                emptyCart: 'Tasilt tella d tameqqrant.', deleteProd: 'Kkes 🗑️'
-            }
-        };
-
-        let currentLang = 'ar';
-
-        function setLanguage(lang, evt) {
-            currentLang = lang;
-            localStorage.setItem('user_preferred_lang', lang);
-            const t = storeTranslations[lang] || storeTranslations['ar'];
-            document.documentElement.dir = t.dir;
-            document.documentElement.lang = lang;
-
-            document.getElementById('label-home').innerText = t.home;
-            document.getElementById('label-store-title').innerText = t.storeTitle;
-            document.getElementById('label-store-desc').innerText = t.storeDesc;
-            document.getElementById('searchInput').placeholder = t.searchPlaceholder;
-            document.getElementById('label-cat-all').innerText = t.catAll;
-            document.getElementById('label-cat-clothes').innerText = t.catClothes;
-            document.getElementById('label-cat-electronics').innerText = t.catElectronics;
-            document.getElementById('label-cat-accessories').innerText = t.catAccessories;
-            document.getElementById('label-closed-title').innerText = t.closedTitle;
-            document.getElementById('label-closed-desc').innerText = t.closedDesc;
-            document.getElementById('label-cart-btn').innerText = t.cartBtn;
-            document.getElementById('label-cart-title').innerText = t.cartTitle;
-            document.getElementById('label-total').innerText = t.total;
-            document.getElementById('label-name').innerText = t.name;
-            document.getElementById('label-phone').innerText = t.phone;
-            document.getElementById('label-city').innerText = t.city;
-            document.getElementById('label-checkout').innerText = t.checkout;
-
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            if (evt && evt.currentTarget) {
-                evt.currentTarget.classList.add('active');
-            } else {
-                document.querySelectorAll('.lang-btn').forEach(btn => {
-                    if ((lang === 'ar' && btn.textContent.includes('العربية')) ||
-                        (lang === 'en' && btn.textContent.includes('English')) ||
-                        (lang === 'fr' && btn.textContent.includes('Français')) ||
-                        (lang === 'ber' && btn.textContent.includes('ⵜⴰⵎⴰⵣⵉⵖⵜ'))) {
-                        btn.classList.add('active');
-                    }
-                });
-            }
-            renderStore();
+        function addToCart(title, price) {
+            cart.push({ title, price });
+            updateCartUI();
         }
 
-        const initialProducts = [
-            { id: 1, title: "قميص AKMA المخصص", price: 199, category: "ملابس", img: "profile.jpg", badge: "الأكثر مبيعاً", rating: "★★★★★", desc: "قميص قطني عصري بجودة عالية وتصميم المظلم المميز." },
-            { id: 2, title: "بطاقة NFC الذكية", price: 149, category: "إلكترونيات", img: "profile.jpg", badge: "جديد", rating: "★★★★★", desc: "بطاقة ذكية لمشاركة جميع روابطك ومعلومات الاتصال بلمسة واحدة." },
-            { id: 3, title: "غطاء هاتف AKMA", price: 99, category: "إكسسوارات", img: "profile.jpg", badge: "خصم", rating: "★★★★☆", desc: "غطاء حماية مقوى للهواتف مع شعار التنين المضيء." }
-        ];
-
-        let products = JSON.parse(localStorage.getItem('akma_pro_products')) || initialProducts;
-        let cart = JSON.parse(localStorage.getItem('akma_pro_cart')) || [];
-        let isStoreOpen = true;
-        let selectedCategory = 'all';
-        let isAdmin = false;
-
-        window.addEventListener('DOMContentLoaded', async () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('admin') === 'true') {
-                isAdmin = true;
-                const actionsContainer = document.getElementById('headerActions');
-                const adminBtn = document.createElement('button');
-                adminBtn.className = 'btn-icon';
-                adminBtn.innerHTML = '⚙️ الإدارة';
-                adminBtn.onclick = openAdminModal;
-                actionsContainer.insertBefore(adminBtn, actionsContainer.firstChild);
-                openAdminModal();
-            }
-
-            // الكشف التلقائي عن لغة الهاتف للمتجر
-            const savedLang = localStorage.getItem('user_preferred_lang');
-            const browserLang = navigator.language || navigator.userLanguage;
-            let initLang = savedLang || 'ar';
-            if (!savedLang) {
-                if (browserLang.startsWith('fr')) initLang = 'fr';
-                else if (browserLang.startsWith('en')) initLang = 'en';
-                else if (browserLang.startsWith('ber') || browserLang.startsWith('zgh')) initLang = 'ber';
-            }
-            setLanguage(initLang);
-
-            await checkCloudStoreStatus();
-            renderStore();
-            updateCartBadge();
-        });
-
-        async function checkCloudStoreStatus() {
-            try {
-                const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-                    headers: { 'X-Master-Key': API_KEY }
-                });
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data.record.store_maint !== undefined) {
-                        isStoreOpen = !data.record.store_maint;
-                    }
-                }
-            } catch (e) { console.error("خطأ:", e); }
-        }
-
-        async function toggleStoreStatusCloud() {
-            isStoreOpen = !isStoreOpen;
-            const isMaint = !isStoreOpen;
-            try {
-                const getRes = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { headers: { 'X-Master-Key': API_KEY } });
-                let currentData = getRes.ok ? (await getRes.json()).record : {};
-                currentData.store_maint = isMaint;
-
-                const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-                    body: JSON.stringify(currentData)
-                });
-                if (res.ok) {
-                    alert(isMaint ? 'تم إغلاق المتجر لجميع الزوار 🔴' : 'تم فتح المتجر للجميع 🟢');
-                    renderStore();
-                    hideModal('adminModal');
-                }
-            } catch (e) { alert('خطأ في التحديث السحابي'); }
-        }
-
-        function renderStore() {
-            const t = storeTranslations[currentLang] || storeTranslations['ar'];
-            const grid = document.getElementById('productsGrid');
-            const closedBox = document.getElementById('storeClosedBox');
-            const toggleBtn = document.getElementById('toggleStoreBtn');
-
-            if (!isStoreOpen) {
-                grid.style.display = 'none';
-                closedBox.style.display = 'block';
-                if (toggleBtn) { toggleBtn.innerText = '🟢 فتح المتجر الآن'; toggleBtn.style.background = '#22c55e'; }
-                return;
-            }
-
-            grid.style.display = 'grid';
-            closedBox.style.display = 'none';
-            if (toggleBtn) { toggleBtn.innerText = '🔴 إغلاق المتجر الآن'; toggleBtn.style.background = '#dc2626'; }
-
-            grid.innerHTML = '';
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = products.filter(p => {
-                const matchCat = selectedCategory === 'all' || p.category === selectedCategory;
-                const matchSearch = p.title.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query);
-                return matchCat && matchSearch;
-            });
-
-            if (filtered.length === 0) {
-                grid.innerHTML = `<p style="color:#94a3b8; text-align:center; grid-column:1/-1;">${t.emptyCart}</p>`;
-                return;
-            }
-
-            filtered.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = `
-                    <div class="product-img-box" onclick="quickView(${p.id})">
-                        <span class="badge-tag">${p.badge}</span>
-                        <img src="${p.img}" class="product-img">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-rating">${p.rating}</div>
-                        <h3 class="product-title" onclick="quickView(${p.id})">${p.title}</h3>
-                        <p class="product-desc">${p.desc}</p>
-                        <div class="product-bottom">
-                            <span class="product-price">${p.price} MAD</span>
-                            <button class="add-cart-btn" onclick="addToCart(${p.id})">${t.addCart}</button>
-                        </div>
-                        ${isAdmin ? `<button onclick="deleteProduct(${p.id})" style="background:transparent; border:none; color:#ef4444; font-size:0.75rem; cursor:pointer; margin-top:8px; text-align:right; font-weight:bold;">${t.deleteProd}</button>` : ''}
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        function filterCategory(cat, btn) {
-            selectedCategory = cat;
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            renderStore();
-        }
-
-        function filterProducts() { renderStore(); }
-
-        function addToCart(id) {
-            const prod = products.find(p => p.id === id);
-            if (!prod) return;
-            const exist = cart.find(item => item.id === id);
-            if (exist) exist.qty++; else cart.push({ ...prod, qty: 1 });
-            saveCart();
-            alert(`تمت إضافة (${prod.title}) إلى السلة!`);
-        }
-
-        function saveCart() { localStorage.setItem('akma_pro_cart', JSON.stringify(cart)); updateCartBadge(); }
-
-        function updateCartBadge() {
-            const count = cart.reduce((acc, item) => acc + item.qty, 0);
-            document.getElementById('cartBadgeCount').innerText = count;
-        }
-
-        function openCartModal() { renderCartItems(); document.getElementById('cartModal').style.display = 'flex'; }
-
-        function renderCartItems() {
-            const t = storeTranslations[currentLang] || storeTranslations['ar'];
-            const list = document.getElementById('cartItemsList');
-            list.innerHTML = '';
-            let total = 0;
+        function updateCartUI() {
+            const itemsContainer = document.getElementById('cart-items');
+            const totalContainer = document.getElementById('total-price');
+            const countContainer = document.getElementById('item-count');
 
             if (cart.length === 0) {
-                list.innerHTML = `<p style="color:#94a3b8; text-align:center; padding:15px;">${t.emptyCart}</p>`;
-                document.getElementById('cartTotalPrice').innerText = '0 MAD';
+                itemsContainer.innerHTML = `<p style="color: #71717a; text-align: center; font-size: 0.85rem;">كيسك فارغ كجيب فلاح فقير! أضف بعض الكنوز فوراً! 👺</p>`;
+                totalContainer.innerText = '0 🪙';
+                countContainer.innerText = '0 عناصر';
                 return;
             }
 
-            cart.forEach(item => {
-                total += item.price * item.qty;
-                const div = document.createElement('div');
-                div.className = 'cart-item';
-                div.innerHTML = `
-                    <div class="cart-item-info">
-                        <div class="cart-item-title">${item.title}</div>
-                        <div class="cart-item-price">${item.price * item.qty} MAD</div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
-                        <span style="font-size:0.85rem; font-weight:bold;">${item.qty}</span>
-                        <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
-                    </div>
+            itemsContainer.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `
+                    <span>💎 ${item.title}</span>
+                    <span>${item.price} 🪙 <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#ef4444; cursor:pointer; margin-right:8px;">❌</button></span>
                 `;
-                list.appendChild(div);
+                itemsContainer.appendChild(itemDiv);
             });
-            document.getElementById('cartTotalPrice').innerText = total + ' MAD';
+
+            totalContainer.innerText = total + ' 🪙';
+            countContainer.innerText = cart.length + ' عناصر';
         }
 
-        function changeQty(id, delta) {
-            const item = cart.find(i => i.id === id);
-            if (!item) return;
-            item.qty += delta;
-            if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
-            saveCart(); renderCartItems();
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
         }
 
-        function checkoutWhatsApp(e) {
-            e.preventDefault();
-            if (cart.length === 0) { alert('السلة فارغة!'); return; }
-            const name = document.getElementById('custName').value.trim();
-            const phone = document.getElementById('custPhone').value.trim();
-            const city = document.getElementById('custCity').value.trim();
-            const myPhone = "212614060332";
-
-            let itemsTxt = ''; let total = 0;
-            cart.forEach(i => { itemsTxt += `• ${i.title} (الكمية: ${i.qty}) - ${i.price * i.qty} MAD%0A`; total += i.price * i.qty; });
-
-            const msg = `السلام عليكم، أرغب في تأكيد طلب شراء من المتجر:%0A%0A📋 *المنتجات المطلوبة:*%0A${itemsTxt}%0A💰 *المجموع:* ${total} MAD%0A%0A👤 *المشتري:* ${name}%0A📞 *الهاتف:* ${phone}%0A📍 *العنوان:* ${city}`;
-            window.open(`https://wa.me/${myPhone}?text=${msg}`, '_blank');
-            cart = []; saveCart(); hideModal('cartModal');
-        }
-
-        function quickView(id) {
-            const p = products.find(item => item.id === id);
-            if (!p) return;
-            document.getElementById('pvTitle').innerText = p.title;
-            document.getElementById('pvImg').src = p.img;
-            document.getElementById('pvDesc').innerText = p.desc;
-            document.getElementById('pvPrice').innerText = p.price + ' MAD';
-            const addBtn = document.getElementById('pvAddBtn');
-            addBtn.onclick = () => { addToCart(p.id); hideModal('productModal'); };
-            document.getElementById('productModal').style.display = 'flex';
-        }
-
-        function openAdminModal() { document.getElementById('adminModal').style.display = 'flex'; }
-
-        function addNewProduct(e) {
-            e.preventDefault();
-            const newP = {
-                id: Date.now(),
-                title: document.getElementById('npTitle').value.trim(),
-                price: parseFloat(document.getElementById('npPrice').value),
-                category: document.getElementById('npCategory').value,
-                img: document.getElementById('npImg').value.trim(),
-                badge: document.getElementById('npBadge').value.trim() || 'جديد',
-                rating: "★★★★★",
-                desc: document.getElementById('npDesc').value.trim()
-            };
-            products.unshift(newP);
-            localStorage.setItem('akma_pro_products', JSON.stringify(products));
-            renderStore(); hideModal('adminModal'); e.target.reset(); alert('تمت إضافة المنتج بنجاح!');
-        }
-
-        function deleteProduct(id) {
-            if (confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
-                products = products.filter(p => p.id !== id);
-                localStorage.setItem('akma_pro_products', JSON.stringify(products));
-                renderStore();
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert('👺 الجوبلن يصرخ: "كيف تقايضني وكيسك فارغ؟ اختر كنزاً أولاً!"');
+                return;
             }
-        }
 
-        function closeModalOnBg(e, id) { if (e.target.id === id) hideModal(id); }
-        function hideModal(id) { document.getElementById(id).style.display = 'none'; }
+            let msg = "مرحباً يا تاجر الجوبلن! 👺🪙\nأريد مقايضة الكنوز التالية مقابل الذهب:\n\n";
+            let total = 0;
+
+            cart.forEach((item, idx) => {
+                msg += `${idx + 1}. ${item.title} - (${item.price} 🪙)\n`;
+                total += item.price;
+            });
+
+            msg += `\nالمجموع الكلي: ${total} 🪙\nأنا جاهز لإتمام الصفقة!`;
+
+            const phone = "212614060332";
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
     </script>
 </body>
 </html>
