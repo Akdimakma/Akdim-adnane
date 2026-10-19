@@ -3,107 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goblin Merchant | متجر الجوبلن للكنوز</title>
+    <title>GOBLIN STORE | متجر الجوبلن</title>
     
     <style>
         *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background: radial-gradient(circle at center, rgba(30, 20, 5, 0.9), rgba(5, 8, 5, 0.98)), 
+            background: radial-gradient(circle at center, rgba(20, 15, 8, 0.85), rgba(5, 5, 8, 0.98)), 
                         url('dragon.jpg') no-repeat center center fixed;
             background-size: cover;
-            color: #fef08a;
+            color: #ffffff;
             min-height: 100vh;
-            padding: 20px 15px;
+            padding: 25px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
         }
 
-        .container {
+        .store-container {
+            width: 100%;
             max-width: 800px;
             margin: 0 auto;
         }
 
-        /* رأس المتجر والطابع */
+        /* الهيدر الكلاسيكي */
         header {
             text-align: center;
-            margin-bottom: 25px;
-            background: rgba(15, 12, 5, 0.85);
-            border: 2px solid #eab308;
-            padding: 20px;
+            margin-bottom: 28px;
+            background: rgba(14, 14, 20, 0.75);
+            border: 1px solid rgba(234, 179, 8, 0.4);
+            padding: 24px 20px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(234, 179, 8, 0.15);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .store-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(234, 179, 8, 0.12);
+            border: 1px solid rgba(234, 179, 8, 0.35);
+            color: #facc15;
+            padding: 6px 16px;
             border-radius: 20px;
-            box-shadow: 0 0 25px rgba(234, 179, 8, 0.25);
-            backdrop-filter: blur(12px);
-        }
-
-        .goblin-avatar {
-            font-size: 3.5rem;
-            margin-bottom: 8px;
-            filter: drop-shadow(0 0 10px #eab308);
-            animation: bounce 2s infinite ease-in-out;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 12px;
         }
 
         header h1 {
-            color: #fbbf24;
-            font-size: 1.8rem;
+            color: #ffffff;
+            font-size: 1.85rem;
             font-weight: 800;
             letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+            margin-bottom: 8px;
         }
 
         header p {
-            color: #a1a1aa;
+            color: #94a3b8;
             font-size: 0.9rem;
-            margin-top: 6px;
+            font-weight: 500;
+            line-height: 1.5;
         }
 
         /* شبكة المنتجات */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
             gap: 18px;
-            margin-bottom: 30px;
+            margin-bottom: 28px;
         }
 
         .product-card {
-            background: rgba(12, 10, 8, 0.85);
-            border: 1px solid rgba(234, 179, 8, 0.4);
-            border-radius: 18px;
-            padding: 16px;
+            background: rgba(18, 18, 26, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 18px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .product-card:hover {
-            border-color: #f59e0b;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+            border-color: rgba(234, 179, 8, 0.6);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 18px rgba(234, 179, 8, 0.2);
         }
 
-        .product-img-box {
+        .product-icon {
             width: 100%;
-            height: 140px;
+            height: 120px;
             background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3.5rem;
-            margin-bottom: 12px;
+            font-size: 3rem;
+            margin-bottom: 14px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -115,107 +122,148 @@
         }
 
         .product-desc {
-            color: #a1a1aa;
-            font-size: 0.8rem;
-            line-height: 1.4;
-            margin-bottom: 12px;
+            color: #94a3b8;
+            font-size: 0.82rem;
+            line-height: 1.45;
+            margin-bottom: 14px;
             flex-grow: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: auto;
         }
 
         .product-price {
             color: #facc15;
             font-weight: 800;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             display: flex;
             align-items: center;
             gap: 4px;
-            margin-bottom: 12px;
         }
 
-        .buy-btn {
-            background: linear-gradient(135deg, #d97706, #b45309);
-            border: 1px solid #f59e0b;
-            color: #ffffff;
-            padding: 10px;
+        .add-btn {
+            background: rgba(234, 179, 8, 0.15);
+            border: 1px solid rgba(234, 179, 8, 0.4);
+            color: #facc15;
+            padding: 9px 14px;
             border-radius: 12px;
             font-weight: 700;
+            font-size: 0.82rem;
             cursor: pointer;
-            width: 100%;
-            transition: all 0.2s;
+            transition: all 0.25s;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 6px;
         }
 
-        .buy-btn:hover {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.6);
+        .add-btn:hover {
+            background: #eab308;
+            color: #000000;
+            border-color: #eab308;
+            box-shadow: 0 4px 15px rgba(234, 179, 8, 0.4);
         }
 
-        /* سلة التسوق - كيس الذهب */
-        .cart-box {
-            background: rgba(15, 12, 5, 0.92);
-            border: 2px solid #eab308;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            backdrop-filter: blur(15px);
+        /* سلة الطلبات */
+        .cart-card {
+            background: rgba(14, 14, 20, 0.8);
+            border: 1px solid rgba(234, 179, 8, 0.4);
+            border-radius: 24px;
+            padding: 22px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
 
         .cart-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(234, 179, 8, 0.3);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            color: #facc15;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 12px;
+            margin-bottom: 16px;
         }
 
-        .cart-items {
+        .cart-header h3 {
+            font-size: 1.1rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-count {
+            background: rgba(234, 179, 8, 0.2);
+            color: #facc15;
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+
+        .cart-items-list {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            max-height: 200px;
+            max-height: 220px;
             overflow-y: auto;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.04);
-            padding: 10px 14px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 12px 16px;
+            border-radius: 14px;
+            color: #ffffff;
             font-size: 0.9rem;
+            font-weight: 600;
         }
 
-        .cart-total {
+        .remove-btn {
+            background: transparent;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-right: 10px;
+            transition: transform 0.2s;
+        }
+
+        .remove-btn:hover { transform: scale(1.2); }
+
+        .cart-summary {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-size: 1.1rem;
             font-weight: 800;
-            color: #facc15;
-            margin-bottom: 15px;
-            padding-top: 10px;
-            border-top: 1px dashed rgba(234, 179, 8, 0.4);
+            color: #ffffff;
+            padding-top: 14px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.12);
+            margin-bottom: 18px;
         }
+
+        .cart-summary span:last-child { color: #facc15; }
 
         .checkout-btn {
             background: #22c55e;
             border: 1px solid #4ade80;
-            color: #000000;
+            color: #052e16;
             padding: 14px;
-            border-radius: 14px;
-            font-size: 1rem;
+            border-radius: 16px;
+            font-size: 0.98rem;
             font-weight: 800;
             width: 100%;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -225,83 +273,99 @@
         .checkout-btn:hover {
             background: #16a34a;
             color: #ffffff;
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+            transform: translateY(-2px);
         }
 
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #a1a1aa;
+        .nav-back {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .nav-back a {
+            color: #94a3b8;
             text-decoration: none;
             font-size: 0.85rem;
+            font-weight: 600;
             transition: color 0.2s;
         }
 
-        .back-link:hover { color: #facc15; }
+        .nav-back a:hover { color: #facc15; }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="store-container">
+        
         <header>
-            <div class="goblin-avatar">👺💎</div>
-            <h1>مخبأ التاجر الجوبلن</h1>
-            <p>"هات الذهب وخذ الكنوز! الجوبلن لا يقبل سوى الصفقة الرابحة! 🤑🪙"</p>
+            <div class="store-badge">
+                <span>👺</span>
+                <span>GOBLIN COMMERCIAL HUB</span>
+            </div>
+            <h1>متجر الجوبلن الكلاسيكي</h1>
+            <p>منصة سريعة ومنظمة لتداول أفضل السلع والخدمات بأعلى سلاسة وأسرع تعامل.</p>
         </header>
 
-        <!-- شبكة المنتجات -->
+        <!-- قائمة المنتجات -->
         <div class="products-grid">
             <div class="product-card">
-                <div class="product-img-box">🗡️</div>
-                <div class="product-title">خنجر الأساطير المشع</div>
-                <div class="product-desc">خنجر مسحور نادر، حاد كالشفرة ومزين بالزمرد.</div>
-                <div class="product-price">150 🪙</div>
-                <button class="buy-btn" onclick="addToCart('خنجر الأساطير المشع', 150)">ضع في الكيس 💰</button>
+                <div class="product-icon">📦</div>
+                <div class="product-title">منتج متميز أولي</div>
+                <div class="product-desc">وصف دقيق للمنتج يعرض أهم خصائصه ومميزاته للزبائن.</div>
+                <div class="product-footer">
+                    <div class="product-price">150 DH</div>
+                    <button class="add-btn" onclick="addToCart('منتج متميز أولي', 150)">إضافة للطلب +</button>
+                </div>
             </div>
 
             <div class="product-card">
-                <div class="product-img-box">🔮</div>
-                <div class="product-title">بلورة الرؤية المستقبلية</div>
-                <div class="product-desc">تكشف لك أسرار الصفقة القادمة قبل الجميع!</div>
-                <div class="product-price">300 🪙</div>
-                <button class="buy-btn" onclick="addToCart('بلورة الرؤية المستقبلية', 300)">ضع في الكيس 💰</button>
+                <div class="product-icon">⚡</div>
+                <div class="product-title">خدمة سريعة فاخرة</div>
+                <div class="product-desc">تنفيذ مباشر واحترافي بضمان التاجر الجوبلن.</div>
+                <div class="product-footer">
+                    <div class="product-price">300 DH</div>
+                    <button class="add-btn" onclick="addToCart('خدمة سريعة فاخرة', 300)">إضافة للطلب +</button>
+                </div>
             </div>
 
             <div class="product-card">
-                <div class="product-img-box">📜</div>
-                <div class="product-title">مخطوطة الأسرار المشفّرة</div>
-                <div class="product-desc">تحتوي على شفرات المطور وحيل التقنية العالية.</div>
-                <div class="product-price">200 🪙</div>
-                <button class="buy-btn" onclick="addToCart('مخطوطة الأسرار المشفّرة', 200)">ضع في الكيس 💰</button>
+                <div class="product-icon">💎</div>
+                <div class="product-title">حزمة أسرار تقنية</div>
+                <div class="product-desc">مجموعة أدوات مخصصة للارتقاء بأعمالك إلى المستوى التالي.</div>
+                <div class="product-footer">
+                    <div class="product-price">200 DH</div>
+                    <button class="add-btn" onclick="addToCart('حزمة أسرار تقنية', 200)">إضافة للطلب +</button>
+                </div>
             </div>
         </div>
 
-        <!-- سلة التسوق -->
-        <div class="cart-box">
+        <!-- سلة التسوق إلكترونية -->
+        <div class="cart-card">
             <div class="cart-header">
-                <h3>💰 كيس الكنوز الخاص بك</h3>
-                <span id="item-count">0 عناصر</span>
+                <h3>🛍️ قائمة طلباتك</h3>
+                <span class="cart-count" id="item-count">0 سلع</span>
             </div>
 
-            <div class="cart-items" id="cart-items">
-                <p style="color: #71717a; text-align: center; font-size: 0.85rem;" id="empty-msg">
-                    كيسك فارغ كجيب فلاح فقير! أضف بعض الكنوز فوراً! 👺
+            <div class="cart-items-list" id="cart-items">
+                <p style="color: #64748b; text-align: center; font-size: 0.85rem; padding: 10px 0;" id="empty-msg">
+                    السلة فارغة حالياً. اختر سلعك للبدء في المعاملة!
                 </p>
             </div>
 
-            <div class="cart-total">
-                <span>المجموع بالذهب:</span>
-                <span id="total-price">0 🪙</span>
+            <div class="cart-summary">
+                <span>المجموع الكلي:</span>
+                <span id="total-price">0 DH</span>
             </div>
 
             <button class="checkout-btn" onclick="checkoutWhatsApp()">
-                مقايضة الكنز عبر واتساب 📲🤑
+                إتمام الطلب المباشر عبر الواتساب 📲
             </button>
         </div>
 
-        <div style="text-align: center;">
-            <a href="index.html" class="back-link">← العودة إلى الصفحة الشخصية</a>
+        <div class="nav-back">
+            <a href="index.html">← العودة إلى الصفحة الشخصية</a>
         </div>
+
     </div>
 
     <script>
@@ -318,9 +382,9 @@
             const countContainer = document.getElementById('item-count');
 
             if (cart.length === 0) {
-                itemsContainer.innerHTML = `<p style="color: #71717a; text-align: center; font-size: 0.85rem;">كيسك فارغ كجيب فلاح فقير! أضف بعض الكنوز فوراً! 👺</p>`;
-                totalContainer.innerText = '0 🪙';
-                countContainer.innerText = '0 عناصر';
+                itemsContainer.innerHTML = `<p style="color: #64748b; text-align: center; font-size: 0.85rem; padding: 10px 0;">السلة فارغة حالياً. اختر سلعك للبدء في المعاملة!</p>`;
+                totalContainer.innerText = '0 DH';
+                countContainer.innerText = '0 سلع';
                 return;
             }
 
@@ -332,14 +396,17 @@
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'cart-item';
                 itemDiv.innerHTML = `
-                    <span>💎 ${item.title}</span>
-                    <span>${item.price} 🪙 <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#ef4444; cursor:pointer; margin-right:8px;">❌</button></span>
+                    <span>• ${item.title}</span>
+                    <div>
+                        <span>${item.price} DH</span>
+                        <button class="remove-btn" onclick="removeFromCart(${index})" title="إزالة">✕</button>
+                    </div>
                 `;
                 itemsContainer.appendChild(itemDiv);
             });
 
-            totalContainer.innerText = total + ' 🪙';
-            countContainer.innerText = cart.length + ' عناصر';
+            totalContainer.innerText = total + ' DH';
+            countContainer.innerText = cart.length + ' سلع';
         }
 
         function removeFromCart(index) {
@@ -349,19 +416,19 @@
 
         function checkoutWhatsApp() {
             if (cart.length === 0) {
-                alert('👺 الجوبلن يصرخ: "كيف تقايضني وكيسك فارغ؟ اختر كنزاً أولاً!"');
+                alert('يرجى اختيار سلع أولاً لإتمام عملية الشراء!');
                 return;
             }
 
-            let msg = "مرحباً يا تاجر الجوبلن! 👺🪙\nأريد مقايضة الكنوز التالية مقابل الذهب:\n\n";
+            let msg = "مرحباً! 👺\nأريد إتمام طلب السلع التالية عبر متجر الجوبلن:\n\n";
             let total = 0;
 
             cart.forEach((item, idx) => {
-                msg += `${idx + 1}. ${item.title} - (${item.price} 🪙)\n`;
+                msg += `${idx + 1}. ${item.title} — (${item.price} DH)\n`;
                 total += item.price;
             });
 
-            msg += `\nالمجموع الكلي: ${total} 🪙\nأنا جاهز لإتمام الصفقة!`;
+            msg += `\nالمجموع الإجمالي: ${total} DH\nيرجى تأكيد الطلب وتحديد طريقة الدفع والتسليم.`;
 
             const phone = "212614060332";
             const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
