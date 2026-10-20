@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -23,7 +24,7 @@
         }
 
         body {
-            background: radial-gradient(circle at center, rgba(30, 10, 15, 0.4), rgba(5, 5, 8, 0.85)), 
+            background: radial-gradient(circle at center, rgba(30, 10, 15, 0.45), rgba(5, 5, 8, 0.92)), 
                         url('dragon.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
@@ -205,7 +206,7 @@
 
         .book-card {
             width: 100%;
-            max-width: 460px;
+            max-width: 480px;
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.85s cubic-bezier(0.23, 1, 0.32, 1);
@@ -239,11 +240,11 @@
             top: 0;
             left: 0;
             transform: rotateY(180deg);
-            background: rgba(2, 8, 4, 0.98);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(34, 197, 94, 0.65);
-            box-shadow: 0 0 55px rgba(34, 197, 94, 0.3), inset 0 0 25px rgba(34, 197, 94, 0.15);
+            background: radial-gradient(circle at top, rgba(16, 185, 129, 0.1), transparent 70%), rgba(2, 6, 4, 0.97);
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            border: 1px solid #10b981;
+            box-shadow: 0 0 50px rgba(16, 185, 129, 0.25), inset 0 0 30px rgba(16, 185, 129, 0.1);
             text-align: right;
             direction: rtl;
             min-height: 100%;
@@ -252,9 +253,19 @@
             scrollbar-width: thin;
         }
 
-        #matrixCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.25; pointer-events: none; }
+        .page-back::before {
+            content: " ";
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 3px, 6px 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-        .page-back-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 10px; }
+        #matrixCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.2; pointer-events: none; }
+
+        .page-back-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 12px; }
 
         .lang-switch {
             display: flex;
@@ -389,15 +400,15 @@
 
         footer { margin-top: 22px; font-size: 0.74rem; color: #64748b; font-weight: 500; }
 
-        /* Hacker Cyber OS Styling */
+        /* Cyberpunk OS Interface Elements */
         .cyber-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(34, 197, 94, 0.4);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.4);
             padding-bottom: 8px;
-            font-size: 0.72rem;
-            color: #22c55e;
+            font-size: 0.75rem;
+            color: #10b981;
             font-weight: 700;
             font-family: 'Courier New', Courier, monospace;
         }
@@ -405,9 +416,9 @@
         .pulse-dot {
             width: 8px;
             height: 8px;
-            background: #22c55e;
+            background: #10b981;
             border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
+            box-shadow: 0 0 10px #10b981;
             animation: pulse-dot 1.2s infinite ease-in-out;
         }
 
@@ -416,60 +427,64 @@
         .cyber-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
 
         .cyber-stat-box {
-            background: rgba(0, 20, 8, 0.75);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            padding: 6px 4px;
+            background: rgba(5, 20, 12, 0.75);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 8px 4px;
             border-radius: 8px;
             text-align: center;
             font-family: 'Courier New', Courier, monospace;
         }
 
-        .cyber-stat-box label { font-size: 0.6rem; color: #86efac; display: block; margin-bottom: 2px; }
-        .cyber-stat-box span { font-size: 0.85rem; font-weight: bold; color: #22c55e; }
+        .cyber-stat-box label { font-size: 0.6rem; color: #6ee7b7; display: block; margin-bottom: 3px; }
+        .cyber-stat-box span { font-size: 0.85rem; font-weight: bold; color: #10b981; }
 
-        .cyber-tabs { display: flex; gap: 4px; border-bottom: 1px solid rgba(34, 197, 94, 0.25); padding-bottom: 6px; overflow-x: auto; scrollbar-width: none; }
+        .cyber-tabs { display: flex; gap: 4px; border-bottom: 1px solid rgba(16, 185, 129, 0.25); padding-bottom: 6px; }
 
         .cyber-tab-btn {
-            background: rgba(0, 25, 10, 0.7);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            color: #86efac;
-            padding: 5px 10px;
+            flex: 1;
+            background: rgba(4, 25, 15, 0.6);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #6ee7b7;
+            padding: 6px 4px;
             border-radius: 6px;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             cursor: pointer;
             font-family: 'Courier New', Courier, monospace;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            white-space: nowrap;
+            text-align: center;
+            transition: all 0.2s ease;
         }
 
-        .cyber-tab-btn:hover, .cyber-tab-btn.active { background: rgba(34, 197, 94, 0.25); color: #ffffff; border-color: #22c55e; box-shadow: 0 0 10px rgba(34, 197, 94, 0.4); }
+        .cyber-tab-btn:hover, .cyber-tab-btn.active {
+            background: rgba(16, 185, 129, 0.25);
+            color: #ffffff;
+            border-color: #10b981;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+        }
 
-        .cyber-panel-tab { display: none; min-height: 230px; }
-        .cyber-panel-tab.active { display: flex; flex-direction: column; gap: 8px; }
+        .cyber-panel-tab { display: none; min-height: 250px; }
+        .cyber-panel-tab.active { display: flex; flex-direction: column; gap: 10px; }
 
         .tool-subcard {
-            background: rgba(0, 15, 6, 0.8);
-            border: 1px solid rgba(34, 197, 94, 0.3);
+            background: rgba(3, 18, 10, 0.85);
+            border: 1px solid rgba(16, 185, 129, 0.3);
             border-radius: 10px;
             padding: 10px 12px;
             font-family: 'Courier New', Courier, monospace;
         }
 
-        .tool-title { font-size: 0.74rem; color: #22c55e; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; }
+        .tool-title { font-size: 0.75rem; color: #10b981; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; }
 
         .toggle-switch-wrapper {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(0, 25, 10, 0.85);
-            border: 1px solid rgba(34, 197, 94, 0.4);
+            background: rgba(4, 25, 15, 0.85);
+            border: 1px solid rgba(16, 185, 129, 0.4);
             padding: 10px 14px;
             border-radius: 12px;
         }
 
-        .toggle-label { font-size: 0.82rem; font-weight: bold; color: #22c55e; font-family: 'Courier New', Courier, monospace; }
+        .toggle-label { font-size: 0.82rem; font-weight: bold; color: #10b981; font-family: 'Courier New', Courier, monospace; }
 
         .switch { position: relative; display: inline-block; width: 48px; height: 24px; }
         .switch input { opacity: 0; width: 0; height: 0; }
@@ -479,7 +494,7 @@
             cursor: pointer;
             inset: 0;
             background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.4);
+            border: 1px solid rgba(16, 185, 129, 0.4);
             transition: .4s;
             border-radius: 24px;
         }
@@ -491,10 +506,10 @@
             width: 16px;
             left: 3px;
             bottom: 3px;
-            background-color: #22c55e;
+            background-color: #10b981;
             transition: .4s;
             border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
+            box-shadow: 0 0 8px #10b981;
         }
 
         input:checked + .slider { background-color: rgba(239, 68, 68, 0.3); border-color: #ef4444; }
@@ -505,9 +520,9 @@
         .pass-input {
             flex: 1;
             background: rgba(0, 0, 0, 0.85);
-            border: 1px solid rgba(34, 197, 94, 0.4);
+            border: 1px solid rgba(16, 185, 129, 0.4);
             border-radius: 6px;
-            color: #22c55e;
+            color: #10b981;
             padding: 6px 8px;
             font-size: 0.74rem;
             outline: none;
@@ -516,42 +531,43 @@
         }
 
         .mini-btn {
-            background: rgba(34, 197, 94, 0.2);
-            border: 1px solid #22c55e;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid #10b981;
             color: #fff;
             padding: 6px 10px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 4px;
             font-family: 'Courier New', Courier, monospace;
+            transition: all 0.2s;
         }
 
-        .mini-btn:hover { background: #22c55e; color: #000; }
+        .mini-btn:hover { background: #10b981; color: #000; box-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
 
         .vault-input-box { display: flex; flex-direction: column; gap: 6px; }
 
         .secret-input {
             flex: 1;
             background: rgba(0, 0, 0, 0.85);
-            border: 1px solid rgba(34, 197, 94, 0.35);
+            border: 1px solid rgba(16, 185, 129, 0.4);
             border-radius: 6px;
-            color: #22c55e;
-            padding: 6px 8px;
-            font-size: 0.74rem;
+            color: #10b981;
+            padding: 7px 10px;
+            font-size: 0.75rem;
             outline: none;
             font-family: 'Courier New', Courier, monospace;
         }
 
-        .vault-list { max-height: 175px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; scrollbar-width: thin; }
+        .vault-list { max-height: 185px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; scrollbar-width: thin; }
 
         .vault-item {
-            background: rgba(0, 25, 7, 0.75);
-            border: 1px solid rgba(34, 197, 94, 0.25);
-            padding: 6px 8px;
+            background: rgba(3, 20, 10, 0.75);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            padding: 7px 9px;
             border-radius: 6px;
             display: flex;
             justify-content: space-between;
@@ -561,14 +577,14 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-        .vault-item-content { flex: 1; color: #86efac; word-break: break-all; text-align: right; }
+        .vault-item-content { flex: 1; color: #6ee7b7; word-break: break-all; text-align: right; }
 
         .cyber-term-box {
             background: rgba(0, 0, 0, 0.95);
-            border: 1px solid rgba(34, 197, 94, 0.45);
+            border: 1px solid rgba(16, 185, 129, 0.45);
             border-radius: 8px;
-            padding: 8px;
-            height: 220px;
+            padding: 10px;
+            height: 235px;
             display: flex;
             flex-direction: column;
             font-family: 'Courier New', Courier, monospace;
@@ -576,16 +592,16 @@
             direction: ltr;
         }
 
-        .cyber-term-output { flex: 1; overflow-y: auto; color: #22c55e; font-size: 0.7rem; line-height: 1.45; margin-bottom: 6px; }
-        .cyber-term-prompt { display: flex; align-items: center; gap: 6px; border-top: 1px dashed rgba(34, 197, 94, 0.3); padding-top: 4px; color: #22c55e; font-size: 0.74rem; }
-        .cyber-term-input { flex: 1; background: transparent; border: none; outline: none; color: #ffffff; font-family: 'Courier New', Courier, monospace; font-size: 0.74rem; }
+        .cyber-term-output { flex: 1; overflow-y: auto; color: #10b981; font-size: 0.72rem; line-height: 1.45; margin-bottom: 6px; }
+        .cyber-term-prompt { display: flex; align-items: center; gap: 6px; border-top: 1px dashed rgba(16, 185, 129, 0.3); padding-top: 6px; color: #10b981; font-size: 0.75rem; }
+        .cyber-term-input { flex: 1; background: transparent; border: none; outline: none; color: #ffffff; font-family: 'Courier New', Courier, monospace; font-size: 0.75rem; }
 
         .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
         .admin-btn {
-            background: rgba(34, 197, 94, 0.15);
-            border: 1px solid rgba(34, 197, 94, 0.4);
-            color: #22c55e;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #10b981;
             padding: 10px 8px;
             border-radius: 10px;
             font-size: 0.76rem;
@@ -596,14 +612,15 @@
             justify-content: center;
             gap: 6px;
             font-family: 'Courier New', Courier, monospace;
+            transition: all 0.2s;
         }
 
-        .admin-btn:hover { background: #22c55e; color: #000; box-shadow: 0 0 15px rgba(34, 197, 94, 0.6); }
+        .admin-btn:hover { background: #10b981; color: #000; box-shadow: 0 0 15px rgba(16, 185, 129, 0.6); }
         .admin-btn.danger { background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.5); color: #f87171; grid-column: span 2; }
-        .admin-btn.danger:hover { background: #ef4444; color: #ffffff; }
+        .admin-btn.danger:hover { background: #ef4444; color: #ffffff; box-shadow: 0 0 15px rgba(239, 68, 68, 0.6); }
 
         .logs-box {
-            background: rgba(20, 0, 0, 0.65);
+            background: rgba(25, 0, 0, 0.75);
             border: 1px solid rgba(239, 68, 68, 0.4);
             border-radius: 8px;
             padding: 6px 8px;
@@ -853,8 +870,8 @@
                 </div>
 
                 <div class="cyber-tabs">
-                    <button class="cyber-tab-btn active" onclick="switchCyberTab('tools', this)">أدوات</button>
-                    <button class="cyber-tab-btn" onclick="switchCyberTab('vault', this)">الأسرار</button>
+                    <button class="cyber-tab-btn active" onclick="switchCyberTab('tools', this)">الأدوات</button>
+                    <button class="cyber-tab-btn" onclick="switchCyberTab('vault', this)">المخزن</button>
                     <button class="cyber-tab-btn" onclick="switchCyberTab('terminal', this)">الطرفية</button>
                     <button class="cyber-tab-btn" onclick="switchCyberTab('control', this)">التحكم</button>
                 </div>
@@ -880,9 +897,9 @@
 
                     <div class="tool-subcard">
                         <div class="tool-title">حالة الاتصال السحابي:</div>
-                        <div style="font-size: 0.68rem; color: #86efac; display: flex; justify-content: space-between;">
+                        <div style="font-size: 0.68rem; color: #6ee7b7; display: flex; justify-content: space-between;">
                             <span>REPO: Akdim-adnane</span>
-                            <span style="color: #22c55e;">ONLINE [200 OK]</span>
+                            <span style="color: #10b981;">ONLINE [200 OK]</span>
                         </div>
                     </div>
                 </div>
@@ -931,7 +948,7 @@
                 </div>
 
                 <footer>
-                    <div style="color: #22c55e; font-family: 'Courier New', Courier, monospace; font-size: 0.7rem; margin-top: 6px; text-align: center;">
+                    <div style="color: #10b981; font-family: 'Courier New', Courier, monospace; font-size: 0.7rem; margin-top: 6px; text-align: center;">
                         [ROOT_SESSION: AUTH_ADNANE_AKDIM]
                     </div>
                 </footer>
@@ -1126,7 +1143,7 @@
                     if ((lang === 'ar' && btn.textContent.includes('العربية')) ||
                         (lang === 'en' && btn.textContent.includes('English')) ||
                         (lang === 'fr' && btn.textContent.includes('Français')) ||
-                        (lang === 'ber' && btn.textContent.includes('ⵜⴰⵎⴰزيⵖⵜ'))) {
+                        (lang === 'ber' && btn.textContent.includes('ⵜⴰⵎⴰⵣⵉⵖⵜ'))) {
                         btn.classList.add('active');
                     }
                 });
@@ -1293,7 +1310,7 @@
             } catch (e) { items = []; }
 
             if (items.length === 0) {
-                container.innerHTML = '<div style="color:#86efac; font-size:0.7rem; text-align:center; padding:12px; font-family:\'Courier New\', Courier, monospace;">المخزن فارغ حالياً.</div>';
+                container.innerHTML = '<div style="color:#6ee7b7; font-size:0.7rem; text-align:center; padding:12px; font-family:\'Courier New\', Courier, monospace;">المخزن فارغ حالياً.</div>';
                 return;
             }
 
@@ -1416,7 +1433,7 @@
             const txt = document.getElementById('maintStatusText');
             if (txt) {
                 txt.innerText = isMaint ? "وضع الصيانة مفعل (الموقع مغلق)" : "وضع الصيانة مغلق (الموقع مفتوح)";
-                txt.style.color = isMaint ? "#ef4444" : "#22c55e";
+                txt.style.color = isMaint ? "#ef4444" : "#10b981";
             }
             const screen = document.getElementById('maintScreen');
             if (isMaint) { screen.style.display = 'flex'; startMaintMatrixEffect(); }
@@ -1466,7 +1483,7 @@
             function draw(time) {
                 if (time - lastDraw > 40) {
                     ctx.fillStyle = 'rgba(0, 0, 0, 0.08)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = '#22c55e'; ctx.font = fontSize + 'px monospace';
+                    ctx.fillStyle = '#10b981'; ctx.font = fontSize + 'px monospace';
                     for (let i = 0; i < drops.length; i++) {
                         ctx.fillText(charsMatrix.charAt(Math.floor(Math.random() * charsMatrix.length)), i * fontSize, drops[i] * fontSize);
                         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
@@ -1543,3 +1560,4 @@
     </script>
 </body>
 </html>
+```
