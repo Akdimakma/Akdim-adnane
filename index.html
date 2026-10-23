@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADNANE AKDIM | Links</title>
+    <title>ADNANE AKDIM | Cyber Hub</title>
 
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#dc2626">
@@ -22,8 +23,17 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        :root {
+            --cyber-green: #00ff66;
+            --cyber-green-dim: rgba(0, 255, 102, 0.15);
+            --cyber-green-border: rgba(0, 255, 102, 0.4);
+            --cyber-cyan: #00f0ff;
+            --cyber-red: #ef4444;
+            --cyber-bg: #030706;
+        }
+
         body {
-            background: radial-gradient(circle at center, rgba(30, 10, 15, 0.4), rgba(5, 5, 8, 0.85)), 
+            background: radial-gradient(circle at center, rgba(30, 10, 15, 0.4), rgba(5, 5, 8, 0.9)), 
                         url('dragon.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
@@ -76,7 +86,7 @@
             right: -320px;
             width: 290px;
             height: 100%;
-            background: rgba(12, 12, 18, 0.92);
+            background: rgba(12, 12, 18, 0.94);
             backdrop-filter: blur(28px);
             -webkit-backdrop-filter: blur(28px);
             border-left: 1px solid rgba(239, 68, 68, 0.3);
@@ -206,7 +216,7 @@
 
         .book-card {
             width: 100%;
-            max-width: 450px;
+            max-width: 480px;
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.85s cubic-bezier(0.23, 1, 0.32, 1);
@@ -240,19 +250,39 @@
             top: 0;
             left: 0;
             transform: rotateY(180deg);
-            background: rgba(3, 7, 5, 0.96);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(34, 197, 94, 0.6);
-            box-shadow: 0 0 50px rgba(34, 197, 94, 0.25), inset 0 0 20px rgba(34, 197, 94, 0.12);
+            background: var(--cyber-bg);
+            backdrop-filter: blur(30px);
+            border: 1px solid var(--cyber-green-border);
+            box-shadow: 0 0 60px rgba(0, 255, 102, 0.2), inset 0 0 25px rgba(0, 255, 102, 0.08);
             overflow: hidden;
             text-align: right;
             direction: rtl;
             min-height: 100%;
         }
 
-        #matrixCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.22; pointer-events: none; }
+        .cyber-grid-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0, 255, 102, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0, 255, 102, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-        .page-back-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 10px; }
+        .cyber-scanline {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        #matrixCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.18; pointer-events: none; }
+
+        .page-back-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 12px; }
 
         .lang-switch {
             display: flex;
@@ -387,14 +417,15 @@
 
         footer { margin-top: 22px; font-size: 0.74rem; color: #64748b; font-weight: 500; }
 
+        /* Hacker Cyber OS UI */
         .cyber-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(34, 197, 94, 0.4);
+            border-bottom: 1px solid var(--cyber-green-border);
             padding-bottom: 8px;
-            font-size: 0.72rem;
-            color: #22c55e;
+            font-size: 0.74rem;
+            color: var(--cyber-green);
             font-weight: 700;
             font-family: 'Courier New', Courier, monospace;
         }
@@ -402,9 +433,9 @@
         .pulse-dot {
             width: 8px;
             height: 8px;
-            background: #22c55e;
+            background: var(--cyber-green);
             border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
+            box-shadow: 0 0 10px var(--cyber-green);
             animation: pulse-dot 1.2s infinite ease-in-out;
         }
 
@@ -413,60 +444,68 @@
         .cyber-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
 
         .cyber-stat-box {
-            background: rgba(0, 20, 8, 0.75);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            padding: 6px 4px;
+            background: rgba(0, 20, 8, 0.85);
+            border: 1px solid var(--cyber-green-border);
+            padding: 8px 4px;
             border-radius: 8px;
             text-align: center;
             font-family: 'Courier New', Courier, monospace;
+            box-shadow: inset 0 0 10px rgba(0,255,102,0.05);
         }
 
         .cyber-stat-box label { font-size: 0.6rem; color: #86efac; display: block; margin-bottom: 2px; }
-        .cyber-stat-box span { font-size: 0.85rem; font-weight: bold; color: #22c55e; }
+        .cyber-stat-box span { font-size: 0.85rem; font-weight: bold; color: var(--cyber-green); text-shadow: 0 0 8px rgba(0,255,102,0.4); }
 
-        .cyber-tabs { display: flex; gap: 4px; border-bottom: 1px solid rgba(34, 197, 94, 0.25); padding-bottom: 6px; overflow-x: auto; scrollbar-width: none; }
+        .cyber-tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--cyber-green-border); padding-bottom: 8px; overflow-x: auto; scrollbar-width: none; }
 
         .cyber-tab-btn {
             background: rgba(0, 25, 10, 0.7);
-            border: 1px solid rgba(34, 197, 94, 0.3);
+            border: 1px solid var(--cyber-green-border);
             color: #86efac;
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 6px;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             cursor: pointer;
             font-family: 'Courier New', Courier, monospace;
             display: flex;
             align-items: center;
             gap: 4px;
             white-space: nowrap;
+            transition: all 0.2s ease;
         }
 
-        .cyber-tab-btn:hover, .cyber-tab-btn.active { background: rgba(34, 197, 94, 0.25); color: #ffffff; border-color: #22c55e; box-shadow: 0 0 10px rgba(34, 197, 94, 0.4); }
+        .cyber-tab-btn:hover, .cyber-tab-btn.active {
+            background: var(--cyber-green-dim);
+            color: #ffffff;
+            border-color: var(--cyber-green);
+            box-shadow: 0 0 12px rgba(0, 255, 102, 0.4);
+        }
 
-        .cyber-panel-tab { display: none; min-height: 230px; }
-        .cyber-panel-tab.active { display: flex; flex-direction: column; gap: 8px; }
+        .cyber-panel-tab { display: none; min-height: 250px; }
+        .cyber-panel-tab.active { display: flex; flex-direction: column; gap: 10px; }
 
         .tool-subcard {
-            background: rgba(0, 15, 6, 0.8);
-            border: 1px solid rgba(34, 197, 94, 0.3);
+            background: rgba(0, 15, 6, 0.85);
+            border: 1px solid var(--cyber-green-border);
             border-radius: 10px;
             padding: 10px 12px;
             font-family: 'Courier New', Courier, monospace;
+            box-shadow: inset 0 0 12px rgba(0,255,102,0.04);
         }
 
-        .tool-title { font-size: 0.74rem; color: #22c55e; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; }
+        .tool-title { font-size: 0.74rem; color: var(--cyber-green); margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; }
 
         .toggle-switch-wrapper {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: rgba(0, 25, 10, 0.85);
-            border: 1px solid rgba(34, 197, 94, 0.4);
+            border: 1px solid var(--cyber-green-border);
             padding: 10px 14px;
             border-radius: 12px;
         }
 
-        .toggle-label { font-size: 0.82rem; font-weight: bold; color: #22c55e; font-family: 'Courier New', Courier, monospace; }
+        .toggle-label { font-size: 0.82rem; font-weight: bold; color: var(--cyber-green); font-family: 'Courier New', Courier, monospace; }
 
         .switch { position: relative; display: inline-block; width: 48px; height: 24px; }
         .switch input { opacity: 0; width: 0; height: 0; }
@@ -476,7 +515,7 @@
             cursor: pointer;
             inset: 0;
             background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.4);
+            border: 1px solid var(--cyber-green-border);
             transition: .4s;
             border-radius: 24px;
         }
@@ -488,10 +527,10 @@
             width: 16px;
             left: 3px;
             bottom: 3px;
-            background-color: #22c55e;
+            background-color: var(--cyber-green);
             transition: .4s;
             border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
+            box-shadow: 0 0 8px var(--cyber-green);
         }
 
         input:checked + .slider { background-color: rgba(239, 68, 68, 0.3); border-color: #ef4444; }
@@ -499,56 +538,44 @@
 
         .pass-output-row { display: flex; gap: 6px; }
 
-        .pass-input {
+        .pass-input, .secret-input {
             flex: 1;
             background: rgba(0, 0, 0, 0.85);
-            border: 1px solid rgba(34, 197, 94, 0.4);
+            border: 1px solid var(--cyber-green-border);
             border-radius: 6px;
-            color: #22c55e;
-            padding: 6px 8px;
-            font-size: 0.74rem;
+            color: var(--cyber-green);
+            padding: 7px 10px;
+            font-size: 0.75rem;
             outline: none;
-            direction: ltr;
             font-family: 'Courier New', Courier, monospace;
         }
 
+        .pass-input { direction: ltr; }
+
         .mini-btn {
-            background: rgba(34, 197, 94, 0.2);
-            border: 1px solid #22c55e;
+            background: var(--cyber-green-dim);
+            border: 1px solid var(--cyber-green);
             color: #fff;
-            padding: 6px 10px;
+            padding: 6px 12px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 4px;
             font-family: 'Courier New', Courier, monospace;
+            transition: all 0.2s ease;
         }
 
-        .mini-btn:hover { background: #22c55e; color: #000; }
+        .mini-btn:hover { background: var(--cyber-green); color: #000; box-shadow: 0 0 12px var(--cyber-green); }
 
-        .vault-input-box { display: flex; flex-direction: column; gap: 6px; }
-
-        .secret-input {
-            flex: 1;
-            background: rgba(0, 0, 0, 0.85);
-            border: 1px solid rgba(34, 197, 94, 0.35);
-            border-radius: 6px;
-            color: #22c55e;
-            padding: 6px 8px;
-            font-size: 0.74rem;
-            outline: none;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        .vault-list { max-height: 175px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; scrollbar-width: thin; }
+        .vault-list { max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; scrollbar-width: thin; }
 
         .vault-item {
             background: rgba(0, 25, 7, 0.75);
-            border: 1px solid rgba(34, 197, 94, 0.25);
-            padding: 6px 8px;
+            border: 1px solid rgba(0, 255, 102, 0.25);
+            padding: 8px 10px;
             border-radius: 6px;
             display: flex;
             justify-content: space-between;
@@ -562,27 +589,28 @@
 
         .cyber-term-box {
             background: rgba(0, 0, 0, 0.95);
-            border: 1px solid rgba(34, 197, 94, 0.45);
+            border: 1px solid var(--cyber-green-border);
             border-radius: 8px;
-            padding: 8px;
-            height: 220px;
+            padding: 10px;
+            height: 230px;
             display: flex;
             flex-direction: column;
             font-family: 'Courier New', Courier, monospace;
             text-align: left;
             direction: ltr;
+            box-shadow: inset 0 0 15px rgba(0,255,102,0.06);
         }
 
-        .cyber-term-output { flex: 1; overflow-y: auto; color: #22c55e; font-size: 0.7rem; line-height: 1.45; margin-bottom: 6px; }
-        .cyber-term-prompt { display: flex; align-items: center; gap: 6px; border-top: 1px dashed rgba(34, 197, 94, 0.3); padding-top: 4px; color: #22c55e; font-size: 0.74rem; }
-        .cyber-term-input { flex: 1; background: transparent; border: none; outline: none; color: #ffffff; font-family: 'Courier New', Courier, monospace; font-size: 0.74rem; }
+        .cyber-term-output { flex: 1; overflow-y: auto; color: var(--cyber-green); font-size: 0.72rem; line-height: 1.45; margin-bottom: 6px; }
+        .cyber-term-prompt { display: flex; align-items: center; gap: 6px; border-top: 1px dashed rgba(0, 255, 102, 0.3); padding-top: 6px; color: var(--cyber-green); font-size: 0.75rem; }
+        .cyber-term-input { flex: 1; background: transparent; border: none; outline: none; color: #ffffff; font-family: 'Courier New', Courier, monospace; font-size: 0.75rem; }
 
         .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
         .admin-btn {
-            background: rgba(34, 197, 94, 0.15);
-            border: 1px solid rgba(34, 197, 94, 0.4);
-            color: #22c55e;
+            background: var(--cyber-green-dim);
+            border: 1px solid var(--cyber-green-border);
+            color: var(--cyber-green);
             padding: 10px 8px;
             border-radius: 10px;
             font-size: 0.76rem;
@@ -593,11 +621,12 @@
             justify-content: center;
             gap: 6px;
             font-family: 'Courier New', Courier, monospace;
+            transition: all 0.2s ease;
         }
 
-        .admin-btn:hover { background: #22c55e; color: #000; box-shadow: 0 0 15px rgba(34, 197, 94, 0.6); }
+        .admin-btn:hover { background: var(--cyber-green); color: #000; box-shadow: 0 0 15px var(--cyber-green); }
         .admin-btn.danger { background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.5); color: #f87171; grid-column: span 2; }
-        .admin-btn.danger:hover { background: #ef4444; color: #ffffff; }
+        .admin-btn.danger:hover { background: #ef4444; color: #ffffff; box-shadow: 0 0 15px #ef4444; }
 
         .logs-box {
             background: rgba(20, 0, 0, 0.65);
@@ -632,17 +661,17 @@
             width: 100%;
             max-width: 460px;
             background: rgba(10, 16, 12, 0.98);
-            border: 1px solid #22c55e;
+            border: 1px solid var(--cyber-green);
             border-radius: 14px;
             padding: 22px;
-            box-shadow: 0 0 35px rgba(34, 197, 94, 0.35);
+            box-shadow: 0 0 35px rgba(0, 255, 102, 0.35);
             text-align: left;
             direction: ltr;
         }
 
-        .terminal-header { color: #22c55e; font-size: 0.82rem; margin-bottom: 14px; border-bottom: 1px dashed rgba(34, 197, 94, 0.4); padding-bottom: 8px; display: flex; justify-content: space-between; }
-        .terminal-logs { color: #22c55e; font-size: 0.82rem; line-height: 1.6; margin-bottom: 14px; }
-        .terminal-input-row { display: flex; align-items: center; gap: 8px; color: #22c55e; }
+        .terminal-header { color: var(--cyber-green); font-size: 0.82rem; margin-bottom: 14px; border-bottom: 1px dashed rgba(0, 255, 102, 0.4); padding-bottom: 8px; display: flex; justify-content: space-between; }
+        .terminal-logs { color: var(--cyber-green); font-size: 0.82rem; line-height: 1.6; margin-bottom: 14px; }
+        .terminal-input-row { display: flex; align-items: center; gap: 8px; color: var(--cyber-green); }
         .terminal-input { background: transparent; border: none; color: #fff; font-family: 'Courier New', Courier, monospace; font-size: 1rem; outline: none; flex: 1; letter-spacing: 3px; }
 
         .qr-modal {
@@ -749,7 +778,7 @@
         </div>
 
         <div style="font-size: 0.7rem; color: #64748b; text-align: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px;">
-            AKMA PLATFORM v3.2
+            AKMA PLATFORM v4.0 PRO
         </div>
     </aside>
 
@@ -831,13 +860,15 @@
         </div>
 
         <div class="page-back">
+            <div class="cyber-grid-overlay"></div>
+            <div class="cyber-scanline"></div>
             <canvas id="matrixCanvas"></canvas>
             
             <div class="page-back-content">
                 <div class="cyber-header">
-                    <div class="status-indicator" style="display:flex; align-items:center; gap:6px;">
+                    <div style="display:flex; align-items:center; gap:8px;">
                         <div class="pulse-dot"></div>
-                        <span>AKMA_CYBER_OS // v3.2</span>
+                        <span style="letter-spacing:1px;">AKMA_CYBER_OS // v4.0</span>
                     </div>
                     <span id="cyberClock">00:00:00 UTC</span>
                 </div>
@@ -845,50 +876,59 @@
                 <div class="cyber-stats">
                     <div class="cyber-stat-box"><label>الزيارات</label><span id="visits-count">1</span></div>
                     <div class="cyber-stat-box"><label>النقرات</label><span id="clicks-count">0</span></div>
-                    <div class="cyber-stat-box"><label>الأمان</label><span style="color: #38bdf8;">SECURE</span></div>
-                    <div class="cyber-stat-box"><label>النواة</label><span id="cyberPing">24ms</span></div>
+                    <div class="cyber-stat-box"><label>الأمان</label><span style="color: var(--cyber-cyan);">ARMED</span></div>
+                    <div class="cyber-stat-box"><label>النواة</label><span id="cyberPing">18ms</span></div>
                 </div>
 
                 <div class="cyber-tabs">
-                    <button class="cyber-tab-btn active" onclick="switchCyberTab('tools', this)">أدوات</button>
-                    <button class="cyber-tab-btn" onclick="switchCyberTab('vault', this)">الأسرار</button>
-                    <button class="cyber-tab-btn" onclick="switchCyberTab('terminal', this)">الطرفية</button>
-                    <button class="cyber-tab-btn" onclick="switchCyberTab('control', this)">التحكم</button>
+                    <button class="cyber-tab-btn active" onclick="switchCyberTab('tools', this)">⚡ الأدوات</button>
+                    <button class="cyber-tab-btn" onclick="switchCyberTab('vault', this)">🔐 الخزنة</button>
+                    <button class="cyber-tab-btn" onclick="switchCyberTab('terminal', this)">💻 الطرفية</button>
+                    <button class="cyber-tab-btn" onclick="switchCyberTab('control', this)">⚙️ التحكم</button>
                 </div>
 
                 <div class="cyber-panel-tab active" id="tab-tools">
                     <div class="tool-subcard">
-                        <div class="tool-title">مولد مفاتيح وتشفير فائق:</div>
+                        <div class="tool-title">
+                            <span>مولد مفاتيح معقدة (KeyGen):</span>
+                            <span style="color:var(--cyber-cyan); font-size:0.65rem;">256-BIT</span>
+                        </div>
                         <div class="pass-output-row">
-                            <input type="text" class="pass-input" id="generatedPassword" readonly placeholder="PASSCODE...">
+                            <input type="text" class="pass-input" id="generatedPassword" readonly placeholder="GENERATE KEY...">
                             <button class="mini-btn" onclick="generateCyberPass()">توليد</button>
                             <button class="mini-btn" onclick="copyCyberPass()">نسخ</button>
                         </div>
                     </div>
 
                     <div class="tool-subcard">
-                        <div class="tool-title">تشفير وفك نصوص (Base64):</div>
+                        <div class="tool-title">
+                            <span>محلل وتشفير النصوص الحساسة:</span>
+                            <span style="color:#facc15; font-size:0.65rem;">B64/ASCII</span>
+                        </div>
                         <div class="pass-output-row">
-                            <input type="text" class="pass-input" id="hashInput" placeholder="اكتب نصاً...">
+                            <input type="text" class="secret-input" id="hashInput" placeholder="أدخل نصاً للتشفير أو الفك...">
                             <button class="mini-btn" onclick="hashInputText()">تشفير</button>
                             <button class="mini-btn" onclick="decodeInputText()">فك</button>
                         </div>
                     </div>
 
                     <div class="tool-subcard">
-                        <div class="tool-title">حالة الاتصال السحابي:</div>
+                        <div class="tool-title">
+                            <span>مفتاح التشفير السحابي والاتصال:</span>
+                            <span style="color:var(--cyber-green);">STABLE</span>
+                        </div>
                         <div style="font-size: 0.68rem; color: #86efac; display: flex; justify-content: space-between;">
-                            <span>REPO: Akdim-adnane</span>
-                            <span style="color: #22c55e;">ONLINE [200 OK]</span>
+                            <span>REMOTE HOST: JsonBin Cloud v3</span>
+                            <span style="color: var(--cyber-cyan);">SYNC: ACTIVE</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="cyber-panel-tab" id="tab-vault">
-                    <div class="vault-input-box">
+                    <div class="tool-subcard" style="padding: 8px;">
                         <div class="pass-output-row">
-                            <input type="text" class="secret-input" id="vaultItemInput" placeholder="أضف ملاحظة أو سراً مشفراً..." onkeydown="if(event.key==='Enter') addSecretItem()">
-                            <button class="mini-btn" onclick="addSecretItem()">إضافة</button>
+                            <input type="text" class="secret-input" id="vaultItemInput" placeholder="أدخل سجلاً، كلمة مرور أو ملاحظة مشفرة..." onkeydown="if(event.key==='Enter') addSecretItem()">
+                            <button class="mini-btn" onclick="addSecretItem()">+ حفظ</button>
                         </div>
                     </div>
                     <div class="vault-list" id="vaultListContainer"></div>
@@ -897,8 +937,8 @@
                 <div class="cyber-panel-tab" id="tab-terminal">
                     <div class="cyber-term-box">
                         <div class="cyber-term-output" id="cyberTermOutput">
-                            &gt; AKMA CORE OS LOADED.<br>
-                            &gt; TYPE 'help' FOR COMMANDS.<br>
+                            &gt; AKMA CORE OS LOADED [AUTHORIZED ROOT].<br>
+                            &gt; TYPE 'help' TO QUERY SUBSYSTEM COMMANDS.<br>
                         </div>
                         <div class="cyber-term-prompt">
                             <span>root@akma:~$</span>
@@ -917,19 +957,19 @@
                     </div>
 
                     <div class="admin-grid">
-                        <button class="admin-btn" onclick="goToStoreAdmin()">🛒 إدارة المتجر</button>
-                        <button class="admin-btn" onclick="changeBioText()">تعديل الوصف</button>
-                        <button class="admin-btn" onclick="installPwaApp()">تثبيت التطبيق</button>
-                        <button class="admin-btn" onclick="resetStats()">تصفير العداد</button>
-                        <button class="admin-btn danger" onclick="flipBackToPublic()">تأمين وقفل النظام</button>
+                        <button class="admin-btn" onclick="goToStoreAdmin()">🛒 متجر الإدارة</button>
+                        <button class="admin-btn" onclick="changeBioText()">✏️ تعديل الوصف</button>
+                        <button class="admin-btn" onclick="installPwaApp()">📲 تثبيت PWA</button>
+                        <button class="admin-btn" onclick="resetStats()">🔄 تصفير النقرات</button>
+                        <button class="admin-btn danger" onclick="flipBackToPublic()">🔒 تأمين وقفل الجلسة</button>
                     </div>
 
-                    <div class="logs-box" id="securityLogs">لا توجد محاولات مشبوهة حتى الآن.</div>
+                    <div class="logs-box" id="securityLogs">لا توجد محاولات تسلل مرصودة حالياً.</div>
                 </div>
 
                 <footer>
-                    <div style="color: #22c55e; font-family: 'Courier New', Courier, monospace; font-size: 0.7rem; margin-top: 6px; text-align: center;">
-                        [ROOT_SESSION: AUTH_ADNANE_AKDIM]
+                    <div style="color: var(--cyber-green); font-family: 'Courier New', Courier, monospace; font-size: 0.7rem; margin-top: 4px; text-align: center; text-shadow: 0 0 5px rgba(0,255,102,0.3);">
+                        [OPERATOR_ID: ADNANE_AKDIM // SECURE_SESSION]
                     </div>
                 </footer>
             </div>
@@ -940,12 +980,12 @@
     <div class="hacker-terminal" id="hackerTerminal">
         <div class="terminal-box">
             <div class="terminal-header">
-                <span>SYSTEM_ROOT_ACCESS // AKDIM_V3</span>
+                <span>SYSTEM_ROOT_AUTHENTICATION // AKDIM_V4</span>
                 <span onclick="closeTerminal()" style="cursor: pointer; color: #a1a1aa;">[ESC]</span>
             </div>
-            <div class="terminal-logs">&gt; ENTER PASSCODE TO UNLOCK SECRET STORAGE.</div>
+            <div class="terminal-logs">&gt; ENTER AUTHORIZATION KEY TO ELEVATE PRIVILEGES.</div>
             <div class="terminal-input-row">
-                <span>PASSCODE&gt;</span>
+                <span>ROOT_KEY&gt;</span>
                 <input type="password" class="terminal-input" id="terminalInput" autocomplete="off">
             </div>
         </div>
@@ -1216,7 +1256,10 @@
             }
         }
 
-        function closeTerminal() { document.getElementById('hackerTerminal').style.display = 'none'; document.getElementById('terminalInput').value = ''; }
+        function closeTerminal() { 
+            document.getElementById('hackerTerminal').style.display = 'none'; 
+            document.getElementById('terminalInput').value = ''; 
+        }
 
         function utf8ToBase64(str) {
             return window.btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode(parseInt(p1, 16))));
@@ -1234,7 +1277,7 @@
             let logs = [];
             try { logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); } catch (e) { logs = []; }
             const now = new Date();
-            logs.unshift(`[INTRUSION_ALERT]: ${now.toLocaleTimeString()}`);
+            logs.unshift(`[BREACH_ATTEMPT]: ${now.toLocaleTimeString()} - IP_LOGGED`);
             if (logs.length > 5) logs.pop();
             localStorage.setItem('adnan_intrusion_logs', JSON.stringify(logs));
         }
@@ -1242,7 +1285,7 @@
         function displaySecurityLogs() {
             let logs = [];
             try { logs = JSON.parse(localStorage.getItem('adnan_intrusion_logs') || '[]'); } catch (e) { logs = []; }
-            document.getElementById('securityLogs').innerHTML = logs.length === 0 ? 'ALL SYSTEMS NOMINAL // NO INTRUSIONS' : logs.map(escapeHTML).join('<br>');
+            document.getElementById('securityLogs').innerHTML = logs.length === 0 ? 'ALL FIREWALL NODES: 100% OPERATIONAL // NO BREACHES' : logs.map(escapeHTML).join('<br>');
         }
 
         function switchCyberTab(tabName, btn) {
@@ -1257,18 +1300,21 @@
         function generateCyberPass() {
             const charset = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%^&*()_+~|}{[]:?";
             let password = "";
-            for (let i = 0; i < 16; i++) password += charset.charAt(Math.floor(Math.random() * charset.length));
+            for (let i = 0; i < 18; i++) password += charset.charAt(Math.floor(Math.random() * charset.length));
             document.getElementById('generatedPassword').value = password;
         }
 
-        function copyCyberPass() { const val = document.getElementById('generatedPassword').value; if (val) copyToClipboard(val); }
+        function copyCyberPass() { 
+            const val = document.getElementById('generatedPassword').value; 
+            if (val) copyToClipboard(val); 
+        }
 
         function hashInputText() {
             const input = document.getElementById('hashInput');
             if (!input.value.trim()) return;
             const encoded = utf8ToBase64(input.value.trim());
             input.value = `ENC[${encoded}]`;
-            showToast('تم التشفير بنجاح!');
+            showToast('تم تشفير النص بنجاح!');
         }
 
         function decodeInputText() {
@@ -1277,7 +1323,12 @@
             if (!val) return;
             if (val.startsWith('ENC[') && val.endsWith(']')) val = val.substring(4, val.length - 1);
             const decoded = base64ToUtf8(val);
-            if (decoded) { input.value = decoded; showToast('تم فك التشفير بنجاح!'); } else { alert('فشل فك النص!'); }
+            if (decoded) { 
+                input.value = decoded; 
+                showToast('تم فك التشفير بنجاح!'); 
+            } else { 
+                alert('فشل فك النص! تأكد من صيغة البيانات.'); 
+            }
         }
 
         function loadSecretItems() {
@@ -1290,7 +1341,7 @@
             } catch (e) { items = []; }
 
             if (items.length === 0) {
-                container.innerHTML = '<div style="color:#86efac; font-size:0.7rem; text-align:center; padding:12px; font-family:\'Courier New\', Courier, monospace;">المخزن فارغ حالياً.</div>';
+                container.innerHTML = '<div style="color:var(--cyber-green); font-size:0.7rem; text-align:center; padding:16px; font-family:\'Courier New\', Courier, monospace;">الخزنة فارغة حالياً. لا توجد أسرار مسجلة.</div>';
                 return;
             }
 
@@ -1302,6 +1353,9 @@
                 contentDiv.textContent = item;
 
                 const actionsDiv = document.createElement('div');
+                actionsDiv.style.display = 'flex';
+                actionsDiv.style.gap = '4px';
+
                 const copyBtn = document.createElement('button');
                 copyBtn.className = 'mini-btn'; copyBtn.innerText = 'نسخ'; copyBtn.onclick = () => copyToClipboard(item);
 
@@ -1328,7 +1382,7 @@
             localStorage.setItem('adnan_multi_vault', utf8ToBase64(JSON.stringify(items)));
             input.value = '';
             loadSecretItems();
-            showToast('تم حفظ السر!');
+            showToast('تم حفظ السر في الخزنة المشفرة!');
         }
 
         function deleteSecretItem(index) {
@@ -1343,7 +1397,11 @@
         }
 
         document.getElementById('cyberConsoleInput').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') { const cmd = this.value.trim().toLowerCase(); this.value = ''; executeCyberCommand(cmd); }
+            if (e.key === 'Enter') { 
+                const cmd = this.value.trim().toLowerCase(); 
+                this.value = ''; 
+                executeCyberCommand(cmd); 
+            }
         });
 
         function executeCyberCommand(cmd) {
@@ -1351,22 +1409,45 @@
             const print = (text) => { out.innerHTML += `&gt; ${text}<br>`; out.scrollTop = out.scrollHeight; };
             print(`<span style="color:#ffffff;">root@akma:~$ ${escapeHTML(cmd)}</span>`);
             switch (cmd) {
-                case 'help': print("COMMANDS: status, store, ping, clear, bio, whoami, lock, date, stats"); break;
-                case 'store': goToStoreAdmin(); break;
-                case 'status': print("SYSTEM: SECURE | CORE: ONLINE | PROTOCOL: TLS 1.3"); break;
-                case 'ping':
-                    const p = Math.floor(Math.random() * 20) + 12;
-                    document.getElementById('cyberPing').innerText = p + 'ms';
-                    print(`REPLY FROM HOST: time=${p}ms TTL=64`);
+                case 'help': 
+                    print("COMMANDS: status, store, ping, clear, bio, whoami, lock, date, stats, sysinfo"); 
                     break;
-                case 'stats': print(`VISITS: ${document.getElementById('visits-count').innerText} | CLICKS: ${interactionClicks}`); break;
-                case 'clear': out.innerHTML = ''; break;
-                case 'whoami': print("OPERATOR: ADNANE AKDIM // AKMA ADMIN"); break;
-                case 'lock': flipBackToPublic(); break;
-                case 'date': print(new Date().toUTCString()); break;
-                case 'bio': print(`CURRENT BIO: "${localStorage.getItem('custom_bio') || translations[currentLang].bio}"`); break;
-                case '': break;
-                default: print(`COMMAND NOT FOUND: ${escapeHTML(cmd)}.`);
+                case 'store': 
+                    goToStoreAdmin(); 
+                    break;
+                case 'status': 
+                    print("SYSTEM: SECURE // CRYPTO: AES-GCM // PROTOCOL: TLS 1.3 // FIREWALL: ON"); 
+                    break;
+                case 'sysinfo':
+                    print(`PLATFORM: ${navigator.platform} | USER_AGENT: ${navigator.userAgent.substring(0, 30)}...`);
+                    break;
+                case 'ping':
+                    const p = Math.floor(Math.random() * 15) + 10;
+                    document.getElementById('cyberPing').innerText = p + 'ms';
+                    print(`REPLY FROM AKMA_CORE: time=${p}ms TTL=128`);
+                    break;
+                case 'stats': 
+                    print(`TOTAL_VISITS: ${document.getElementById('visits-count').innerText} | INTERACTION_CLICKS: ${interactionClicks}`); 
+                    break;
+                case 'clear': 
+                    out.innerHTML = ''; 
+                    break;
+                case 'whoami': 
+                    print("PRIVILEGE: ROOT // OPERATOR: ADNANE AKDIM"); 
+                    break;
+                case 'lock': 
+                    flipBackToPublic(); 
+                    break;
+                case 'date': 
+                    print(new Date().toUTCString()); 
+                    break;
+                case 'bio': 
+                    print(`CURRENT BIO: "${localStorage.getItem('custom_bio') || translations[currentLang].bio}"`); 
+                    break;
+                case '': 
+                    break;
+                default: 
+                    print(`SYNTAX ERROR: '${escapeHTML(cmd)}' UNRECOGNIZED.`);
             }
         }
 
@@ -1374,7 +1455,7 @@
             clearInterval(cyberClockInterval);
             cyberClockInterval = setInterval(() => {
                 const now = new Date();
-                document.getElementById('cyberClock').innerText = now.toTimeString().split(' ')[0] + ' LOC';
+                document.getElementById('cyberClock').innerText = now.toTimeString().split(' ')[0] + ' UTC';
             }, 1000);
         }
 
@@ -1463,7 +1544,7 @@
             function draw(time) {
                 if (time - lastDraw > 40) {
                     ctx.fillStyle = 'rgba(0, 0, 0, 0.08)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = '#22c55e'; ctx.font = fontSize + 'px monospace';
+                    ctx.fillStyle = '#00ff66'; ctx.font = fontSize + 'px monospace';
                     for (let i = 0; i < drops.length; i++) {
                         ctx.fillText(charsMatrix.charAt(Math.floor(Math.random() * charsMatrix.length)), i * fontSize, drops[i] * fontSize);
                         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
@@ -1492,8 +1573,14 @@
                     displaySecurityLogs();
                     startMatrixEffect();
                     startCyberClock();
-                } else { recordFailedAttempt(); alert('ACCESS DENIED!'); this.value = ''; }
-            } else if (e.key === 'Escape') { closeTerminal(); }
+                } else { 
+                    recordFailedAttempt(); 
+                    alert('ACCESS DENIED: UNAUTHORIZED INTRUSION DETECTED!'); 
+                    this.value = ''; 
+                }
+            } else if (e.key === 'Escape') { 
+                closeTerminal(); 
+            }
         });
 
         function flipBackToPublic() {
@@ -1516,15 +1603,16 @@
         }
 
         function resetStats() {
-            if (confirm("هل تريد بالتأكيد تصفير العداد؟")) {
+            if (confirm("هل تريد بالتأكيد تصفير عداد النقرات؟")) {
                 interactionClicks = 0;
                 localStorage.setItem('adnan_clicks', '0');
                 document.getElementById('clicks-count').innerText = '0';
+                showToast('تم تصفير العداد');
             }
         }
 
         function trackVisits() {
-            let visits = parseInt(localStorage.getItem('adnan_visits_count') || '139', 10);
+            let visits = parseInt(localStorage.getItem('adnan_visits_count') || '142', 10);
             visits++;
             localStorage.setItem('adnan_visits_count', visits.toString());
             document.getElementById('visits-count').innerText = visits;
@@ -1540,3 +1628,4 @@
     </script>
 </body>
 </html>
+```
