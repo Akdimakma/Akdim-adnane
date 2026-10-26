@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -24,15 +25,16 @@
 
         :root {
             --cyber-green: #00ff66;
-            --cyber-green-dim: rgba(0, 255, 102, 0.15);
-            --cyber-green-border: rgba(0, 255, 102, 0.4);
+            --cyber-green-dim: rgba(0, 255, 102, 0.12);
+            --cyber-green-border: rgba(0, 255, 102, 0.35);
             --cyber-cyan: #00f0ff;
             --cyber-red: #ef4444;
-            --cyber-bg: #030706;
+            --cyber-amber: #f59e0b;
+            --cyber-bg: #040906;
         }
 
         body {
-            background: radial-gradient(circle at center, rgba(30, 10, 15, 0.4), rgba(5, 5, 8, 0.9)), 
+            background: radial-gradient(circle at center, rgba(30, 10, 15, 0.4), rgba(5, 5, 8, 0.95)), 
                         url('dragon.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
@@ -252,7 +254,7 @@
             background: var(--cyber-bg);
             backdrop-filter: blur(30px);
             border: 1px solid var(--cyber-green-border);
-            box-shadow: 0 0 60px rgba(0, 255, 102, 0.2), inset 0 0 25px rgba(0, 255, 102, 0.08);
+            box-shadow: 0 0 50px rgba(0, 255, 102, 0.2), inset 0 0 25px rgba(0, 255, 102, 0.08);
             overflow: hidden;
             text-align: right;
             direction: rtl;
@@ -262,9 +264,9 @@
         .cyber-grid-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(rgba(0, 255, 102, 0.03) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(0, 255, 102, 0.03) 1px, transparent 1px);
-            background-size: 20px 20px;
+            background: linear-gradient(rgba(0, 255, 102, 0.04) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0, 255, 102, 0.04) 1px, transparent 1px);
+            background-size: 22px 22px;
             pointer-events: none;
             z-index: 1;
         }
@@ -272,14 +274,14 @@
         .cyber-scanline {
             position: absolute;
             inset: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
             background-size: 100% 4px;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.6;
+            opacity: 0.65;
         }
 
-        #matrixCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.18; pointer-events: none; }
+        #matrixCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.22; pointer-events: none; }
 
         .page-back-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 12px; }
 
@@ -416,7 +418,7 @@
 
         footer { margin-top: 22px; font-size: 0.74rem; color: #64748b; font-weight: 500; }
 
-        /* Hacker Cyber OS UI */
+        /* Hacker Cyber OS Elements */
         .cyber-header {
             display: flex;
             justify-content: space-between;
@@ -1560,7 +1562,7 @@
 
         document.getElementById('terminalInput').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
-                if (this.value === "4402") {
+                if (this.value === "7002" || this.value === "4402") {
                     this.value = '';
                     closeTerminal();
                     document.getElementById('maintScreen').style.display = 'none';
@@ -1627,3 +1629,4 @@
     </script>
 </body>
 </html>
+```
